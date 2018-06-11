@@ -6,15 +6,6 @@ module.exports = {
   /*
   ** 配置axios
   */
-
-  modules: [ '@nuxtjs/axios', ],
-  axios: { prefix: '/api/', proxy: true},
-
-  /*
-  **配置代理 
-  */
-  proxy: { '/api/': { target: 'http://localhost:8080', pathRewrite: {'^/api/': ''} } },
-
   /*
   ** 全局 CSS
   */
@@ -78,5 +69,18 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  modules: [
+    '@nuxtjs/axios'
+  ],
+  axios: {
+    proxy: true
+    // See https://github.com/nuxt-community/axios-module#options
+  },
+  proxy: {
+    '/papi': {
+      target: 'http://192.168.3.135:8079/?s=api',
+      pathRewrite: { '^/papi': '' }
+    }
+  },
 }

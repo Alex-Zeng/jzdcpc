@@ -1,6 +1,12 @@
 <template>
-  <div>
-    <el-button>我的测试</el-button>
+  <div style="text-align:center;margin-top:200px;">
+    <div>
+      {{
+        data.list[0].title
+      }}
+    </div>
+
+    <el-button>组件测试</el-button>
   </div>
 </template>
 
@@ -15,16 +21,12 @@
 </style>
 
 <script>
+  import request from '../service'
   export default {
-    data() {
-      const item = {
-        date: '2016-05-02',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      };
-      return {
-        tableData: Array(20).fill(item)
-      }
+    async asyncData() {
+      // 数据测试
+      const {data} = await request.post('/papi/goods/getRecommend')
+      return {data}
     }
   };
 </script>
