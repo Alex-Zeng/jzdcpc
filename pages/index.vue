@@ -2,7 +2,7 @@
   <div style="text-align:center;margin-top:200px;">
     <div>
       {{
-        data.list[0].title
+        data
       }}
     </div>
 
@@ -21,12 +21,16 @@
 </style>
 
 <script>
-  import request from '../service'
   export default {
-    async asyncData() {
+    computed: {
+      data() {
+        return this.$store.state.test.goodsRecommend;
+      }
+    },
+
+    async asyncData({store}) {
       // 数据测试
-      const {data} = await request.post('/papi/goods/getRecommend')
-      return {data}
+      store.dispatch('getGoodsRecommend')
     }
   };
 </script>
