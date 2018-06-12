@@ -4,11 +4,16 @@
 
 module.exports = {
   /*
-  ** 配置axios
+  ** 配置鉴权中间件
   */
+  router: {
+    middleware: 'checkAuth'
+  },
+
   /*
   ** 全局 CSS
   */
+
   css: [
     'element-ui/lib/theme-chalk/index.css',
     '~/assets/stylus/main.styl'
@@ -70,6 +75,10 @@ module.exports = {
       }
     }
   },
+
+  /*
+  ** 配置axios
+  */
   modules: [
     '@nuxtjs/axios'
   ],
@@ -82,5 +91,5 @@ module.exports = {
       target: 'http://192.168.3.135:8079/?s=api',
       pathRewrite: { '^/papi': '' }
     }
-  },
+  }
 }
