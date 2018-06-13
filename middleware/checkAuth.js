@@ -1,7 +1,7 @@
-import {getUserFromCookie} from '../helper/auth'
+import {getTokenFromCookie, getTokenFromReqCookie} from '../helper/auth'
 
-export default function ({store}) {
+export default function ({store, route, req}) {
   // 取Cookie中保存的token
-  const loggedUser = getUserFromCookie()
-  store.commit('SETUSER', loggedUser)
+  const token = getTokenFromReqCookie(req) || getTokenFromCookie()
+  store.commit('SETTOKEN', token)
 }

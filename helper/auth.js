@@ -35,8 +35,25 @@ export const unsetToken = () => {
 }
 
 export const getUserFromCookie = () => {
-  const token = Cookie.get('token')
+  const token = Cookie.get('user')
+  return token
+}
+
+export const getTokenFromCookie = () => {
+  if (process.server) return
+  const token = Cookie.get('_token')
   return token || null
+}
+
+export const getTokenFromReqCookie = (req) => {
+  if (!req) {
+    return null
+  }
+  if (!req.headers.cookie) return
+  const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('_token='))
+  if (!jwtCookie) return null
+  const jwt = jwtCookie.split('=')[1]
+  return jwt
 }
 
 export const getUserFromLocalStorage = () => {

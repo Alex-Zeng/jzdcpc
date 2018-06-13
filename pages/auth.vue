@@ -13,6 +13,7 @@
 import authHeader from '../components/auth/header'
 import authFooter from '../components/auth/footer'
 export default {
+  middleware: 'lockLogin',
   components: {
     authHeader,
     authFooter

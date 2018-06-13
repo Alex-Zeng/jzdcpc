@@ -14,6 +14,14 @@ const store = () =>
       test,
       auth
     },
+    // actions: {
+    //   nuxtServerInit ({ commit }, { req }) {
+    //     console.log(req)
+    //     if (req.session.user) {
+    //       commit('SETTOKEN', req.session.user)
+    //     }
+    //   }
+    // },
     strict: debug,
     plugins: debug ? [createLogger()] : []
   })

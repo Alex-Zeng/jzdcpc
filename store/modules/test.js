@@ -1,26 +1,27 @@
-import apiTest from '../../api/api_test'
+import apiTest from '../../api/apiTest'
 
 const state = {
-  goodsRecommend: {}
+  favoriteList: {}
 }
 
 const getters = {
-  goodsRecommend: (state, getters, rootState) => {
-    return state.goodsRecommend
+  favoriteList: (state, getters, rootState) => {
+    return state.favoriteList
   }
 }
 
 const actions = {
-  getGoodsRecommend ({ commit }) {
-    apiTest.getGoodsRecommend(data => {
-      commit('updateGoodsRecommend', data)
-    })
+  getFavoriteList ({ commit }, fileds) {
+    console.log('test')
+    apiTest.getFavoriteList(data => {
+      commit('updateList', data)
+    }, fileds)
   }
 }
 
 const mutations = {
-  updateGoodsRecommend (state, data) {
-    state.goodsRecommend = data
+  updateList (state, data) {
+    state.favoriteList = data
   }
 }
 

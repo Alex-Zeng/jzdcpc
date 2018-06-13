@@ -6,7 +6,7 @@
       }}
     </div>
 
-    <el-button>组件测试</el-button>
+    <el-button @click="getData">组件测试</el-button>
   </div>
 </template>
 
@@ -26,13 +26,14 @@
 export default {
   computed: {
     data () {
-      return this.$store.state.auth
+      return this.$store.getters.favoriteList
     }
   },
 
-  async asyncData ({store}) {
-    // 数据测试
-    // store.dispatch('getGoodsRecommend')
+  methods: {
+    getData () {
+      this.$store.dispatch('getFavoriteList', {pageSize: 10, pageNumber: 1, field: 'time', sort: 'asc'})
+    }
   }
 }
 </script>
