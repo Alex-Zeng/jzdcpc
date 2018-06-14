@@ -6,7 +6,7 @@ import createLogger from '../helper/logger'
 
 Vue.use(Vuex)
 
-const debug = process.env.NODE_ENV !== 'production'
+const debug = process.env.NODE_ENV !== 'production' && !process.server
 // todo: 删除test
 const store = () =>
   new Vuex.Store({
@@ -14,14 +14,6 @@ const store = () =>
       test,
       auth
     },
-    // actions: {
-    //   nuxtServerInit ({ commit }, { req }) {
-    //     console.log(req)
-    //     if (req.session.user) {
-    //       commit('SETTOKEN', req.session.user)
-    //     }
-    //   }
-    // },
     strict: debug,
     plugins: debug ? [createLogger()] : []
   })

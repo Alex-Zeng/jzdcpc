@@ -1,6 +1,6 @@
 <template>
   <div class="login-box">
-    <div class="login-form">
+    <div class="login-index-form">
       <el-form ref="loginForm" :model="form" :rules="rules">
         <el-form-item label="账号：" prop="userName">
           <el-input
@@ -28,7 +28,7 @@
           </el-button>
         </el-form-item>
         <el-form-item class="no-password">
-          <nuxt-link to="/" class="link">
+          <nuxt-link to="/auth/login" class="link">
             <i class="phone">&#xe636;</i><span>免密登录</span>
           </nuxt-link>
         </el-form-item>
@@ -101,7 +101,7 @@ export default {
   background-position top center
   height 699px
   padding-top 100px
-  .login-form
+  .login-index-form
     height 500px
     width 600px
     background url("~assets/img/auth/login_form_bg.png") no-repeat
@@ -154,9 +154,10 @@ export default {
 
 <style lang="stylus">
 //样式覆盖
-.login-form
+.login-index-form
   .el-form-item__label
-    color #999
+    color #ffffff
+    color rgba(255, 255, 255, .8)
     font-size 16px
     &::before
       content: '' !important
