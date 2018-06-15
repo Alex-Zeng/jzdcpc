@@ -71,7 +71,7 @@ export default {
     font-size 24px
     background-color: #fff
     margin-right 40px
-    border-radius 4p
+    border-radius 4px
     color #000
     text-align center
 

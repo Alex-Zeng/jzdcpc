@@ -1,7 +1,13 @@
 <template>
   <div class="login-box">
-    <h1>{{step}}</h1>
-    <div class="login-form" v-show="step === 1">
+    <div
+      class="login-form"
+      v-show="step === 1"
+      element-loading-text="验证中..."
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0, 0, 0, 0.8)"
+      v-loading="loading"
+    >
       <div class="title">
         <h4>验证码登录</h4>
         <span>(登录后可直接完成注册)</span>
@@ -39,7 +45,15 @@
       </el-form>
     </div>
     <!-- 第二步 -->
-    <div class="login-form" v-show="step === 2" style="height:440px;">
+    <div
+      class="login-form"
+      v-show="step === 2"
+      style="height:440px;"
+      element-loading-text="登录中..."
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0, 0, 0, 0.8)"
+      v-loading="loading"
+    >
       <div class="title">
         <h4>验证码登录</h4>
         <span>(请输入短信验证码)</span>
@@ -63,7 +77,15 @@
     </div>
 
     <!-- 第三步 -->
-    <div class="login-form" v-show="step === 3" style="padding-top: 40px; height: 450px;">
+    <div
+      class="login-form"
+      v-show="step === 3"
+      style="padding-top: 40px; height: 450px;"
+      element-loading-text="提交中..."
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0, 0, 0, 0.8)"
+      v-loading="loading"
+    >
       <div class="title">
         <h4>验证码登录</h4>
         <span>(首次登录，请设置用户名)</span>
@@ -98,6 +120,7 @@
 <script>
 import apiCaptcha from '../../api/apiCaptcha'
 import codeInput from '../../components/codeInput'
+import { nameReg } from '../../helper/reg'
 export default {
   name: 'login',
   components: {
@@ -106,8 +129,9 @@ export default {
   data () {
     return {
       step: 1,
+      loading: false,
       codeForm: {
-        phone: '13113422181',
+        phone: '',
         code: '',
         id: '',
         codeValid: '1' // 默认验证
@@ -134,7 +158,8 @@ export default {
       },
       nameRules: {
         userName: [
-          { required: true, message: '请输入用户名', trigger: 'blur' }
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { pattern: nameReg, message: '用户名格式：4-20位，不能为纯数字，不可包含[. @ #]等特殊字符', trigger: 'blur' }
         ]
       },
       imgSrcrand: '',
@@ -155,6 +180,7 @@ export default {
     submitForm (formName, action, validMsg, fileds) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          this.loading = true
           this.$store.dispatch(action,
             {
               errorCb: msg => {
@@ -163,6 +189,7 @@ export default {
                   message: msg,
                   type: 'error'
                 })
+                this.loading = false
               },
               successCb: (msg, status) => {
                 this.$message({
@@ -181,6 +208,7 @@ export default {
                 } else {
                   this.step = this.step + 1
                 }
+                this.loading = false
               },
               fileds: fileds
             }

@@ -1,7 +1,17 @@
 <template>
   <div class="login-box">
-    <div class="login-index-form">
-      <el-form ref="loginForm" :model="form" :rules="rules">
+    <div
+      class="login-index-form"
+      element-loading-text="登录中"
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0, 0, 0, 0.8)"
+      v-loading="loading"
+    >
+      <el-form
+        ref="loginForm"
+        :model="form"
+        :rules="rules"
+      >
         <el-form-item label="账号：" prop="userName">
           <el-input
             v-model="form.userName"
@@ -20,7 +30,7 @@
           </el-input>
         </el-form-item>
         <el-form-item class="forget">
-          <nuxt-link to="/">忘记密码？</nuxt-link>
+          <nuxt-link to="/auth/forget">忘记密码？</nuxt-link>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" class="login-button" @click="submitForm('loginForm')">
@@ -42,6 +52,7 @@ export default {
   name: 'login',
   data () {
     return {
+      loading: false,
       form: {
         userName: '',
         password: ''
@@ -60,6 +71,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          this.loading = true
           this.$store.dispatch('doLoginIndex',
             {
               errorCb: msg => {
@@ -68,6 +80,7 @@ export default {
                   message: msg,
                   type: 'error'
                 })
+                this.loading = false
               },
               successCb: msg => {
                 this.$message({
@@ -76,6 +89,7 @@ export default {
                   type: 'success'
                 })
                 this.$router.replace('/')
+                this.loading = false
               },
               fileds: this.form
             }
