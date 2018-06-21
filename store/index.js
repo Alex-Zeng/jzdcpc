@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import test from './modules/test'
 import auth from './modules/auth'
+import orders from './modules/orders'
 import createLogger from '../helper/logger'
 
 Vue.use(Vuex)
@@ -12,7 +13,8 @@ const store = () =>
   new Vuex.Store({
     modules: {
       test,
-      auth
+      auth,
+      orders
     },
     strict: debug,
     plugins: debug ? [createLogger()] : []

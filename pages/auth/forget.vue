@@ -1,8 +1,5 @@
 <template>
   <div class="forget-box">
-    <h1 style="color:white">
-      {{ passwordForm }}
-    </h1>
     <div
       class="forget-form"
       v-show="step === 1"
@@ -31,9 +28,10 @@
     <div
       class="forget-form"
       v-show="step === 2"
-      element-loading-text="登录中..."
+      element-loading-text="提交中..."
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
+      element-loading-lock="true"
       v-loading="loading"
     >
       <div class="title">
@@ -76,7 +74,7 @@
           </el-input>
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary" class="submit-button" @click="submitForm">
+          <el-button type="primary" class="submit-button" @click="submitForm('passwordForm')">
             确定修改
           </el-button>
         </el-form-item>
@@ -88,7 +86,7 @@
 <script>
 import apiCaptcha from '../../api/apiCaptcha'
 import apiPassword from '../../api/apiPassword'
-import { phoneReg, codeReg } from '../../helper/reg'
+import { phoneReg, codeReg, passwordReg } from '../../helper/reg'
 import smsButton from '../../components/smsButton'
 export default {
   name: 'forget',
@@ -134,8 +132,8 @@ export default {
           { pattern: codeReg, message: '短信验证码必须为四位数字' }
         ],
         password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
-          // { pattern: codeReg, message: '短信验证码必须为四位数字' }
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { pattern: passwordReg, message: '密码格式为长度6-20位的字母、数字、符号组成' }
         ]
       },
       imgSrcrand: '',
@@ -156,6 +154,48 @@ export default {
     submitForm (formName, action, validMsg, fileds) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          this.$confirm('提交后将完成修改密码，请确定修改, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            const form = {
+              password: this.passwordForm.password,
+              confirmPassword: this.passwordForm.password,
+              code: this.passwordForm.smsCode,
+              phone: this.passwordForm.phone
+            }
+            this.loading = true
+            apiPassword.passwordUpdate(
+              (msg) => {
+                this.$message({
+                  showClose: true,
+                  message: '修改成功，请重新登录',
+                  type: 'success'
+                })
+                this.loading = false
+                this.$router.replace('/auth')
+              },
+              (msg) => {
+                this.$message({
+                  showClose: true,
+                  message: msg,
+                  type: 'error'
+                })
+                this.loading = false
+              },
+              form
+            )
+            this.$message({
+              type: 'success',
+              message: '提交成功!'
+            })
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消修改'
+            })
+          })
         }
       })
     },

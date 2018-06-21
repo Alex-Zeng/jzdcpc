@@ -23,16 +23,16 @@ service.interceptors.request.use(
 // 返回状态判断
 service.interceptors.response.use(
   res => {
-    // const {status} = res.data
+    const {status} = res.data
 
-    // if (status === -2) {
-    //   window.$nuxt.$message({
-    //     showClose: true,
-    //     message: '用户未登录或登录已失效，请登录后继续操作',
-    //     type: 'error'
-    //   })
-    //   window.$nuxt.$router.replace('/auth')
-    // }
+    if (status === -2) {
+      window.$nuxt.$message({
+        showClose: true,
+        message: '用户未登录或登录已失效，请登录后继续操作',
+        type: 'error'
+      })
+      window.$nuxt.$router.replace('/auth')
+    }
     return res.data
   },
   error => {

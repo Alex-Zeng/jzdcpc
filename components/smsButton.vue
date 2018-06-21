@@ -41,7 +41,7 @@ export default {
     async send () {
       this.sending = true
       const { msg, status } = await request.post(this.api, this.fileds)
-      if (status === 1) {
+      if (status === 0) {
         this.$message({
           showClose: true,
           message: msg,
