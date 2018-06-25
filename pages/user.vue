@@ -6,6 +6,11 @@
         <el-collapse>
           <el-collapse-item>
             <template slot="title">
+              <i class="title-icon">&#xe600;</i>用户中心首页
+            </template>
+          </el-collapse-item>
+          <el-collapse-item>
+            <template slot="title">
               <i class="title-icon">&#xe639;</i>企业账号管理
             </template>
           </el-collapse-item>

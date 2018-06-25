@@ -163,8 +163,6 @@ export default {
     margin 0 auto
     &.text
       color #737373
-  .pager
-    text-align center
   .order-wrap
     padding 40px
   .result-wrap

@@ -2,7 +2,6 @@
  * 本文件定义element-ui组件框架的引入，按需引入
  * theme也按需引入
  */
-
 import Vue from 'vue'
 import { Button, Form, FormItem, Input, Message, Loading, MessageBox, Collapse, CollapseItem, Badge, Pagination } from 'element-ui'
 import '../theme/button.css'
