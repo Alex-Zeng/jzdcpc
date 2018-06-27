@@ -105,12 +105,23 @@ export default {
     }
   },
   mounted () {
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
     const {params: {type, page}} = this.$route
     this.pageNumber = Number(page)
     this.$store.dispatch('getOrderList', {
-      status: type,
-      pageNumber: this.pageNumber,
-      pageSize
+      data: {
+        status: type,
+        pageNumber: this.pageNumber,
+        pageSize
+      },
+      cb: () => {
+        loading.close()
+      }
     })
   },
   data () {

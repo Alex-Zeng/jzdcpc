@@ -1,9 +1,7 @@
 <template>
   <div style="text-align:center;margin-top:200px;">
     <div>
-      {{
-      data
-      }}
+      <uploadImg></uploadImg>
     </div>
 
     <el-button @click="getData">组件测试</el-button>
@@ -23,7 +21,11 @@
 </style>
 
 <script>
+import uploadImg from '../components/uploadImg'
 export default {
+  components: {
+    uploadImg
+  },
   computed: {
     data () {
       return this.$store.getters.favoriteList

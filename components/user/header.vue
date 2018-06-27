@@ -14,8 +14,8 @@
         <div class="name">
           abc，你已登录!
         </div>
-        <div class="message">
-          <el-badge is-dot>
+        <div class="message" @click="message">
+          <el-badge :is-dot="msgs>0">
             <i class="icon">&#xe611;</i>
           </el-badge>
           <span>消息</span>
@@ -116,11 +116,22 @@
 import Cookies from 'js-cookie'
 export default {
   name: 'userHeader',
+  computed: {
+    msgs () {
+      return this.$store.getters.messageNumber
+    }
+  },
   methods: {
     logout () {
       Cookies.remove('_token')
       this.$router.replace('/auth')
+    },
+    message () {
+      this.$router.push('/user/message')
     }
+  },
+  mounted () {
+    this.$store.dispatch('getMessageNumber')
   }
 }
 </script>
