@@ -37,9 +37,14 @@
 
 <style lang="stylus" scoped>
 .header
-  height 64
+  height 64px
   background #1c324f
   min-width 1200px
+  position fixed
+  width: 100%
+  z-index 1800
+  top 0
+  left 0
 
   .jzdc
     padding-top 22px

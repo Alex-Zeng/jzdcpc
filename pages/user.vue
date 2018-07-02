@@ -75,16 +75,18 @@
       background-color #294265
     &.active
       background-color #294265
+    a
+      display block
 .user-wrap
   padding-left 182px
   background-color #1c324f
   min-width 1200px
+  margin-top 64px
   .content
-    float left
     background-color #ffffff
     display block
     width 99.9%
-    margin-left -182px
+    /*margin-left 182px*/
     overflow: hidden
 </style>
 
@@ -93,9 +95,11 @@
 .user-menu
   background-color #1c324f
   width 182px
-  float left
-  position relative
-  left -182px
+  position fixed
+  left 0
+  top 64px
+  z-index 9999
+  height 100%
   .title-icon
     font-family 'jzdc'
     color #ffffff

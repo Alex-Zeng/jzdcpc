@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import test from './modules/test'
+import cert from './modules/cert'
 import auth from './modules/auth'
 import orders from './modules/orders'
 import favorite from './modules/favorite'
@@ -14,7 +14,7 @@ const debug = process.env.NODE_ENV !== 'production' && !process.server
 const store = () =>
   new Vuex.Store({
     modules: {
-      // test,
+      cert,
       auth,
       orders,
       favorite,
