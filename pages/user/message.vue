@@ -102,7 +102,7 @@ export default {
           line-height 54px
         .content
           border 1px solid #ccc
-          padding 40px
+          padding 20px
           display flex
           flex-flow row
           align-items center
