@@ -1,33 +1,27 @@
 <template>
-  <div style="text-align:center;margin-top:200px;height: 3000px;">
+  <div>
+    <indexHeader></indexHeader>
     <div>
-      <uploadImg
-        id="1"
-        title="法人身份证"
-        v-model="filename"
-      ></uploadImg>
     </div>
     <el-button @click="getData">组件测试</el-button>
   </div>
 </template>
 
-<style lang="stylus">
-.el-header {
-  background-color: #B3C0D1;
-  color: #333;
-  line-height: 60px;
-}
-
-.el-aside {
-  color: #333;
-}
+<style lang="stylus" scoped>
+.el-header
+  background-color #B3C0D1
+  color #333
+  line-height 60px
+.header
+  height 60px
+  line-height 1
 </style>
 
 <script>
-import uploadImg from '../components/uploadImg'
+import indexHeader from '../components/index/header'
 export default {
   components: {
-    uploadImg
+    indexHeader
   },
   data () {
     return {
