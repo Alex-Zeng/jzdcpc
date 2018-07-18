@@ -1,13 +1,13 @@
 <template>
   <div>
-    <indexHeader isOpen="true"></indexHeader>
+    <indexHeader :isOpen="true"></indexHeader>
     <div class="main">
       <div class="main-header">
         <div class="banner">
           <el-carousel height="360px" indicator-position="none">
             <el-carousel-item v-for="item in banner" :key="item.id">
               <a :href="item.url" :target="item.target">
-                <img :src="item.img" alt="">
+                <img :src="item.img" alt="banner">
               </a>
             </el-carousel-item>
           </el-carousel>
@@ -21,16 +21,15 @@
               津晶科技信息服务（广州）有限公司
             </h3>
             <el-button type="primary" plain>进入工作台</el-button>
-            <el-button type="primary" plain>登录/注册</el-button>
+            <el-button type="primary" plain @click="$router.push('/auth/login')">登录/注册</el-button>
           </div>
           <div>
             <img src="~assets/img/index/gonggao.png" alt="">
             <span>系统公告</span>
             <div>
-              <p>2018.7.3</p>
+              <p>{{notice.release_time}}</p>
               <p class="msg-content">
-                系统公告主题，主题好精彩，精彩到你唔信
-                系统公告主题，主题好精彩，精彩到你唔信
+                {{notice.summary}}
               </p>
               <a href="">更多>></a>
             </div>
@@ -775,7 +774,7 @@ body{
 .sub-floor-nav{
   position fixed
   top 45%
-  right 15%
+  right 200px
 }
 .sub-floor-nav ul{
   padding-bottom 10px
@@ -808,7 +807,11 @@ export default {
   },
   data () {
     return {
-      banner: []
+      banner: [],
+      notice: {
+        release_time: '2018.07.03',
+        summary: '内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要'
+      }
     }
   },
   computed: {
@@ -818,12 +821,18 @@ export default {
   },
   mounted () {
     this.getBannerList()
+    this.getNotice()
   },
   methods: {
     async getBannerList () {
       await apiIndex.getBanner({type: 1}, (data) => {
-        console.log(data)
         this.banner = data
+      })
+    },
+    async getNotice () {
+      await apiIndex.getFirstNotice({pageSize: 1, pageNumber: 1}, (data) => {
+        const {data: {list}} = data
+        this.notice = list[0]
       })
     },
     goTop () {

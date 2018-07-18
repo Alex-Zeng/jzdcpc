@@ -4,8 +4,8 @@ export default {
     const { data } = await request.post('/papi/img/banner', fileds)
     cb(data)
   },
-  async setDefaultAddress (fileds, cb) {
-    const data = await request.post('/papi/user/setDefaultAddress', fileds)
+  async getFirstNotice (fileds, cb) {
+    const data = await request.post('/papi/user/getNoticeList', fileds)
     cb(data)
   }
 }
