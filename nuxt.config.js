@@ -87,7 +87,7 @@ module.exports = {
   },
   proxy: {
     '/papi': {
-      target: 'http://localhost/?s=api',
+      target: 'http://192.168.3.135:8079/?s=api',
       pathRewrite: { '^/papi': '' }
     }
   }

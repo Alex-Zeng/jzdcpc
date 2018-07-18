@@ -1,13 +1,260 @@
 <template>
-  <div>sasasas</div>
+  <div>
+    <top></top>
+    <div class="bottom-wrap">
+      <div class="content">
+        <i class="logo"></i>
+        <div class="center">
+          <ul class="clearfix">
+            <li class="active">找商品</li>
+            <li>找供应商</li>
+          </ul>
+          <div class="header-search-form">
+            <el-input class="header-search-input"></el-input>
+            <el-button type="primary">搜一搜</el-button>
+          </div>
+        </div>
+        <div class="btn"><el-button style="padding: 8px 14px;"><div class="car"><i class="icon">&#xe617;</i><span class="car-text">购物清单</span><el-badge :value="3"></el-badge></div></el-button></div>
+        <ul class="header-menu">
+          <div class="child-wrap">
+            <div class="child-menu" v-for="(i, k) in child" :key="i.id + k">
+              <div class="child-menu-list clearfix">
+                <div class="menu-name">{{i.name}}</div>
+                <ul class="clearfix" style="float: left;width: 600px;">
+                  <li class="child-menu-list-item" v-for="(item, key) in i.child" :key="key+item.id+k">{{item.name}}</li>
+                </ul>
+                <a href="" class="more">更多>></a>
+              </div>
+            </div>
+          </div>
+          <li class="itemAll"><i class="menu-icon">&#xe605;</i>全部商品分类</li>
+          <li class="item" v-for="(i ,k) in menu" :key="k + i.id" @mouseover="child = i.child"><img src="" alt="">{{i.name}}
+          </li>
+        </ul>
+        <ul class="header-tabs">
+          <li class="item active">首页</li>
+          <li class="item">集众金融</li>
+          <li class="item">集众服务</li>
+          <li class="item">关于我们</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import top from './top'
+import service from '../../service'
 export default {
-  name: 'indexHeader'
+  name: 'indexHeader',
+  components: {
+    top
+  },
+  data () {
+    return {
+      menu: [],
+      child: [],
+      showWrap: false
+    }
+  },
+  mounted () {
+    this.getMenu()
+  },
+  methods: {
+    async getMenu () {
+      try {
+        const {data, status, msg} = await service.get('papi/goods/getCategoryList')
+        if (status === 0) {
+          this.menu = data
+        } else {
+          this.$message(
+            {
+              type: 'warn',
+              message: msg
+            }
+          )
+        }
+      } catch (e) {
+        this.$message(
+          {
+            type: 'error',
+            message: '网络有点小问题'
+          }
+        )
+      }
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
+  .bottom-wrap
+    height 138px
+    background-color #f5f5f5
+    border-bottom 2px solid #2475e2
+    position relative
+    .content
+      height 138px
+    .header-menu
+      width 240px
+      position absolute
+      top 138px
+      margin-top -38px
+      left 0
+      &:hover
+        .child-wrap
+          width 808px
+          display: block
+      .child-wrap
+        overflow hidden
+        position absolute
+        left 240px
+        top 40px
+        min-height 500px
+        height 500px
+        background-color #fff
+        font-size 14px
+        padding 30px 0
+        width 0
+        transition width 0.3s
+        box-sizing border-box
+        display: none
+      .child-menu
+        font-size 14px
+        .more
+          position absolute
+          right 39px
+        .menu-name
+          float left
+          color: #030000
+          font-weight 600
+          box-sizing border-box
+          width 125px
+          text-align right
+          padding-left 18px
+        .child-menu-list
+          .child-menu-list-item
+            float left
+            padding-left 10px
+            cursor pointer
+            line-height 1.8
+            &:hover
+              color #2475E2
+            &:before
+              content:'|'
+              padding-right 10px
+              color #e1e1e1
+        &+.child-menu
+          margin-top 20px
+      .item
+        box-sizing border-box
+        padding-left 40px
+        height 51px
+        line-height 51px
+        color #fff
+        font-size 14px
+        background-color #313131
+        position relative
+        cursor pointer
+        &:after
+          display block
+          content: '\e678'
+          font-size 12px
+          font-family 'jzdc'
+          position absolute
+          right 20px
+          top 0
+          line-height 50px
+        &+.item
+          border-top 1px solid #fff
+        .menu-icon
+          font-size 20px
+          color #ffffff
+          font-family 'jzdc'
+          float left
+          margin-right 30px
+      .itemAll
+        border-top-left-radius 6px
+        border-top-right-radius 6px
+        background-color #2475e2
+        box-sizing border-box
+        padding-left 40px
+        height 40px
+        line-height 40px
+        color #fff
+        font-size 14px
+        .menu-icon
+          font-size 20px
+          color #ffffff
+          font-family 'jzdc'
+          float left
+          margin-right 30px
+    .header-tabs
+      position absolute
+      bottom 10px
+      left 260px
+      color #333333
+      .item
+        float left
+        width 120px
+        text-align center
+        cursor pointer
+        &.active
+          color #2475e2
+    .center
+      width 500px
+      margin 20px auto 0
+      ul
+        font-size 14px
+        li
+          float left
+          margin-right 10px
+          cursor pointer
+        li+li
+          margin-right 0
+          padding-left 10px
+          border-left 1px solid #a1a1a1
+        li.active
+          color #2475e2
+    .logo
+      background-image url('../../assets/img/index/logo.png')
+      width 210px
+      height 60px
+      display block
+      position absolute
+      top 39px
+      left 0
+      margin-top -30px
+    .btn
+      height 36px
+      position absolute
+      right 0
+      top 69px
+      margin-top -18px
+      .car
+        display flex
+      .car-text
+        line-height 20px
+        padding 0 6px
+    .icon
+      font-family 'jzdc'
+      font-size 20px
+      color #ff7900
+  .content
+    width 1300px
+    margin 0 auto
+    position relative
+</style>
 
+<style lang="stylus">
+  .header-search-form
+    margin-top 10px
+    .header-search-input
+      width 400px
+      input
+        border-bottom-right-radius 0 !important
+        border-top-right-radius 0 !important
+    .el-button
+      border-bottom-left-radius 0 !important
+      border-top-left-radius 0 !important
 </style>
