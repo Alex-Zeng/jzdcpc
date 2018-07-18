@@ -15,20 +15,20 @@
           </div>
         </div>
         <div class="btn"><el-button style="padding: 8px 14px;"><div class="car"><i class="icon">&#xe617;</i><span class="car-text">购物清单</span><el-badge :value="3"></el-badge></div></el-button></div>
-        <ul class="header-menu">
-          <div class="child-wrap">
-            <div class="child-menu" v-for="(i, k) in child" :key="i.id + k">
+        <ul class="header-menu" @mouseleave="showWrap=false, show=isOpen" @mouseover="show=true">
+          <div class="child-wrap" v-show="showWrap" @mouseleave="showWrap=false">
+            <div class="child-menu" v-for="(i, k) in child" :key="'item'+i.id + k">
               <div class="child-menu-list clearfix">
                 <div class="menu-name">{{i.name}}</div>
                 <ul class="clearfix" style="float: left;width: 600px;">
-                  <li class="child-menu-list-item" v-for="(item, key) in i.child" :key="key+item.id+k">{{item.name}}</li>
+                  <li class="child-menu-list-item" v-for="(item, key) in i.child" :key="'menu' + key+item.id+k">{{item.name}}</li>
                 </ul>
                 <a href="" class="more">更多>></a>
               </div>
             </div>
           </div>
           <li class="itemAll"><i class="menu-icon">&#xe605;</i>全部商品分类</li>
-          <li class="item" v-for="(i ,k) in menu" :key="k + i.id" @mouseover="child = i.child"><img src="" alt="">{{i.name}}
+          <li :class="{item:true, isOpen: isOpen || show}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="child = i.child, showWrap=true"><img src="" alt="">{{i.name}}
           </li>
         </ul>
         <ul class="header-tabs">
@@ -50,11 +50,15 @@ export default {
   components: {
     top
   },
+  props: {
+    isOpen: Boolean
+  },
   data () {
     return {
       menu: [],
       child: [],
-      showWrap: false
+      showWrap: false,
+      show: false
     }
   },
   mounted () {
@@ -63,7 +67,7 @@ export default {
   methods: {
     async getMenu () {
       try {
-        const {data, status, msg} = await service.get('papi/goods/getCategoryList')
+        const {data, status, msg} = await service.get('/papi/goods/getCategoryList')
         if (status === 0) {
           this.menu = data
         } else {
@@ -99,32 +103,29 @@ export default {
       width 240px
       position absolute
       top 138px
-      margin-top -38px
+      margin-top -40px
       left 0
-      &:hover
-        .child-wrap
-          width 808px
-          display: block
       .child-wrap
+        width 808px
         z-index 999
         overflow hidden
         position absolute
         left 240px
         top 40px
-        min-height 500px
-        height 500px
+        min-height 510px
+        height 510px
         background-color #fff
         font-size 14px
         padding 30px 0
-        width 0
-        transition width 0.3s
+        transition width 0.8s
         box-sizing border-box
-        display: none
+        display: block
       .child-menu
         font-size 14px
         .more
           position absolute
           right 39px
+          line-height 1.8
         .menu-name
           float left
           color: #030000
@@ -157,6 +158,9 @@ export default {
         background-color #313131
         position relative
         cursor pointer
+        display: none
+        &.isOpen
+          display block
         &:after
           display block
           content: '\e678'
