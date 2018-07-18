@@ -1,12 +1,14 @@
 <template>
   <div>
-    <indexHeader></indexHeader>
+    <indexHeader isOpen="true"></indexHeader>
     <div class="main">
       <div class="main-header">
         <div class="banner">
           <el-carousel height="360px" indicator-position="none">
-            <el-carousel-item v-for="item in 4" :key="item">
-              <h3>{{ item }}</h3>
+            <el-carousel-item v-for="item in banner" :key="item.id">
+              <a :href="item.url" :target="item.target">
+                <img :src="item.img" alt="">
+              </a>
             </el-carousel-item>
           </el-carousel>
         </div>
@@ -22,7 +24,7 @@
             <el-button type="primary" plain>登录/注册</el-button>
           </div>
           <div>
-            <img src="" alt="">
+            <img src="~assets/img/index/gonggao.png" alt="">
             <span>系统公告</span>
             <div>
               <p>2018.7.3</p>
@@ -51,15 +53,19 @@
       <div class="main-AD">
         <div class="item">
           <img src="~assets/img/index/cgfx.png" alt="">
+          <span>采购放心</span>
         </div>
         <div class="item">
           <img src="~assets/img/index/wyjl.png" alt="">
+          <span>物优价廉</span>
         </div>
         <div class="item">
           <img src="~assets/img/index/pzbz.png" alt="">
+          <span>品质保障</span>
         </div>
         <div class="item">
           <img src="~assets/img/index/fwtx.png" alt="">
+          <span>服务贴心</span>
         </div>
       </div>
       <div id="floor1" class="main-floor">
@@ -490,6 +496,7 @@
           <li><a href="#floor3">冰箱</a></li>
           <li><a href="#floor4">冰箱</a></li>
         </ul>
+        <img src="~assets/img/index/go-top.png" @click="goTop" alt="">
       </div>
     </div>
   </div>
@@ -524,6 +531,11 @@ body{
   margin-right 10px
   background #5B96E3
 }
+.main .banner a, .main .banner a img{
+  display block
+  width 100%
+  height 100%
+}
 .main .banner-right{
   width 240px
 }
@@ -547,7 +559,6 @@ body{
   margin-right 10px
   display inline-block
   vertical-align middle
-  background green
 }
 .main .banner-right > div:last-child p{
   color #666666
@@ -635,9 +646,25 @@ body{
 .main-AD .item{
   flex 1
   text-align center
+  font-size 20px
+  font-weight bold
+}
+.main-AD .item:nth-child(1){
+  color #2FBEED
+}
+.main-AD .item:nth-child(2){
+  color #FF7F00
+}
+.main-AD .item:nth-child(3){
+  color #00CCAA
+}
+.main-AD .item:nth-child(4){
+  color #7FBFFF
 }
 .main-AD .item img{
   display inline
+  vertical-align middle
+  margin-right 10px
 }
 .main-floor{
   position relative
@@ -748,7 +775,10 @@ body{
 .sub-floor-nav{
   position fixed
   top 45%
-  right 10%
+  right 15%
+}
+.sub-floor-nav ul{
+  padding-bottom 10px
 }
 .sub-floor-nav a{
   width 60px
@@ -764,18 +794,21 @@ body{
   background #2475E2
   color #ffffff
 }
+.sub-floor-nav img{
+  margin auto
+}
 </style>
 
 <script>
 import indexHeader from '../components/index/header'
+import apiIndex from '@/api/apiIndex'
 export default {
   components: {
     indexHeader
   },
   data () {
     return {
-      radio3: '',
-      filename: ''
+      banner: []
     }
   },
   computed: {
@@ -784,10 +817,17 @@ export default {
     }
   },
   mounted () {
+    this.getBannerList()
   },
   methods: {
-    getData () {
-      this.$store.dispatch('getFavoriteList', {pageSize: 10, pageNumber: 1, field: 'time', sort: 'asc'})
+    async getBannerList () {
+      await apiIndex.getBanner({type: 1}, (data) => {
+        console.log(data)
+        this.banner = data
+      })
+    },
+    goTop () {
+      window.scrollTo(0, 0)
     }
   }
 }
