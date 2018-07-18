@@ -1,11 +1,22 @@
 <template>
-    $END$
+  <div>
+    <indexHeader :isOpen="showMenu"></indexHeader>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "search"
+import indexHeader from '../../components/index/header'
+export default {
+  components: {
+    indexHeader
+  },
+  data () {
+    return {
+      showMenu: false
     }
+  },
+  name: 'search'
+}
 </script>
 
 <style scoped>
