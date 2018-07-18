@@ -5,6 +5,8 @@
 import Vue from 'vue'
 import {
   Button,
+  RadioButton,
+  RadioGroup,
   Form,
   FormItem,
   Input,
@@ -22,9 +24,12 @@ import {
   Tag,
   Dialog,
   Cascader,
-  Checkbox
+  Checkbox,
+  Carousel,
+  CarouselItem
 } from 'element-ui'
 import '../theme/button.css'
+import '../theme/radio-button.css'
 import '../theme/form.css'
 import '../theme/form-item.css'
 import '../theme/input.css'
@@ -46,9 +51,13 @@ import '../theme/tag.css'
 import '../theme/dialog.css'
 import '../theme/cascader.css'
 import '../theme/checkbox.css'
+import '../theme/carousel.css'
+import '../theme/carousel-item.css'
 
 export default () => {
   Vue.use(Button)
+  Vue.use(RadioButton)
+  Vue.use(RadioGroup)
   Vue.use(Form)
   Vue.use(FormItem)
   Vue.use(Input)
@@ -65,6 +74,8 @@ export default () => {
   Vue.use(Dialog)
   Vue.use(Cascader)
   Vue.use(Checkbox)
+  Vue.use(Carousel)
+  Vue.use(CarouselItem)
   Vue.prototype.$loading = Loading.service
   Vue.prototype.$message = Message
   Vue.prototype.$confirm = MessageBox.confirm
