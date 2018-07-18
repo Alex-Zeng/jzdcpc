@@ -106,6 +106,7 @@ export default {
           width 808px
           display: block
       .child-wrap
+        z-index 999
         overflow hidden
         position absolute
         left 240px
