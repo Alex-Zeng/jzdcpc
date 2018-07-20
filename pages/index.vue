@@ -31,7 +31,7 @@
               <p class="msg-content">
                 {{notice.summary}}
               </p>
-              <a href="">更多>></a>
+              <nuxt-link to="/user/message" class="link">更多>></nuxt-link>
             </div>
           </div>
         </div>
@@ -39,11 +39,11 @@
       <div class="main-count">
         <div class="total">
           <p>本月累计成交</p>
-          <h3>188,888.00<span>元</span></h3>
+          <h3>{{total.turnoverMonth}}<span>元</span></h3>
         </div>
         <div class="total">
           <p>累计成交额</p>
-          <h3>188,888.00<span>元</span></h3>
+          <h3>{{total.turnoverAll}}<span>元</span></h3>
         </div>
         <div class="jzAd">
           集众广告图
@@ -811,6 +811,10 @@ export default {
       notice: {
         release_time: '2018.07.03',
         summary: '内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要'
+      },
+      total: {
+        turnoverMonth: '200 000,00',
+        turnoverAll: '200 000,00'
       }
     }
   },
@@ -821,6 +825,7 @@ export default {
   },
   mounted () {
     this.getBannerList()
+    this.getTotal()
     this.getNotice()
   },
   methods: {
@@ -833,6 +838,11 @@ export default {
       await apiIndex.getFirstNotice({pageSize: 1, pageNumber: 1}, (data) => {
         const {data: {list}} = data
         this.notice = list[0]
+      })
+    },
+    async getTotal () {
+      await apiIndex.getTotal((data) => {
+        this.total = data.data
       })
     },
     goTop () {

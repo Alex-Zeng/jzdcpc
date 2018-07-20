@@ -7,5 +7,9 @@ export default {
   async getFirstNotice (fileds, cb) {
     const data = await request.post('/papi/user/getNoticeList', fileds)
     cb(data)
+  },
+  async getTotal (cb) {
+    const data = await request.get('/papi/index/turnover')
+    cb(data)
   }
 }
