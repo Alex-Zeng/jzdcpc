@@ -3,17 +3,17 @@
     <div class="top-wrap">
       <div class="content">
         <span class="welcome">集众电采欢迎您！！</span>
-        <ul class="top-menu">
+        <ul class="top-menu" v-if="token">
           <li class="item">
             <i class="icon">&#xe60f;</i>
             <span class="name">收藏(<span class="num">100</span>)</span>
           </li>
           <li class="item">
             <i class="icon">&#xe611;</i>
-            <span class="name">消息(<span class="num">100</span>)</span>
+            <span class="name">消息(<span class="num">{{msgs}}</span>)</span>
           </li>
           <li class="item">
-            <span class="name">退出</span>
+            <span class="name" @click="logout">退出</span>
           </li>
           <li class="item">
             <span class="name">下载手机app</span>
@@ -25,8 +25,23 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
 export default {
-  name: 'indexTop'
+  name: 'indexTop',
+  computed: {
+    msgs () {
+      return this.$store.getters.messageNumber
+    },
+    token () {
+      return this.$store.getters.loggedToken
+    }
+  },
+  methods: {
+    logout () {
+      Cookies.remove('_token')
+      this.$router.replace('/auth')
+    }
+  }
 }
 </script>
 

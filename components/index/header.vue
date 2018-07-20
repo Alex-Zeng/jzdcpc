@@ -3,15 +3,15 @@
     <top></top>
     <div class="bottom-wrap">
       <div class="content">
-        <i class="logo"></i>
+        <i class="logo" @click="$router.replace('/')"></i>
         <div class="center">
           <ul class="clearfix">
-            <li class="active">找商品</li>
-            <li>找供应商</li>
+            <li :class="{'active': type === 0}" @click="type=0">找商品</li>
+            <li :class="{'active': type === 1}" @click="type=1">找供应商</li>
           </ul>
           <div class="header-search-form">
-            <el-input class="header-search-input"></el-input>
-            <el-button type="primary">搜一搜</el-button>
+            <el-input class="header-search-input" v-model="key" @keyup.enter.native="search"></el-input>
+            <el-button type="primary" @click="search">搜一搜</el-button>
           </div>
         </div>
         <div class="btn"><el-button style="padding: 8px 14px;"><div class="car"><i class="icon">&#xe617;</i><span class="car-text">购物清单</span><el-badge :value="3"></el-badge></div></el-button></div>
@@ -28,7 +28,11 @@
             </div>
           </div>
           <li class="itemAll"><i class="menu-icon">&#xe605;</i>全部商品分类</li>
-          <li :class="{item:true, isOpen: isOpen || show}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="child = i.child, showWrap=true"><img src="" alt="">{{i.name}}
+          <li :class="{item:true, isOpen: isOpen || show}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="child = i.child, showWrap=true">
+            <div class="img">
+              <img :src="i.path" width="16px" alt="">
+            </div>
+            <span style="float: left;">{{i.name}}</span>
           </li>
         </ul>
         <ul class="header-tabs">
@@ -44,11 +48,19 @@
 
 <script>
 import top from './top'
-import service from '../../service'
 export default {
   name: 'indexHeader',
   components: {
     top
+  },
+  watch: {
+    '$route': function () {
+      const {params: {all}} = this.$route
+      if (all) {
+        let json = JSON.parse(all)
+        json.keywords && (this.key = json.keywords)
+      }
+    }
   },
   props: {
     isOpen: Boolean
@@ -58,26 +70,40 @@ export default {
       menu: [],
       child: [],
       showWrap: false,
-      show: false
+      show: false,
+      key: '',
+      type: 0
     }
   },
   mounted () {
     this.getMenu()
+    const {params: {all}} = this.$route
+    if (all) {
+      let json = JSON.parse(all)
+      this.key = json.keywords
+    }
   },
   methods: {
+    async search () {
+      const all = {keywords: this.key, type: this.type}
+      this.$router.push('/goods/search/' + JSON.stringify(all))
+    },
     async getMenu () {
       try {
-        const {data, status, msg} = await service.get('/papi/goods/getCategoryList')
-        if (status === 0) {
-          this.menu = data
-        } else {
-          this.$message(
-            {
-              type: 'warn',
-              message: msg
-            }
-          )
-        }
+        this.$store.dispatch('getCategoryList', (result) => {
+          console.log(result)
+          const {data, status, msg} = result
+          if (status === 0) {
+            this.menu = data
+          } else {
+            this.$message(
+              {
+                type: 'warn',
+                message: msg
+              }
+            )
+          }
+        })
       } catch (e) {
         this.$message(
           {
@@ -93,6 +119,7 @@ export default {
 
 <style lang="stylus" scoped>
   .bottom-wrap
+    z-index 999
     height 138px
     background-color #f5f5f5
     border-bottom 2px solid #2475e2
@@ -159,6 +186,14 @@ export default {
         position relative
         cursor pointer
         display: none
+        .img
+          height 51px
+          line-height 51px
+          vertical-align: middle
+          float left
+          margin-right 20px
+          img
+            vertical-align:middle
         &.isOpen
           display block
         &:after
