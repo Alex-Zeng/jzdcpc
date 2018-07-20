@@ -6,6 +6,7 @@ import orders from './modules/orders'
 import favorite from './modules/favorite'
 import message from './modules/message'
 import createLogger from '../helper/logger'
+import category from './modules/category'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ const store = () =>
       auth,
       orders,
       favorite,
-      message
+      message,
+      category
     },
     strict: debug,
     plugins: debug ? [createLogger()] : []
