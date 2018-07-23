@@ -1,24 +1,312 @@
 <template>
   <div>
     <indexHeader :isOpen="showMenu"></indexHeader>
+    <div class="search-wrap">
+      <a href="" class="back">返回</a>
+      <ul class="tags">
+        <li class="item">
+          <dl class="item-dl clearfix">
+            <dt><div class="label">商品大类</div></dt>
+            <dd>
+              <div class="dditem" v-for="i in categoryList" :key="i.id" @click="changeCate(1, i.child, i.id)" :class="{active: i.id === selectId}">{{i.name}}</div>
+            </dd>
+          </dl>
+        </li>
+        <li class="item">
+          <dl class="item-dl clearfix">
+            <dt>
+              <div class="label">物料类别</div>
+            </dt>
+            <dd>
+              <div class="dditem" v-for="i in child" :key="i.id" @click="changeCate(2, i.child, i.id)" :class="{active: i.id === childId}">{{i.name}}</div>
+            </dd>
+          </dl>
+        </li>
+        <li class="item">
+          <dl class="item-dl clearfix">
+            <dt>
+              <div class="label">物料名称</div>
+            </dt>
+            <dd><div class="dditem" v-for="i in superChild" :key="i.id" @click="changeCate(3, [], i.id)" :class="{active: i.id === scId}">{{i.name}}</div></dd>
+          </dl>
+        </li>
+      </ul>
+      <div class="sort-bar clearfix">
+        <ul class="sorts clearfix">
+          <li class="item">默认排序</li>
+          <li :class="{item:true, sort: true, up}" @click="sort(!up)">价格</li>
+        </ul>
+        <div class="right">
+          <div class="info">发现 {{all.keywords}} 共有 {{total}} 件商品</div>
+        </div>
+      </div>
+      <div class="result clearfix">
+        <nuxt-link :to="'/goods/detail/'+i.id" tag="div" class="item" v-for="i in list" :key="i.id">
+          <div class="top">
+            <img :src="i.url" alt="">
+            <div>
+              <i class="star">&#xe60f;</i>
+              <span>收藏</span>
+            </div>
+          </div>
+          <div class="bottom">
+            <span class="title">{{i.title}}</span>
+            <h4 class="money">¥<span class="num">{{i.min_price}}-{{i.max_price}}</span></h4>
+          </div>
+        </nuxt-link>
+      </div>
+      <div class="pager" style="margin-top: 20px; margin-bottom: 40px;">
+        <el-pagination
+          background
+          :total="total"
+          :page-size="12"
+          :current-page="pageNumber"
+          @current-change="page"
+        >
+        </el-pagination>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import indexHeader from '../../components/index/header'
+import apiSearch from '../../api/apiSearch'
+const pageSize = 12
 export default {
   components: {
     indexHeader
   },
+  computed: {
+    categoryList () {
+      return this.$store.getters.categoryList.data
+    }
+  },
   data () {
     return {
-      showMenu: false
+      showMenu: false,
+      list: [],
+      total: 0,
+      pageNumber: 1,
+      up: true,
+      all: {},
+      child: [],
+      superChild: [],
+      selectId: -1,
+      childId: -1,
+      scId: -1
     }
+  },
+  watch: {
+    '$route': async function () {
+      const {params: {all}} = this.$route
+      let json = JSON.parse(all)
+      this.all = json
+      this.search()
+    }
+  },
+  methods: {
+    sort (isUp) {
+      this.up = isUp
+      this.all = {...this.all, sort: isUp ? 'asc' : 'desc'}
+      this.$router.push('/goods/search/' + JSON.stringify(this.all))
+    },
+    page (page) {
+      this.all = {...this.all, pageNumber: page}
+      this.$router.push('/goods/search/' + JSON.stringify(this.all))
+    },
+    changeCate  (type, child, id) {
+      switch (type) {
+        case 1:
+          this.child = child
+          this.selectId = id
+          this.superChild = []
+          break
+        case 2:
+          this.childId = id
+          this.superChild = child
+          break
+        case 3:
+          this.scId = id
+          break
+      }
+      this.all.cateId = id
+      this.$router.push('/goods/search/' + JSON.stringify(this.all))
+    },
+    async search () {
+      const loading = this.$loading({
+        lock: true,
+        text: '加载中...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      await apiSearch.search((data) => {
+        loading.close()
+        const {list, total} = data
+        this.list = list
+        this.total = total
+      }, {...this.all, pageSize})
+    }
+  },
+  async mounted () {
+    const {params: {all}} = this.$route
+    let json = JSON.parse(all)
+    this.all = json
+    this.search()
   },
   name: 'search'
 }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
+.search-wrap
+  width 1300px
+  margin 0 auto
+  .tags
+    font-size 14px
+    .item + .item
+      border-top 1px solid #dedede
+    .item-dl
+      height auto !important
+      height 43px
+      min-height 43px
+      display flex
+      dt
+        height auto !important
+        height 43px
+        min-height 43px
+        background-color #2475e2
+        color #ffffff
+        width 150px
+        text-align center
+        height auto
+        position relative
+        .label
+          position absolute
+          left 50%
+          top 50%
+          transform translateX(-50%) translateY(-50%)
+          -ms-transform translateX(-50%) translateY(-50%)
+      dd
+        text-align center
+        width 1150px
+        background-color #fff
+        color #666666
+        cursor pointer
+        .dditem
+          float left
+          padding 12px 20px
+          &:hover
+            color #2475e2
+          &.active
+            color #2475e2
+  .sort-bar
+    font-size 16px
+    color #333333
+    margin-top 20px
+    background-color #f5f7fa
+    border 1px solid #dddddd
+    .right
+      float right
+      padding 12px 19px
+    .sorts
+      float left
+      cursor pointer
+      .item
+        float left
+        padding 12px 19px
+        min-width 103px
+        text-align center
+        border-right 1px solid #ddd
+        &.sort
+          position relative
+          font-family 'jzdc'
+          display block
+          padding-left 12px
+          &.up
+            &:after
+              content '\e635'
+              position absolute
+              right 24px
+              top 10px
+              font-size 12px
+              color #ff7900
+            &:before
+              content '\e62b'
+              position absolute
+              right 24px
+              bottom 10px
+              font-size 12px
+              color #999
+          &:after
+            content '\e635'
+            position absolute
+            right 24px
+            top 10px
+            font-size 12px
+            color #999
+          &:before
+            content '\e62b'
+            position absolute
+            right 24px
+            bottom 10px
+            font-size 12px
+            color #ff7900
 
+  .back
+    color #2475e2
+    font-size 14px
+    font-weight 600
+    padding 20px 0 22px 0
+    display block
+    &:before
+      content '\e67d'
+      font-family 'jzdc'
+      margin-right 10px
+  .result
+    margin-top 20px
+    .item
+      float left
+      width 310px
+      box-sizing border-box
+      background-color #ffffff
+      margin-bottom 20px
+      border 1px solid #ddd
+      .bottom
+        padding 20px 15px
+        .title
+          font-size 14px
+          color #333
+          height 38px
+          display block
+          overflow hidden
+          cursor pointer
+        .money
+          padding-top 6px
+          color #ff0000
+          .num
+            font-size 18px
+      .top
+        padding 20px 15px 10px
+        border-bottom 1px solid #ddd
+        font-size 16px
+        color #666666
+        .star
+          font-family 'jzdc'
+          font-size 24px
+          float left
+          margin-right 6px
+          cursor pointer
+        span
+          line-height 26px
+          cursor pointer
+        img
+          width 100%
+          height 280px
+          display block
+          padding-bottom 10px
+    .item
+      margin-right 19px
+      &:nth-child(4n)
+        margin-right 0
 </style>
