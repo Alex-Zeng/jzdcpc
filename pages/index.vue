@@ -15,13 +15,13 @@
         <div class="banner-right">
           <div>
             <div class="logo">
-              <img src="" alt="logo">
+              <img :src="user.path" alt="logo">
             </div>
             <h3>
-              津晶科技信息服务（广州）有限公司
+              {{user.username}}
             </h3>
-            <el-button type="primary" plain>进入工作台</el-button>
-            <el-button type="primary" plain @click="$router.push('/auth/login')">登录/注册</el-button>
+            <el-button type="primary" v-if="token" plain>进入工作台</el-button>
+            <el-button type="primary" v-if="token == null" plain @click="$router.push('/auth/login')">登录/注册</el-button>
           </div>
           <div>
             <img src="~assets/img/index/gonggao.png" alt="">
@@ -67,437 +67,39 @@
           <span>服务贴心</span>
         </div>
       </div>
-      <div id="floor1" class="main-floor">
+      <div v-for="item in goodsList" :id="item.id" :key="item.id" class="main-floor">
         <div class="floor-nav">
-          <h3>冰箱</h3>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button active" href="javascript:;">按钮</a>
-          <img src="~assets/img/index/bingxiang.png" alt="">
+          <h3>{{item.name}}</h3>
+          <nuxt-link  class="el-button"  v-for="i in item.pushTypeList" :id="i.id" :key="i.id" :to='`/goods/search/%7B"type":0,"cateId":${i.id}%7D`'>{{i.name}}</nuxt-link>
+          <img :src="goodsListImg[item.id].img" alt="">
         </div>
         <div class="floor-content">
           <ul>
-            <li>
-              <a href="">
-                <img src="" alt="">
+            <li v-for="j in item.pushGoodsList" :key="j.id">
+              <nuxt-link :to="'/goods/detail/'+j.id">
+                <img :src="j.icon" alt="">
                 <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
+                  {{j.title}}
                 </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div id="floor2" class="main-floor">
-        <div class="floor-nav">
-          <h3>冰箱</h3>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button active" href="javascript:;">按钮</a>
-        </div>
-        <div class="floor-content">
-          <ul>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div id="floor3" class="main-floor">
-        <div class="floor-nav">
-          <h3>冰箱</h3>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button active" href="javascript:;">按钮</a>
-        </div>
-        <div class="floor-content">
-          <ul>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div id="floor4" class="main-floor">
-        <div class="floor-nav">
-          <h3>冰箱</h3>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button" href="javascript:;">按钮</a>
-          <a class="el-button active" href="javascript:;">按钮</a>
-        </div>
-        <div class="floor-content">
-          <ul>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="" alt="">
-                <p>
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管冰箱铜管冰箱铜管
-                  冰箱铜管冰箱铜管
-                </p>
-                <span class="text-red">￥20.00</span>
-              </a>
+                <div class="text-red">
+                  <span class="text-red">￥ {{j.min_price}}</span>
+                  <span class="text-red" v-if="j.min_price !== j.max_price">~ {{j.max_price}}</span>
+                </div>
+              </nuxt-link>
             </li>
           </ul>
         </div>
       </div>
       <div class="sub-floor-nav">
         <ul>
-          <li><a href="#floor1">冰箱</a></li>
-          <li><a href="#floor2">冰箱</a></li>
-          <li><a href="#floor3">冰箱</a></li>
-          <li><a href="#floor4">冰箱</a></li>
+          <li v-for="item in subFloorNav" :key="item.id">
+            <a href="javascript:;" @click.prevent="custormAnchor('item.id')">{{item.name}}</a>
+          </li>
         </ul>
         <img src="~assets/img/index/go-top.png" @click="goTop" alt="">
       </div>
     </div>
+    <indexFooter></indexFooter>
   </div>
 </template>
 
@@ -567,9 +169,14 @@ body{
 .banner-right .logo{
   width 92px
   height 92px
+  padding 10px
   border-radius 50%
   margin auto
   background #F5F5F5
+}
+.banner-right .logo img{
+  width 100%
+  height 100%
 }
 .banner-right h3{
   color #666666
@@ -735,8 +342,9 @@ body{
   margin-left 268px
 }
 .floor-content ul{
+  height 600px
   border 1px solid #DEDEDE
-
+  overflow hidden
 }
 .floor-content ul li{
   display inline-block
@@ -760,7 +368,7 @@ body{
   padding 20px 14px 10px 20px
   box-sizing border-box
   border 1px solid #DEDEDE
-  background #5daf34
+  background #ffffff
   text-align left
   margin-left -1px
 }
@@ -769,7 +377,7 @@ body{
   height 167px
   margin auto
   margin-bottom 45px
-  background mediumpurple
+  background #e0e0e0
 }
 .sub-floor-nav{
   position fixed
@@ -800,35 +408,55 @@ body{
 
 <script>
 import indexHeader from '../components/index/header'
+import indexFooter from '../components/index/footer'
 import apiIndex from '@/api/apiIndex'
 export default {
   components: {
-    indexHeader
+    indexHeader,
+    indexFooter
   },
   data () {
     return {
+      user: {},
       banner: [],
-      notice: {
-        release_time: '2018.07.03',
-        summary: '内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要'
-      },
-      total: {
-        turnoverMonth: '200 000,00',
-        turnoverAll: '200 000,00'
-      }
+      notice: {},
+      total: {},
+      goodsList: [],
+      goodsListImg: [
+        {img: require('@/assets/img/index/bingxiang.png')},
+        {img: require('@/assets/img/index/xiyiji.png')},
+        {img: require('@/assets/img/index/kongtiao.png')},
+        {img: require('@/assets/img/index/xiaodugui.png')},
+        {img: require('@/assets/img/index/quanzidong.png')},
+        {img: require('@/assets/img/index/fucai.png')},
+        {img: require('@/assets/img/index/baozhuangyinshua.png')},
+        {img: require('@/assets/img/index/yuancailiao.png')}
+      ],
+      subFloorNav: []
     }
   },
   computed: {
-    data () {
-      return this.$store.getters.favoriteList
+    token () {
+      return this.$store.getters.loggedToken
     }
   },
   mounted () {
+    if (this.token != null) {
+      this.getProfile()
+    }
     this.getBannerList()
     this.getTotal()
     this.getNotice()
+    this.getPushTypeAndGoods()
   },
   methods: {
+    async getProfile () {
+      await apiIndex.getProfile((data) => {
+        console.log(88888888)
+        console.log(data)
+        this.user = data.data
+      })
+    },
     async getBannerList () {
       await apiIndex.getBanner({type: 1}, (data) => {
         this.banner = data
@@ -845,8 +473,31 @@ export default {
         this.total = data.data
       })
     },
+    async getPushTypeAndGoods () {
+      await apiIndex.getPushTypeAndGoods((data) => {
+        this.goodsList = data
+        data.forEach((item) => {
+          this.subFloorNav.push({id: item.id, name: item.name})
+        })
+      })
+    },
     goTop () {
-      window.scrollTo(0, 0)
+      let scrollTop = parseInt(document.body.scrollTop || document.documentElement.scrollTop)
+      let t = setInterval(function () {
+        scrollTop += -200
+        window.scrollTo(0, scrollTop)
+        if (scrollTop < 0) {
+          clearInterval(t)
+          window.scrollTo(0, 0)
+        }
+      }, 60)
+    },
+    custormAnchor (anchorName) {
+      // 找到锚点
+      let anchorElement = document.getElementById(anchorName)
+      if (anchorElement) {
+        anchorElement.scrollIntoView()
+      }
     }
   }
 }

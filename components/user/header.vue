@@ -1,6 +1,7 @@
 <template>
   <div class="header">
     <div class="header-content">
+      <menunNav></menunNav>
       <div class="jzdc">
         <nuxt-link to="/">
           <div class="logo"></div>
@@ -38,7 +39,7 @@
 <style lang="stylus" scoped>
 .header
   height 64px
-  background #1c324f
+  background #2475E2
   min-width 1200px
   position fixed
   width: 100%
@@ -92,6 +93,8 @@
   .toindex
     float left
     margin-right 10px
+    a
+      color #ffffff
     .icon
       font-family 'jzdc'
       font-size 16px
@@ -104,10 +107,10 @@
       font-size 16px
       margin-right 4px
 .header-content
-  width 100%
+  width 1300px
   height 64px
   margin 0 auto
-  background #1c324f
+  position relative
 </style>
 
 <style lang="stylus">
@@ -119,8 +122,12 @@
 
 <script>
 import Cookies from 'js-cookie'
+import menunNav from './menuNav'
 export default {
   name: 'userHeader',
+  components: {
+    menunNav
+  },
   computed: {
     msgs () {
       return this.$store.getters.messageNumber

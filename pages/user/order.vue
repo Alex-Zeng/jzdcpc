@@ -177,7 +177,7 @@ export default {
   .order-wrap
     padding 40px
   .result-wrap
-    min-width 1200px
+    margin auto
     .title
       height 48px
       background-color #2fbeed
