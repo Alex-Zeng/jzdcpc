@@ -26,7 +26,10 @@ import {
   Cascader,
   Checkbox,
   Carousel,
-  CarouselItem
+  CarouselItem,
+  Breadcrumb,
+  BreadcrumbItem,
+  InputNumber
 } from 'element-ui'
 import '../theme/button.css'
 import '../theme/radio-button.css'
@@ -53,6 +56,9 @@ import '../theme/cascader.css'
 import '../theme/checkbox.css'
 import '../theme/carousel.css'
 import '../theme/carousel-item.css'
+import '../theme/breadcrumb.css'
+import '../theme/breadcrumb-item.css'
+import '../theme/input-number.css'
 
 export default () => {
   Vue.use(Button)
@@ -76,6 +82,9 @@ export default () => {
   Vue.use(Checkbox)
   Vue.use(Carousel)
   Vue.use(CarouselItem)
+  Vue.use(Breadcrumb)
+  Vue.use(BreadcrumbItem)
+  Vue.use(InputNumber)
   Vue.prototype.$loading = Loading.service
   Vue.prototype.$message = Message
   Vue.prototype.$confirm = MessageBox.confirm

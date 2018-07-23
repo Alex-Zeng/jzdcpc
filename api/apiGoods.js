@@ -11,5 +11,9 @@ export default {
   async getSpecification (cb, fileds) {
     const { data } = await request.get('/papi/goods/getSpecification', fileds)
     cb(data)
+  },
+  async getSupplierHot (cb, fileds) {
+    const { data } = await request.post('/papi/goods/getSupplierHot', fileds)
+    cb(data)
   }
 }

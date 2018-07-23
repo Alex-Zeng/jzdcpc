@@ -13,22 +13,22 @@
             <img width="100%" height="100%" :src="detail.imgList && detail.imgList[select].img" alt="">
           </div>
           <div class="small-wrap">
-            <i class="prev"></i>
+            <i class="prev">&#xe67d;</i>
             <div class="small-list">
               <div class="super-wrap">
-                <div class="small-item" v-for="(i, k) in detail.imgList" :key="k" @click="select=k">
+                <div :class="{'small-item': true, active: select === k}" v-for="(i, k) in detail.imgList" :key="k" @click="select=k">
                   <img :src="i.img" alt="">
                 </div>
               </div>
             </div>
-            <i class="next"></i>
+            <i class="next">&#xe678;</i>
           </div>
         </div>
         <div class="info-wrap">
           <div class="title">{{detail.title}}</div>
           <div class="label">
             <span>单价</span>
-            <span class="money">¥{{detail.min_price}}-{{ detail.max_price}}</span>
+            <span class="money">¥{{stdPrice|| ((detail.min_price||0)+ '-' + (detail.max_price||0))}}</span>
             <span class="uni">元/{{detail.unit}}</span>
           </div>
           <div class="info-item">
@@ -44,24 +44,36 @@
           </div>
           <div class="info-item type clearfix" v-for="(i, k) in detail.standard" :key="i.id">
             <span class="name" style="float: left;">{{i.title}}：</span>
-            <div style="float: left; width: 768px;margin-left: -10px;">
-              <el-button style="margin-top: 10px;" :type="choose[k] === index? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, index)">{{item.color_name}}</el-button>
+            <div style="float: left; width: 768px;margin-left: -10px;" v-if="k===0">
+              <el-button style="margin-top: 10px;" :type="choose[k] === item.color_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.color_id)">{{item.color_name}}</el-button>
+            </div>
+            <div style="float: left; width: 768px;margin-left: -10px;" v-if="k===1">
+              <el-button style="margin-top: 10px;" :type="choose[k] === item.option_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.option_id)">{{item.option_name}}</el-button>
             </div>
           </div>
-          <div class="label" style="margin-bottom: 20px;">
-            <span class="grey">{{choose}}</span>
+          <div class="label" style="margin-bottom: 20px;" v-if="spec.no && spec.name" v-loading="specLoading">
+            <span class="grey"><span>物料编号：{{spec.no}}</span><span style="text-indent: 40px;">物料规格：{{spec.name}}</span></span>
           </div>
 
-          <el-button type="primary" style="width: 240px;"><i class="icon">&#xe617;</i>加入购物车</el-button>
+          <el-button type="primary" style="width: 240px;margin-left: 20px;"><i class="icon">&#xe617;</i>加入购物车</el-button>
         </div>
       </div>
       <div class="other-wrap clearfix">
         <div class="left">
-          热门
+          <img src="~assets/img/goods/detail-hot.png" alt="">
+          <div class="hot-list">
+            <a class="hot-item" :href="'/goods/detail/'+i.id" v-for="(i, k) in hotCur" :key="'hot'+k">
+              <img :src="i.icon" alt="">
+            </a>
+          </div>
+          <div class="hot-pager clearfix">
+            <i class="icon icon-left" @click="changeHot(false)">&#xe67d;</i>
+            <i class="icon icon-right" @click="changeHot(true)">&#xe678;</i>
+          </div>
         </div>
         <div class="right">
           <div class="title">商品详情</div>
-          <div v-html="detail.detail" style="padding: 0 28px;"></div>
+          <div v-html="detail.detail" style="padding: 0 28px 28px;"></div>
         </div>
       </div>
     </div>
@@ -86,24 +98,74 @@ export default {
       select: 0,
       path: [],
       spec: {},
-      choose: []
+      specLoading: false,
+      choose: [0, 0],
+      hot: [],
+      hotCur: [],
+      hotPage: 0,
+      stdPrice: null
     }
   },
   methods: {
     chooseFunc (k, index) {
+      const {params: {id}} = this.$route
       this.$set(this.choose, k, index)
+      const colorId = this.choose[0]
+      const optionId = this.choose[1]
+      this.detail.standardPrice.forEach((i) => {
+        if (colorId === i.color_id) {
+          if (optionId === i.option_id) {
+            this.stdPrice = i.price
+          }
+        }
+      })
+      apiGoods.getSpecification((data) => {
+        this.spec = data
+      }, {goodsId: id, colorId, optionId})
+    },
+    getHot () {
+      const {params: {id}} = this.$route
+      apiGoods.getSupplierHot((data) => {
+        this.hot = data
+        if (data.length > 3) {
+          this.hotCur = data.slice(0, 3)
+          this.hotPage = 0
+        } else {
+          this.hotCur = data
+        }
+      }, {id})
+    },
+    changeHot (isNext) {
+      const page = this.hotPage
+      if (isNext) {
+        if ((page + 1) * 3 >= this.hot.length) {
+          // this.$message({
+          //   type: 'warn',
+          //   message: ''
+          // })
+          return
+        }
+        this.hotPage += 1
+        this.hotCur = this.hot.slice(this.hotPage * 3, this.hotPage * 3 + 3)
+      } else {
+        if ((page - 1) < 0) {
+          return
+        }
+        this.hotPage -= 1
+        this.hotCur = this.hot.slice(this.hotPage * 3, this.hotPage * 3 + 3)
+      }
     }
   },
   mounted () {
     const {params: {id}} = this.$route
+    this.specLoading = true
+    this.getHot()
     apiGoods.getGoodsDetail((data) => {
+      this.specLoading = false
       this.detail = data
     }, {id})
     apiGoods.getPath((data) => {
       this.path = data
-    }, {id})
-    apiGoods.getSpecification((data) => {
-      console.log(data)
     }, {id})
   }
 }
@@ -145,6 +207,31 @@ export default {
     .left
       width 388px
       float left
+      padding-left 48px
+      .hot-list
+        width 220px
+        margin 0 auto
+        .hot-item
+          width 220px
+          height 220px
+          margin-top 20px
+          display block
+          img
+            width 220px
+            height 220px
+      .hot-pager
+        width 220px
+        margin 20px auto 0
+        .icon
+          font-size 20px
+          font-weight 600
+          color #2475e2
+          font-family 'jzdc'
+          cursor pointer
+        .icon-left
+          float left
+        .icon-right
+          float right
     .right
       float left
       width 910px
@@ -178,6 +265,25 @@ export default {
         width 380px
         height 70px
         overflow hidden
+        position relative
+        .prev
+          font-family 'jzdc'
+          font-size 26px
+          left 0
+          top 50%
+          margin-top -14px
+          position absolute
+          color #2475e2
+          cursor pointer
+        .next
+          font-family 'jzdc'
+          font-size 26px
+          position absolute
+          color #2475e2
+          right 0
+          top 50%
+          margin-top -14px
+          cursor pointer
         .super-wrap
           width 5000px
           overflow hidden
@@ -189,8 +295,9 @@ export default {
             width 70px
             height 70px
             float left
-            border 1px solid #2475e2
             margin-right 9px
+            &.active
+              border 1px solid #2475e2
             img
               width 100%
               height 100%
