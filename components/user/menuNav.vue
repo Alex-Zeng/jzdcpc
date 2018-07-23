@@ -81,6 +81,7 @@ export default {
     height 150px
     padding 15px
     text-align center
+    background-color #ffffff
     border-bottom 10px solid #f4f5f5
     .logo
       width 92px

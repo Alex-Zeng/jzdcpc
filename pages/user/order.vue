@@ -23,8 +23,9 @@
       </div>
 
       <div class="table" v-for="order in orders" :key="order.id">
+        <p class="time">2018-5-10 10:00:00</p>
         <div class="title clearfix">
-          <div class="item order-info"><span>订单号：</span>订单信息</div>
+          <div class="item order-info"><span>订单编号：201805102336001</span></div>
           <div class="item source">供应商</div>
           <div class="item addr">收货人</div>
           <div class="item status">{{getStateTitle(order.state)}}</div>
@@ -38,7 +39,7 @@
             <div class="info">
               <div class="md">
                 <div class="goods-title">{{item.title}}</div>
-                <div class="goods-info">{{item.specifications_name}}</div>
+                <div class="goods-info">{{item.specifications_name}}产品规格描述</div>
               </div>
             </div>
           </div>
@@ -175,22 +176,24 @@ export default {
     &.text
       color #737373
   .order-wrap
-    padding 40px
   .result-wrap
     margin auto
     .title
       height 48px
-      background-color #2fbeed
+      background-color #ffffff
+      border 1px solid #dddddd
       line-height 48px
       padding-left 20px
       margin-bottom 20px
     .item
-        float left
-        font-size 18px
-        color #ffffff
-        overflow hidden
+      float left
+      font-size 14px
+      color #333333
+      overflow hidden
     .table
       margin-bottom 20px
+      .time
+        padding 0 0 10px 20px
       .title
         height 40px
         border 1px solid #cccccc
@@ -205,39 +208,37 @@ export default {
     .data
       border 1px solid #cccccc
       padding 20px 0 20px 20px
+      background-color #ffffff
       .item
         color #737373
+        height 72px
+        line-height 72px
       .source
-        line-height 120px
-        height 120px
       .addr
-        line-height 120px
-        height 120px
       .status
-        line-height 120px
-        height 120px
       .action
         text-align center
       .img
-        height 120px
-        width 148px
+        height 60px
+        width 52px
         overflow hidden
         float left
         img
+          display block
           width 100%
           height 100%
+          background-color #e1e1e1
       .info
         padding-left 20px
-        height 120px
         color #737373
         position relative
         display flex
         justify-content center
         flex-direction column
         .md
+          line-height 1.5
           .goods-title
-            font-size 20px
-            line-height 1.8
+            font-size 18px
           .goods-info
             color #999999
             font-size 16px

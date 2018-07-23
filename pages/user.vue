@@ -13,13 +13,11 @@
 <style lang="stylus" scoped>
 .user-wrap
   padding-left 182px
-  background-color #ffffff
   width 1300px
   margin auto
   margin-top 74px
   position relative
   .content
-    background-color #ffffff
     display block
     width 99.9%
     min-height 600px
