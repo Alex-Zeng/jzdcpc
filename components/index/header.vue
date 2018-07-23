@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div :style="{'background-color':bg}">
     <top></top>
-    <div class="bottom-wrap">
+    <div class="bottom-wrap" :style="{'background-color':bg}">
       <div class="content">
         <i class="logo" @click="$router.replace('/')"></i>
         <div class="center">
@@ -21,9 +21,11 @@
               <div class="child-menu-list clearfix">
                 <div class="menu-name">{{i.name}}</div>
                 <ul class="clearfix" style="float: left;width: 600px;">
-                  <li class="child-menu-list-item" v-for="(item, key) in i.child" :key="'menu' + key+item.id+k">{{item.name}}</li>
+                  <li class="child-menu-list-item" v-for="(item, key) in i.child" :key="'menu' + key+item.id+k">
+                    <nuxt-link :to='`/goods/search/%7B"type":0,"cateId":${item.id}%7D`'>{{item.name}}</nuxt-link>
+                  </li>
                 </ul>
-                <a href="" class="more">更多>></a>
+                <!--<a href="" class="more">更多>></a>-->
               </div>
             </div>
           </div>
@@ -63,7 +65,8 @@ export default {
     }
   },
   props: {
-    isOpen: Boolean
+    isOpen: Boolean,
+    bg: String
   },
   data () {
     return {
@@ -91,7 +94,6 @@ export default {
     async getMenu () {
       try {
         this.$store.dispatch('getCategoryList', (result) => {
-          console.log(result)
           const {data, status, msg} = result
           if (status === 0) {
             this.menu = data
