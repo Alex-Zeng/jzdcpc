@@ -10,6 +10,7 @@ import {
   Form,
   FormItem,
   Input,
+  DatePicker,
   Message,
   Loading,
   MessageBox,
@@ -19,6 +20,7 @@ import {
   Pagination,
   Progress,
   Radio,
+  Col,
   Select,
   Option,
   Tag,
@@ -36,6 +38,7 @@ import '../theme/radio-button.css'
 import '../theme/form.css'
 import '../theme/form-item.css'
 import '../theme/input.css'
+import '../theme/date-picker.css'
 import '../theme/message.css'
 import '../theme/loading.css'
 import '../theme/badge.css'
@@ -67,6 +70,7 @@ export default () => {
   Vue.use(Form)
   Vue.use(FormItem)
   Vue.use(Input)
+  Vue.use(DatePicker)
   Vue.use(Badge)
   Vue.use(Collapse)
   Vue.use(CollapseItem)
@@ -75,6 +79,7 @@ export default () => {
   Vue.use(Progress)
   Vue.use(Radio)
   Vue.use(Select)
+  Vue.use(Col)
   Vue.use(Option)
   Vue.use(Tag)
   Vue.use(Dialog)

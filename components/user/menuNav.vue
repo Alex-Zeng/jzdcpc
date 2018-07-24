@@ -10,7 +10,7 @@
         </h3>
       </nuxt-link>
     </div>
-    <el-collapse accordion="true">
+    <el-collapse accordion>
       <el-collapse-item>
         <template slot="title">
           <i class="title-icon">&#xe639;</i>企业账号管理

@@ -8,8 +8,51 @@
         <el-form-item>
           <el-button type="primary">确定</el-button>
         </el-form-item>
-        <el-form-item style="float: right;">
+        <!--<el-form-item style="float: right;">
           <el-button type="primary">导出结果</el-button>
+        </el-form-item>-->
+        <el-form-item>
+          <el-button type="text" @click="showMore">更多条件<i class="down-icon"></i></el-button>
+        </el-form-item>
+      </el-form>
+      <el-form :inline="true" :model="formInline" class="demo-form-inline">
+        <el-form-item label="采购商品：">
+          <el-input v-model="formInline.user" placeholder="请输入采购的商品名称"></el-input>
+        </el-form-item>
+        <el-form-item label="订单状态：">
+          <el-select v-model="formInline.region" placeholder="请选择订单状态">
+            <el-option label="待核价" value="0"></el-option>
+            <el-option label="待签约" value="1"></el-option>
+            <el-option label="待采购商打款" value="2"></el-option>
+            <el-option label="待发货" value="3"></el-option>
+            <el-option label="订单关闭" value="4"></el-option>
+            <el-option label="待收货" value="6"></el-option>
+            <el-option label="待质检" value="7"></el-option>
+            <el-option label="问题确认中" value="8"></el-option>
+            <el-option label="账期中" value="9"></el-option>
+            <el-option label="逾期中" value="10"></el-option>
+            <el-option label="待打款至供应商" value="11"></el-option>
+            <el-option label="交易完成" value="13"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="采购企业：">
+          <el-input v-model="formInline.user" placeholder="请输入采购企业"></el-input>
+        </el-form-item>
+        <el-form-item label="活动时间：">
+          <el-col :span="11">
+            <el-form-item prop="date1">
+              <el-date-picker type="date" placeholder="选择日期" v-model="formInline.date1" style="width: 100%;"></el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col class="line" :span="2">-&nbsp;</el-col>
+          <el-col :span="11">
+            <el-form-item prop="date2">
+              <el-date-picker type="date" placeholder="选择时间" v-model="formInline.date2" style="width: 100%;"></el-date-picker>
+            </el-form-item>
+          </el-col>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">查询</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -75,6 +118,19 @@
 const pageSize = 10
 export default {
   name: 'order',
+  data () {
+    return {
+      // type: 'all',
+      pageNumber: 1,
+      activeName: -1,
+      formInline: {
+        user: '',
+        region: '',
+        date1: '',
+        date2: ''
+      }
+    }
+  },
   computed: {
     orders () {
       return this.$store.getters.orderList
@@ -125,13 +181,14 @@ export default {
       }
     })
   },
-  data () {
-    return {
-      // type: 'all',
-      pageNumber: 1
-    }
-  },
   methods: {
+    showMore () {
+      if (this.activeName === '-1') {
+        this.activeName = '1'
+      } else {
+        this.activeName = '-1'
+      }
+    },
     getList (page) {
       const {params: {type}} = this.$route
       this.$router.push(`/user/order/${type}/${page}`)
@@ -163,6 +220,9 @@ export default {
         case 13:
           return '交易完成'
       }
+    },
+    onSubmit () {
+      console.log('submit!')
     }
   }
 }
@@ -178,6 +238,15 @@ export default {
   .order-wrap
   .result-wrap
     margin auto
+    .down-icon
+      width 0
+      height 0
+      border-width 8px
+      border-style solid
+      border-color #FF7900 transparent transparent transparent
+      position absolute
+      top 16px
+      right -18px
     .title
       height 48px
       background-color #ffffff
@@ -257,4 +326,10 @@ export default {
         width 19%
         text-align center
 
+</style>
+<style lang="stylus">
+  .search-wrap
+    .el-collapse-item__arrow
+      display none
+      opacity 0
 </style>
