@@ -56,48 +56,93 @@
       </el-form>
     </div>
     <div class="result-wrap">
-      <div class="title">
-        <div class="item order-info">订单信息</div>
-        <div class="item source">供应商</div>
-        <div class="item addr">收货人</div>
-        <div class="item status">订单状态</div>
-        <div class="item action">操作</div>
-      </div>
+      <!--<table>
+        <thead>
+        <tr>
+          <th>订单信息</th>
+          <th>供应商</th>
+          <th>收货人</th>
+          <th>订单状态</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="order in orders" :key="order.id">
+          <td>
+            <table>
+              <thead>
+              <tr>
+                <th>订单编号：{{order.out_id}}</th>
+                <th>{{order.companyName || '无'}}</th>
+                <th>{{order.receiver_name}}</th>
+                <th>{{getStateTitle(order.state)}}</th>
+                <th>总额：¥{{order.money}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="item in (order.goods)" :key="order.id + item.id">
+                <td><img :src="item.icon" alt=""></td>
+                <td>
+                  <div class="goods-title">{{item.title}}</div>
+                  <div class="goods-info">{{item.specifications_name}}</div>
+                  <div class="goods-info">{{item.specifications_no}}</div>
+                  <div class="goods-info">{{item.specifications_info}}</div>
+                </td>
+                <td>数量：{{item.quantity}}</td>
+                <td>单价：{{item.price}}元</td>
+                <td>小计：{{(item.quantity * item.price).toFixed(2)}}元</td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+          <td>
+            <el-button class="order-button" type="primary" v-show="order.state == 3">确定发货</el-button>
+            <el-button class="order-button" type="primary" v-show="order.state == 6">确定发货</el-button>
+            <el-button class="order-button" type="primary" v-show="order.state !== 3 && order.state !== 6">查看详情</el-button>
+            <el-button class="order-button text" type="text" v-show="order.state == 1">取消交易</el-button>
+            &lt;!&ndash; <el-button class="order-button text" type="text">售后申请</el-button> &ndash;&gt;
+          </td>
+        </tr>
+
+        </tbody>
+      </table>-->
 
       <div class="table" v-for="order in orders" :key="order.id">
         <p class="time">2018-5-10 10:00:00</p>
-        <div class="title clearfix">
-          <div class="item order-info"><span>订单编号：{{order.out_id}}</span></div>
-          <div class="item source">{{order.companyName || '无'}}</div>
-          <div class="item addr">{{order.receiver_name}}</div>
-          <div class="item status">{{getStateTitle(order.state)}}</div>
-          <div class="item action"><span>总额：</span>¥{{order.money}}</div>
-        </div>
-        <div class="data clearfix" v-for="item in (order.goods)" :key="order.id + item.id">
-          <div class="item order-info">
-            <div class="img">
-              <img :src="item.icon" alt="">
-            </div>
-            <div class="info">
-              <div class="md">
-                <div class="goods-title">{{item.title}}</div>
-                <div class="goods-info">{{item.specifications_name}}</div>
-                <div class="goods-info">{{item.specifications_no}}</div>
-                <div class="goods-info">{{item.specifications_info}}</div>
+          <div class="title clearfix">
+            <div class="item order-info"><span>订单编号：{{order.out_id}}</span></div>
+            <div class="item source">{{order.companyName || '无'}}</div>
+            <div class="item addr">{{order.receiver_name}}</div>
+            <div class="item status">{{getStateTitle(order.state)}}</div>
+            <div class="item action"><span>总额：</span>¥{{order.money}}</div>
+          </div>
+        <div class="lists">
+          <div class="lists-content">
+            <div class="data" v-for="item in (order.goods)" :key="order.id + item.id">
+              <div class="item order-info">
+                <div class="img">
+                  <img :src="item.icon" alt="">
+                </div>
+                <div class="info">
+                  <div class="md">
+                    <div class="goods-title">{{item.title}}</div>
+                    <div class="goods-info">{{item.specifications_name}}</div>
+                    <div class="goods-info">{{item.specifications_no}}</div>
+                    <div class="goods-info">{{item.specifications_info}}</div>
+                  </div>
+                </div>
               </div>
+              <div class="item source">数量：{{item.quantity}}</div>
+              <div class="item addr">单价：{{item.price}}元</div>
+              <div class="item status">小计：{{(item.quantity * item.price).toFixed(2)}}元</div>
             </div>
           </div>
-          <div class="item source">数量：{{item.quantity}}</div>
-          <div class="item addr">单价：{{item.price}}元</div>
-          <div class="item status">小计：{{(item.quantity * item.price).toFixed(2)}}元</div>
-          <div class="item action">
-            <div class="info">
-              <el-button class="order-button" type="primary" v-show="order.state == 3">确定发货</el-button>
-              <el-button class="order-button" type="primary" v-show="order.state == 6">确定发货</el-button>
-              <el-button class="order-button" type="primary" v-show="order.state !== 3 && order.state !== 6">查看详情</el-button>
-              <el-button class="order-button text" type="text" v-show="order.state == 1">取消交易</el-button>
-              <!-- <el-button class="order-button text" type="text">售后申请</el-button> -->
-            </div>
+          <div class="info info-btn">
+            <el-button class="order-button" type="primary" v-show="order.state == 3">确定发货</el-button>
+            <el-button class="order-button" type="primary" v-show="order.state == 6">确定发货</el-button>
+            <el-button class="order-button" type="primary" v-show="order.state !== 3 && order.state !== 6">查看详情</el-button>
+            <el-button class="order-button text" type="text" v-show="order.state == 1">取消交易</el-button>
+            <!--<el-button class="order-button text" type="text">售后申请</el-button>-->
           </div>
         </div>
       </div>
@@ -227,6 +272,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  table
+    width 100%
+    td
+      border 1px solid red
   .order-button
     width 120px
     height 38px
@@ -259,6 +308,8 @@ export default {
       overflow hidden
     .table
       margin-bottom 20px
+      .list
+        display flex
       .time
         padding 0 0 10px 20px
       .title
@@ -275,6 +326,7 @@ export default {
       border 1px solid #cccccc
       padding 20px 0 20px 20px
       background-color #ffffff
+      overflow hidden
       .item
         color #66666
         height 72px
@@ -323,7 +375,16 @@ export default {
     .action
         width 19%
         text-align center
-
+  .lists
+    display flex
+    clear both
+    background-color #ffffff
+    .lists-content
+      flex 1
+    .info-btn
+      padding 20px
+      border 1px solid #ccc
+      border-left none
 </style>
 <style lang="stylus">
   .search-wrap
