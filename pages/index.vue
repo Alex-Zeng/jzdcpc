@@ -20,7 +20,7 @@
             <h3>
               {{user.username}}
             </h3>
-            <el-button type="primary" v-if="token" plain>进入工作台</el-button>
+            <el-button type="primary" v-if="token" plain @click="$router.push('/user')">进入工作台</el-button>
             <el-button type="primary" v-if="token == null" plain @click="$router.push('/auth/login')">登录/注册</el-button>
           </div>
           <div>

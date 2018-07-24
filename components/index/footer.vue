@@ -23,7 +23,7 @@
       </div>
       <div class="code">
         <img src="~assets/img/common/code.png" alt="">
-        官方微信
+        <p>官方微信</p>
       </div>
     </div>
   </div>

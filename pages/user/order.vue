@@ -1,59 +1,58 @@
 <template>
   <div class="order-wrap">
     <div class="search-wrap">
-      <el-form ref="searchForm" :inline="true">
+      <el-form ref="searchForm" :inline="true" :model="searchForm" class="demo-form-inline">
         <el-form-item>
           <el-input placeholder="订单关键字"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary">确定</el-button>
         </el-form-item>
-        <!--<el-form-item style="float: right;">
-          <el-button type="primary">导出结果</el-button>
-        </el-form-item>-->
         <el-form-item>
-          <el-button type="text" @click="showMore">更多条件<i class="down-icon"></i></el-button>
+          <el-button type="text" @click="showMore = !showMore">更多条件<i class="down-icon"></i></el-button>
         </el-form-item>
-      </el-form>
-      <el-form :inline="true" :model="formInline" class="demo-form-inline">
-        <el-form-item label="采购商品：">
-          <el-input v-model="formInline.user" placeholder="请输入采购的商品名称"></el-input>
-        </el-form-item>
-        <el-form-item label="订单状态：">
-          <el-select v-model="formInline.region" placeholder="请选择订单状态">
-            <el-option label="待核价" value="0"></el-option>
-            <el-option label="待签约" value="1"></el-option>
-            <el-option label="待采购商打款" value="2"></el-option>
-            <el-option label="待发货" value="3"></el-option>
-            <el-option label="订单关闭" value="4"></el-option>
-            <el-option label="待收货" value="6"></el-option>
-            <el-option label="待质检" value="7"></el-option>
-            <el-option label="问题确认中" value="8"></el-option>
-            <el-option label="账期中" value="9"></el-option>
-            <el-option label="逾期中" value="10"></el-option>
-            <el-option label="待打款至供应商" value="11"></el-option>
-            <el-option label="交易完成" value="13"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="采购企业：">
-          <el-input v-model="formInline.user" placeholder="请输入采购企业"></el-input>
-        </el-form-item>
-        <el-form-item label="活动时间：">
-          <el-col :span="11">
-            <el-form-item prop="date1">
-              <el-date-picker type="date" placeholder="选择日期" v-model="formInline.date1" style="width: 100%;"></el-date-picker>
-            </el-form-item>
-          </el-col>
-          <el-col class="line" :span="2">-&nbsp;</el-col>
-          <el-col :span="11">
-            <el-form-item prop="date2">
-              <el-date-picker type="date" placeholder="选择时间" v-model="formInline.date2" style="width: 100%;"></el-date-picker>
-            </el-form-item>
-          </el-col>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
-        </el-form-item>
+        <div class="more" v-show="showMore">
+          <el-form-item label="采购商品：">
+            <el-input v-model="searchForm.goodsName" placeholder="请输入采购的商品名称"></el-input>
+          </el-form-item>
+          <el-form-item label="订单状态：">
+            <el-select v-model="searchForm.status" placeholder="请选择订单状态">
+              <el-option label="待核价" value="0"></el-option>
+              <el-option label="待签约" value="1"></el-option>
+              <el-option label="待采购商打款" value="2"></el-option>
+              <el-option label="待发货" value="3"></el-option>
+              <el-option label="订单关闭" value="4"></el-option>
+              <el-option label="待收货" value="6"></el-option>
+              <el-option label="待质检" value="7"></el-option>
+              <el-option label="问题确认中" value="8"></el-option>
+              <el-option label="账期中" value="9"></el-option>
+              <el-option label="逾期中" value="10"></el-option>
+              <el-option label="待打款至供应商" value="11"></el-option>
+              <el-option label="交易完成" value="13"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="采购企业：">
+            <el-input v-model="searchForm.userName" placeholder="请输入采购企业"></el-input>
+          </el-form-item>
+          <el-form-item label="活动时间：">
+            <el-col :span="11">
+              <el-form-item prop="date1">
+                <el-date-picker type="date" placeholder="选择日期" v-model="searchForm.date1" style="width: 100%;"></el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col class="line" :span="2" style="text-align: center">-</el-col>
+            <el-col :span="11">
+              <el-form-item prop="date2">
+                <el-date-picker type="date" placeholder="选择时间" v-model="searchForm.date2" style="width: 100%;"></el-date-picker>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+          <el-form-item style="float: right">
+            <el-button type="primary" @click="onSubmit">搜索</el-button>
+            <el-button type="primary" @click="resetForm('searchForm')">重置</el-button>
+            <el-button type="primary">导出结果</el-button>
+          </el-form-item>
+        </div>
       </el-form>
     </div>
     <div class="result-wrap">
@@ -68,11 +67,11 @@
       <div class="table" v-for="order in orders" :key="order.id">
         <p class="time">2018-5-10 10:00:00</p>
         <div class="title clearfix">
-          <div class="item order-info"><span>订单编号：201805102336001</span></div>
-          <div class="item source">供应商</div>
-          <div class="item addr">收货人</div>
+          <div class="item order-info"><span>订单编号：{{order.out_id}}</span></div>
+          <div class="item source">{{order.companyName || '无'}}</div>
+          <div class="item addr">{{order.receiver_name}}</div>
           <div class="item status">{{getStateTitle(order.state)}}</div>
-          <div class="item action"><span>总额：</span>¥1000</div>
+          <div class="item action"><span>总额：</span>¥{{order.money}}</div>
         </div>
         <div class="data clearfix" v-for="item in (order.goods)" :key="order.id + item.id">
           <div class="item order-info">
@@ -82,13 +81,15 @@
             <div class="info">
               <div class="md">
                 <div class="goods-title">{{item.title}}</div>
-                <div class="goods-info">{{item.specifications_name}}产品规格描述</div>
+                <div class="goods-info">{{item.specifications_name}}</div>
+                <div class="goods-info">{{item.specifications_no}}</div>
+                <div class="goods-info">{{item.specifications_info}}</div>
               </div>
             </div>
           </div>
-          <div class="item source">{{order.supplier || '无'}}</div>
-          <div class="item addr">{{order.receiver_name}}</div>
-          <div class="item status">{{getStateTitle(order.state)}}</div>
+          <div class="item source">数量：{{item.quantity}}</div>
+          <div class="item addr">单价：{{item.price}}元</div>
+          <div class="item status">小计：{{(item.quantity * item.price).toFixed(2)}}元</div>
           <div class="item action">
             <div class="info">
               <el-button class="order-button" type="primary" v-show="order.state == 3">确定发货</el-button>
@@ -122,10 +123,11 @@ export default {
     return {
       // type: 'all',
       pageNumber: 1,
-      activeName: -1,
-      formInline: {
-        user: '',
-        region: '',
+      showMore: false,
+      searchForm: {
+        goodsName: '',
+        status: '',
+        userName: '',
         date1: '',
         date2: ''
       }
@@ -182,13 +184,6 @@ export default {
     })
   },
   methods: {
-    showMore () {
-      if (this.activeName === '-1') {
-        this.activeName = '1'
-      } else {
-        this.activeName = '-1'
-      }
-    },
     getList (page) {
       const {params: {type}} = this.$route
       this.$router.push(`/user/order/${type}/${page}`)
@@ -223,6 +218,9 @@ export default {
     },
     onSubmit () {
       console.log('submit!')
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }
@@ -234,7 +232,7 @@ export default {
     height 38px
     margin 0 auto
     &.text
-      color #737373
+      color #66666
   .order-wrap
   .result-wrap
     margin auto
@@ -271,15 +269,14 @@ export default {
         margin-bottom 0
         border-bottom none
         .item
-          color #2fbeed
           span
-            color: #737373
+            color: #66666
     .data
       border 1px solid #cccccc
       padding 20px 0 20px 20px
       background-color #ffffff
       .item
-        color #737373
+        color #66666
         height 72px
         line-height 72px
       .source
@@ -288,8 +285,8 @@ export default {
       .action
         text-align center
       .img
-        height 60px
-        width 52px
+        width 60px
+        height 52px
         overflow hidden
         float left
         img
@@ -299,7 +296,7 @@ export default {
           background-color #e1e1e1
       .info
         padding-left 20px
-        color #737373
+        color #66666
         position relative
         display flex
         justify-content center
@@ -316,6 +313,7 @@ export default {
     .source
         width 19%
         text-align center
+        white-space nowrap
     .addr
         width 18%
         text-align center
