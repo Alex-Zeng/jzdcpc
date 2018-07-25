@@ -70,7 +70,7 @@
         </div>
         <div class="addr-body">
           <div>联系方式：{{i.phone}}</div>
-          <div>详细地址：{{i.detail}}</div>
+          <div class="detail">详细地址：{{i.detail}}</div>
         </div>
         <div class="addr-footer clearfix">
           <el-radio :label="i.id" v-model="defaultAddr" style="float: left;" @change="setDefault(i.id)">默认地址</el-radio>
@@ -257,7 +257,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消删除'
+          message: '已取消选择'
         })
         // 数据无变动，遍历回退
         this.list.forEach((i) => {
@@ -374,44 +374,62 @@ export default {
       margin-left -24px
       min-width 1332px
       .addr-item
-        border 1px solid #ccc
+        border 1px solid #2475e2
+        border-radius 4px
         margin-left 24px
         margin-bottom 20px
         width 318px
+        background-color #ffffff
         float left
         .addr-new
           text-align center
-          height 140px
-          line-height 140px
+          height 177px
+          line-height 177px
           font-size 44px
           cursor pointer
         .addr-header
-          border-bottom 1px solid #ccc
+          border-bottom 1px solid #2475e2
           padding 12px
           height 49px
+          font-size 14px
           .name
             float right
         .addr-body
           padding 12px
+          font-size 14px
+          .detail
+            margin-top 4px
+            height 19*3px
+            overflow hidden
         .addr-footer
           padding 4px 12px
+          color #ff7900
           .action
             font-family 'jzdc'
             float right
             i
               cursor pointer
               &:hover
-                color: #2fbeed
+                color: #2475e2
 </style>
 
 <style lang="stylus">
   .address-wrap
+    .el-radio.is-checked
+      .el-radio__inner
+        border-color #ff7900
+        background #ff7900
+      .el-radio__label
+        color #ff7900 !important
     .addr-header
       .el-tag
         height 24px
         line-height 22px
     .el-tag
       cursor pointer
+      border-color #ff7900
+      color #ff7900
+      background-color #fff
       &.select
         background-color rgba(64, 158, 255, .5)
     .el-tag+.el-tag

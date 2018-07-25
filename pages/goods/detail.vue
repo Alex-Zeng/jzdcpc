@@ -44,7 +44,7 @@
           </div>
           <div class="info-item type clearfix" v-for="(i, k) in detail.standard" :key="i.id">
             <span class="name" style="float: left;">{{i.title}}：</span>
-            <div style="float: left; width: 768px;margin-left: -10px;" v-if="k===0">
+            <div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;" v-if="k===0">
               <el-button style="margin-top: 10px;" :type="choose[k] === item.color_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.color_id)">{{item.color_name}}</el-button>
             </div>
             <div style="float: left; width: 768px;margin-left: -10px;" v-if="k===1">
@@ -55,7 +55,7 @@
             <span class="grey"><span>物料编号：{{spec.no}}</span><span style="text-indent: 40px;">物料规格：{{spec.name}}</span></span>
           </div>
 
-          <el-button type="primary" style="width: 240px;margin-left: 20px;"><i class="icon">&#xe617;</i>加入购物车</el-button>
+          <el-button type="primary" style="width: 240px;margin-left: 20px;" @click="addToCart"><i class="icon">&#xe617;</i>加入购物车</el-button>
         </div>
       </div>
       <div class="other-wrap clearfix">
@@ -85,6 +85,7 @@
 import indexHeader from '../../components/index/header'
 import indexFooter from '../../components/index/footer'
 import apiGoods from '../../api/apiGoods'
+import apiMallCart from '../../api/apiMallCart'
 export default {
   name: 'detail',
   components: {
@@ -139,10 +140,6 @@ export default {
       const page = this.hotPage
       if (isNext) {
         if ((page + 1) * 3 >= this.hot.length) {
-          // this.$message({
-          //   type: 'warn',
-          //   message: ''
-          // })
           return
         }
         this.hotPage += 1
@@ -153,6 +150,29 @@ export default {
         }
         this.hotPage -= 1
         this.hotCur = this.hot.slice(this.hotPage * 3, this.hotPage * 3 + 3)
+      }
+    },
+    addToCart () {
+      const {params: {id}} = this.$route
+      const colorId = this.choose[0]
+      const optionId = this.choose[1]
+      const number = this.count
+      try {
+        apiMallCart.add((data) => {
+          const {msg, status} = data
+          if (status === 0) {
+            this.$message(
+              {
+                type: 'success',
+                message: msg
+              }
+            )
+          } else {
+            this.$message.error(msg)
+          }
+        }, {id, colorId, optionId, number})
+      } catch (e) {
+        this.$message.error('网络开小差，请稍后重试')
       }
     }
   },
