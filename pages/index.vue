@@ -452,7 +452,6 @@ export default {
   methods: {
     async getProfile () {
       await apiIndex.getProfile((data) => {
-        console.log(88888888)
         console.log(data)
         this.user = data.data
       })
@@ -475,8 +474,8 @@ export default {
     },
     async getPushTypeAndGoods () {
       await apiIndex.getPushTypeAndGoods((data) => {
-        this.goodsList = data
-        data.forEach((item) => {
+        this.goodsList = data.data.dataType
+        data.data.dataType.forEach((item) => {
           this.subFloorNav.push({id: item.id, name: item.name})
         })
       })
