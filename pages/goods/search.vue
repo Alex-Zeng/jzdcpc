@@ -40,42 +40,50 @@
           <div class="info">发现 {{all.keywords}} 共有 {{total}} 件商品</div>
         </div>
       </div>
-      <div class="result clearfix">
-        <nuxt-link :to="'/goods/detail/'+i.id" tag="div" class="item" v-for="i in list" :key="i.id">
-          <div class="top">
-            <img :src="i.url" alt="">
-            <div>
-              <i class="star">&#xe60f;</i>
-              <span>收藏</span>
+      <empty v-if="list.length <= 0"></empty>
+      <div v-else>
+        <div class="result clearfix">
+          <nuxt-link :to="'/goods/detail/'+i.id" tag="div" class="item" v-for="i in list" :key="i.id">
+            <div class="top">
+              <img :src="i.url" alt="">
+              <div>
+                <i class="star">&#xe60f;</i>
+                <span>收藏</span>
+              </div>
             </div>
-          </div>
-          <div class="bottom">
-            <span class="title">{{i.title}}</span>
-            <h4 class="money">¥<span class="num">{{i.min_price}}-{{i.max_price}}</span></h4>
-          </div>
-        </nuxt-link>
-      </div>
-      <div class="pager" style="margin-top: 20px; margin-bottom: 40px;">
-        <el-pagination
-          background
-          :total="total"
-          :page-size="12"
-          :current-page="pageNumber"
-          @current-change="page"
-        >
-        </el-pagination>
+            <div class="bottom">
+              <span class="title">{{i.title}}</span>
+              <h4 class="money">¥<span class="num">{{i.min_price}}-{{i.max_price}}</span></h4>
+            </div>
+          </nuxt-link>
+        </div>
+        <div class="pager" style="margin-top: 20px; margin-bottom: 40px;">
+          <el-pagination
+            background
+            :total="total"
+            :page-size="12"
+            :current-page="pageNumber"
+            @current-change="page"
+          >
+          </el-pagination>
+        </div>
       </div>
     </div>
+    <indexFooter></indexFooter>
   </div>
 </template>
 
 <script>
 import indexHeader from '../../components/index/header'
+import indexFooter from '../../components/index/footer'
+import empty from '../../components/empty'
 import apiSearch from '../../api/apiSearch'
 const pageSize = 12
 export default {
   components: {
-    indexHeader
+    indexHeader,
+    indexFooter,
+    empty
   },
   computed: {
     categoryList () {

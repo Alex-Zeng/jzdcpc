@@ -8,5 +8,9 @@ export default {
       return
     }
     successCb(data)
+  },
+  async make (cb, fileds) {
+    const data = await request.post('/papi/order/make', fileds)
+    cb(data)
   }
 }
