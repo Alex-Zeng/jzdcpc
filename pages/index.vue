@@ -46,7 +46,7 @@
           <h3>{{total.turnoverAll}}<span>元</span></h3>
         </div>
         <div class="jzAd">
-          集众广告图
+          <img src="~assets/img/index/fuwu.png" alt="">
         </div>
       </div>
       <div class="main-AD">
@@ -227,11 +227,11 @@ body{
   margin-right 8px
 }
 .main-count .total h3{
-  font-size 56px
+  font-size 44px
   color #2475E2
 }
 .main-count .total h3 span{
-  font-size 18px
+  font-size 16px
   color #333333
   padding-left 0.5em
 }
@@ -452,7 +452,6 @@ export default {
   methods: {
     async getProfile () {
       await apiIndex.getProfile((data) => {
-        console.log(88888888)
         console.log(data)
         this.user = data.data
       })
@@ -475,8 +474,8 @@ export default {
     },
     async getPushTypeAndGoods () {
       await apiIndex.getPushTypeAndGoods((data) => {
-        this.goodsList = data
-        data.forEach((item) => {
+        this.goodsList = data.data.dataType
+        data.data.dataType.forEach((item) => {
           this.subFloorNav.push({id: item.id, name: item.name})
         })
       })
