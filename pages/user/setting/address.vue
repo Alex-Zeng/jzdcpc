@@ -142,7 +142,6 @@ export default {
     async getTags () {
       await apiAddress.getAddressTags(
         ({data}) => {
-          console.log(data)
           this.tags = data
         }
       )
@@ -183,8 +182,8 @@ export default {
         this.form = {...obj}
         const {areaIds, areaName} = obj
         if (areaIds.length > 0) {
-          this.getCity(areaIds[0])
-          this.getCounty(areaIds[1])
+          this.getCity({id: areaIds[0]})
+          this.getCounty({id: areaIds[1]})
           setTimeout(() => {
             const names = areaName.split('-')
             this.pid = {id: areaIds[0], name: names[0]}
@@ -205,7 +204,6 @@ export default {
       this.dialogFormVisible = true
     },
     showInput () {
-      console.log('test')
       this.inputVisible = true
     },
     async setDefault (id) {
