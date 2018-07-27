@@ -12,7 +12,7 @@
           <div :class="{'addr-item': true, 'select': i.id === select}" v-for="i in addressList" :key="i.id" @click="select = i.id">
             <div class="addr-header">
               {{i.areaName}} <el-tag v-show="i.tag">{{i.tag}}</el-tag>
-              <span class="name">张三</span>
+              <span class="name">{{i.name}}</span>
             </div>
             <div class="addr-body">
               <div>联系方式：{{i.phone}}</div>
@@ -26,6 +26,11 @@
               </div>
             </div>
           </div>
+          <nuxt-link to="/user/setting/address" class="addr-item">
+            <div class="addr-new">
+              +
+            </div>
+          </nuxt-link>
           <i class="drop" @click="addressAll = true" v-if="!addressAll">&#xe6d7;</i>
           <i class="close" @click="addressAll = false" v-if="addressAll">&#xe6d7;</i>
         </div>
@@ -299,9 +304,9 @@ export default {
         display block
         font-family 'jzdc'
         color #ff8b1f
-        font-size 24px
+        font-size 18px
         position absolute
-        bottom 0
+        bottom -1px
         left 50%
         margin-left -63px
         cursor pointer
@@ -309,9 +314,9 @@ export default {
         display block
         font-family 'jzdc'
         color #ff8b1f
-        font-size 24px
+        font-size 18px
         position absolute
-        bottom 0
+        bottom -1px
         left 50%
         margin-left -63px
         transform rotate(180deg)
@@ -326,6 +331,12 @@ export default {
         background-color #ffffff
         margin-right 72px
         float left
+        .addr-new
+          text-align center
+          height 177px
+          line-height 177px
+          font-size 44px
+          cursor pointer
         &:last-child
           margin-right 0
         &.select
