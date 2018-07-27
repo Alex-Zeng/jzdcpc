@@ -12,7 +12,7 @@
         <div class="avatar">
           <img src="" alt="">
         </div>
-        <div class="name">
+        <div class="name" @click="$router.push('/user/workbench/favorite')">
           <span class="name" style="cursor: pointer;">收藏(<span class="num">{{favoriteTotal}}</span>)</span>
         </div>
         <div class="message" @click="message">

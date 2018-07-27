@@ -5,7 +5,7 @@ export default function ({store, route, req}) {
   const token = getTokenFromReqCookie(req) || getTokenFromCookie()
   const user = getUserFromCookie()
   store.commit('SETTOKEN', token)
-  console.log(user)
+  // console.log(user)
   if (user) {
     store.commit('SETUSER', JSON.parse(user))
   }

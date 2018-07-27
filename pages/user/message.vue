@@ -9,7 +9,7 @@
           <img :src="i.icon" alt="">
           <span class="name">{{i.title}}</span>
           <span class="text">{{i.content}}，订单号：{{i.orderNo}}</span>
-          <nuxt-link to="/" class="link">查看详情</nuxt-link>
+          <nuxt-link :to="'/user/order-detail/'+i.orderNo+'/-1'" class="link">查看详情</nuxt-link>
         </div>
       </li>
     </ul>

@@ -5,7 +5,7 @@ import auth from './modules/auth'
 import orders from './modules/orders'
 import favorite from './modules/favorite'
 import message from './modules/message'
-import createLogger from '../helper/logger'
+// import createLogger from '../helper/logger'
 import category from './modules/category'
 
 Vue.use(Vuex)
@@ -22,8 +22,8 @@ const store = () =>
       message,
       category
     },
-    strict: debug,
-    plugins: debug ? [createLogger()] : []
+    strict: debug
+    // plugins: debug ? [createLogger()] : []
   })
 
 export default store
