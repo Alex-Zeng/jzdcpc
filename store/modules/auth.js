@@ -2,7 +2,7 @@ import apiAuth from '../../api/apiAuth'
 import Cookie from 'js-cookie'
 
 const state = {
-  user: null,
+  user: {},
   token: Cookie.get('_token') || null
 }
 
@@ -22,7 +22,9 @@ const actions = {
       const {token} = data
       // 存入cookie与 stroe state
       Cookie.set('_token', token)
+      Cookie.set('_user', JSON.stringify(data))
       commit('SETTOKEN', token)
+      commit('SETUSER', data)
     }, errorCb, fileds)
   },
   doLoginPhone ({ commit }, {successCb, errorCb, fileds}) {
@@ -36,7 +38,9 @@ const actions = {
       const {token} = data
       // 存入cookie与 stroe state
       Cookie.set('_token', token)
+      Cookie.set('_user', JSON.stringify(data))
       commit('SETTOKEN', token)
+      commit('SETUSER', data)
     }, errorCb, fileds)
   },
   doRegisterPhone ({ commit }, {successCb, errorCb, fileds}) {
@@ -45,7 +49,9 @@ const actions = {
       const {token} = data
       // 存入cookie与 stroe state
       Cookie.set('_token', token)
+      Cookie.set('_user', JSON.stringify(data))
       commit('SETTOKEN', token)
+      commit('SETUSER', data)
     }, errorCb, fileds)
   },
   doRegisterSendCode ({ commit }, {successCb, errorCb, fileds}) {

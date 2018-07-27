@@ -14,7 +14,7 @@
             <el-button type="primary" @click="search">搜一搜</el-button>
           </div>
         </div>
-        <nuxt-link to="/goods/cart" tag="div" class="btn"><el-button style="padding: 8px 14px;"><div class="car"><i class="icon">&#xe617;</i><span class="car-text">购物清单</span><el-badge :value="3"></el-badge></div></el-button></nuxt-link>
+        <nuxt-link to="/goods/cart" tag="div" class="btn"><el-button style="padding: 8px 14px;"><div class="car"><i class="icon">&#xe617;</i><span class="car-text">购物清单</span><el-badge :value="num"></el-badge></div></el-button></nuxt-link>
         <ul class="header-menu" @mouseleave="showWrap=false, show=isOpen" @mouseover="show=true">
           <div class="child-wrap" v-show="showWrap" @mouseleave="showWrap=false">
             <div class="child-menu" v-for="(i, k) in child" :key="'item'+i.id + k">
@@ -50,6 +50,7 @@
 
 <script>
 import top from './top'
+import apiMallCart from '../../api/apiMallCart'
 export default {
   name: 'indexHeader',
   components: {
@@ -75,11 +76,13 @@ export default {
       showWrap: false,
       show: false,
       key: '',
-      type: 0
+      type: 0,
+      num: 0
     }
   },
   mounted () {
     this.getMenu()
+    this.getNum()
     const {params: {all}} = this.$route
     if (all) {
       let json = JSON.parse(all)
@@ -106,6 +109,23 @@ export default {
             )
           }
         })
+      } catch (e) {
+        this.$message(
+          {
+            type: 'error',
+            message: '网络有点小问题'
+          }
+        )
+      }
+    },
+    async getNum () {
+      try {
+        await apiMallCart.getNum(
+          (result) => {
+            const {data: {total}} = result
+            this.num = total
+          }
+        )
       } catch (e) {
         this.$message(
           {

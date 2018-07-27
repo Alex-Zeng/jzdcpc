@@ -2,8 +2,11 @@
   <div class="user-menu">
     <div class="user-home">
       <nuxt-link to="/user">
-        <div class="logo">
-          <img src="" alt="logo">
+        <div class="logo" v-if="user.path">
+          <img :src="user.path" alt="logo">
+        </div>
+        <div class="logo" v-else>
+          <img src="~assets/img/common/default_avatar.png" alt="logo">
         </div>
         <h3>
           进入工作台
@@ -15,38 +18,24 @@
         <template slot="title">
           <i class="title-icon">&#xe639;</i>企业账号管理
         </template>
+        <div class="route-list">
+          <div :class="{item: true, 'active': /\/user\/setting\/cert/.test(path)}">
+            <nuxt-link to="/user/setting/cert">企业认证</nuxt-link>
+          </div>
+        </div>
+        <div class="route-list">
+          <div :class="{item: true, 'active': /\/user\/setting\/address/.test(path)}">
+            <nuxt-link to="/user/setting/address">收货地址管理</nuxt-link>
+          </div>
+        </div>
       </el-collapse-item>
       <el-collapse-item title="订单管理" name="2">
         <template slot="title">
           <i class="title-icon">&#xe6bd;</i>订单管理
         </template>
         <div class="route-list">
-          <div :class="{active: type ==-1, item: true}">
-            <nuxt-link to="/user/order/-1/1">全部订单</nuxt-link>
-          </div>
-          <div :class="{active: type ==0, item: true}">
-            <nuxt-link to="/user/order/0/1">待核价</nuxt-link>
-          </div>
-          <div :class="{active: type ==1, item: true}">
-            <nuxt-link to="/user/order/1/1">待签约</nuxt-link>
-          </div>
-          <div :class="{active: type ==2, item: true}">
-            <nuxt-link to="/user/order/2/1">待付款</nuxt-link>
-          </div>
-          <div :class="{active: type ==3, item: true}">
-            <nuxt-link to="/user/order/3/1">待发货</nuxt-link>
-          </div>
-          <div :class="{active: type ==6, item: true}">
-            <nuxt-link to="/user/order/6/1">待收货</nuxt-link>
-          </div>
-          <div :class="{active: type ==9, item: true}">
-            <nuxt-link to="/user/order/9/1">账期中</nuxt-link>
-          </div>
-          <div :class="{active: type ==8, item: true}">
-            <nuxt-link to="/user/order/-1/1">售后处理</nuxt-link>
-          </div>
-          <div :class="{active: type ==13, item: true}">
-            <nuxt-link to="/user/order/13/1">已完成</nuxt-link>
+          <div :class="{active: type ==i.key, item: true}" v-for="(i, k) in statusList" :key="'orders'+k">
+            <nuxt-link :to="'/user/order/'+i.key+'/1'">{{i.value}}</nuxt-link>
           </div>
         </div>
       </el-collapse-item>
@@ -64,14 +53,32 @@ export default {
   name: 'menuNav',
   data () {
     return {
-      type: -1
+      type: -1,
+      path: ''
+    }
+  },
+  computed: {
+    user: function () {
+      return this.$store.getters.loggedUser
+    },
+    statusList: function () {
+      return this.$store.getters.statusList
     }
   },
   watch: {
     '$route': function () {
+      const {path} = this.$route
       const {params: {type}} = this.$route
-      this.type = type
+      this.type = (type * 1)
+      this.path = path
     }
+  },
+  mounted () {
+    const {params: {type}} = this.$route
+    const {path} = this.$route
+    this.type = (type * 1)
+    this.path = path
+    this.$store.dispatch('getStatusList')
   }
 }
 </script>
@@ -86,8 +93,9 @@ export default {
     .logo
       width 92px
       height 92px
-      padding 10px
+      /*padding 10px*/
       border-radius 50%
+      overflow hidden
       margin auto
       background #F5F5F5
       img

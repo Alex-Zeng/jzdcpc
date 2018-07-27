@@ -43,10 +43,14 @@
       <empty v-if="list.length <= 0"></empty>
       <div v-else>
         <div class="result clearfix">
-          <nuxt-link :to="'/goods/detail/'+i.id" tag="div" class="item" v-for="i in list" :key="i.id">
+          <div class="item" v-for="i in list" :key="i.id" @click="$router.push('/goods/detail/'+i.id)">
             <div class="top">
               <img :src="i.url" alt="">
-              <div>
+              <div v-if="!(i.isFavorite)" @click.stop="favorite(i.id, i)">
+                <i class="star">&#xe60f;</i>
+                <span>收藏</span>
+              </div>
+              <div style="color: #ff7900" v-else @click.stop="favoriteDelete(i.id, i)">
                 <i class="star">&#xe60f;</i>
                 <span>收藏</span>
               </div>
@@ -55,7 +59,7 @@
               <span class="title">{{i.title}}</span>
               <h4 class="money">¥<span class="num">{{i.min_price}}-{{i.max_price}}</span></h4>
             </div>
-          </nuxt-link>
+          </div>
         </div>
         <div class="pager" style="margin-top: 20px; margin-bottom: 40px;">
           <el-pagination
@@ -114,6 +118,54 @@ export default {
     }
   },
   methods: {
+    favorite (goodsId, item) {
+      this.$store.dispatch('addFavorite', {fileds: {goodsId},
+        scb: (msg) => {
+          this.$message({
+            type: 'success',
+            message: msg
+          })
+          item.isFavorite = 1
+        },
+        ecb: (msg) => {
+          this.$message.error(msg)
+        }
+      })
+    },
+    favoriteDelete (id, i) {
+      this.$confirm('此操作将永久删除该收藏记录, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: '删除中...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        this.$store.dispatch('deleteFavorite', {
+          fileds: {goodsId: id},
+          successCb: (msg) => {
+            this.$message({
+              type: 'success',
+              message: msg
+            })
+            loading.close()
+            i.isFavorite = 0
+          },
+          errorCb: (msg) => {
+            this.$message.error(msg)
+            loading.close()
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
     sort (isUp) {
       this.up = isUp
       this.all = {...this.all, sort: isUp ? 'asc' : 'desc'}

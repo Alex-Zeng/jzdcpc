@@ -12,5 +12,29 @@ export default {
   async make (cb, fileds) {
     const data = await request.post('/papi/order/make', fileds)
     cb(data)
+  },
+  async detail (cb, fileds) {
+    const data = await request.post('/papi/order/detail', fileds)
+    cb(data)
+  },
+  async delivery (cb, fileds) {
+    const data = await request.post('/papi/order/delivery', fileds)
+    cb(data)
+  },
+  async statusList (cb) {
+    const {data} = await request.get('/papi/order/showStatusList')
+    cb(data)
+  },
+  async receipt (cb, fileds) {
+    const data = await request.post('/papi/order/receipt', fileds)
+    cb(data)
+  },
+  async cancel (cb, fileds) {
+    const data = await request.post('/papi/order/cancel', fileds)
+    cb(data)
+  },
+  async service (cb, fileds) {
+    const data = await request.post('/papi/order/service', fileds)
+    cb(data)
   }
 }

@@ -35,7 +35,7 @@ export const unsetToken = () => {
 }
 
 export const getUserFromCookie = () => {
-  const token = Cookie.get('user')
+  const token = Cookie.get('_user')
   return token
 }
 

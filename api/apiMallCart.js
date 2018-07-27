@@ -15,5 +15,9 @@ export default {
   async update (cb, fileds) {
     const data = await request.post('/papi/mall_cart/update', fileds)
     cb(data)
+  },
+  async getNum (cb) {
+    const data = await request.get('/papi/mall_cart/getNumber')
+    cb(data)
   }
 }

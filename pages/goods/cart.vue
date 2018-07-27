@@ -45,7 +45,7 @@
               </li>
               <li class="item" style="width: 280px; text-align: center;">{{(item.quantity*item.price).toFixed(2)}}</li>
               <li class="item action" style="width: 210px;text-align: center;">
-                <span class="op">收藏商品</span>
+                <span class="op" @click="favorite(item.goodsId)">收藏商品</span>
                 <span class="op" @click="deleteIds(item.cartId)">删除</span>
               </li>
             </ul>
@@ -228,6 +228,19 @@ export default {
           type: 'info',
           message: '已取消删除'
         })
+      })
+    },
+    favorite (goodsId) {
+      this.$store.dispatch('addFavorite', {fileds: {goodsId},
+        scb: (msg) => {
+          this.$message({
+            type: 'success',
+            message: msg
+          })
+        },
+        ecb: (msg) => {
+          this.$message.error(msg)
+        }
       })
     },
     getList () {

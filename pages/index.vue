@@ -14,8 +14,11 @@
         </div>
         <div class="banner-right">
           <div>
-            <div class="logo">
+            <div class="logo" v-if="user.path">
               <img :src="user.path" alt="logo">
+            </div>
+            <div class="logo" v-else>
+              <img src="~assets/img/common/default_avatar.png" alt="logo">
             </div>
             <h3>
               {{user.username}}
@@ -169,7 +172,7 @@ body{
 .banner-right .logo{
   width 92px
   height 92px
-  padding 10px
+  overflow hidden
   border-radius 50%
   margin auto
   background #F5F5F5

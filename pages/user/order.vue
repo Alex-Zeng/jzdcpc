@@ -56,69 +56,18 @@
       </el-form>
     </div>
     <div class="result-wrap">
-      <!--<table>
-        <thead>
-        <tr>
-          <th>订单信息</th>
-          <th>供应商</th>
-          <th>收货人</th>
-          <th>订单状态</th>
-          <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="order in orders" :key="order.id">
-          <td>
-            <table>
-              <thead>
-              <tr>
-                <th>订单编号：{{order.out_id}}</th>
-                <th>{{order.companyName || '无'}}</th>
-                <th>{{order.receiver_name}}</th>
-                <th>{{getStateTitle(order.state)}}</th>
-                <th>总额：¥{{order.money}}</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr v-for="item in (order.goods)" :key="order.id + item.id">
-                <td><img :src="item.icon" alt=""></td>
-                <td>
-                  <div class="goods-title">{{item.title}}</div>
-                  <div class="goods-info">{{item.specifications_name}}</div>
-                  <div class="goods-info">{{item.specifications_no}}</div>
-                  <div class="goods-info">{{item.specifications_info}}</div>
-                </td>
-                <td>数量：{{item.quantity}}</td>
-                <td>单价：{{item.price}}元</td>
-                <td>小计：{{(item.quantity * item.price).toFixed(2)}}元</td>
-              </tr>
-              </tbody>
-            </table>
-          </td>
-          <td>
-            <el-button class="order-button" type="primary" v-show="order.state == 3">确定发货</el-button>
-            <el-button class="order-button" type="primary" v-show="order.state == 6">确定发货</el-button>
-            <el-button class="order-button" type="primary" v-show="order.state !== 3 && order.state !== 6">查看详情</el-button>
-            <el-button class="order-button text" type="text" v-show="order.state == 1">取消交易</el-button>
-            &lt;!&ndash; <el-button class="order-button text" type="text">售后申请</el-button> &ndash;&gt;
-          </td>
-        </tr>
-
-        </tbody>
-      </table>-->
-
       <div class="table" v-for="order in orders" :key="order.id">
-        <p class="time">2018-5-10 10:00:00</p>
+        <p class="time">{{order.orderDate}}</p>
           <div class="title clearfix">
-            <div class="item order-info"><span>订单编号：{{order.out_id}}</span></div>
+            <div class="item order-info"><span>订单号：{{order.out_id}}</span></div>
             <div class="item source">{{order.companyName || '无'}}</div>
             <div class="item addr">{{order.receiver_name}}</div>
-            <div class="item status">{{getStateTitle(order.state)}}</div>
+            <div class="item status">{{order.service_type === 1? '售后处理中': order.service_type === 2 && type === 6? '售后完成': getStateTitle(order.state, order.groupId)}}</div>
             <div class="item action"><span>总额：</span>¥{{order.money}}</div>
           </div>
         <div class="lists">
           <div class="lists-content">
-            <div class="data" v-for="item in (order.goods)" :key="order.id + item.id">
+            <div class="data" v-for="(item, key) in (order.goods)" :key="order.id + key">
               <div class="item order-info">
                 <div class="img">
                   <img :src="item.icon" alt="">
@@ -138,11 +87,10 @@
             </div>
           </div>
           <div class="info info-btn">
-            <el-button class="order-button" type="primary" v-show="order.state == 3">确定发货</el-button>
-            <el-button class="order-button" type="primary" v-show="order.state == 6">确定发货</el-button>
-            <el-button class="order-button" type="primary" v-show="order.state !== 3 && order.state !== 6">查看详情</el-button>
-            <el-button class="order-button text" type="text" v-show="order.state == 1">取消交易</el-button>
-            <!--<el-button class="order-button text" type="text">售后申请</el-button>-->
+            <el-button class="order-button" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;margin-right: 8px;" @click="$router.push('/user/order-detail/'+order.out_id+'/'+type)">查看详情</el-button>
+            <el-button class="order-button" type="primary" v-show="order.state == 3 && order.groupId == 5" style="width: 80px;padding-left: 0;padding-right: 0;" @click="$router.push('/user/order-detail/'+order.out_id)">确定发货</el-button>
+            <el-button class="order-button" type="primary" v-show="order.state == 6 && order.groupId == 4" style="width: 80px;padding-left: 0;padding-right: 0;" @click="receipt(order.out_id)">确定收货</el-button>
+            <el-button class="order-button text" type="text" v-show="(order.state ==1 || order.state == 0)&&order.groupId==4" style="width: 80px;padding-left: 0;padding-right: 0;" @click="cancel(order.out_id)">取消交易</el-button>
           </div>
         </div>
       </div>
@@ -166,7 +114,6 @@ export default {
   name: 'order',
   data () {
     return {
-      // type: 'all',
       pageNumber: 1,
       showMore: false,
       searchForm: {
@@ -175,7 +122,8 @@ export default {
         userName: '',
         date1: '',
         date2: ''
-      }
+      },
+      type: -1
     }
   },
   computed: {
@@ -216,6 +164,7 @@ export default {
       background: 'rgba(0, 0, 0, 0.7)'
     })
     const {params: {type, page}} = this.$route
+    this.type = type
     this.pageNumber = Number(page)
     this.$store.dispatch('getOrderList', {
       data: {
@@ -231,35 +180,143 @@ export default {
   methods: {
     getList (page) {
       const {params: {type}} = this.$route
+      this.type = type
       this.$router.push(`/user/order/${type}/${page}`)
     },
-    getStateTitle (state) {
+    cancel (no) {
+      this.$confirm('提交后将取消交易，请确定是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: '取消订单中',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        this.$store.dispatch('orderCancel', {fileds: {no},
+          cb: (data) => {
+            loading.close()
+            const {status, msg} = data
+            if (status === 0) {
+              this.$message({
+                type: 'success',
+                message: msg
+              })
+              const {params: {type, page}} = this.$route
+              this.pageNumber = Number(page)
+              this.$store.dispatch('getOrderList', {
+                data: {
+                  status: type,
+                  pageNumber: this.pageNumber,
+                  pageSize
+                },
+                cb: () => {
+                  loading.close()
+                }
+              })
+            } else {
+              this.$message.error(msg)
+            }
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消修改'
+        })
+      })
+    },
+    receipt (no) {
+      this.$confirm('提交后将完成收货，请确定是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: '确定收货中',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        this.$store.dispatch('orderReceipt', {fileds: {no},
+          cb: (data) => {
+            loading.close()
+            const {status, msg} = data
+            if (status === 0) {
+              this.$message({
+                type: 'success',
+                message: msg
+              })
+              const {params: {type, page}} = this.$route
+              this.pageNumber = Number(page)
+              this.$store.dispatch('getOrderList', {
+                data: {
+                  status: type,
+                  pageNumber: this.pageNumber,
+                  pageSize
+                },
+                cb: () => {
+                  loading.close()
+                }
+              })
+            } else {
+              this.$message.error(msg)
+            }
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消修改'
+        })
+      })
+    },
+    getStateTitle (state, group) {
+      let result = ''
       switch (state) {
+        case -1:
+          result = '全部'
+          break
         case 0:
-          return '待核价'
+          result = '待核价'
+          break
         case 1:
-          return '待签约'
+          result = '待签约'
+          break
         case 2:
-          return '待采购商打款'
+          result = '待采购商打款'
+          break
         case 3:
-          return '待发货'
+          result = '待发货'
+          break
         case 4:
-          return '订单关闭'
+          result = '订单关闭'
+          break
         case 6:
-          return '待收货'
+          result = '待收货'
+          break
         case 7:
-          return '待质检'
+          result = '待质检'
+          break
         case 8:
-          return '问题确认中'
+          result = '售后处理'
+          break
         case 9:
-          return '账期中'
+          result = '账期中'
+          break
         case 10:
-          return '逾期中'
+          result = '逾期中'
+          break
         case 11:
-          return '待打款至供应商'
+          result = (group === 4 ? '交易完成' : '待结算')
+          break
         case 13:
-          return '交易完成'
+          result = '交易完成'
+          break
       }
+      return result
     },
     onSubmit () {
       console.log('submit!')
@@ -297,7 +354,7 @@ export default {
     .title
       height 48px
       background-color #ffffff
-      border 1px solid #dddddd
+      border 1px solid #dedede
       line-height 48px
       padding-left 20px
       margin-bottom 20px
@@ -314,7 +371,7 @@ export default {
         padding 0 0 10px 20px
       .title
         height 40px
-        border 1px solid #cccccc
+        border 1px solid #dedede
         background-color #ffffff
         line-height 40px
         margin-bottom 0
@@ -323,14 +380,16 @@ export default {
           span
             color: #66666
     .data
-      border 1px solid #cccccc
+      border 1px solid #dedede
       padding 20px 0 20px 20px
       background-color #ffffff
       overflow hidden
+      &+.data
+        border-top none
       .item
         color #66666
-        height 72px
-        line-height 72px
+        height 52px
+        line-height 52px
       .source
       .addr
       .status
@@ -383,8 +442,11 @@ export default {
       flex 1
     .info-btn
       padding 20px
-      border 1px solid #ccc
+      border 1px solid #dedede
       border-left none
+      display flex
+      justify-content center
+      align-items center
 </style>
 <style lang="stylus">
   .search-wrap

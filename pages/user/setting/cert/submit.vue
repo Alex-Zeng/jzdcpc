@@ -1,5 +1,8 @@
 <template>
   <div class="submit-wrap">
+    <div class="preview" v-show="preview" @click="preview=false">
+      <img src="~assets/img/common/template.png" alt="">
+    </div>
     <div v-show="form.status !== 0" class="cert-status">
       <div v-show="form.status === '1'">
         工作人员努力审核中，请耐心等待
@@ -42,7 +45,7 @@
       </el-form>
     </div>
     <div class="title">证件影像资料上传<span>（仅限JPG/JEPG/BMP/PNG等格式，单张8M以内）</span></div>
-    <div class="label"><span>*</span>必传资料：</div>
+    <div class="label"><span>*</span>必传资料：<span style="color:#2475e2;cursor:pointer;" to="/template.png" @click="preview=true">(点击查看委托授权书模板)</span></div>
     <div class="imgBox clearfix">
       <div class="item">
         <uploadImg id="1" v-model="form.business" :defaultPath="form.businessPath" title="工商营业执照"></uploadImg>
@@ -86,6 +89,7 @@ export default {
   },
   data () {
     return {
+      preview: false,
       form: {
         type: 1,
         agent: 1,
@@ -192,8 +196,25 @@ export default {
 <style lang="stylus">
   .submit-wrap
     padding 44px 0
+    .preview
+      width 100%
+      height 100%
+      position fixed
+      top 0
+      left 0
+      background-color rgba(0, 0, 0, 0.4)
+      z-index 9999
+      img
+        width 900px
+        height 648px
+        display block
+        left 50%
+        top 50%
+        position absolute
+        margin-left -450px
+        margin-top -324px
     .cert-status
-      background-color #2fbeed
+      background-color #2475e2
       padding: 40px
       color #fff
       text-align center
@@ -205,9 +226,9 @@ export default {
       text-align center
     .title
       font-size 18px
-      color #2fbeed
+      color #2475e2
       padding-left 10px
-      border-left 10px solid #2fbeed
+      border-left 10px solid #2475e2
       span
         font-size 16px
     .form-wrap
@@ -223,7 +244,7 @@ export default {
       width 1080px
       margin-bottom 40px
       .item
-        width 240px
+        width 220px
         float left
         margin-right 40px
         &:last-child

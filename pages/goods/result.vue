@@ -16,7 +16,7 @@
             </div>
             <div class="item">
               <span class="label">订单金额：</span>
-              <span class="value">1000，00</span>
+              <span class="value">{{i.totalPrice}}</span>
             </div>
             <div class="item">
               <span class="label">期望交货日期：</span>
@@ -24,21 +24,19 @@
             </div>
             <div class="item">
               <span class="label">买家留言：</span>
-              <span class="value">1000，留言内容留言内容留言内容留言内容留言内容
-留言内容留言内容留言内容留言内容留言内容
-留言内容留言内容留言内容留言内容留言内容
-留言内容留言内容留言内容留言内容留言内容
-留言内容留言内容留言内容留言内容留言内容</span>
+              <span class="value">
+                {{i.remark}}
+              </span>
             </div>
           </div>
           <div class="right">
-            <div class="item">
-              <ul class="">
-                <li><img src="" alt="">商品名称</li>
-                <li>X11</li>
-                <li>30.00</li>
-                <li>330.00</li>
-                <li>查看</li>
+            <div class="item" v-for="(item, key) in i.goods" :key="'goods'+key">
+              <ul class="clearfix">
+                <li style="width: 240px;"><img :src="item.icon" alt="">{{item.title}}</li>
+                <li style="width: 110px;">X{{item.quantity}}</li>
+                <li style="width: 140px;">{{item.price}}</li>
+                <li style="width: 230px;">{{item.price * item.quantity}}</li>
+                <nuxt-link :to="'/goods/detail/'+item.goods_id" tag="li" style="width: 80px;cursor:pointer;color: #2475e2;">查看</nuxt-link>
               </ul>
             </div>
           </div>
@@ -115,8 +113,17 @@ export default {
       .right
         float left
         padding 20px
+        height 288px
+        overflow-y auto
         ul
+          margin-bottom 10px
           li
             float left
             line-height 45px
+            img
+              width 45px
+              height 45px
+              display block
+              float left
+              margin-right 6px
 </style>

@@ -12,8 +12,8 @@
         <div class="avatar">
           <img src="" alt="">
         </div>
-        <div class="name">
-          abc，你已登录!
+        <div class="name" @click="$router.push('/user/workbench/favorite')">
+          <span class="name" style="cursor: pointer;">收藏(<span class="num">{{favoriteTotal}}</span>)</span>
         </div>
         <div class="message" @click="message">
           <el-badge :is-dot="msgs>0">
@@ -82,6 +82,8 @@
   .name
     float left
     margin-right 10px
+    .num
+      color #FF7F00
   .message
     float left
     margin-right 10px
@@ -131,6 +133,12 @@ export default {
   computed: {
     msgs () {
       return this.$store.getters.messageNumber
+    },
+    loggedUser () {
+      return this.$store.getters.loggedUser
+    },
+    favoriteTotal () {
+      return this.$store.getters.favoriteTotal
     }
   },
   methods: {

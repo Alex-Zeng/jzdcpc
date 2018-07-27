@@ -9,16 +9,14 @@
       </ul>
       <div class="center-box">
         <p>
-          <a href="">集众金融</a>
-          <a href="">集众服务</a>
-          <a href="">关于我们</a>
+          <a class="link" href="">集众金融</a>
+          <a class="link" href="">集众服务</a>
+          <a class="link" href="">关于我们</a>
         </p>
         <p>copyright © 2018 津晶科技 版权所有&emsp;&emsp;粤ICP备18037422号</p>
         <p>
-          <img src="~assets/img/common/footer-a.png" alt="">
-          <img src="~assets/img/common/footer-a.png" alt="">
-          <img src="~assets/img/common/footer-a.png" alt="">
-          <img src="~assets/img/common/footer-a.png" alt="">
+          <a class="pn" href="http://webscan.360.cn/index/checkwebsite/url/www.jizhongdiancai.com"><img src="~assets/img/common/footer-360.png" alt=""></a>
+          <a class="pn" href="http://www.miibeian.gov.cn"><img src="~assets/img/common/footer-icp.png" alt=""></a>
         </p>
       </div>
       <div class="code">
@@ -64,11 +62,16 @@ export default {
         display flex
         justify-content center
         padding-bottom 10px
-        a
+        .link
           padding 0 30px
           color #FFFFFF
         img
           margin 10px
+        .pn
+          img
+            width 108px
+            height 3
+            8px
     .code
       padding-left 136px
       text-align center
