@@ -376,6 +376,7 @@ body{
   margin-left -1px
 }
 .floor-content a img{
+  display block
   width 167px
   height 167px
   margin auto
