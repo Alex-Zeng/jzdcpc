@@ -65,6 +65,11 @@ export default {
       }
     }
   },
+  computed: {
+    token () {
+      return this.$store.getters.loggedToken
+    }
+  },
   props: {
     isOpen: Boolean,
     bg: String
@@ -119,20 +124,22 @@ export default {
       }
     },
     async getNum () {
-      try {
-        await apiMallCart.getNum(
-          (result) => {
-            const {data: {total}} = result
-            this.num = total
-          }
-        )
-      } catch (e) {
-        this.$message(
-          {
-            type: 'error',
-            message: '网络有点小问题'
-          }
-        )
+      if (this.token) {
+        try {
+          await apiMallCart.getNum(
+            (result) => {
+              const {data: {total}} = result
+              this.num = total
+            }
+          )
+        } catch (e) {
+          this.$message(
+            {
+              type: 'error',
+              message: '网络有点小问题'
+            }
+          )
+        }
       }
     }
   }
