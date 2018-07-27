@@ -36,7 +36,6 @@ const actions = {
         successCb('登录成功', status)
       }
       const {token} = data
-      // 存入cookie与 stroe state
       Cookie.set('_token', token)
       Cookie.set('_user', JSON.stringify(data))
       commit('SETTOKEN', token)

@@ -1,9 +1,9 @@
 <template>
   <div class="header">
     <div class="header-content">
-      <div class="header-action">
+      <nuxt-link to="/" tag="div" class="header-action">
         <span class="txt">登录</span>
-      </div>
+      </nuxt-link>
     </div>
   </div>
 </template>

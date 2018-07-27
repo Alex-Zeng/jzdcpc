@@ -3,7 +3,7 @@
     <div class="top-wrap">
       <div class="content">
         <span class="welcome">集众电采欢迎您！！</span>
-        <ul class="top-menu" v-if="token">
+        <ul class="top-menu" v-show="token">
           <nuxt-link to="/user/workbench/favorite" tag="li" class="item">
             <i class="icon">&#xe60f;</i>
             <span class="name">收藏(<span class="num">{{favoriteTotal}}</span>)</span>
@@ -30,13 +30,13 @@ export default {
   name: 'indexTop',
   computed: {
     msgs () {
-      return this.$store.getters.messageNumber
+      return this.$store.getters.messageNumber || 0
     },
     token () {
       return this.$store.getters.loggedToken
     },
     favoriteTotal () {
-      return this.$store.getters.favoriteTotal
+      return this.$store.getters.favoriteTotal || 0
     }
   },
   methods: {
@@ -46,7 +46,9 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('getFavoriteNumber')
+    if (this.token) {
+      this.$store.dispatch('getFavoriteNumber')
+    }
   }
 }
 </script>
