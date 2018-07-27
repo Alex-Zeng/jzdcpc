@@ -81,14 +81,14 @@ export default {
   .message-wrap
     padding 40px
     .title
-      font-size 26px
-      color #2fbeed
+      font-size 18px
+      color #333333
       padding-left 10px
-      border-left 10px solid #2fbeed
+      border-left 4px solid #ff7900
     .back
       font-size 18px
       cursor pointer
-      color #2fbeed
+      color #ff7900
       margin-bottom 16px
       .back_icon
         font-family 'jzdc'
@@ -101,6 +101,7 @@ export default {
           font-weight 400
           line-height 54px
         .content
+          background-color #fff
           border 1px solid #ccc
           padding 20px
           display flex

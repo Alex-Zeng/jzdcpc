@@ -21,22 +21,35 @@ const getters = {
 const actions = {
   getFavoriteList ({ commit }, {fileds, cb}) {
     apiFavorite.favoriteList(data => {
-      const {list, total} = data
+      const {list, total, typeList} = data
       commit('updateFavoriteList', list)
       commit('updateFavoriteTotal', total)
+      commit('updateTypeList', typeList)
       cb()
     }, fileds)
   },
-  getFavoriteType ({ commit }) {
-    apiFavorite.favoriteType(data => {
-      const {list} = data
-      commit('updateTypeList', list)
-    })
-  },
-  deleteFavorite ({ commit }, {fileds, successCb, errorCb}) {
+  // getFavoriteType ({ commit }) {
+  //   apiFavorite.favoriteType(data => {
+  //     const {list} = data
+  //     commit('updateTypeList', list)
+  //   })
+  // },
+  deleteFavorite ({ commit, getters }, {fileds, successCb, errorCb}) {
     apiFavorite.favoriteDelete((data, msg) => {
       successCb(msg)
+      commit('updateFavoriteTotal', getters.favoriteTotal - 1)
     }, fileds, errorCb)
+  },
+  addFavorite ({ commit, getters }, {fileds, scb, ecb}) {
+    apiFavorite.favoriteAdd((data, msg) => {
+      scb(msg)
+      commit('updateFavoriteTotal', getters.favoriteTotal + 1)
+    }, fileds, ecb)
+  },
+  getFavoriteNumber ({ commit }) {
+    apiFavorite.favoriteNumber((number) => {
+      commit('updateFavoriteTotal', number)
+    })
   }
 }
 

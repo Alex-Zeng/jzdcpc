@@ -46,7 +46,7 @@
         <div class="sub-title-bar clearfix">
           <div class="left"><i class="icon">&#xe602;</i>{{i.supplierName}}</div>
           <div class="right">期望交货日期：
-            <el-date-picker type="date" placeholder="与实际交货日期可能存在偏差" v-model="i.date" style="width: 248px;"></el-date-picker>
+            <el-date-picker type="date" placeholder="与实际交货日期可能存在偏差" v-model="i.date" style="width: 248px;" format="yyyy-MM-dd" value-format="yyyy-MM-dd"></el-date-picker>
           </div>
         </div>
         <div class="goods-wrap" v-for="(item, key) in i.list" :key="'goods'+key">
@@ -107,6 +107,24 @@
           总额（元）: <b>{{total.toFixed(2)}}</b>
         </span>
         <el-button type="primary" style="float: right;width: 200px;" @click="makeOrder">提交订单</el-button>
+      </div>
+    </div>
+    <div class="main-AD">
+      <div class="item">
+        <img src="~assets/img/index/cgfx.png" alt="">
+        <span>采购放心</span>
+      </div>
+      <div class="item">
+        <img src="~assets/img/index/wyjl.png" alt="">
+        <span>物优价廉</span>
+      </div>
+      <div class="item">
+        <img src="~assets/img/index/pzbz.png" alt="">
+        <span>品质保障</span>
+      </div>
+      <div class="item">
+        <img src="~assets/img/index/fwtx.png" alt="">
+        <span>服务贴心</span>
       </div>
     </div>
     <indexFooter></indexFooter>
@@ -196,7 +214,13 @@ export default {
         loading.close()
         this.editArr = []
         this.total = 0
-        cart.forEach((i) => {
+        cart.forEach((i, key) => {
+          if (!cart[key].date) {
+            cart[key].date = ''
+          }
+          if (!cart[key].remark) {
+            cart[key].remark = ''
+          }
           this.editArr.push(new Array(i.list.length).fill(false))
           i.list.forEach((item) => {
             this.total += (item.price * 1)
@@ -210,6 +234,30 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.main-AD
+  width 1300px
+  margin 0 auto
+  height 120px
+  display flex
+  justify-content space-between
+  align-items center
+  .item
+    flex 1
+    text-align center
+    font-size 20px
+    font-weight bold
+    &:nth-child(1)
+      color #2FBEED
+    &:nth-child(2)
+      color #FF7F00
+    &:nth-child(3)
+      color #00CCAA
+    &:nth-child(4)
+      color #7FBFFF
+    & img
+      display inline
+      vertical-align middle
+      margin-right 10px
 .order-wrap
   width 1300px
   margin 0 auto

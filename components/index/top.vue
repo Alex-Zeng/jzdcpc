@@ -4,14 +4,14 @@
       <div class="content">
         <span class="welcome">集众电采欢迎您！！</span>
         <ul class="top-menu" v-if="token">
-          <li class="item">
+          <nuxt-link to="/user/workbench/favorite" tag="li" class="item">
             <i class="icon">&#xe60f;</i>
-            <span class="name">收藏(<span class="num">100</span>)</span>
-          </li>
-          <li class="item">
+            <span class="name">收藏(<span class="num">{{favoriteTotal}}</span>)</span>
+          </nuxt-link>
+          <nuxt-link to="/user/message" class="item">
             <i class="icon">&#xe611;</i>
             <span class="name">消息(<span class="num">{{msgs}}</span>)</span>
-          </li>
+          </nuxt-link>
           <li class="item">
             <span class="name" @click="logout">退出</span>
           </li>
@@ -34,6 +34,9 @@ export default {
     },
     token () {
       return this.$store.getters.loggedToken
+    },
+    favoriteTotal () {
+      return this.$store.getters.favoriteTotal
     }
   },
   methods: {
@@ -41,6 +44,9 @@ export default {
       Cookies.remove('_token')
       this.$router.replace('/auth')
     }
+  },
+  mounted () {
+    this.$store.dispatch('getFavoriteNumber')
   }
 }
 </script>

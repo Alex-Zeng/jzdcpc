@@ -1,9 +1,12 @@
 <template>
   <div class="upload-wrap">
+    <div class="preview" v-show="show" @click="show=false">
+      <img :src="path||defaultPath" alt="">
+    </div>
     <h4 class="titleUoload">{{title}}</h4>
     <div class="img-box" v-show="value">
       <i class="delete" @click="deleteImg"></i>
-      <img class="img" :src="path||defaultPath" alt="">
+      <img class="img" :src="path||defaultPath" alt="" @click="show=true">
     </div>
     <div class="select-box" @click="open" v-show="!value&&!isProgress">
       <span>点击上传</span>
@@ -28,7 +31,8 @@ export default {
     return {
       count: 0,
       isProgress: false,
-      path: ''
+      path: '',
+      show: false
     }
   },
   methods: {
@@ -38,7 +42,7 @@ export default {
       const {size} = file
       const OUTSIZE = 8192000
       if (size && size > OUTSIZE) {
-        this.$message.error('上传文件大小不可超过5M')
+        this.$message.error('上传文件大小不可超过8M')
         return ''
       }
       fd.append('type', 'certification')
@@ -88,6 +92,23 @@ export default {
     width 240px
     height 240px
     box-sizing border-box
+    .preview
+      width 100%
+      height 100%
+      position fixed
+      top 0
+      left 0
+      background-color rgba(0, 0, 0, 0.4)
+      z-index 9999
+      img
+        width 800px
+        height 448px
+        display block
+        left 50%
+        top 50%
+        position absolute
+        margin-left -400px
+        margin-top -224px
     .titleUoload
       font-size 18px
       color #222

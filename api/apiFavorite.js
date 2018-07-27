@@ -20,5 +20,17 @@ export default {
       return
     }
     successCb(data, msg)
+  },
+  async favoriteAdd (successCb, fileds, errorCb) {
+    const { status, msg, data } = await request.post('/papi/goods/addFavorite', fileds)
+    if (status !== 0) {
+      errorCb(msg)
+      return
+    }
+    successCb(data, msg)
+  },
+  async favoriteNumber (scb) {
+    const {data: {number}} = await request.post('/papi/user/getFavoriteNumber')
+    scb(number)
   }
 }

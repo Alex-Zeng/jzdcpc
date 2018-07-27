@@ -66,7 +66,7 @@
       <div class="addr-item" v-for="i in list" :key="i.id">
         <div class="addr-header">
           {{i.areaName}} <el-tag v-show="i.tag">{{i.tag}}</el-tag>
-          <span class="name">张三</span>
+          <span class="name">{{i.name}}</span>
         </div>
         <div class="addr-body">
           <div>联系方式：{{i.phone}}</div>

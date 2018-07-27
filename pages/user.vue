@@ -19,11 +19,11 @@
   position relative
   .content
     display block
-    width 99.9%
+    /*width 99.9%*/
     min-height 600px
     border-left 10px solid #f4f5f5
     /*margin-left 182px*/
-    overflow: hidden
+    /*overflow: hidden*/
 </style>
 <script>
 import userHeader from '../components/user/header'

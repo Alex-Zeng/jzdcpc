@@ -1,18 +1,14 @@
 <template>
   <div class="favorite-wrap">
     <div class="title">收藏夹</div>
-    <!--动态计算宽度-->
-    <div class="favorite-tabs clearfix" :style="{width: (favoriteType.length+1)*130+'px'}">
-        <nuxt-link to="/user/workbench/favorite/-1/1" :class="{active: type == -1, 'tabs-item': true}">
-            所有
-        </nuxt-link>
-        <nuxt-link v-for="i in favoriteType" v-bind:to="`/user/workbench/favorite/${i.id}/1`" :class="{active: type == i.id, 'tabs-item': true}" :key="i.id">
+    <div class="favorite-tabs clearfix">
+        <nuxt-link v-for="i in favoriteType" v-bind:to="`/user/workbench/favorite/${i.typeId}/1`" :class="{active: type == i.typeId, 'tabs-item': true}" :key="i.typeId">
             {{i.name}}({{i.count}})
         </nuxt-link>
     </div>
     <div class="content clearfix">
       <div class="list">
-        <div class="item" v-for="i in favoriteList" :key="i.id">
+        <nuxt-link tag="div" :to="'/goods/detail/'+i.id" class="item" v-for="i in favoriteList" :key="i.id">
           <i class="delete" @click="doDelete(i.id)">&#xe61d;</i>
           <div class="img">
             <img :src="i.icon" alt="">
@@ -25,13 +21,14 @@
               ￥<span>{{i.min_price}}~{{i.max_price}}</span>
             </div>
           </div>
-        </div>
+        </nuxt-link>
       </div>
       <div class="pager" style="margin-top: 20px;">
         <el-pagination
           background
           :total="total"
           :page-size="14"
+          layout="prev, pager, next"
           :current-page="pageNumber"
           @current-change="getList"
         >
@@ -43,12 +40,15 @@
 
 <style lang="stylus" scoped>
   .favorite-wrap
-    padding 40px
+    padding 30px
     .content
-      width 1430px
+      width 1096px
+      background-color #fff
+      padding-bottom 20px
+      border-radius 10px
       .list
-        width 1470px
-        margin-left -40px
+        width 1096px
+        margin-left 0px
         overflow hidden
         .item
           width 170px
@@ -66,7 +66,7 @@
             display none
             color #ccc
             &:hover
-              color #2fbeed
+              color #2475e2
           .goods-title
             text-align center
             overflow hidden
@@ -79,7 +79,7 @@
             padding 0 9px
             .left
               float left
-              color #2fbeed
+              color #2475e2
               span
                 font-size 16px
                 font-weight bold
@@ -97,20 +97,22 @@
           &:hover
             margin-top 16px
             height 214px
-            border 1px solid #2fbeed
+            border 1px solid #2475e2
             .delete
               display block
     .title
-      font-size 26px
-      color #2fbeed
+      font-size 16px
+      color #333333
       padding-left 10px
-      border-left 10px solid #2fbeed
+      border-left 4px solid #ff7900
     .favorite-tabs
       margin-top 28px
-      margin-left -10px
-      width 1520px
+      margin-bottom 20px
       overflow hidden
-      height 46px
+      height 40px
+      width 1096px
+      border-radius 5px
+      background-color #fff
       .tabs-item
         -webkit-transition all 0.8s
         -moz-transition all 0.8s
@@ -118,28 +120,22 @@
         -o-transition all 0.8s
         transition all 0.8s
         cursor pointer
-        color #2fbeed
+        color #666666
+        padding 0 18px
         text-align center
-        background-color #ccf2ff
         float left
-        width 120px
         height 40px
         line-height 40px
-        font-size 14px
-        margin-left 10px
+        font-size 16px
         position relative
+        &+.tabs-item
+          &:after
+            content: '|'
+            position absolute
+            top -1px
+            left 0
         &.active
-          background-color #2fbeed
-          color #fff
-        &:after
-          content ' '
-          display block
-          position absolute
-          bottom -6px
-          left 0
-          width 130px
-          z-index 100
-          border-bottom 6px solid #2fbeed
+          color #2475e2
 </style>
 
 <script>
@@ -178,7 +174,6 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('getFavoriteType')
     const {type, pageNumber} = this
     const fileds = {cateId: type, pageSize, pageNumber}
     const loading = this.$loading({
