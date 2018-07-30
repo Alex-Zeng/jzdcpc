@@ -3,21 +3,24 @@
     <div class="top-wrap">
       <div class="content">
         <span class="welcome">集众电采欢迎您！！</span>
-        <ul class="top-menu" v-show="token">
-          <nuxt-link to="/user/workbench/favorite" tag="li" class="item">
+        <ul class="top-menu">
+          <nuxt-link to="/user/workbench/favorite" tag="li" class="item" v-show="token">
             <i class="icon">&#xe60f;</i>
             <span class="name">收藏(<span class="num">{{favoriteTotal}}</span>)</span>
           </nuxt-link>
-          <nuxt-link to="/user/message" class="item">
+          <nuxt-link to="/user/message" class="item" v-show="token">
             <i class="icon">&#xe611;</i>
             <span class="name">消息(<span class="num">{{msgs}}</span>)</span>
           </nuxt-link>
-          <li class="item">
+          <li class="item" v-show="token">
             <span class="name" @click="logout">退出</span>
           </li>
-          <li class="item">
-            <span class="name"><a href="http://dev.jizhongdiancai.com/download" target="_blank">下载手机app</a></span>
-          </li>
+          <nuxt-link to="/user" tag="li" class="item" v-show="token">
+            <span class="name">进入工作台</span>
+          </nuxt-link>
+          <a href="/app-down/index.html" class="item">
+            <span class="name">下载手机app</span>
+          </a>
         </ul>
       </div>
     </div>
@@ -25,7 +28,6 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie'
 export default {
   name: 'indexTop',
   computed: {
@@ -41,8 +43,10 @@ export default {
   },
   methods: {
     logout () {
-      Cookies.remove('_token')
-      this.$router.replace('/auth')
+      this.$store.dispatch('logout')
+      setTimeout(() => {
+        this.$router.replace('/auth')
+      })
     }
   },
   mounted () {

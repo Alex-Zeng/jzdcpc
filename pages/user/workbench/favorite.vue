@@ -8,8 +8,8 @@
     </div>
     <div class="content clearfix">
       <div class="list">
-        <nuxt-link tag="div" :to="'/goods/detail/'+i.id" class="item" v-for="i in favoriteList" :key="i.id">
-          <i class="delete" @click="doDelete(i.id)">&#xe61d;</i>
+        <div @click="$router.push('/goods/detail/'+i.id)" class="item" v-for="i in favoriteList" :key="i.id">
+          <i class="delete" @click.stop="doDelete(i.id)">&#xe61d;</i>
           <div class="img">
             <img :src="i.icon" alt="">
           </div>
@@ -21,7 +21,7 @@
               ￥<span>{{i.min_price}}~{{i.max_price}}</span>
             </div>
           </div>
-        </nuxt-link>
+        </div>
       </div>
       <div class="pager" style="margin-top: 20px;">
         <el-pagination

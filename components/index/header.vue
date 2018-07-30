@@ -15,7 +15,10 @@
           </div>
         </div>
         <nuxt-link to="/goods/cart" tag="div" class="btn"><el-button style="padding: 8px 14px;"><div class="car"><i class="icon">&#xe617;</i><span class="car-text">购物清单</span><el-badge :value="num"></el-badge></div></el-button></nuxt-link>
-        <ul class="header-menu" @mouseleave="showWrap=false, show=isOpen" @mouseover="show=true">
+        <ul class="header-menu" @mouseleave="showWrap=false, show=isOpen, slogan=false" @mouseover="show=true">
+          <div class="child-wrap" v-show="slogan" @mouseleave="slogan=false">
+            <a href="/service/index.html"><img src="~/assets/img/common/slogan.jpg" alt=""></a>
+          </div>
           <div class="child-wrap" v-show="showWrap" @mouseleave="showWrap=false">
             <div class="child-menu" v-for="(i, k) in child" :key="'item'+i.id + k">
               <div class="child-menu-list clearfix">
@@ -30,18 +33,19 @@
             </div>
           </div>
           <li class="itemAll"><i class="menu-icon">&#xe605;</i>全部商品分类</li>
-          <li :class="{item:true, isOpen: isOpen || show}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="child = i.child, showWrap=true">
+          <li :class="{item:true, isOpen: isOpen || show, active: (child===i.child) && showWrap}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="child = i.child, showWrap=true, slogan=false">
             <div class="img">
               <img :src="i.path" width="16px" alt="">
             </div>
             <span style="float: left;">{{i.name}}</span>
           </li>
+          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true"><i class="menu-icon" style="margin-right: 16px;">&#xe67e;</i>集众服务</li>
         </ul>
         <ul class="header-tabs">
-          <li class="item active">首页</li>
-          <li class="item"><a href="">集众金融</a></li>
-          <li class="item"><a href="">集众服务</a></li>
-          <li class="item"><a href="">关于我们</a></li>
+          <a href="/" class="item">首页</a>
+          <a href="/service/index.html" class="item">集众金融</a>
+          <a class="item" href="/service/index.html">集众服务</a>
+          <li class="item">关于我们</li>
         </ul>
       </div>
     </div>
@@ -82,7 +86,8 @@ export default {
       show: false,
       key: '',
       type: 0,
-      num: 0
+      num: 0,
+      slogan: false
     }
   },
   mounted () {
@@ -215,6 +220,10 @@ export default {
         position relative
         cursor pointer
         display: none
+        &:hover
+          background-color #2475e2
+        &.active
+          background-color #2475e2
         .img
           height 51px
           line-height 51px
@@ -270,10 +279,6 @@ export default {
         cursor pointer
         &.active
           color #2475e2
-        a
-          color #333333
-          &:hover
-            color #2475e2
     .center
       width 500px
       margin 20px auto 0

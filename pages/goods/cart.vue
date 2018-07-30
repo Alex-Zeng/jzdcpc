@@ -161,6 +161,7 @@ export default {
         apiMallCart.update((data) => {
         }, {id, number})
       })
+      this.countAll()
     },
     countAll () {
       let count = 0

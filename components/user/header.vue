@@ -123,7 +123,6 @@
 </style>
 
 <script>
-import Cookies from 'js-cookie'
 import menunNav from './menuNav'
 export default {
   name: 'userHeader',
@@ -143,8 +142,11 @@ export default {
   },
   methods: {
     logout () {
-      Cookies.remove('_token')
-      this.$router.replace('/auth')
+      // Cookies.remove('_token')
+      this.$store.dispatch('logout')
+      setTimeout(() => {
+        this.$router.replace('/auth')
+      })
     },
     message () {
       this.$router.push('/user/message')

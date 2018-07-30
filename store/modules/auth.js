@@ -16,6 +16,12 @@ const getters = {
 }
 
 const actions = {
+  logout ({ commit }) {
+    commit('SETTOKEN', null)
+    commit('SETUSER', {})
+    Cookie.remove('_token')
+    Cookie.remove('_user')
+  },
   doLoginIndex ({ commit }, {successCb, errorCb, fileds}) {
     apiAuth.loginIndex(data => {
       successCb('登录成功')

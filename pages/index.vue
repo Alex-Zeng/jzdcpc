@@ -70,11 +70,11 @@
           <span>服务贴心</span>
         </div>
       </div>
-      <div v-for="item in goodsList" :id="item.id" :key="item.id" class="main-floor">
+      <div v-for="(item, k) in goodsList" :id="item.id" :key="item.id" class="main-floor">
         <div class="floor-nav">
           <h3>{{item.name}}</h3>
           <nuxt-link  class="el-button"  v-for="i in item.pushTypeList" :id="i.id" :key="i.id" :to='`/goods/search/%7B"type":0,"cateId":${i.id}%7D`'>{{i.name}}</nuxt-link>
-          <img :src="goodsListImg[item.id].img" alt="">
+          <img :src="goodsListImg[k].img" alt="">
         </div>
         <div class="floor-content">
           <ul>
@@ -96,7 +96,7 @@
       <div class="sub-floor-nav">
         <ul>
           <li v-for="item in subFloorNav" :key="item.id">
-            <a href="javascript:;" @click.prevent="custormAnchor('item.id')">{{item.name}}</a>
+            <a href="javascript:;" @click.prevent="custormAnchor(item.id)">{{item.name}}</a>
           </li>
         </ul>
         <img src="~assets/img/index/go-top.png" @click="goTop" alt="">
@@ -293,7 +293,8 @@ body{
 .floor-nav h3{
   font-size 30px
   color #ffffff
-  padding 40px
+  padding 40px 0
+  text-align center
 }
 .floor-nav .el-button{
   width 80px
@@ -347,6 +348,8 @@ body{
 .floor-content ul{
   height 600px
   border 1px solid #DEDEDE
+  border-top none
+  border-right none
   overflow hidden
 }
 .floor-content ul li{
@@ -392,7 +395,7 @@ body{
   padding-bottom 10px
 }
 .sub-floor-nav a{
-  width 60px
+  padding 0 10px
   height 42px
   line-height 42px
   display block
@@ -445,21 +448,12 @@ export default {
     }
   },
   mounted () {
-    if (this.token != null) {
-      this.getProfile()
-    }
     this.getBannerList()
     this.getTotal()
     this.getNotice()
     this.getPushTypeAndGoods()
   },
   methods: {
-    async getProfile () {
-      await apiIndex.getProfile((data) => {
-        console.log(data)
-        this.user = data.data
-      })
-    },
     async getBannerList () {
       await apiIndex.getBanner({type: 1}, (data) => {
         this.banner = data
@@ -496,6 +490,7 @@ export default {
       }, 60)
     },
     custormAnchor (anchorName) {
+      console.log(anchorName)
       // 找到锚点
       let anchorElement = document.getElementById(anchorName)
       if (anchorElement) {

@@ -86,6 +86,7 @@ import indexHeader from '../../components/index/header'
 import indexFooter from '../../components/index/footer'
 import apiGoods from '../../api/apiGoods'
 import apiMallCart from '../../api/apiMallCart'
+
 export default {
   name: 'detail',
   components: {
@@ -168,7 +169,12 @@ export default {
               }
             )
           } else {
-            this.$message.error(msg)
+            if (msg === '没有权限操作') {
+              this.$message.error('请先进行企业认证')
+              this.$router.push('/user/setting/cert')
+            } else {
+              this.$message.error(msg)
+            }
           }
         }, {id, colorId, optionId, number})
       } catch (e) {
