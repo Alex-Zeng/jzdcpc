@@ -15,7 +15,10 @@
           </div>
         </div>
         <nuxt-link to="/goods/cart" tag="div" class="btn"><el-button style="padding: 8px 14px;"><div class="car"><i class="icon">&#xe617;</i><span class="car-text">购物清单</span><el-badge :value="num"></el-badge></div></el-button></nuxt-link>
-        <ul class="header-menu" @mouseleave="showWrap=false, show=isOpen" @mouseover="show=true">
+        <ul class="header-menu" @mouseleave="showWrap=false, show=isOpen, slogan=false" @mouseover="show=true">
+          <div class="child-wrap" v-show="slogan" @mouseleave="slogan=false">
+            <a href="/service/index.html"><img src="~/assets/img/common/slogan.jpg" alt=""></a>
+          </div>
           <div class="child-wrap" v-show="showWrap" @mouseleave="showWrap=false">
             <div class="child-menu" v-for="(i, k) in child" :key="'item'+i.id + k">
               <div class="child-menu-list clearfix">
@@ -30,13 +33,13 @@
             </div>
           </div>
           <li class="itemAll"><i class="menu-icon">&#xe605;</i>全部商品分类</li>
-          <li :class="{item:true, isOpen: isOpen || show}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="child = i.child, showWrap=true">
+          <li :class="{item:true, isOpen: isOpen || show, active: (child===i.child) && showWrap}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="child = i.child, showWrap=true, slogan=false">
             <div class="img">
               <img :src="i.path" width="16px" alt="">
             </div>
             <span style="float: left;">{{i.name}}</span>
           </li>
-          <li :class="{item:true, isOpen: isOpen || show}"><i class="menu-icon">&#xe67e;</i>集众服务</li>
+          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true"><i class="menu-icon" style="margin-right: 16px;">&#xe67e;</i>集众服务</li>
         </ul>
         <ul class="header-tabs">
           <a href="/" class="item">首页</a>
@@ -83,7 +86,8 @@ export default {
       show: false,
       key: '',
       type: 0,
-      num: 0
+      num: 0,
+      slogan: false
     }
   },
   mounted () {
@@ -217,6 +221,8 @@ export default {
         cursor pointer
         display: none
         &:hover
+          background-color #2475e2
+        &.active
           background-color #2475e2
         .img
           height 51px
