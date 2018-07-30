@@ -4,8 +4,8 @@
       <ul>
         <li>商务合作&咨询（工作日09:00~18:00）</li>
         <li><img src="~assets/img/common/footer-qq.png" alt="">3510294139</li>
-        <li><img src="~assets/img/common/footer-qq.png" alt="">18024595469</li>
-        <li><img src="~assets/img/common/footer-qq.png" alt="">zhaoshang@jizhongdiancai.com</li>
+        <li><img src="~assets/img/common/footer-tel.png" alt="">18024595469</li>
+        <li><img src="~assets/img/common/footer-email.png" alt="">zhaoshang@jizhongdiancai.com</li>
       </ul>
       <div class="center-box">
         <p>
