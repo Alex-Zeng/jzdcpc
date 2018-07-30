@@ -1,0 +1,226 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  text-underline: none;
+  text-decoration: none;
+}
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+}
+.swiper-container {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'MicrosoftYaHei';
+}
+.swiper-wrapper {
+  transition-delay: 0.3s;
+}
+.swiper-slide:nth-child(1) {
+  background: url("../img/guide/bg-1.jpg") no-repeat center;
+  background-size: 100%;
+}
+.swiper-slide:nth-child(2) {
+  background: url("../img/guide/bg-2.jpg") no-repeat center;
+  background-size: 100%;
+}
+.swiper-slide:nth-child(3) {
+  background: url("../img/guide/bg-3.jpg") no-repeat center;
+  background-size: 100%;
+}
+.header {
+  margin: 0 50px 0 50px;
+  height: 80px;
+  background: rgba(46,109,182,0.4);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 40px;
+  z-index: 999;
+}
+.header > img {
+  margin-left: 110px;
+  margin-top: 16px;
+  float: left;
+}
+.header > div {
+  float: right;
+  padding: 22px 110px;
+}
+.header .button {
+  display: inline-block;
+  width: 200px;
+  height: 36px;
+  line-height: 36px;
+  margin-right: 40px;
+  border-radius: 18px;
+  border: 1px solid #fff;
+  text-align: center;
+  color: #fff;
+  font-size: 24px;
+  position: relative;
+}
+.header .button img {
+  display: inline;
+  vertical-align: middle;
+  margin-top: -6px;
+}
+.header .button:last-child:hover img:last-child {
+  transform: rotate(180deg);
+}
+.header .button .code {
+  width: 148px;
+  height: 0;
+  position: absolute;
+  top: 50px;
+  right: 30px;
+  transition: all 0.5s;
+}
+.header .button .code {
+  width: 148px;
+  height: 0;
+  position: absolute;
+  top: 50px;
+  right: 30px;
+  transition: all 0.5s;
+}
+.header .button:last-child:hover .code {
+  height: 148px;
+}
+.swiper-slide {
+  font-size: 18px;
+  color: #fff;
+  position: relative;
+}
+.swiper-slide h3 {
+  font-size: 96px;
+  padding-top: 350px;
+  margin-left: 200px;
+  padding-bottom: 35px;
+  font-weight: normal;
+}
+.swiper-slide h4 {
+  font-size: 42px;
+  margin-left: 200px;
+  padding-bottom: 15px;
+  font-weight: normal;
+}
+.swiper-slide .donw-btn {
+  margin-left: 200px;
+  padding-top: 20px;
+  display: flex;
+}
+.swiper-slide .donw-btn- {
+  width: 260px;
+}
+.swiper-slide .donw-btn a {
+  display: inline-block;
+  padding: 10px 0;
+}
+.swiper-slide .slide-right {
+  position: absolute;
+  top: 287px;
+  right: 160px;
+  text-align: center;
+  font-size: 18px;
+  color: #2e6db6;
+}
+.swiper-slide .slide-right img {
+  display: block;
+  padding-bottom: 20px;
+}
+.swiper-slide ul {
+  margin-left: 200px;
+  width: 460px;
+}
+.swiper-slide ul li {
+  width: 48%;
+  display: inline-block;
+}
+.swiper-slide ul li img {
+  vertical-align: middle;
+}
+.swiper-pagination-bullet {
+  width: 16px;
+  height: 16px;
+}
+.swiper-pagination-bullet-active {
+  background: #fff;
+}
+.swiper-slide h3 {
+  transform: translateX(-300px);
+  opacity: 0;
+  transition: all 2s;
+}
+.ani-slide h3 {
+  transform: translateX(0);
+  opacity: 1;
+}
+.swiper-slide h4 {
+  transform: translateX(500px);
+  opacity: 0;
+  transition: all 1s 1s;
+}
+.ani-slide h4 {
+  transform: translateX(0);
+  opacity: 1;
+}
+.swiper-slide h4:nth-child(2) {
+  transform: translateX(500px);
+  opacity: 0;
+  transition: all 0.5s 1.5s;
+}
+.ani-slide h4:nth-child(2) {
+  transform: translateX(0);
+  opacity: 1;
+}
+.swiper-slide .slide-right img {
+  transform: rotateY(180deg);
+  opacity: 0;
+  transition: all 1s 0.5s;
+}
+.ani-slide .slide-right img {
+  transform: rotateY(0deg);
+  opacity: 1;
+}
+.swiper-slide .slide-right p {
+  transform: translateY(-100px);
+  opacity: 0;
+  transition: all 1s 1s;
+}
+.ani-slide .slide-right p {
+  transform: translateY(0);
+  opacity: 1;
+}
+.swiper-slide .donw-btn a {
+  transform: rotate(180deg);
+  opacity: 0;
+  transition: all 1s 1s;
+}
+.ani-slide .donw-btn a {
+  transform: rotate(0deg);
+  opacity: 1;
+}
+.swiper-slide .donw-btn > img {
+  transform: scale(0.5, 0.5);
+  opacity: 0;
+  transition: all 1s 0.5s;
+}
+.ani-slide .donw-btn > img {
+  transform: scale(1, 1);
+  opacity: 1;
+}
+.swiper-slide ul {
+  transform: translateY(200px);
+  opacity: 0;
+  transition: all 1s 0.5s;
+}
+.ani-slide ul {
+  transform: translateY(0);
+  opacity: 1;
+}

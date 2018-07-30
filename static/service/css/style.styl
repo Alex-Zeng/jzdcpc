@@ -1,0 +1,231 @@
+*
+    font-family Microsoft YaHei,-apple-system,PingFang SC,Hiragino Sans GB,Helvetica Neue,Arial,sans-serif
+    padding 0
+    margin 0
+    border none
+    list-style none
+    text-underline none
+    text-decoration none
+    outline none
+html
+    background-color #F5F5F5
+    font-family MicrosoftYaHei
+.header
+    height 60px
+    line-height 60px
+    background-color #F5F5F5
+    .header-content
+        display flex
+        justify-content space-between
+        width 1300px
+        margin auto
+    img
+        height 26px
+        padding-top 18px
+    a
+        padding 0 20px
+        color #666666
+        &.active
+        &:hover
+            color #2475E2
+.banner
+    height 300px
+    padding-top 100px
+    text-align center
+    font-size 16px
+    color #ffffff
+    background #000000 url("../img/01@2x.png") no-repeat center
+.title
+    font-size 32px
+    padding-bottom 40px
+    text-align center
+    &:after
+        display block
+        width 2em
+        content ''
+        margin auto
+        margin-top 20px
+        border-bottom 2px solid #ffffff
+.carousel-box
+    width 1300px
+    height 580px
+    overflow hidden
+    margin auto
+    position relative
+    .carousel-btn
+        a
+            width 36px
+            height 36px
+            border-radius 50%
+            position absolute
+            top 0
+            bottom 0
+            margin auto
+            text-align center
+            line-height 36px
+            z-index 9
+        a:first-child
+            left 10px
+            background #ff7900 url("../img/left-btn.png") no-repeat center
+        a:last-child
+            right 10px
+            background #ff7900 url("../img/right-btn.png") no-repeat center
+    .carousel
+        width 300%
+        height 100%
+        text-align left
+        position absolute
+        left 0
+        ul
+            margin 0
+            float left
+.product
+    padding-top 100px
+    padding-bottom 100px
+    text-align center
+    .title
+        &:after
+            border-color #2475E2
+    ul
+        width 1300px
+        padding 10px 65px
+        margin auto
+        text-align left
+        box-sizing border-box
+        background-color #ffffff
+        color #333333
+        overflow hidden
+        li
+            display inline-block
+            width 340px
+            height 230px
+            padding-left 20px
+            float left
+            box-sizing border-box
+            margin 25px
+            padding-bottom 35px
+            border-left 5px solid #333333
+            border-bottom 5px solid #333333
+            position relative
+            overflow hidden
+            .title
+                font-size 20px
+                text-align left
+                &:after
+                    width 1em
+                    margin-top 10px
+                    margin-left 0
+            .product-index
+                position absolute
+                right 5px
+                top 5px
+                font-size 60px
+                font-weight bold
+        .product-info-box
+            transform translateX(0)
+            padding-top 4px
+            transition transform ease 1s
+            &.product-info-hide
+                transform translateX(-370px)
+            .product-info
+                display flex
+                font-size 14px
+                padding-bottom 8px
+                label
+                    word-break break-all
+                    white-space nowrap
+                div
+                    flex
+.main-footer
+    height 500px
+    color #ffffff
+    padding-top 100px
+    box-sizing border-box
+    background #000000 url("../img/02@2x.png") no-repeat center
+    ul
+        display flex
+        justify-content center
+        li
+            padding 0 100px
+            text-align center
+            img
+                height 98px
+                padding-bottom 10px
+.main-form
+    height 500px
+    padding-top 100px
+    .title
+        padding-bottom 46px
+        &:after
+            border-color #2475E2
+    form
+        text-align center
+        margin auto
+        .form-item
+            padding-bottom 20px
+            label
+                width 308px
+                display block
+                margin auto
+                text-align left
+        input
+            width 240px
+            height 36px
+            padding 0 0.5em
+            box-sizing border-box
+            border 1px solid #DEDEDE
+            border-radius 5px
+            background #ffffff
+        button
+            width 80px
+            height 36px
+            border-radius 5px
+            background #ffffff
+            border 1px solid #DEDEDE
+            &.active
+                color #ffffff
+                background #2475E2
+            &.submit
+                width 200px
+                color #ffffff
+                background #2475E2
+
+.footer-wrap
+    width 100%
+    background-color #333333
+    .center-wrap
+        width 1300px
+        display flex
+        justify-content center
+        margin 0 auto
+        box-sizing border-box
+        pading 40px 50px 30px
+        padding-top 40px
+        min-height 200px
+        color #ffffff
+        ul
+            width 340px
+        ul
+            li
+                padding-bottom 20px
+        ul
+            img
+                display inline
+                vertical-align middle
+                margin-right 10px
+        .center-box
+            p
+                display flex
+                justify-content center
+                padding-bottom 10px
+                a
+                    padding 0 30px
+                    color #FFFFFF
+                img
+                    margin 10px
+        .code
+            padding-left 136px
+            text-align center
+            padding-top 10px
+            img
+                padding-bottom 10px

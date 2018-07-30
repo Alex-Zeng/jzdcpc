@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>集众服务</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+    <link rel="stylesheet" href="css/sheetstyle.css">
+</head>
+<body>
+<!-- Swiper -->
+<div class="swiper-container">
+    <div class="header">
+        <a href="http://uat.jizhongdiancai.com/" target="_blank">
+        </a>
+        <img src="./img/guide/logo.png" alt="" onclick="window.open('http://uat.jizhongdiancai.com/')">
+        <div>
+            <a class="button" href="http://download.jizhongdiancai.com/index/androidNormal.html">
+                <img src="./img/guide/andrinod-icon.png" alt="">
+                Andrinod
+            </a>
+            <a class="button" href="http://download.jizhongdiancai.com/index/iphoneNormal.html">
+                <img src="./img/guide/ios-icon.png" alt="">
+                iPhone
+            </a>
+            <a class="button" style="border: none" href="javascript:;">
+                <img src="./img/guide/sys.png" alt="">
+                扫一扫下载
+                <img class="code" src="./img/guide/code.png" alt="">
+                <img src="./img/guide/dwon.png" alt="">
+            </a>
+        </div>
+    </div>
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <h3>
+                四维一体  互联互通
+            </h3>
+            <h4>
+                我们不断探索新模式
+            </h4>
+            <h4>
+                致力打造家电行业的互联网新生态
+            </h4>
+            <div class="donw-btn">
+                <div class="donw-btn-">
+                    <a href="http://download.jizhongdiancai.com/index/androidNormal.html"><img src="./img/guide/andrinod-btn.png" alt=""></a>
+                    <a href="http://download.jizhongdiancai.com/index/iphoneNormal.html"><img src="./img/guide/ios-btn.png" alt=""></a>
+                </div>
+                <img src="./img/guide/code.png" alt="">
+            </div>
+            <div class="slide-right">
+                <img src="./img/guide/swyt.png" alt="">
+                <p>“四维一体 互联互通” 新商业模式图</p>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <h3>
+                集为财  众为本
+            </h3>
+            <h4>
+                服务家电行业的中小企业
+            </h4>
+            <h4>
+                提供一站式、多方位的解决方案
+            </h4>
+            <ul class="">
+                <li><img src="./img/guide/jinrong.png" alt="">金融</li>
+                <li><img src="./img/guide/fawu.png" alt="">法务</li>
+                <li><img src="./img/guide/baoxian.png" alt="">保险</li>
+                <li><img src="./img/guide/zhishi.png" alt="">知识产权</li>
+                <li><img src="./img/guide/shouhou.png" alt="">家电售后服务</li>
+                <li><img src="./img/guide/zidonghua.png" alt="">自动化生产</li>
+            </ul>
+            <div class="donw-btn">
+                <div class="donw-btn-">
+                    <a href="http://download.jizhongdiancai.com/index/androidNormal.html"><img src="./img/guide/andrinod-btn.png" alt=""></a>
+                    <a href="http://download.jizhongdiancai.com/index/iphoneNormal.html"><img src="./img/guide/ios-btn.png" alt=""></a>
+                </div>
+                <img src="./img/guide/code.png" alt="">
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <h3>
+                实体崛起的新力量
+            </h3>
+            <h4>
+                互联网+供应链
+            </h4>
+            <h4>
+                让中国家电制造业更加伟大
+            </h4>
+            <div class="donw-btn">
+                <div class="donw-btn-">
+                    <a href="http://download.jizhongdiancai.com/index/androidNormal.html"><img src="./img/guide/andrinod-btn.png" alt=""></a>
+                    <a href="http://download.jizhongdiancai.com/index/iphoneNormal.html"><img src="./img/guide/ios-btn.png" alt=""></a>
+                </div>
+                <img src="./img/guide/code.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container',{
+        direction : 'vertical',
+        followFinger : false,
+        speed:800,
+        mousewheel: true,
+        pagination : {
+            el:'.swiper-pagination',
+        },
+        on:{
+            init:function(swiper){
+                slide=this.slides.eq(0);
+                slide.addClass('ani-slide');
+            },
+            transitionStart: function(){
+                for(i=0;i<this.slides.length;i++){
+                    slide=this.slides.eq(i);
+                    slide.removeClass('ani-slide');
+                }
+            },
+            transitionEnd: function(){
+                slide=this.slides.eq(this.activeIndex);
+                slide.addClass('ani-slide');
+
+            },
+        }
+    });
+</script>
+</body>
+</html>
