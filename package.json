@@ -20,7 +20,8 @@
     "js-cookie": "^2.2.0",
     "jwt-decode": "^2.2.0",
     "nuxt": "^1.0.0",
-    "qs": "^6.5.2"
+    "qs": "^6.5.2",
+    "vue-image-crop-upload": "^2.3.3"
   },
   "devDependencies": {
     "@nuxtjs/axios": "^5.3.1",

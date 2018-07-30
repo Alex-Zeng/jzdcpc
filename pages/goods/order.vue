@@ -228,7 +228,7 @@ export default {
           }
           this.editArr.push(new Array(i.list.length).fill(false))
           i.list.forEach((item) => {
-            this.total += (item.price * 1)
+            this.total += (item.price * item.quantity)
           })
         })
         this.cartList = cart

@@ -70,11 +70,11 @@
           <span>服务贴心</span>
         </div>
       </div>
-      <div v-for="item in goodsList" :id="item.id" :key="item.id" class="main-floor">
+      <div v-for="(item, k) in goodsList" :id="item.id" :key="item.id" class="main-floor">
         <div class="floor-nav">
           <h3>{{item.name}}</h3>
           <nuxt-link  class="el-button"  v-for="i in item.pushTypeList" :id="i.id" :key="i.id" :to='`/goods/search/%7B"type":0,"cateId":${i.id}%7D`'>{{i.name}}</nuxt-link>
-          <img :src="goodsListImg[item.id].img" alt="">
+          <img :src="goodsListImg[k].img" alt="">
         </div>
         <div class="floor-content">
           <ul>
@@ -347,6 +347,8 @@ body{
 .floor-content ul{
   height 600px
   border 1px solid #DEDEDE
+  border-top none
+  border-right none
   overflow hidden
 }
 .floor-content ul li{
@@ -445,21 +447,12 @@ export default {
     }
   },
   mounted () {
-    if (this.token != null) {
-      this.getProfile()
-    }
     this.getBannerList()
     this.getTotal()
     this.getNotice()
     this.getPushTypeAndGoods()
   },
   methods: {
-    async getProfile () {
-      await apiIndex.getProfile((data) => {
-        console.log(data)
-        this.user = data.data
-      })
-    },
     async getBannerList () {
       await apiIndex.getBanner({type: 1}, (data) => {
         this.banner = data

@@ -36,11 +36,12 @@
             </div>
             <span style="float: left;">{{i.name}}</span>
           </li>
+          <li :class="{item:true, isOpen: isOpen || show}"><i class="menu-icon">&#xe67e;</i>集众服务</li>
         </ul>
         <ul class="header-tabs">
-          <li class="item active">首页</li>
-          <li class="item">集众金融</li>
-          <li class="item">集众服务</li>
+          <a href="/" class="item">首页</a>
+          <a href="/service/index.html" class="item">集众金融</a>
+          <a class="item" href="/service/index.html">集众服务</a>
           <li class="item">关于我们</li>
         </ul>
       </div>
@@ -215,6 +216,8 @@ export default {
         position relative
         cursor pointer
         display: none
+        &:hover
+          background-color #2475e2
         .img
           height 51px
           line-height 51px
