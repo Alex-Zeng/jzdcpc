@@ -13,15 +13,15 @@
             <img width="100%" height="100%" :src="detail.imgList && detail.imgList[select].img" alt="">
           </div>
           <div class="small-wrap">
-            <i class="prev">&#xe67d;</i>
+            <i class="prev" @click="changeImg(false)">&#xe67d;</i>
             <div class="small-list">
-              <div class="super-wrap">
+              <div class="super-wrap" :style="{'margin-left':offset+'px'}">
                 <div :class="{'small-item': true, active: select === k}" v-for="(i, k) in detail.imgList" :key="k" @click="select=k">
                   <img :src="i.img" alt="">
                 </div>
               </div>
             </div>
-            <i class="next">&#xe678;</i>
+            <i class="next" @click="changeImg(true)">&#xe678;</i>
           </div>
         </div>
         <div class="info-wrap">
@@ -95,6 +95,7 @@ export default {
   },
   data () {
     return {
+      offset: 0,
       detail: {},
       count: 1,
       select: 0,
@@ -151,6 +152,21 @@ export default {
         }
         this.hotPage -= 1
         this.hotCur = this.hot.slice(this.hotPage * 3, this.hotPage * 3 + 3)
+      }
+    },
+    changeImg (isNext) {
+      console.log(this.detail.imgList.length)
+      if (isNext) {
+        if ((this.offset) <= 0) {
+          this.offset = 0
+        } else {
+          this.offset -= 80
+        }
+      } else {
+        if (((this.offset + 320) - this.detail.imgList.length * 80) >= 80) {
+          return
+        }
+        this.offset += 80
       }
     },
     addToCart () {

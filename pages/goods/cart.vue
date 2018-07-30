@@ -186,6 +186,10 @@ export default {
           }
         })
       })
+      if (ids.length < 1) {
+        this.$message.error('请选择需要删除的商品!')
+        return
+      }
       this.deleteIds(ids.join(','))
     },
     deleteIds (ids) {

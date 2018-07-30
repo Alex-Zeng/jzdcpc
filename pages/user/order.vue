@@ -1,57 +1,42 @@
 <template>
   <div class="order-wrap">
+    <el-dialog title="订单记录已生成" :visible.sync="dialogFormVisible" width="400px">
+      <div style="text-align: center;">
+        <a :href="url" target="_blank" style="color: #ff7900;font-size: 18px; font-weight: 600;">点击下载订单记录</a>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+      </div>
+    </el-dialog>
     <div class="search-wrap">
-      <el-form ref="searchForm" :inline="true" :model="searchForm" class="demo-form-inline">
-        <el-form-item>
-          <el-input placeholder="订单关键字"></el-input>
+      <el-form ref="searchForm" :inline="true" :model="searchForm">
+        <el-form-item prop="startDate" label="起始时间：">
+          <el-date-picker type="date" placeholder="选择起始时间" v-model="searchForm.startDate" style="width: 198px;" format="yyyy-MM-dd" value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary">确定</el-button>
+        <span style="line-height: 40px; padding: 0 10px 0 0;">-</span>
+        <el-form-item prop="endDate" label="终止时间：">
+          <el-date-picker type="date" placeholder="选择终止时间" v-model="searchForm.endDate" style="width: 198px;" format="yyyy-MM-dd" value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
-        <el-form-item>
-          <el-button type="text" @click="showMore = !showMore">更多条件<i class="down-icon"></i></el-button>
+        <el-form-item prop="orderNo" label="订单号：" label-width="82px">
+          <el-input v-model="searchForm.orderNo" placeholder="请输入订单号" style="width: 198px;"></el-input>
         </el-form-item>
-        <div class="more" v-show="showMore">
-          <el-form-item label="采购商品：">
-            <el-input v-model="searchForm.goodsName" placeholder="请输入采购的商品名称"></el-input>
-          </el-form-item>
-          <el-form-item label="订单状态：">
-            <el-select v-model="searchForm.status" placeholder="请选择订单状态">
-              <el-option label="待核价" value="0"></el-option>
-              <el-option label="待签约" value="1"></el-option>
-              <el-option label="待采购商打款" value="2"></el-option>
-              <el-option label="待发货" value="3"></el-option>
-              <el-option label="订单关闭" value="4"></el-option>
-              <el-option label="待收货" value="6"></el-option>
-              <el-option label="待质检" value="7"></el-option>
-              <el-option label="问题确认中" value="8"></el-option>
-              <el-option label="账期中" value="9"></el-option>
-              <el-option label="逾期中" value="10"></el-option>
-              <el-option label="待打款至供应商" value="11"></el-option>
-              <el-option label="交易完成" value="13"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="采购企业：">
-            <el-input v-model="searchForm.userName" placeholder="请输入采购企业"></el-input>
-          </el-form-item>
-          <el-form-item label="活动时间：">
-            <el-col :span="11">
-              <el-form-item prop="date1">
-                <el-date-picker type="date" placeholder="选择日期" v-model="searchForm.date1" style="width: 100%;"></el-date-picker>
-              </el-form-item>
-            </el-col>
-            <el-col class="line" :span="2" style="text-align: center">-</el-col>
-            <el-col :span="11">
-              <el-form-item prop="date2">
-                <el-date-picker type="date" placeholder="选择时间" v-model="searchForm.date2" style="width: 100%;"></el-date-picker>
-              </el-form-item>
-            </el-col>
-          </el-form-item>
-          <el-form-item style="float: right">
+        <el-form-item label="采购商品：" prop="goodsName">
+          <el-input v-model="searchForm.goodsName" placeholder="请输入采购的商品名称" style="width: 198px;"></el-input>
+        </el-form-item>
+        <el-form-item label="订单状态：" style="margin-left: 14px;">
+          <el-select v-model="searchForm.status" placeholder="请选择订单状态" style="width: 198px;" prop="status">
+            <el-option :label="item.value" :value="item.key" v-for="(item, key) in statusList" :key="key+'status'"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="采购企业：" prop="companyName">
+          <el-input v-model="searchForm.companyName" placeholder="请输入采购企业" style="width: 198px;"></el-input>
+        </el-form-item>
+        <div style="width: 870px;height: 40px;">
+          <div style="float: right;">
             <el-button type="primary" @click="onSubmit">搜索</el-button>
             <el-button type="primary" @click="resetForm('searchForm')">重置</el-button>
-            <el-button type="primary">导出结果</el-button>
-          </el-form-item>
+            <el-button type="primary" @click="exportXls">导出结果</el-button>
+          </div>
         </div>
       </el-form>
     </div>
@@ -109,6 +94,7 @@
 </template>
 
 <script>
+import service from '@/service'
 const pageSize = 10
 export default {
   name: 'order',
@@ -116,14 +102,17 @@ export default {
     return {
       pageNumber: 1,
       showMore: false,
+      dialogFormVisible: false,
       searchForm: {
         goodsName: '',
         status: '',
-        userName: '',
-        date1: '',
-        date2: ''
+        companyName: '',
+        startDate: '',
+        endDate: '',
+        orderNo: ''
       },
-      type: -1
+      type: -1,
+      url: ''
     }
   },
   computed: {
@@ -132,6 +121,9 @@ export default {
     },
     total () {
       return this.$store.getters.orderTotal
+    },
+    statusList () {
+      return this.$store.getters.statusList
     }
   },
   watch: {
@@ -142,13 +134,16 @@ export default {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
-      const {params: {type, page}} = this.$route
+      const {params: {type, page, search}} = this.$route
       this.pageNumber = Number(page)
+      let others = {}
+      search && (others = JSON.parse(search))
       this.$store.dispatch('getOrderList', {
         data: {
           status: type,
           pageNumber: this.pageNumber,
-          pageSize
+          pageSize,
+          ...others
         },
         cb: () => {
           loading.close()
@@ -163,14 +158,18 @@ export default {
       spinner: 'el-icon-loading',
       background: 'rgba(0, 0, 0, 0.7)'
     })
-    const {params: {type, page}} = this.$route
+    const {params: {type, page, search}} = this.$route
     this.type = type
     this.pageNumber = Number(page)
+    let others = {}
+    search && (others = JSON.parse(search))
+    others && (this.searchForm = others)
     this.$store.dispatch('getOrderList', {
       data: {
         status: type,
         pageNumber: this.pageNumber,
-        pageSize
+        pageSize,
+        ...others
       },
       cb: () => {
         loading.close()
@@ -179,9 +178,11 @@ export default {
   },
   methods: {
     getList (page) {
-      const {params: {type}} = this.$route
+      const {params: {type, search}} = this.$route
       this.type = type
-      this.$router.push(`/user/order/${type}/${page}`)
+      let others = {}
+      search && (others = search)
+      this.$router.push(`/user/order/${type}/${page}/${others}`)
     },
     cancel (no) {
       this.$confirm('提交后将取消交易，请确定是否继续?', '提示', {
@@ -319,10 +320,42 @@ export default {
       return result
     },
     onSubmit () {
-      console.log('submit!')
+      this.pageNumber = 1
+      const others = JSON.stringify(this.searchForm)
+      const status = this.searchForm.status || this.type
+      this.$router.push(`/user/order/${status}/${this.pageNumber}/${others}`)
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+    },
+    async exportXls () {
+      const loading = this.$loading({
+        lock: true,
+        text: '生成记录中',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      try {
+        const {status, data: { url }} = await service.post('/papi/order/export', this.searchForm)
+        if (status === 0) {
+          this.$message(
+            {
+              type: 'success',
+              message: '文件已生成，请点击下载'
+            }
+          )
+          this.url = url
+          setTimeout(() => {
+            this.dialogFormVisible = true
+          }, 700)
+        } else {
+          this.$message.error('生成记录失败！')
+        }
+      } catch (e) {
+        this.$message.error('生成记录失败！')
+      } finally {
+        loading.close()
+      }
     }
   }
 }
