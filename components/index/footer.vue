@@ -9,8 +9,8 @@
       </ul>
       <div class="center-box">
         <p>
-          <a class="link" href="">集众金融</a>
-          <a class="link" href="">集众服务</a>
+          <a class="link" href="/service/index.html">集众金融</a>
+          <a class="link" href="/service/index.html">集众服务</a>
           <a class="link" href="">关于我们</a>
         </p>
         <p>copyright © 2018 津晶科技 版权所有&emsp;&emsp;粤ICP备18037422号</p>
