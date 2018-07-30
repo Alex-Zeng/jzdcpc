@@ -96,7 +96,7 @@
       <div class="sub-floor-nav">
         <ul>
           <li v-for="item in subFloorNav" :key="item.id">
-            <a href="javascript:;" @click.prevent="custormAnchor('item.id')">{{item.name}}</a>
+            <a href="javascript:;" @click.prevent="custormAnchor(item.id)">{{item.name}}</a>
           </li>
         </ul>
         <img src="~assets/img/index/go-top.png" @click="goTop" alt="">
@@ -293,7 +293,8 @@ body{
 .floor-nav h3{
   font-size 30px
   color #ffffff
-  padding 40px
+  padding 40px 0
+  text-align center
 }
 .floor-nav .el-button{
   width 80px
@@ -394,7 +395,7 @@ body{
   padding-bottom 10px
 }
 .sub-floor-nav a{
-  width 60px
+  padding 0 10px
   height 42px
   line-height 42px
   display block
@@ -489,6 +490,7 @@ export default {
       }, 60)
     },
     custormAnchor (anchorName) {
+      console.log(anchorName)
       // 找到锚点
       let anchorElement = document.getElementById(anchorName)
       if (anchorElement) {
