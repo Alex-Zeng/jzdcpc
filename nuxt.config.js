@@ -28,7 +28,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'jdzc-web',
+    title: '集众电采',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -87,7 +87,7 @@ module.exports = {
   },
   proxy: {
     '/papi': {
-      target: 'http://192.168.3.135:8079/api',
+      target: 'http://dev.jizhongdiancai.com/api',
       pathRewrite: { '^/papi': '' }
     }
   }
