@@ -39,9 +39,9 @@
         </ul>
         <ul class="header-tabs">
           <li class="item active">首页</li>
-          <li class="item">集众金融</li>
-          <li class="item">集众服务</li>
-          <li class="item">关于我们</li>
+          <li class="item"><a href="">集众金融</a></li>
+          <li class="item"><a href="">集众服务</a></li>
+          <li class="item"><a href="">关于我们</a></li>
         </ul>
       </div>
     </div>
@@ -270,6 +270,10 @@ export default {
         cursor pointer
         &.active
           color #2475e2
+        a
+          color #333333
+          &:hover
+            color #2475e2
     .center
       width 500px
       margin 20px auto 0

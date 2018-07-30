@@ -16,7 +16,7 @@
             <span class="name" @click="logout">退出</span>
           </li>
           <li class="item">
-            <span class="name">下载手机app</span>
+            <span class="name"><a href="http://dev.jizhongdiancai.com/download" target="_blank">下载手机app</a></span>
           </li>
         </ul>
       </div>
