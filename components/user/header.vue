@@ -142,7 +142,6 @@ export default {
   },
   methods: {
     logout () {
-      // Cookies.remove('_token')
       this.$store.dispatch('logout')
       setTimeout(() => {
         this.$router.replace('/auth')

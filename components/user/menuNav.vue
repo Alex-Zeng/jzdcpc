@@ -2,7 +2,6 @@
   <div class="user-menu">
     <div class="user-home">
       <nuxt-link to="/user">
-        {{user}}
         <div class="logo" v-if="user.path">
           <img :src="user.path" alt="logo">
         </div>

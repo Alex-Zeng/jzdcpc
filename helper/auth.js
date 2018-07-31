@@ -35,6 +35,7 @@ export const unsetToken = () => {
 }
 
 export const getUserFromCookie = () => {
+  if (process.server) return
   const token = Cookie.get('_user')
   return token
 }
@@ -51,6 +52,17 @@ export const getTokenFromReqCookie = (req) => {
   }
   if (!req.headers.cookie) return
   const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('_token='))
+  if (!jwtCookie) return null
+  const jwt = jwtCookie.split('=')[1]
+  return jwt
+}
+
+export const getUserFromReqCookie = (req) => {
+  if (!req) {
+    return null
+  }
+  if (!req.headers.cookie) return
+  const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('_user='))
   if (!jwtCookie) return null
   const jwt = jwtCookie.split('=')[1]
   return jwt

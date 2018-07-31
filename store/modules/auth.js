@@ -1,8 +1,9 @@
 import apiAuth from '../../api/apiAuth'
 import Cookie from 'js-cookie'
+import {getUserFromReqCookie} from '../../helper/auth'
 
 const state = {
-  user: Cookie.get('_user') ? JSON.parse(Cookie.get('_user')) : {},
+  user: {},
   token: Cookie.get('_token') || null
 }
 
@@ -16,6 +17,12 @@ const getters = {
 }
 
 const actions = {
+  nuxtServerInit ({ commit }, { req }) {
+    const user = getUserFromReqCookie(req)
+    if (user != null) {
+      commit('SETUSER', JSON.parse(decodeURIComponent(user)))
+    }
+  },
   logout ({ commit }) {
     commit('SETTOKEN', null)
     commit('SETUSER', {})
