@@ -8,7 +8,7 @@
           <dl class="item-dl clearfix">
             <dt><div class="label">商品大类</div></dt>
             <dd>
-              <div class="dditem" v-for="i in categoryList" :key="i.id" @click="changeCate(1, i.child, i.id)" :class="{active: i.id === selectId}">{{i.name}}</div>
+              <div class="dditem" v-for="i in categoryList" :key="i.id" @click="changeCate(1, i.child, i.id)" :class="{active: i.id == selectId}">{{i.name}}</div>
             </dd>
           </dl>
         </li>
@@ -18,7 +18,7 @@
               <div class="label">物料类别</div>
             </dt>
             <dd>
-              <div class="dditem" v-for="i in child" :key="i.id" @click="changeCate(2, i.child, i.id)" :class="{active: i.id === childId}">{{i.name}}</div>
+              <div class="dditem" v-for="i in child" :key="i.id" @click="changeCate(2, i.child, i.id)" :class="{active: i.id == childId}">{{i.name}}</div>
             </dd>
           </dl>
         </li>
@@ -27,7 +27,7 @@
             <dt>
               <div class="label">物料名称</div>
             </dt>
-            <dd><div class="dditem" v-for="i in superChild" :key="i.id" @click="changeCate(3, [], i.id)" :class="{active: i.id === scId}">{{i.name}}</div></dd>
+            <dd><div class="dditem" v-for="i in superChild" :key="i.id" @click="changeCate(3, [], i.id)" :class="{active: i.id == scId}">{{i.name}}</div></dd>
           </dl>
         </li>
       </ul>
@@ -114,7 +114,69 @@ export default {
       const {params: {all}} = this.$route
       let json = JSON.parse(all)
       this.all = json
+      setTimeout(() => {
+        if (json.selectId) {
+          this.selectId = json.selectId
+        }
+        if (json.childId) {
+          this.childId = json.childId
+          const list = this.categoryList
+          list.forEach((i) => {
+            if (parseInt(i.id) === parseInt(json.selectId)) {
+              this.child = i.child
+            }
+          })
+        } else {
+          this.childId = -1
+          this.child = []
+        }
+        if (json.scId) {
+          const list = this.child
+          list.forEach((i) => {
+            if (parseInt(i.id) === parseInt(json.childId)) {
+              this.superChild = i.child
+            }
+          })
+          this.scId = json.scId
+        } else {
+          this.scId = -1
+          this.superChild = []
+        }
+      }, 100)
       this.search()
+    },
+    'categoryList': function () {
+      const {params: {all}} = this.$route
+      let json = JSON.parse(all)
+      setTimeout(() => {
+        if (json.selectId) {
+          this.selectId = json.selectId
+        }
+        if (json.childId) {
+          this.childId = json.childId
+          const list = this.categoryList
+          list.forEach((i) => {
+            if (parseInt(i.id) === parseInt(json.selectId)) {
+              this.child = i.child
+            }
+          })
+        } else {
+          this.childId = -1
+          this.child = []
+        }
+        if (json.scId) {
+          const list = this.child
+          list.forEach((i) => {
+            if (parseInt(i.id) === parseInt(json.childId)) {
+              this.superChild = i.child
+            }
+          })
+          this.scId = json.scId
+        } else {
+          this.scId = -1
+          this.superChild = []
+        }
+      }, 100)
     }
   },
   methods: {
@@ -215,29 +277,6 @@ export default {
     const {params: {all}} = this.$route
     let json = JSON.parse(all)
     this.all = json
-    setTimeout(() => {
-      if (json.selectId) {
-        this.selectId = json.selectId
-      }
-      if (json.childId) {
-        this.childId = json.childId
-        const list = this.categoryList
-        list.forEach((i) => {
-          if (i.id === json.selectId) {
-            this.child = i.child
-          }
-        })
-      }
-      if (json.scId) {
-        const list = this.child
-        list.forEach((i) => {
-          if (i.id === json.childId) {
-            this.superChild = i.child
-          }
-        })
-        this.scId = json.scId
-      }
-    }, 100)
     this.search()
   },
   name: 'search'

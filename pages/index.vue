@@ -14,8 +14,9 @@
         </div>
         <div class="banner-right">
           <div>
-            <div class="logo" v-if="user">
-              <img :src="user.path" alt="logo">
+            <div class="logo" v-if="!!token">
+              <img :src="user.path" alt="logo" v-if="user.path">
+              <img src="~assets/img/common/default_avatar.png" alt="logo" v-else>
             </div>
             <div class="logo" v-else>
               <img src="~assets/img/common/default_avatar.png" alt="logo">
