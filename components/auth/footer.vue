@@ -19,15 +19,15 @@
         </nuxt-link>
       </div>
       <div class="add">
-        <span>电话：（020）22512521</span>
-        <span>地址：广州市越秀区越华路112号珠江国际大厦4205单元</span>
+        <span>电话：(020)84125513</span>
+        <span>地址：广东省广州市海珠区昌岗中路166号 佳都商贸中心505-506</span>
         <span>邮编：510030</span>
       </div>
       <div class="num">
-        粤ICP备18007919号-1
+        粤ICP备18037422号
       </div>
       <div class="copyright">
-        Copyright @gdppinvest.com All Right Reserved
+        Copyright @2018 津晶科技 All Right Reserved
       </div>
     </div>
   </div>
