@@ -14,7 +14,7 @@
         </div>
         <div class="banner-right">
           <div>
-            <div class="logo" v-if="user">
+            <div class="logo" v-if="!!token">
               <img :src="user.path" alt="logo">
             </div>
             <div class="logo" v-else>
