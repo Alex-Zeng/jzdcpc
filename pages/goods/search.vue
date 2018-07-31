@@ -114,7 +114,69 @@ export default {
       const {params: {all}} = this.$route
       let json = JSON.parse(all)
       this.all = json
+      setTimeout(() => {
+        if (json.selectId) {
+          this.selectId = json.selectId
+        }
+        if (json.childId) {
+          this.childId = json.childId
+          const list = this.categoryList
+          list.forEach((i) => {
+            if (i.id === json.selectId) {
+              this.child = i.child
+            }
+          })
+        } else {
+          this.childId = -1
+          this.child = []
+        }
+        if (json.scId) {
+          const list = this.child
+          list.forEach((i) => {
+            if (i.id === json.childId) {
+              this.superChild = i.child
+            }
+          })
+          this.scId = json.scId
+        } else {
+          this.scId = -1
+          this.superChild = []
+        }
+      }, 100)
       this.search()
+    },
+    'categoryList': function () {
+      const {params: {all}} = this.$route
+      let json = JSON.parse(all)
+      setTimeout(() => {
+        if (json.selectId) {
+          this.selectId = json.selectId
+        }
+        if (json.childId) {
+          this.childId = json.childId
+          const list = this.categoryList
+          list.forEach((i) => {
+            if (i.id === json.selectId) {
+              this.child = i.child
+            }
+          })
+        } else {
+          this.childId = -1
+          this.child = []
+        }
+        if (json.scId) {
+          const list = this.child
+          list.forEach((i) => {
+            if (i.id === json.childId) {
+              this.superChild = i.child
+            }
+          })
+          this.scId = json.scId
+        } else {
+          this.scId = -1
+          this.superChild = []
+        }
+      }, 100)
     }
   },
   methods: {
@@ -215,29 +277,6 @@ export default {
     const {params: {all}} = this.$route
     let json = JSON.parse(all)
     this.all = json
-    setTimeout(() => {
-      if (json.selectId) {
-        this.selectId = json.selectId
-      }
-      if (json.childId) {
-        this.childId = json.childId
-        const list = this.categoryList
-        list.forEach((i) => {
-          if (i.id === json.selectId) {
-            this.child = i.child
-          }
-        })
-      }
-      if (json.scId) {
-        const list = this.child
-        list.forEach((i) => {
-          if (i.id === json.childId) {
-            this.superChild = i.child
-          }
-        })
-        this.scId = json.scId
-      }
-    }, 100)
     this.search()
   },
   name: 'search'
