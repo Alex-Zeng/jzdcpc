@@ -2,7 +2,7 @@ import apiAuth from '../../api/apiAuth'
 import Cookie from 'js-cookie'
 
 const state = {
-  user: {},
+  user: Cookie.get('_user') ? JSON.parse(Cookie.get('_user')) : {},
   token: Cookie.get('_token') || null
 }
 
@@ -26,7 +26,6 @@ const actions = {
     apiAuth.loginIndex(data => {
       successCb('登录成功')
       const {token} = data
-      // 存入cookie与 stroe state
       Cookie.set('_token', token)
       Cookie.set('_user', JSON.stringify(data))
       commit('SETTOKEN', token)
