@@ -38,42 +38,15 @@
 <script>
 import indexHeader from '@/components/index/header'
 import indexFooter from '@/components/index/footer'
-import apiNotice from '@/api/apiNotice'
 const pageSize = 10
 export default {
   name: 'index',
   data () {
     return {
-      pageNumber: 1,
-      lists: [
-        {
-          'id': 1,
-          'title': '新版本上线了',
-          'summary': '经过两个月的开发测试，系统功能上线了，鼓掌散花',
-          'release_time': '2018年06月13日 15:17'
-        },
-        {
-          'id': 1,
-          'title': '新版本上线了',
-          'summary': '经过两个月的开发测试，系统功能上线了，鼓掌散花',
-          'release_time': '2018年06月13日 15:17'
-        },
-        {
-          'id': 1,
-          'title': '新版本上线了',
-          'summary': '经过两个月的开发测试，系统功能上线了，鼓掌散花',
-          'release_time': '2018年06月13日 15:17'
-        }
-      ]
+      pageNumber: 1
     }
   },
   methods: {
-    async getNotice () {
-      await apiNotice.getFirstNotice({pageSize: 1, pageNumber: 1}, (data) => {
-        const {data: {list}} = data
-        this.notice = list[0]
-      })
-    },
     getList (page) {
       this.$router.push(`/notice/notice-detail/${page}`)
     },
