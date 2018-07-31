@@ -34,7 +34,7 @@
               <p class="msg-content">
                 {{notice.summary}}
               </p>
-              <nuxt-link to="/user/message" class="link">更多>></nuxt-link>
+              <nuxt-link to="/notice" class="link">更多>></nuxt-link>
             </div>
           </div>
         </div>
@@ -409,6 +409,7 @@ body{
   color #ffffff
 }
 .sub-floor-nav img{
+  display block
   margin auto
 }
 </style>
