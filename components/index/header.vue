@@ -22,10 +22,10 @@
           <div class="child-wrap" v-show="showWrap" @mouseleave="showWrap=false">
             <div class="child-menu" v-for="(i, k) in child" :key="'item'+i.id + k">
               <div class="child-menu-list clearfix">
-                <nuxt-link :to='`/goods/search/%7B"type":0,"cateId":${i.id}%7D`' tag="div" class="menu-name">{{i.name}}</nuxt-link>
+                <nuxt-link :to='`/goods/search/%7B"type":0,"cateId":${i.id},"selectId":${selectId},"childId":${i.id}%7D`' tag="div" class="menu-name">{{i.name}}</nuxt-link>
                 <ul class="clearfix" style="float: left;width: 600px;">
                   <li class="child-menu-list-item" v-for="(item, key) in i.child" :key="'menu' + key+item.id+k">
-                    <nuxt-link :to='`/goods/search/%7B"type":0,"cateId":${item.id}%7D`'>{{item.name}}</nuxt-link>
+                    <nuxt-link :to='`/goods/search/%7B"type":0,"cateId":${item.id},"selectId":${selectId}, "childId":${i.id},"scId":${item.id}%7D`'>{{item.name}}</nuxt-link>
                   </li>
                 </ul>
                 <!--<a href="" class="more">更多>></a>-->
@@ -33,7 +33,7 @@
             </div>
           </div>
           <li class="itemAll"><i class="menu-icon">&#xe605;</i>全部商品分类</li>
-          <li :class="{item:true, isOpen: isOpen || show, active: (child===i.child) && showWrap}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="child = i.child, showWrap=true, slogan=false">
+          <li :class="{item:true, isOpen: isOpen || show, active: (child===i.child) && showWrap}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="selectId = i.id, child = i.child, showWrap=true, slogan=false">
             <div class="img">
               <img :src="i.path" width="16px" alt="">
             </div>
@@ -88,6 +88,7 @@ export default {
       key: '',
       type: 0,
       num: 0,
+      selectId: -1,
       slogan: false
     }
   },
