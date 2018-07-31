@@ -2,7 +2,7 @@
   <div>
     <indexHeader :isOpen="showMenu"></indexHeader>
     <div class="search-wrap">
-      <a href="" class="back">返回</a>
+      <nuxt-link to="/" class="back">返回</nuxt-link>
       <ul class="tags">
         <li class="item">
           <dl class="item-dl clearfix">
@@ -180,14 +180,17 @@ export default {
         case 1:
           this.child = child
           this.selectId = id
+          this.all.selectId = id
           this.superChild = []
           break
         case 2:
           this.childId = id
+          this.all.childId = id
           this.superChild = child
           break
         case 3:
           this.scId = id
+          this.all.scId = id
           break
       }
       this.all.cateId = id
@@ -212,6 +215,29 @@ export default {
     const {params: {all}} = this.$route
     let json = JSON.parse(all)
     this.all = json
+    setTimeout(() => {
+      if (json.selectId) {
+        this.selectId = json.selectId
+      }
+      if (json.childId) {
+        this.childId = json.childId
+        const list = this.categoryList
+        list.forEach((i) => {
+          if (i.id === json.selectId) {
+            this.child = i.child
+          }
+        })
+      }
+      if (json.scId) {
+        const list = this.child
+        list.forEach((i) => {
+          if (i.id === json.childId) {
+            this.superChild = i.child
+          }
+        })
+        this.scId = json.scId
+      }
+    }, 100)
     this.search()
   },
   name: 'search'

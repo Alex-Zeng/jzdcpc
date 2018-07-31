@@ -24,7 +24,6 @@
           <el-input
             v-model="codeForm.code"
             placeholder="请输入图片验证码"
-            type="password"
           >
           </el-input>
           <img :src="`${imgSrcrand}`" class="captcha" alt="点击刷新验证码" @click="updateCaptcha" v-show="imgSrcrand"/>
