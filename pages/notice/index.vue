@@ -13,7 +13,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="item in list" @click="$router.push('/')" :key="item.id">
+        <tr v-for="item in list" @click="$router.replace('/notice/notice-detail/'+ item.id)" :key="item.id">
           <td style="width: 200px;padding-left: 1em;">{{item.release_time}}</td>
           <td>{{item.title}}</td>
           <td>{{item.summary}}</td>
@@ -107,7 +107,7 @@ export default {
     .back
       font-size 18px
       cursor pointer
-      color #ff7900
+      color #2475E2
       margin-bottom 16px
       .back_icon
         font-family 'jzdc'

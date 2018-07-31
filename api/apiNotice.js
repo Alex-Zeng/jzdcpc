@@ -11,5 +11,9 @@ export default {
       return
     }
     successCb(data, msg)
+  },
+  async getNoticeInfo (cb, fileds) {
+    const { data } = await request.get('/papi/user/getNoticeInfo', fileds)
+    cb(data)
   }
 }
