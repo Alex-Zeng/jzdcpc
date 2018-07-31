@@ -82,7 +82,7 @@ export default {
       font-size 14px
       color #666666
       line-height 1.5
-      text-align center
+      text-align left
       margin auto
     .footer
       padding-top 50px
