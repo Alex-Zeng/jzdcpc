@@ -13,7 +13,7 @@
           <img src="" alt="">
         </div>
         <div class="name" @click="$router.push('/user/workbench/favorite')">
-          <span class="name" style="cursor: pointer;">收藏(<span class="num">{{favoriteTotal}}</span>)</span>
+          <span style="cursor: pointer;"><i class="icon">&#xe60f;</i>收藏(<span class="num">{{favoriteTotal}}</span>)</span>
         </div>
         <div class="message" @click="message">
           <el-badge :is-dot="msgs>0">
@@ -84,6 +84,10 @@
     margin-right 10px
     .num
       color #FF7F00
+    .icon
+      font-family 'jzdc'
+      font-size 16px
+      margin-right 4px
   .message
     float left
     margin-right 10px

@@ -8,7 +8,7 @@
           <dl class="item-dl clearfix">
             <dt><div class="label">商品大类</div></dt>
             <dd>
-              <div class="dditem" v-for="i in categoryList" :key="i.id" @click="changeCate(1, i.child, i.id)" :class="{active: i.id === selectId}">{{i.name}}</div>
+              <div class="dditem" v-for="i in categoryList" :key="i.id" @click="changeCate(1, i.child, i.id)" :class="{active: i.id == selectId}">{{i.name}}</div>
             </dd>
           </dl>
         </li>
@@ -18,7 +18,7 @@
               <div class="label">物料类别</div>
             </dt>
             <dd>
-              <div class="dditem" v-for="i in child" :key="i.id" @click="changeCate(2, i.child, i.id)" :class="{active: i.id === childId}">{{i.name}}</div>
+              <div class="dditem" v-for="i in child" :key="i.id" @click="changeCate(2, i.child, i.id)" :class="{active: i.id == childId}">{{i.name}}</div>
             </dd>
           </dl>
         </li>
@@ -27,7 +27,7 @@
             <dt>
               <div class="label">物料名称</div>
             </dt>
-            <dd><div class="dditem" v-for="i in superChild" :key="i.id" @click="changeCate(3, [], i.id)" :class="{active: i.id === scId}">{{i.name}}</div></dd>
+            <dd><div class="dditem" v-for="i in superChild" :key="i.id" @click="changeCate(3, [], i.id)" :class="{active: i.id == scId}">{{i.name}}</div></dd>
           </dl>
         </li>
       </ul>
@@ -122,7 +122,7 @@ export default {
           this.childId = json.childId
           const list = this.categoryList
           list.forEach((i) => {
-            if (i.id === json.selectId) {
+            if (parseInt(i.id) === parseInt(json.selectId)) {
               this.child = i.child
             }
           })
@@ -133,7 +133,7 @@ export default {
         if (json.scId) {
           const list = this.child
           list.forEach((i) => {
-            if (i.id === json.childId) {
+            if (parseInt(i.id) === parseInt(json.childId)) {
               this.superChild = i.child
             }
           })
@@ -156,7 +156,7 @@ export default {
           this.childId = json.childId
           const list = this.categoryList
           list.forEach((i) => {
-            if (i.id === json.selectId) {
+            if (parseInt(i.id) === parseInt(json.selectId)) {
               this.child = i.child
             }
           })
@@ -167,7 +167,7 @@ export default {
         if (json.scId) {
           const list = this.child
           list.forEach((i) => {
-            if (i.id === json.childId) {
+            if (parseInt(i.id) === parseInt(json.childId)) {
               this.superChild = i.child
             }
           })
