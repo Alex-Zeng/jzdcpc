@@ -61,6 +61,7 @@ export default {
     width 1300px
     min-height 558px
     margin auto
+    font-size 18px
     .back
       font-size 18px
       cursor pointer
@@ -78,6 +79,8 @@ export default {
       margin auto
     .content
       width 660px
+      font-size 14px
+      color #666666
       line-height 1.5
       text-align center
       margin auto
