@@ -1,5 +1,6 @@
 import apiAuth from '../../api/apiAuth'
 import Cookie from 'js-cookie'
+import {getUserFromReqCookie} from '../../helper/auth'
 
 const state = {
   user: {},
@@ -16,6 +17,12 @@ const getters = {
 }
 
 const actions = {
+  nuxtServerInit ({ commit }, { req }) {
+    const user = getUserFromReqCookie(req)
+    if (user != null) {
+      commit('SETUSER', JSON.parse(decodeURIComponent(user)))
+    }
+  },
   logout ({ commit }) {
     commit('SETTOKEN', null)
     commit('SETUSER', {})
@@ -26,7 +33,6 @@ const actions = {
     apiAuth.loginIndex(data => {
       successCb('登录成功')
       const {token} = data
-      // 存入cookie与 stroe state
       Cookie.set('_token', token)
       Cookie.set('_user', JSON.stringify(data))
       commit('SETTOKEN', token)

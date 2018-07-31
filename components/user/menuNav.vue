@@ -41,7 +41,7 @@
       </el-collapse-item>
       <el-collapse-item title="集众服务" name="3">
         <template slot="title">
-          <i class="title-icon">&#xe67c;</i>集众服务
+          <a href="/service/index.html" style="display: block;"><i class="title-icon">&#xe67c;</i>集众服务</a>
         </template>
       </el-collapse-item>
     </el-collapse>

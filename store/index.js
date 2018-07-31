@@ -5,6 +5,7 @@ import auth from './modules/auth'
 import orders from './modules/orders'
 import favorite from './modules/favorite'
 import message from './modules/message'
+import notice from './modules/notice'
 // import createLogger from '../helper/logger'
 import category from './modules/category'
 
@@ -20,6 +21,7 @@ const store = () =>
       orders,
       favorite,
       message,
+      notice,
       category
     },
     strict: debug
