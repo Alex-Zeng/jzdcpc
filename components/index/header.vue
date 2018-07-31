@@ -39,7 +39,9 @@
             </div>
             <span style="float: left;">{{i.name}}</span>
           </li>
-          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true"><i class="menu-icon" style="margin-right: 16px;">&#xe67e;</i>集众服务</li>
+          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true"><i class="menu-icon" style="margin-right: 16px;">&#xe67e;</i>
+            <a href="/service/index.html" style="color: #ffffff" target="_blank">集众服务</a>
+          </li>
         </ul>
         <ul class="header-tabs">
           <a href="/" class="item">首页</a>
