@@ -35,7 +35,9 @@
             <el-input v-model="form.representative"></el-input>
           </el-form-item>
           <el-form-item label="注册资本" prop="capital" style="width: 520px;float: right;">
-            <el-input v-model="form.capital"></el-input>
+            <el-input v-model="form.capital">
+              <template slot="append">万元</template>
+            </el-input>
           </el-form-item>
         </div>
 

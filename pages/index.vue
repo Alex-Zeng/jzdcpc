@@ -14,17 +14,17 @@
         </div>
         <div class="banner-right">
           <div>
-            <div class="logo" v-if="user.path">
+            <div class="logo" v-if="user">
               <img :src="user.path" alt="logo">
             </div>
             <div class="logo" v-else>
               <img src="~assets/img/common/default_avatar.png" alt="logo">
             </div>
             <h3>
-              {{user.username}}
+              <span v-if="user">{{user.username}}</span>
             </h3>
-            <el-button type="primary" v-if="token" plain @click="$router.push('/user')">进入工作台</el-button>
-            <el-button type="primary" v-if="token == null" plain @click="$router.push('/auth/login')">登录/注册</el-button>
+            <el-button type="primary" v-if="!!token" plain @click="$router.push('/user')">进入工作台</el-button>
+            <el-button type="primary" v-else plain @click="$router.push('/auth/login')">登录/注册</el-button>
           </div>
           <div>
             <img src="~assets/img/index/gonggao.png" alt="">
@@ -49,7 +49,9 @@
           <h3>{{total.turnoverAll}}<span>元</span></h3>
         </div>
         <div class="jzAd">
-          <img src="~assets/img/index/fuwu.png" alt="">
+          <a href="/service/index.html" target="_blank">
+            <img src="~assets/img/index/fuwu.png" alt="">
+          </a>
         </div>
       </div>
       <div class="main-AD">

@@ -24,8 +24,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   res => {
     const {status} = res.data
-
-    if (status === -2) {
+    if (parseInt(status) === -2) {
       window.$nuxt.$message({
         showClose: true,
         message: '用户未登录或登录已失效，请登录后继续操作',

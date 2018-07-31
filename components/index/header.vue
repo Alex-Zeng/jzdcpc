@@ -17,12 +17,12 @@
         <nuxt-link to="/goods/cart" tag="div" class="btn"><el-button style="padding: 8px 14px;"><div class="car"><i class="icon">&#xe617;</i><span class="car-text">购物清单</span><el-badge :value="num"></el-badge></div></el-button></nuxt-link>
         <ul class="header-menu" @mouseleave="showWrap=false, show=isOpen, slogan=false" @mouseover="show=true">
           <div class="child-wrap" v-show="slogan" @mouseleave="slogan=false">
-            <a href="/service/index.html"><img src="~/assets/img/common/slogan.jpg" alt=""></a>
+            <a href="/service/index.html" target="_blank"><img src="~/assets/img/common/slogan.jpg" alt=""></a>
           </div>
           <div class="child-wrap" v-show="showWrap" @mouseleave="showWrap=false">
             <div class="child-menu" v-for="(i, k) in child" :key="'item'+i.id + k">
               <div class="child-menu-list clearfix">
-                <div class="menu-name">{{i.name}}</div>
+                <nuxt-link :to='`/goods/search/%7B"type":0,"cateId":${i.id}%7D`' tag="div" class="menu-name">{{i.name}}</nuxt-link>
                 <ul class="clearfix" style="float: left;width: 600px;">
                   <li class="child-menu-list-item" v-for="(item, key) in i.child" :key="'menu' + key+item.id+k">
                     <nuxt-link :to='`/goods/search/%7B"type":0,"cateId":${item.id}%7D`'>{{item.name}}</nuxt-link>
@@ -39,13 +39,14 @@
             </div>
             <span style="float: left;">{{i.name}}</span>
           </li>
-          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true"><i class="menu-icon" style="margin-right: 16px;">&#xe67e;</i>集众服务</li>
+          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true"><i class="menu-icon" style="margin-right: 16px;">&#xe67e;</i>
+            <a href="/service/index.html" style="color: #ffffff" target="_blank">集众服务</a>
+          </li>
         </ul>
         <ul class="header-tabs">
           <a href="/" class="item">首页</a>
-          <a href="/service/index.html" class="item">集众金融</a>
-          <a class="item" href="/service/index.html">集众服务</a>
-          <li class="item">关于我们</li>
+          <a href="/service/index.html" class="item" target="_blank">集众金融</a>
+          <a class="item" href="/service/index.html" target="_blank">集众服务</a>
         </ul>
       </div>
     </div>
@@ -195,6 +196,9 @@ export default {
           width 125px
           text-align right
           padding-left 18px
+          cursor pointer
+          &:hover
+            color #2475E2
         .child-menu-list
           .child-menu-list-item
             float left

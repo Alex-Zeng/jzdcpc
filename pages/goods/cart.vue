@@ -95,23 +95,29 @@ export default {
   },
   watch: {
     all: function () {
-      let check = []
-      this.checkedList.forEach((i) => {
-        check.push(i.fill(this.all))
-      })
-      this.$set(this.checkedList, check)
-      this.groupAll.fill(this.all)
-      this.countAll()
+      if (this.checkedList.length > 0) {
+        let check = []
+        this.checkedList.forEach((i) => {
+          check.push(i.fill(this.all))
+        })
+        this.$set(this.checkedList, check)
+        this.groupAll.fill(this.all)
+        this.countAll()
+      }
     },
     groupAll: function () {
-      this.groupAll.forEach((i, k) => {
-        const temp = new Array(this.checkedList[k].length).fill(i)
-        this.$set(this.checkedList, k, temp)
-      })
-      this.countAll()
+      if (this.groupAll.length > 0) {
+        this.groupAll.forEach((i, k) => {
+          const temp = new Array(this.checkedList[k].length).fill(i)
+          this.$set(this.checkedList, k, temp)
+        })
+        this.countAll()
+      }
     },
     checkedList: function () {
-      this.countAll()
+      if (this.checkedList.length > 0) {
+        this.countAll()
+      }
     }
   },
   data () {
@@ -256,13 +262,17 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       })
       try {
+        let group = []
+        let check = []
         apiMallCart.getMallCart((data) => {
           data.forEach((i) => {
             const len = i.list.length
-            this.groupAll.push(false)
-            this.checkedList.push(new Array(len).fill(false))
+            group.push(false)
+            check.push(new Array(len).fill(false))
           })
           this.list = data
+          this.groupAll = group
+          this.checkedList = check
         }, {})
       } catch (e) {
         this.$message({

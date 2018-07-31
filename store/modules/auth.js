@@ -1,6 +1,5 @@
 import apiAuth from '../../api/apiAuth'
 import Cookie from 'js-cookie'
-import {getUserFromReqCookie} from '../../helper/auth'
 
 const state = {
   user: {},
@@ -17,17 +16,12 @@ const getters = {
 }
 
 const actions = {
-  nuxtServerInit ({ commit }, { req }) {
-    const user = getUserFromReqCookie(req)
-    if (user != null) {
-      commit('SETUSER', JSON.parse(decodeURIComponent(user)))
-    }
-  },
   logout ({ commit }) {
     commit('SETTOKEN', null)
-    commit('SETUSER', {})
-    Cookie.remove('_token')
-    Cookie.remove('_user')
+    commit('SETUSER', null)
+    Cookie.set('_token', '')
+    Cookie.set('_user', '')
+    Cookie.set('_logout', true)
   },
   doLoginIndex ({ commit }, {successCb, errorCb, fileds}) {
     apiAuth.loginIndex(data => {
@@ -37,6 +31,7 @@ const actions = {
       Cookie.set('_user', JSON.stringify(data))
       commit('SETTOKEN', token)
       commit('SETUSER', data)
+      Cookie.set('_logout', false)
     }, errorCb, fileds)
   },
   doLoginPhone ({ commit }, {successCb, errorCb, fileds}) {
@@ -52,6 +47,7 @@ const actions = {
       Cookie.set('_user', JSON.stringify(data))
       commit('SETTOKEN', token)
       commit('SETUSER', data)
+      Cookie.set('_logout', false)
     }, errorCb, fileds)
   },
   doRegisterPhone ({ commit }, {successCb, errorCb, fileds}) {
@@ -63,6 +59,7 @@ const actions = {
       Cookie.set('_user', JSON.stringify(data))
       commit('SETTOKEN', token)
       commit('SETUSER', data)
+      Cookie.set('_logout', false)
     }, errorCb, fileds)
   },
   doRegisterSendCode ({ commit }, {successCb, errorCb, fileds}) {

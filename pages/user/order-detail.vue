@@ -26,7 +26,7 @@
           <span class="label">订单金额：{{detail.money}}元</span>
         </div>
         <div class="item">
-          <span class="label">订单状态：{{detail.serviceType === 1? '售后处理中': detail.serviceType === 2 && type === 6? '售后完成': getState(detail.state, detail.groupId)}}</span>
+          <span class="label">订单状态：{{detail.serviceType == 1? '售后处理中': detail.serviceType == 2 && type == 6? '售后完成': getState(detail.state, detail.groupId)}}</span>
         </div>
       </div>
       <div class="right">
@@ -66,7 +66,7 @@
         <li style="width: 144px;">{{(i.price*i.quantity).toFixed(2)}}</li>
         <li style="width: 156px;">{{i.specifications_no}}</li>
         <li style="width: 254px;">{{i.specifications_name}}</li>
-        <li style="width: 86px;" class="action" @click="dialogFormVisible = true, goodsId = i.goods_id"
+        <li style="width: 86px;" class="action" @click="dialogFormVisible = true, goodsId = i.id"
             v-if="(detail.state==6 || detail.state == 13 || detail.state == 9 || detail.state==10  || detail.state==11)&&(i.service_type==0)&&(detail.groupId==4)"
         >
           申请售后
@@ -130,10 +130,12 @@
           </div>
         </div>
       </div>
-      <div class="empty" v-if="detail.groupId === 4">暂无物流信息</div>
+      <div v-else>
+        <div class="empty" v-if="detail.groupId == 4">暂无物流信息</div>
+      </div>
     </div>
 
-    <div class="common card clearfix" v-if="(detail.groupId === 5) && (!detail.expressCode)">
+    <div class="common card clearfix" v-if="(detail.groupId == 5) && (!detail.expressCode)">
       <div class="title">物流信息</div>
       <div>
         <div class="left" style="width:420px;">
@@ -175,22 +177,22 @@
       </div>
     </div>
 
-    <div class="common card clearfix" v-if="detail.groupId !== 4">
+    <div class="common card clearfix" v-if="detail.groupId != 4">
       <div class="title">付款信息</div>
       <div v-if="detail.payNumber || detail.payDate || detail.payImg">
         <div class="left" style="width: 370px;">
           <div class="item">
-            <span class="label">{{detail.payMethod === '转账' ? '票号' : '流水号'}}：</span>
+            <span class="label">{{detail.payMethod == '转账' ? '票号' : '流水号'}}：</span>
             <span class="value">{{detail.payNumber}}</span>
           </div>
           <div class="item">
-            <span class="label">{{detail.payMethod === '转账' ? '承兑日期' : '汇款日期'}}：</span>
+            <span class="label">{{detail.payMethod == '转账' ? '承兑日期' : '汇款日期'}}：</span>
             <span class="value">{{detail.payDate}}</span>
           </div>
         </div>
         <div class="left">
           <div class="item">
-            <span class="label">{{detail.payMethod === '转账' ? '票据影像' : '汇款凭证'}}：</span>
+            <span class="label">{{detail.payMethod == '转账' ? '票据影像' : '汇款凭证'}}：</span>
             <span class="value" style="color:#2475e2;cursor:pointer;" @click="img = detail.payImg, show=true">查看</span>
           </div>
         </div>
@@ -257,6 +259,15 @@ export default {
                 type: 'success',
                 message: msg
               })
+              const {params: {no, type}} = this.$route
+              this.type = type * 1
+              const loading = this.$loading({
+                lock: true,
+                text: '加载中...',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+              })
+              this.$store.dispatch('getOrderDetail', {fileds: {no}, cb: () => { loading.close() }})
             } else {
               this.$message.error(msg)
             }

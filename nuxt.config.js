@@ -3,6 +3,7 @@
  */
 
 module.exports = {
+  mode: 'spa',
   /*
   ** 配置鉴权中间件
   */

@@ -9,7 +9,7 @@
           <img src="~assets/img/common/default_avatar.png" alt="logo">
         </div>
         <h3>
-          进入工作台
+          {{user.username}}
         </h3>
       </nuxt-link>
     </div>

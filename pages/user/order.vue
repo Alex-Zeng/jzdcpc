@@ -41,6 +41,13 @@
       </el-form>
     </div>
     <div class="result-wrap">
+      <div class="title">
+        <div class="item order-info">订单信息</div>
+        <div class="item source">供应商</div>
+        <div class="item addr">收货人</div>
+        <div class="item status">订单状态</div>
+        <div class="item action">操作</div>
+      </div>
       <div class="table" v-for="order in orders" :key="order.id">
         <p class="time">{{order.orderDate}}</p>
           <div class="title clearfix">
@@ -60,9 +67,7 @@
                 <div class="info">
                   <div class="md">
                     <div class="goods-title">{{item.title}}</div>
-                    <div class="goods-info">{{item.specifications_name}}</div>
-                    <div class="goods-info">{{item.specifications_no}}</div>
-                    <div class="goods-info">{{item.specifications_info}}</div>
+                    <div class="goods-info">{{item.s_info}}</div>
                   </div>
                 </div>
               </div>
@@ -74,7 +79,7 @@
           <div class="info info-btn">
             <el-button class="order-button" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;margin-right: 8px;" @click="$router.push('/user/order-detail/'+order.out_id+'/'+type)">查看详情</el-button>
             <el-button class="order-button" type="primary" v-show="order.state == 3 && order.groupId == 5" style="width: 80px;padding-left: 0;padding-right: 0;" @click="$router.push('/user/order-detail/'+order.out_id)">确定发货</el-button>
-            <el-button class="order-button" type="primary" v-show="order.state == 6 && order.groupId == 4" style="width: 80px;padding-left: 0;padding-right: 0;" @click="receipt(order.out_id)">确定收货</el-button>
+            <el-button class="order-button" type="primary" v-show="order.state == 6 && order.groupId == 4 && (order.service_type ==0 || order.service_type ==2)" style="width: 80px;padding-left: 0;padding-right: 0;" @click="receipt(order.out_id)">确定收货</el-button>
             <el-button class="order-button text" type="text" v-show="(order.state ==1 || order.state == 0)&&order.groupId==4" style="width: 80px;padding-left: 0;padding-right: 0;" @click="cancel(order.out_id)">取消交易</el-button>
           </div>
         </div>
@@ -374,7 +379,7 @@ export default {
       color #66666
   .order-wrap
   .result-wrap
-    margin auto
+    margin 40px auto 40px
     .down-icon
       width 0
       height 0
@@ -458,6 +463,7 @@ export default {
         width 19%
         text-align center
         white-space nowrap
+        text-overflow ellipsis
     .addr
         width 18%
         text-align center
