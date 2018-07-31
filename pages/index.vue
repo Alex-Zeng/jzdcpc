@@ -424,7 +424,6 @@ export default {
   },
   data () {
     return {
-      user: {},
       banner: [],
       notice: {},
       total: {},
@@ -445,6 +444,9 @@ export default {
   computed: {
     token () {
       return this.$store.getters.loggedToken
+    },
+    user () {
+      return this.$store.getters.loggedUser
     }
   },
   mounted () {
