@@ -49,7 +49,9 @@
           <h3>{{total.turnoverAll}}<span>元</span></h3>
         </div>
         <div class="jzAd">
-          <img src="~assets/img/index/fuwu.png" alt="">
+          <a href="/service/index.html" target="_blank">
+            <img src="~assets/img/index/fuwu.png" alt="">
+          </a>
         </div>
       </div>
       <div class="main-AD">

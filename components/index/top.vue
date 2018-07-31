@@ -18,7 +18,7 @@
           <nuxt-link to="/user" tag="li" class="item" v-show="token">
             <span class="name">进入工作台</span>
           </nuxt-link>
-          <a href="/app-down/index.html" class="item">
+          <a href="/app-down/index.html" target="_blank" class="item">
             <span class="name">下载手机app</span>
           </a>
         </ul>

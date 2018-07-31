@@ -17,7 +17,7 @@
         <nuxt-link to="/goods/cart" tag="div" class="btn"><el-button style="padding: 8px 14px;"><div class="car"><i class="icon">&#xe617;</i><span class="car-text">购物清单</span><el-badge :value="num"></el-badge></div></el-button></nuxt-link>
         <ul class="header-menu" @mouseleave="showWrap=false, show=isOpen, slogan=false" @mouseover="show=true">
           <div class="child-wrap" v-show="slogan" @mouseleave="slogan=false">
-            <a href="/service/index.html"><img src="~/assets/img/common/slogan.jpg" alt=""></a>
+            <a href="/service/index.html" target="_blank"><img src="~/assets/img/common/slogan.jpg" alt=""></a>
           </div>
           <div class="child-wrap" v-show="showWrap" @mouseleave="showWrap=false">
             <div class="child-menu" v-for="(i, k) in child" :key="'item'+i.id + k">
@@ -43,8 +43,8 @@
         </ul>
         <ul class="header-tabs">
           <a href="/" class="item">首页</a>
-          <a href="/service/index.html" class="item">集众金融</a>
-          <a class="item" href="/service/index.html">集众服务</a>
+          <a href="/service/index.html" target="_blank" class="item">集众金融</a>
+          <a class="item" href="/service/index.html" target="_blank">集众服务</a>
           <li class="item">关于我们</li>
         </ul>
       </div>
