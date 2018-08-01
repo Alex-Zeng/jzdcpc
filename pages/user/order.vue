@@ -185,7 +185,7 @@ export default {
     getList (page) {
       const {params: {type, search}} = this.$route
       this.type = type
-      let others = {}
+      let others = JSON.stringify({})
       search && (others = search)
       this.$router.push(`/user/order/${type}/${page}/${others}`)
     },
