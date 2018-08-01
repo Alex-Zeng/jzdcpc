@@ -7,9 +7,9 @@
       <!--<nuxt-link to="/" :class="{active: type == -1, 'tabs-item': true}">-->
         <!--安全设置-->
       <!--</nuxt-link>-->
-      <!--<nuxt-link to="/" :class="{active: type == -1, 'tabs-item': true}">-->
-        <!--其他设置-->
-      <!--</nuxt-link>-->
+      <nuxt-link to="/user/setting/others" :class="{active: type == 3, 'tabs-item': true}">
+        其他设置
+      </nuxt-link>
       <nuxt-link to="/user/setting/address" :class="{active: type == 4, 'tabs-item': true}">
         收货地址管理
       </nuxt-link>
@@ -64,6 +64,9 @@ export default {
       if (/user-setting-address/.test(name)) {
         this.type = 4
       }
+      if (/user-setting-others/.test(name)) {
+        this.type = 3
+      }
     }
   },
   data () {
@@ -78,6 +81,9 @@ export default {
     }
     if (/user-setting-address/.test(name)) {
       this.type = 4
+    }
+    if (/user-setting-others/.test(name)) {
+      this.type = 3
     }
   }
 }
