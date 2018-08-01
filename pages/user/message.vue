@@ -7,8 +7,8 @@
         <h4 class="time">{{i.release_time}}</h4>
         <div class="content clearfix">
           <img :src="i.icon" alt="">
-          <span class="name">{{i.title}}</span>
-          <span class="text">{{i.content}}，订单号：{{i.orderNo}}</span>
+          <span class="name">{{i.goodsName}}</span>
+          <span class="text">{{i.title}}，订单号：{{i.orderNo}}</span>
           <nuxt-link :to="'/user/order-detail/'+i.orderNo+'/-1'" class="link">查看详情</nuxt-link>
         </div>
       </li>
@@ -79,11 +79,12 @@ export default {
 
 <style lang="stylus" scoped>
   .message-wrap
-    padding 40px
+    padding 5px
     .title
       font-size 18px
       color #333333
       padding-left 10px
+      margin-bottom 10px
       border-left 4px solid #ff7900
     .back
       font-size 18px
@@ -94,29 +95,51 @@ export default {
         font-family 'jzdc'
         font-size 18px
     .msg-list
+      margin-left 130px
+      padding-left 26px
+      padding-bottom 20px
+      border-left 5px solid #DEDEDE
       .msg-item
+        position relative
+        margin-bottom 30px
         .time
-          font-size 20px
+          width 104px
+          font-size 14px
           color #737373
           font-weight 400
-          line-height 54px
+          text-align center
+          position absolute
+          left -150px
+          &:after
+            display block
+            content ''
+            width 16px
+            height 16px
+            border-radius 50%
+            background #FF7900
+            position absolute
+            right -25px
+            top 0
         .content
           background-color #fff
           border 1px solid #ccc
-          padding 20px
+          padding 5px 10px
           display flex
           flex-flow row
           align-items center
           img
-            width 74px
-            height 60px
-            margin-right 40px
+            width 62px
+            height 50px
+            margin-right 20px
           .link
             float right
+            text-align right
             width 80px
+            font-size 14px
             color #2fbeed
           .text
             flex 1
+            font-size 14px
           .name
             width 280px
             overflow hidden

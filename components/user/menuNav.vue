@@ -1,7 +1,7 @@
 <template>
   <div class="user-menu">
     <div class="user-home">
-      <nuxt-link to="/user">
+      <nuxt-link to="/user/workbench">
         <div class="logo" v-if="user.path">
           <img :src="user.path" alt="logo">
         </div>
@@ -9,7 +9,8 @@
           <img src="~assets/img/common/default_avatar.png" alt="logo">
         </div>
         <h3>
-          {{user.username}}
+          <!--{{user.username}}-->
+          进入工作台
         </h3>
       </nuxt-link>
     </div>

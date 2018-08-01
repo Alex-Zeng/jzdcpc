@@ -24,7 +24,7 @@
             <h3>
               <span v-if="user">{{user.username}}</span>
             </h3>
-            <el-button type="primary" v-if="!!token" plain @click="$router.push('/user')">进入工作台</el-button>
+            <el-button type="primary" v-if="!!token" plain @click="$router.push('/user/workbench')">进入工作台</el-button>
             <el-button type="primary" v-else plain @click="$router.push('/auth/login')">登录/注册</el-button>
           </div>
           <div>
@@ -429,7 +429,10 @@ export default {
   data () {
     return {
       banner: [],
-      notice: {},
+      notice: {
+        release_time: '',
+        summary: ''
+      },
       total: {},
       goodsList: [],
       goodsListImg: [
