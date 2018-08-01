@@ -4,7 +4,7 @@
     <div class="detail-wrap">
       <div class="breadcrumb">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item v-for="i in path" :key="'path' + i.id"><nuxt-link :to='`/goods/search/%7B"type":0,"cateId":${i.id}%7D`'>{{i.name}}</nuxt-link></el-breadcrumb-item>
+          <el-breadcrumb-item v-for="(i, key) in path" :key="'path' + i.id"><nuxt-link :to='`/goods/search/%7B"type":0,"cateId":${i.id},${getSearchLink(path, key)}%7D`'>{{i.name}}</nuxt-link></el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <div class="preview-wrap clearfix">
@@ -15,7 +15,7 @@
           <div class="small-wrap">
             <i class="prev" @click="changeImg(false)">&#xe67d;</i>
             <div class="small-list">
-              <div class="super-wrap" :style="{'margin-left':offset+'px'}">
+              <div class="super-wrap" :style="{'margin-left':offset*80+'px'}">
                 <div :class="{'small-item': true, active: select === k}" v-for="(i, k) in detail.imgList" :key="k" @click="select=k">
                   <img :src="i.img" alt="">
                 </div>
@@ -110,6 +110,17 @@ export default {
     }
   },
   methods: {
+    getSearchLink (path, key) {
+      if (key === 0) {
+        return '"selectId":' + path[key].id
+      }
+      if (key === 1) {
+        return '"selectId":' + path[0].id + ',"childId":' + path[key].id
+      }
+      if (key === 2) {
+        return '"selectId":' + path[0].id + ',"childId":' + path[1].id + ',"scId":' + path[key].id
+      }
+    },
     chooseFunc (k, index) {
       const {params: {id}} = this.$route
       this.$set(this.choose, k, index)
@@ -155,18 +166,16 @@ export default {
       }
     },
     changeImg (isNext) {
-      console.log(this.detail.imgList.length)
       if (isNext) {
-        if ((this.offset) <= 0) {
-          this.offset = 0
-        } else {
-          this.offset -= 80
+        if (this.offset * -1 < (this.detail.imgList.length - 4)) {
+          this.offset -= 1
         }
+        console.log(this.offset)
       } else {
-        if (((this.offset + 320) - this.detail.imgList.length * 80) >= 80) {
+        if (this.offset >= 0) {
           return
         }
-        this.offset += 80
+        this.offset += 1
       }
     },
     addToCart () {

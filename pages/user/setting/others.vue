@@ -29,6 +29,7 @@
 <script>
 import Upload2 from 'vue-image-crop-upload'
 import api from '../../../api/apiSetting'
+import Cookies from 'js-cookie'
 export default {
   name: 'others',
   components: {Upload2},
@@ -62,6 +63,8 @@ export default {
               type: 'success',
               message: msg
             })
+            const all = JSON.parse(Cookies.get('_user'))
+            Cookies.set('_user', JSON.stringify({...all, ...this.settingForm, path: this.preview}))
           } else {
             this.$message.error(msg)
           }

@@ -111,10 +111,10 @@ export default {
   },
   watch: {
     '$route': async function () {
-      const {params: {all}} = this.$route
-      let json = JSON.parse(all)
-      this.all = json
       setTimeout(() => {
+        const {params: {all}} = this.$route
+        let json = JSON.parse(all)
+        this.all = json
         if (json.selectId) {
           this.selectId = json.selectId
         }
@@ -126,9 +126,6 @@ export default {
               this.child = i.child
             }
           })
-        } else {
-          this.childId = -1
-          this.child = []
         }
         if (json.scId) {
           const list = this.child
@@ -138,17 +135,14 @@ export default {
             }
           })
           this.scId = json.scId
-        } else {
-          this.scId = -1
-          this.superChild = []
         }
+        this.search()
       }, 100)
-      this.search()
     },
     'categoryList': function () {
-      const {params: {all}} = this.$route
-      let json = JSON.parse(all)
       setTimeout(() => {
+        const {params: {all}} = this.$route
+        let json = JSON.parse(all)
         if (json.selectId) {
           this.selectId = json.selectId
         }
@@ -160,9 +154,6 @@ export default {
               this.child = i.child
             }
           })
-        } else {
-          this.childId = -1
-          this.child = []
         }
         if (json.scId) {
           const list = this.child
@@ -172,9 +163,6 @@ export default {
             }
           })
           this.scId = json.scId
-        } else {
-          this.scId = -1
-          this.superChild = []
         }
       }, 100)
     }
