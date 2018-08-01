@@ -288,7 +288,7 @@ body{
   background red
   margin-bottom 20px
   position absolute
-  padding 30px
+  padding 30px 20px
   box-sizing border-box
   left 0
   top 0
@@ -300,12 +300,12 @@ body{
   text-align center
 }
 .floor-nav .el-button{
-  width 80px
+  width 96px
   height 32px
   line-height 32px
   text-align center
   padding 0
-  margin 10px
+  margin 8px
   color #f7f7f7
   border 1px solid #f7f7f7
   border-radius 5px
