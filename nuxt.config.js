@@ -23,7 +23,8 @@ module.exports = {
   ** 增加element-ui，详见plugins/element-ui.js
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/ava'
   ],
   /*
   ** Headers of the page
@@ -88,7 +89,7 @@ module.exports = {
   },
   proxy: {
     '/papi': {
-      target: 'http://dev.jizhongdiancai.com/api',
+      target: 'http://192.168.3.135/api',
       pathRewrite: { '^/papi': '' }
     }
   }

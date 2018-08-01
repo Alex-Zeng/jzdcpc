@@ -24,6 +24,11 @@
           </div>
         </div>
         <div class="route-list">
+          <div :class="{item: true, 'active': /\/user\/setting\/others/.test(path)}">
+            <nuxt-link to="/user/setting/others">其它设置</nuxt-link>
+          </div>
+        </div>
+        <div class="route-list">
           <div :class="{item: true, 'active': /\/user\/setting\/address/.test(path)}">
             <nuxt-link to="/user/setting/address">收货地址管理</nuxt-link>
           </div>
