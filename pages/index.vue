@@ -315,28 +315,28 @@ body{
   color #2475E2
   background #f7f7f7
 }
-.floor-nav:nth-child(1){
+.main-floor:nth-child(1) .floor-nav{
   background linear-gradient(#9DB9FC, #7E9FF2)
 }
-.floor-nav:nth-child(2){
+.main-floor:nth-child(2) .floor-nav{
   background linear-gradient(#9DC6FC, #7EB0F2)
 }
-.floor-nav:nth-child(3){
+.main-floor:nth-child(3) .floor-nav{
   background linear-gradient(#6ABFD9, #46ACCB)
 }
-.floor-nav:nth-child(4){
+.main-floor:nth-child(4) .floor-nav{
   background linear-gradient(#9D9DFC, #7E7EF2)
 }
-.floor-nav:nth-child(5){
+.main-floor:nth-child(5) .floor-nav{
   background linear-gradient(#9DB5FC, #7E9BF2)
 }
-.floor-nav:nth-child(6){
+.main-floor:nth-child(6) .floor-nav{
   background linear-gradient(#6DC9DA, #43B7CE)
 }
-.floor-nav:nth-child(7){
+.main-floor:nth-child(7) .floor-nav{
   background linear-gradient(#52D9C2, #2ED4B8)
 }
-.floor-nav:nth-child(8){
+.main-floor:nth-child(8) .floor-nav{
   background linear-gradient(#E3C471, #DDB447)
 }
 .floor-nav img{

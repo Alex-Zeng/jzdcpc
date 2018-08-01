@@ -15,8 +15,8 @@
         <tbody>
         <tr v-for="item in list" @click="$router.replace('/notice/notice-detail/'+ item.id)" :key="item.id">
           <td style="width: 200px;padding-left: 1em;">{{item.release_time}}</td>
-          <td>{{item.title}}</td>
-          <td>{{item.summary}}</td>
+          <td><div style="width: 287px">{{item.title}}</div></td>
+          <td><div style="width: 770px">{{item.summary}}</div></td>
         </tr>
         </tbody>
       </table>
@@ -120,4 +120,9 @@ export default {
         background #ffffff
       th
         text-align left
+      td
+        div
+          overflow hidden
+          text-overflow ellipsis
+          white-space nowrap
 </style>
