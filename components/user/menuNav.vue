@@ -30,6 +30,11 @@
           </div>
         </div>
         <div class="route-list">
+          <div :class="{item: true, 'active': /\/user\/setting\/safe/.test(path)}">
+            <nuxt-link to="/user/setting/safe">安全设置</nuxt-link>
+          </div>
+        </div>
+        <div class="route-list">
           <div :class="{item: true, 'active': /\/user\/setting\/address/.test(path)}">
             <nuxt-link to="/user/setting/address">收货地址管理</nuxt-link>
           </div>

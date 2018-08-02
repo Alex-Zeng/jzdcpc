@@ -13,7 +13,6 @@
           <el-input
             v-model="phoneForm.phone"
             placeholder="请输入手机号"
-            type="password"
           >
           </el-input>
         </el-form-item>

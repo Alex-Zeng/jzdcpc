@@ -46,6 +46,7 @@
       background-color #fff
       padding-bottom 20px
       border-radius 10px
+      min-height 600px
       .list
         width 1096px
         margin-left 0px

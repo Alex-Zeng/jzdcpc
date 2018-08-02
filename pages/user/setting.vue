@@ -4,9 +4,9 @@
       <nuxt-link to="/user/setting/cert" :class="{active: type == 1, 'tabs-item': true}">
         企业信息变更
       </nuxt-link>
-      <!--<nuxt-link to="/" :class="{active: type == -1, 'tabs-item': true}">-->
-        <!--安全设置-->
-      <!--</nuxt-link>-->
+      <nuxt-link to="/user/setting/safe" :class="{active: type == 2, 'tabs-item': true}">
+        安全设置
+      </nuxt-link>
       <nuxt-link to="/user/setting/others" :class="{active: type == 3, 'tabs-item': true}">
         其他设置
       </nuxt-link>
@@ -17,7 +17,47 @@
     <nuxt-child></nuxt-child>
   </div>
 </template>
-
+<script>
+export default {
+  watch: {
+    '$route': function () {
+      const {name} = this.$route
+      if (/user-setting-cert/.test(name)) {
+        this.type = 1
+      }
+      if (/user-setting-address/.test(name)) {
+        this.type = 4
+      }
+      if (/user-setting-others/.test(name)) {
+        this.type = 3
+      }
+      if (/user-setting-safe/.test(name)) {
+        this.type = 2
+      }
+    }
+  },
+  data () {
+    return {
+      type: ''
+    }
+  },
+  mounted () {
+    const {name} = this.$route
+    if (/user-setting-cert/.test(name)) {
+      this.type = 1
+    }
+    if (/user-setting-address/.test(name)) {
+      this.type = 4
+    }
+    if (/user-setting-others/.test(name)) {
+      this.type = 3
+    }
+    if (/user-setting-safe/.test(name)) {
+      this.type = 2
+    }
+  }
+}
+</script>
 <style lang="stylus">
   .setting-wrap
     padding 40px
@@ -53,38 +93,3 @@
         &:first-child
           border-left 1px solid #dedede
 </style>
-<script>
-export default {
-  watch: {
-    '$route': function () {
-      const {name} = this.$route
-      if (/user-setting-cert/.test(name)) {
-        this.type = 1
-      }
-      if (/user-setting-address/.test(name)) {
-        this.type = 4
-      }
-      if (/user-setting-others/.test(name)) {
-        this.type = 3
-      }
-    }
-  },
-  data () {
-    return {
-      type: ''
-    }
-  },
-  mounted () {
-    const {name} = this.$route
-    if (/user-setting-cert/.test(name)) {
-      this.type = 1
-    }
-    if (/user-setting-address/.test(name)) {
-      this.type = 4
-    }
-    if (/user-setting-others/.test(name)) {
-      this.type = 3
-    }
-  }
-}
-</script>
