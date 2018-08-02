@@ -254,7 +254,7 @@ export default {
         this.$store.dispatch('orderService', {fileds: {no, goodsId, type},
           cb: (data) => {
             const {status, msg} = data
-            if (status === 0) {
+            if (status == 0) {
               this.$message({
                 type: 'success',
                 message: msg
@@ -317,7 +317,7 @@ export default {
           result = '逾期中'
           break
         case 11:
-          result = (group === 4 ? '交易完成' : '待结算')
+          result = (group == 4 ? '交易完成' : '待结算')
           break
         case 13:
           result = '交易完成'
@@ -353,7 +353,7 @@ export default {
         this.$store.dispatch('doDelivery', {fileds: {...this.expressForm, no},
           cb: (data) => {
             const {status, msg} = data
-            if (status === 0) {
+            if (status == 0) {
               const loading = this.$loading({
                 lock: true,
                 text: '加载中...',

@@ -122,7 +122,7 @@ export default {
           this.childId = json.childId
           const list = this.categoryList
           list.forEach((i) => {
-            if (parseInt(i.id) === parseInt(json.selectId)) {
+            if (parseInt(i.id) == parseInt(json.selectId)) {
               this.child = i.child
             }
           })
@@ -130,7 +130,7 @@ export default {
         if (json.scId) {
           const list = this.child
           list.forEach((i) => {
-            if (parseInt(i.id) === parseInt(json.childId)) {
+            if (parseInt(i.id) == parseInt(json.childId)) {
               this.superChild = i.child
             }
           })
@@ -150,7 +150,7 @@ export default {
           this.childId = json.childId
           const list = this.categoryList
           list.forEach((i) => {
-            if (parseInt(i.id) === parseInt(json.selectId)) {
+            if (parseInt(i.id) == parseInt(json.selectId)) {
               this.child = i.child
             }
           })
@@ -158,7 +158,7 @@ export default {
         if (json.scId) {
           const list = this.child
           list.forEach((i) => {
-            if (parseInt(i.id) === parseInt(json.childId)) {
+            if (parseInt(i.id) == parseInt(json.childId)) {
               this.superChild = i.child
             }
           })

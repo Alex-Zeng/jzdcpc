@@ -16,7 +16,7 @@
             <i class="prev" @click="changeImg(false)">&#xe67d;</i>
             <div class="small-list">
               <div class="super-wrap" :style="{'margin-left':offset*80+'px'}">
-                <div :class="{'small-item': true, active: select === k}" v-for="(i, k) in detail.imgList" :key="k" @click="select=k">
+                <div :class="{'small-item': true, active: select == k}" v-for="(i, k) in detail.imgList" :key="k" @click="select=k">
                   <img :src="i.img" alt="">
                 </div>
               </div>
@@ -44,11 +44,11 @@
           </div>
           <div class="info-item type clearfix" v-for="(i, k) in detail.standard" :key="i.id">
             <span class="name" style="float: left;">{{i.title}}：</span>
-            <div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;" v-if="k===0">
-              <el-button style="margin-top: 10px;" :type="choose[k] === item.color_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.color_id)">{{item.color_name}}</el-button>
+            <div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;" v-if="k==0">
+              <el-button style="margin-top: 10px;" :type="choose[k] == item.color_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.color_id)">{{item.color_name}}</el-button>
             </div>
-            <div style="float: left; width: 768px;margin-left: -10px;" v-if="k===1">
-              <el-button style="margin-top: 10px;" :type="choose[k] === item.option_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.option_id)">{{item.option_name}}</el-button>
+            <div style="float: left; width: 768px;margin-left: -10px;" v-if="k==1">
+              <el-button style="margin-top: 10px;" :type="choose[k] == item.option_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.option_id)">{{item.option_name}}</el-button>
             </div>
           </div>
           <div class="label" style="margin-bottom: 20px;" v-if="spec.no && spec.name" v-loading="specLoading">
@@ -111,13 +111,13 @@ export default {
   },
   methods: {
     getSearchLink (path, key) {
-      if (key === 0) {
+      if (key == 0) {
         return '"selectId":' + path[key].id
       }
-      if (key === 1) {
+      if (key == 1) {
         return '"selectId":' + path[0].id + ',"childId":' + path[key].id
       }
-      if (key === 2) {
+      if (key == 2) {
         return '"selectId":' + path[0].id + ',"childId":' + path[1].id + ',"scId":' + path[key].id
       }
     },
@@ -127,8 +127,8 @@ export default {
       const colorId = this.choose[0]
       const optionId = this.choose[1]
       this.detail.standardPrice.forEach((i) => {
-        if (colorId === i.color_id) {
-          if (optionId === i.option_id) {
+        if (colorId == i.color_id) {
+          if (optionId == i.option_id) {
             this.stdPrice = i.price
           }
         }
@@ -186,7 +186,7 @@ export default {
       try {
         apiMallCart.add((data) => {
           const {msg, status} = data
-          if (status === 0) {
+          if (status == 0) {
             this.$message(
               {
                 type: 'success',
@@ -194,7 +194,7 @@ export default {
               }
             )
           } else {
-            if (msg === '没有权限操作') {
+            if (msg == '没有权限操作') {
               this.$message.error('请先进行企业认证')
               this.$router.push('/user/setting/cert')
             } else {

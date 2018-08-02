@@ -58,7 +58,7 @@ export default {
       try {
         api.set((data) => {
           const {status, msg} = data
-          if (parseInt(status) === 0) {
+          if (parseInt(status) == 0) {
             this.$message({
               type: 'success',
               message: msg

@@ -74,7 +74,7 @@ export default {
   mounted () {
     apiCaptcha.img((data) => {
       const {src, id} = data
-      this.phoneForm = {...(this.phoneForm ), id}
+      this.phoneForm = {...(this.phoneForm), id}
       this.imgSrc = src
       this.imgSrcrand = src
     }, (msg) => {

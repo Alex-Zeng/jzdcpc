@@ -44,7 +44,7 @@
           <el-checkbox style="margin-left: 8px;" v-model="form.is_default">设为默认</el-checkbox>
         </el-form-item>
         <el-form-item label="设置标签" label-width="80px">
-          <el-tag v-for="i in tags" :key="i.id" :class="{select: form.tag===i.tag}" closable @click.native="setTag(i.tag)" @close="tagClose(i.id)">{{i.tag}}</el-tag>
+          <el-tag v-for="i in tags" :key="i.id" :class="{select: form.tag==i.tag}" closable @click.native="setTag(i.tag)" @close="tagClose(i.id)">{{i.tag}}</el-tag>
           <el-input
             class="input-new-tag"
             v-if="inputVisible"
@@ -223,7 +223,7 @@ export default {
             {id},
             (data) => {
               const {status, msg} = data
-              if (status === 0) {
+              if (status == 0) {
                 this.$message(
                   {
                     type: 'success',
@@ -281,7 +281,7 @@ export default {
           {id},
           (data) => {
             const {status, msg} = data
-            if (status === 0) {
+            if (status == 0) {
               this.$message(
                 {
                   type: 'success',

@@ -51,7 +51,7 @@ export default {
       } else {
         this.agent = '0'
       }
-      if (role === '采购商') {
+      if (role == '采购商') {
         this.type = '1'
       } else {
         this.type = '2'

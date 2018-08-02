@@ -2,7 +2,7 @@
   <div class="login-box">
     <div
       class="login-form"
-      v-show="step === 1"
+      v-show="step == 1"
       element-loading-text="验证中..."
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
@@ -46,7 +46,7 @@
     <!-- 第二步 -->
     <div
       class="login-form"
-      v-show="step === 2"
+      v-show="step == 2"
       style="height:440px;"
       element-loading-text="登录中..."
       element-loading-spinner="el-icon-loading"
@@ -78,7 +78,7 @@
     <!-- 第三步 -->
     <div
       class="login-form"
-      v-show="step === 3"
+      v-show="step == 3"
       style="padding-top: 40px; height: 450px;"
       element-loading-text="提交中..."
       element-loading-spinner="el-icon-loading"
@@ -196,10 +196,10 @@ export default {
                   message: msg,
                   type: 'success'
                 })
-                if (this.step === 3) {
+                if (this.step == 3) {
                   this.$router.replace('/')
-                } else if (this.step === 2) {
-                  if (status === -3) {
+                } else if (this.step == 2) {
+                  if (status == -3) {
                     this.step = this.step + 1
                   } else {
                     this.$router.replace('/')
