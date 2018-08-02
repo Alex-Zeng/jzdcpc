@@ -369,6 +369,9 @@ export default {
     },
     handleClickRow (index) {
       console.log(index)
+      this.$router.push('/user/order-detail/' + index.orderNo)
+      // @click="$router.push('/user/order-detail/'+order.out_id+'/'+type)"
+      // this.$router.push('/user/order-detail/'+order.out_id+'/'+type)
     }
   },
   created () {
@@ -382,6 +385,8 @@ export default {
       this.getSupplierOrderInfo()
     }
     this.getDeskList(1)
+  },
+  mounted () {
   },
   computed: {
     user () {
