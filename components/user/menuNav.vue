@@ -1,7 +1,7 @@
 <template>
   <div class="user-menu">
     <div class="user-home">
-      <nuxt-link to="/user">
+      <nuxt-link to="/user/workbench">
         <div class="logo" v-if="user.path">
           <img :src="user.path" alt="logo">
         </div>
@@ -9,7 +9,8 @@
           <img src="~assets/img/common/default_avatar.png" alt="logo">
         </div>
         <h3>
-          {{user.username}}
+          <!--{{user.username}}-->
+          进入工作台
         </h3>
       </nuxt-link>
     </div>
@@ -21,6 +22,16 @@
         <div class="route-list">
           <div :class="{item: true, 'active': /\/user\/setting\/cert/.test(path)}">
             <nuxt-link to="/user/setting/cert">企业认证</nuxt-link>
+          </div>
+        </div>
+        <div class="route-list">
+          <div :class="{item: true, 'active': /\/user\/setting\/others/.test(path)}">
+            <nuxt-link to="/user/setting/others">其它设置</nuxt-link>
+          </div>
+        </div>
+        <div class="route-list">
+          <div :class="{item: true, 'active': /\/user\/setting\/safe/.test(path)}">
+            <nuxt-link to="/user/setting/safe">安全设置</nuxt-link>
           </div>
         </div>
         <div class="route-list">

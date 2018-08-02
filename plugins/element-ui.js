@@ -31,7 +31,11 @@ import {
   CarouselItem,
   Breadcrumb,
   BreadcrumbItem,
-  InputNumber
+  InputNumber,
+  Table,
+  TableColumn,
+  Tabs,
+  TabPane
 } from 'element-ui'
 import '../theme/button.css'
 import '../theme/radio-button.css'
@@ -62,6 +66,10 @@ import '../theme/carousel-item.css'
 import '../theme/breadcrumb.css'
 import '../theme/breadcrumb-item.css'
 import '../theme/input-number.css'
+import '../theme/table.css'
+import '../theme/table-column.css'
+import '../theme/tabs.css'
+import '../theme/tab-pane.css'
 
 export default () => {
   Vue.use(Button)
@@ -90,6 +98,10 @@ export default () => {
   Vue.use(Breadcrumb)
   Vue.use(BreadcrumbItem)
   Vue.use(InputNumber)
+  Vue.use(Table)
+  Vue.use(TableColumn)
+  Vue.use(Tabs)
+  Vue.use(TabPane)
   Vue.prototype.$loading = Loading.service
   Vue.prototype.$message = Message
   Vue.prototype.$confirm = MessageBox.confirm

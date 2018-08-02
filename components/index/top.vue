@@ -15,7 +15,7 @@
           <li class="item" v-show="token">
             <span class="name" @click="logout">退出</span>
           </li>
-          <nuxt-link to="/user" tag="li" class="item" v-show="token">
+          <nuxt-link to="/user/workbench" tag="li" class="item" v-show="token">
             <span class="name">进入工作台</span>
           </nuxt-link>
           <a href="/app-down/index.html" target="_blank" class="item">

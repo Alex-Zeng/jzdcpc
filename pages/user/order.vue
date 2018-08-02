@@ -54,7 +54,7 @@
             <div class="item order-info"><span>订单号：{{order.out_id}}</span></div>
             <div class="item source">{{order.companyName || '无'}}</div>
             <div class="item addr">{{order.receiver_name}}</div>
-            <div class="item status">{{order.service_type === 1? '售后处理中': order.service_type === 2 && type === 6? '售后完成': getStateTitle(order.state, order.groupId)}}</div>
+            <div class="item status">{{order.service_type == 1? '售后处理中': order.service_type == 2 && type == 6? '售后完成': getStateTitle(parseInt(order.state), parseInt(order.groupId))}}</div>
             <div class="item action"><span>总额：</span>¥{{order.money}}</div>
           </div>
         <div class="lists">
@@ -185,7 +185,7 @@ export default {
     getList (page) {
       const {params: {type, search}} = this.$route
       this.type = type
-      let others = {}
+      let others = JSON.stringify({})
       search && (others = search)
       this.$router.push(`/user/order/${type}/${page}/${others}`)
     },

@@ -26,7 +26,7 @@
           <span class="label">订单金额：{{detail.money}}元</span>
         </div>
         <div class="item">
-          <span class="label">订单状态：{{detail.serviceType == 1? '售后处理中': detail.serviceType == 2 && type == 6? '售后完成': getState(detail.state, detail.groupId)}}</span>
+          <span class="label">订单状态：{{detail.serviceType == 1? '售后处理中': detail.serviceType == 2 && type == 6? '售后完成': getState(parseInt(detail.state), parseInt(detail.groupId))}}</span>
         </div>
       </div>
       <div class="right">

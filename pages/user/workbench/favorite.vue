@@ -1,5 +1,5 @@
 <template>
-  <div class="favorite-wrap">
+  <div class="favorite-wrap">asdasdas
     <div class="title">收藏夹</div>
     <div class="favorite-tabs clearfix">
         <nuxt-link v-for="i in favoriteType" v-bind:to="`/user/workbench/favorite/${i.typeId}/1`" :class="{active: type == i.typeId, 'tabs-item': true}" :key="i.typeId">
@@ -46,6 +46,7 @@
       background-color #fff
       padding-bottom 20px
       border-radius 10px
+      min-height 600px
       .list
         width 1096px
         margin-left 0px

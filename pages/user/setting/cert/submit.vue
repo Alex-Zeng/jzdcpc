@@ -1,8 +1,5 @@
 <template>
   <div class="submit-wrap">
-    <div class="preview" v-show="preview" @click="preview=false">
-      <img src="~assets/img/common/template.png" alt="">
-    </div>
     <div v-show="form.status !== 0" class="cert-status">
       <div v-show="form.status === '1'">
         工作人员努力审核中，请耐心等待
@@ -47,7 +44,7 @@
       </el-form>
     </div>
     <div class="title">证件影像资料上传<span>（仅限JPG/JEPG/BMP/PNG等格式，单张8M以内）</span></div>
-    <div class="label"><span>*</span>必传资料：<span style="color:#2475e2;cursor:pointer;" to="/template.png" @click="preview=true">(点击查看委托授权书模板)</span></div>
+    <div class="label"><span>*</span>必传资料：<a style="color:#2475e2;cursor:pointer;" href="/template/授权委托书模板.docx" target="_blank">(点击查看委托授权书模板)</a></div>
     <div class="imgBox clearfix">
       <div class="item">
         <uploadImg id="1" v-model="form.business" :defaultPath="form.businessPath" title="工商营业执照"></uploadImg>
@@ -91,7 +88,6 @@ export default {
   },
   data () {
     return {
-      preview: false,
       form: {
         type: 1,
         agent: 1,

@@ -24,7 +24,7 @@
             <h3>
               <span v-if="user">{{user.username}}</span>
             </h3>
-            <el-button type="primary" v-if="!!token" plain @click="$router.push('/user')">进入工作台</el-button>
+            <el-button type="primary" v-if="!!token" plain @click="$router.push('/user/workbench')">进入工作台</el-button>
             <el-button type="primary" v-else plain @click="$router.push('/auth/login')">登录/注册</el-button>
           </div>
           <div>
@@ -288,7 +288,7 @@ body{
   background red
   margin-bottom 20px
   position absolute
-  padding 30px
+  padding 30px 20px
   box-sizing border-box
   left 0
   top 0
@@ -300,12 +300,12 @@ body{
   text-align center
 }
 .floor-nav .el-button{
-  width 80px
+  width 96px
   height 32px
   line-height 32px
   text-align center
   padding 0
-  margin 10px
+  margin 8px
   color #f7f7f7
   border 1px solid #f7f7f7
   border-radius 5px
@@ -315,28 +315,28 @@ body{
   color #2475E2
   background #f7f7f7
 }
-.floor-nav:nth-child(1){
+.main-floor:nth-child(1) .floor-nav{
   background linear-gradient(#9DB9FC, #7E9FF2)
 }
-.floor-nav:nth-child(2){
+.main-floor:nth-child(2) .floor-nav{
   background linear-gradient(#9DC6FC, #7EB0F2)
 }
-.floor-nav:nth-child(3){
+.main-floor:nth-child(3) .floor-nav{
   background linear-gradient(#6ABFD9, #46ACCB)
 }
-.floor-nav:nth-child(4){
+.main-floor:nth-child(4) .floor-nav{
   background linear-gradient(#9D9DFC, #7E7EF2)
 }
-.floor-nav:nth-child(5){
+.main-floor:nth-child(5) .floor-nav{
   background linear-gradient(#9DB5FC, #7E9BF2)
 }
-.floor-nav:nth-child(6){
+.main-floor:nth-child(6) .floor-nav{
   background linear-gradient(#6DC9DA, #43B7CE)
 }
-.floor-nav:nth-child(7){
+.main-floor:nth-child(7) .floor-nav{
   background linear-gradient(#52D9C2, #2ED4B8)
 }
-.floor-nav:nth-child(8){
+.main-floor:nth-child(8) .floor-nav{
   background linear-gradient(#E3C471, #DDB447)
 }
 .floor-nav img{
@@ -429,7 +429,10 @@ export default {
   data () {
     return {
       banner: [],
-      notice: {},
+      notice: {
+        release_time: '',
+        summary: ''
+      },
       total: {},
       goodsList: [],
       goodsListImg: [

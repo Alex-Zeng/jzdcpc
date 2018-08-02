@@ -55,7 +55,7 @@
       height 24px
       // background-color #fff
       background-repeat no-repeat
-      background-image url("~assets/img/user/small-logo.png")
+      background-image url("~assets/img/user/workbench-logo@2x.png")
       background-position left center
       float left
       margin-right 20px
