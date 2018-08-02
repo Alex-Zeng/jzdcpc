@@ -9,7 +9,7 @@
       </div>
       <div class="address-wrap">
         <div :class="{'addr-list':true, 'clearfix': true, all: addressAll}">
-          <div :class="{'addr-item': true, 'select': i.id === select}" v-for="i in addressList" :key="i.id" @click="select = i.id">
+          <div :class="{'addr-item': true, 'select': i.id == select}" v-for="i in addressList" :key="i.id" @click="select = i.id">
             <div class="addr-header">
               {{i.areaName}} <el-tag v-show="i.tag">{{i.tag}}</el-tag>
               <span class="name">{{i.name}}</span>
@@ -19,7 +19,7 @@
               <div class="detail">详细地址：{{i.detail}}</div>
             </div>
             <div class="addr-footer clearfix">
-              <el-radio :label="i.id" v-model="defaultAddr" v-if="defaultAddr === i.id" style="float: left;">默认地址</el-radio>
+              <el-radio :label="i.id" v-model="defaultAddr" v-if="defaultAddr == i.id" style="float: left;">默认地址</el-radio>
               <div class="action">
                 <i style="margin-right: 8px;" @click="editOpen(i, true)">&#xe601;</i>
                 <i @click="remove(i.id)">&#xe61d;</i>

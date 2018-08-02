@@ -355,9 +355,9 @@ export default {
     async getDeskList (index) {
       await apiWorkbench.getDeskList({type: index}, (data) => {
         const {data: {list}} = data
-        if (index === 1) {
+        if (index == 1) {
           this.tableData1 = list
-        } else if (index === 2) {
+        } else if (index == 2) {
           this.tableData2 = list
         } else {
           this.tableData3 = list
@@ -378,10 +378,10 @@ export default {
     this.getNotice()
     this.getTotal()
     this.messageList()
-    if (parseInt(this.user.group) === 4) {
+    if (parseInt(this.user.group) == 4) {
       this.getBuyerOrderInfo()
     }
-    if (parseInt(this.user.group) === 5) {
+    if (parseInt(this.user.group) == 5) {
       this.getSupplierOrderInfo()
     }
     this.getDeskList(1)

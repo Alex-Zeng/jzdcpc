@@ -2,7 +2,7 @@
   <div class="forget-box">
     <div
       class="forget-form"
-      v-show="step === 1"
+      v-show="step == 1"
       element-loading-text="验证中..."
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
@@ -26,7 +26,7 @@
     <!-- 第二步 -->
     <div
       class="forget-form"
-      v-show="step === 2"
+      v-show="step == 2"
       element-loading-text="提交中..."
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"

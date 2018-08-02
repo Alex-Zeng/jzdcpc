@@ -1,13 +1,13 @@
 <template>
   <div class="submit-wrap">
     <div v-show="form.status !== 0" class="cert-status">
-      <div v-show="form.status === '1'">
+      <div v-show="form.status == '1'">
         工作人员努力审核中，请耐心等待
       </div>
-      <div v-show="form.status === '2'">
+      <div v-show="form.status == '2'">
         您的企业认证已经通过审核
       </div>
-      <div v-show="form.status === '3'">
+      <div v-show="form.status == '3'">
         您的企业认证已被拒绝，拒绝原因：{{this.form.refuseReason}}
       </div>
     </div>
@@ -151,7 +151,7 @@ export default {
             this.$message.error('请上传法人身份证!')
             return ''
           }
-          if (this.form.agent === 1 || this.form.agent === '1') {
+          if (this.form.agent == 1 || this.form.agent == '1') {
             if (!(this.form.attorney)) {
               this.$message.error('请上传代办人委托书!')
               return ''
