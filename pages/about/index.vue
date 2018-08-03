@@ -98,9 +98,14 @@ export default {
     myGeo.getPoint("昌岗中路166号佳都商务中心5楼505-506号", function(point){
       if (point) {
         map.centerAndZoom(point, 16);
-        map.addOverlay(new BMap.Marker(point));
+        // map.addOverlay(new BMap.Marker(point));
+        let marker = new BMap.Marker(point);  // 创建标注
+        map.addOverlay(marker);               // 将标注添加到地图中
+        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
       }
     }, "广州市")
+    map.enableScrollWheelZoom(true);
+
   }
 }
 
