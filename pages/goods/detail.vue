@@ -232,6 +232,8 @@ export default {
       background-color #2475e2
       color #ffffff
       border-radius 0 2px 2px 0
+      &:hover
+        background rgb(80, 145, 232)
     .el-input__inner
       border 1px solid #2475e2
     .info-item.type

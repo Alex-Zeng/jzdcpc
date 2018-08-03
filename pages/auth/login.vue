@@ -51,6 +51,7 @@
       element-loading-text="登录中..."
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
+      element-loading-lock="true"
       v-loading="loading"
     >
       <div class="title">
@@ -83,6 +84,7 @@
       element-loading-text="提交中..."
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
+      element-loading-lock="true"
       v-loading="loading"
     >
       <div class="title">
