@@ -52,33 +52,31 @@
         </div>
       </div>
     </div>
-    <h3 class="title">联系我们</h3>
-    <div>
-      <div class="content" style="display: flex">
-        <ul>
-          <li>
-            商务合作&咨询（工作日09:00~18:00）
-          </li>
-          <li>
-            <img src="@/assets/img/about/qq.png" alt="">
-            3510294139
-          </li>
-          <li>
-            <img src="@/assets/img/about/phone.png" alt="">
-            18024595469
-          </li>
-          <li>
-            <img src="@/assets/img/about/email.png" alt="">
-            zhaoshang@jizhongdiancai.com
-          </li>
-          <li>
-            <img src="@/assets/img/about/address.png" alt="">
-            广东省广州市海珠区昌岗中路166号佳都商贸中心505-506
-          </li>
-        </ul>
-        <div class="baidu-map" id="allmap">
-          百度地图
-        </div>
+    <h3 class="title white-bg">联系我们</h3>
+    <div class="content" style="display: flex;padding-top: 30px;">
+      <ul>
+        <li>
+          商务合作&咨询（工作日09:00~18:00）
+        </li>
+        <li>
+          <img src="@/assets/img/about/qq.png" alt="">
+          3510294139
+        </li>
+        <li>
+          <img src="@/assets/img/about/phone.png" alt="">
+          18024595469
+        </li>
+        <li>
+          <img src="@/assets/img/about/email.png" alt="">
+          zhaoshang@jizhongdiancai.com
+        </li>
+        <li>
+          <img src="@/assets/img/about/address.png" alt="">
+          广东省广州市海珠区昌岗中路166号佳都商贸中心505-506
+        </li>
+      </ul>
+      <div class="baidu-map" id="allmap">
+        百度地图
       </div>
     </div>
   </div>
@@ -145,7 +143,7 @@ export default {
           vertical-align middle
     .baidu-map
       width 500px
-      height 200px
+      height 230px
   .partner
     padding 35px
     border 1px solid #DBDBDB
