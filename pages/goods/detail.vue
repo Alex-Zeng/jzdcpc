@@ -47,7 +47,7 @@
             <div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;" v-if="k==0">
               <el-button style="margin-top: 10px;" :type="choose[k] == item.color_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.color_id)">{{item.color_name}}</el-button>
             </div>
-            <div style="float: left; width: 768px;margin-left: -10px;" v-if="k==1">
+            <div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;" v-if="k==1">
               <el-button style="margin-top: 10px;" :type="choose[k] == item.option_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.option_id)">{{item.option_name}}</el-button>
             </div>
           </div>

@@ -86,16 +86,21 @@
 <script>
 export default {
   name: 'index',
-  data () {
-    return {
-      ak: 'ii1u2roseIqwzATpCIiVdkKUH4gWRtmx' // 百度api密钥
-    }
-  },
   methods: {
   },
   created () {
   },
   mounted () {
+    /* eslint-disable */
+    let map = new BMap.Map("allmap")
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11)
+    let myGeo = new BMap.Geocoder()
+    myGeo.getPoint("昌岗中路166号佳都商务中心5楼505-506号", function(point){
+      if (point) {
+        map.centerAndZoom(point, 16);
+        map.addOverlay(new BMap.Marker(point));
+      }
+    }, "广州市")
   }
 }
 
@@ -133,6 +138,9 @@ export default {
         padding-bottom 27px
         img
           vertical-align middle
+    .baidu-map
+      width 500px
+      height 200px
   .partner
     padding 35px
     border 1px solid #DBDBDB
