@@ -9,6 +9,7 @@ module.exports = {
   */
   router: {
     middleware: 'checkAuth'
+    // mode: 'hash'
   },
 
   /*
