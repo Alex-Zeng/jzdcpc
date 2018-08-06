@@ -11,7 +11,8 @@
         <p>
           <a class="link" href="/service/index.html">集众金融</a>
           <a class="link" href="/service/index.html">集众服务</a>
-          <!--<a class="link" href="">关于我们</a>-->
+          <!--<a class="link" href="" target="_blank">关于我们</a>-->
+          <nuxt-link to="/about" class="item" target="_blank">关于我们</nuxt-link>
         </p>
         <p>copyright © 2018 津晶科技 版权所有&emsp;&emsp;粤ICP备18037422号</p>
         <p>

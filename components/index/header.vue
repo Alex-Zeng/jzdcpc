@@ -47,6 +47,7 @@
           <a href="/" class="item">首页</a>
           <a href="/service/index.html" class="item" target="_blank">集众金融</a>
           <a class="item" href="/service/index.html" target="_blank">集众服务</a>
+          <nuxt-link to="/about" class="item" target="_blank">关于我们</nuxt-link>
         </ul>
       </div>
     </div>
