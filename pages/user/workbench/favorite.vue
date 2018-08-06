@@ -1,5 +1,5 @@
 <template>
-  <div class="favorite-wrap">asdasdas
+  <div class="favorite-wrap">
     <div class="title">收藏夹</div>
     <div class="favorite-tabs clearfix">
         <nuxt-link v-for="i in favoriteType" v-bind:to="`/user/workbench/favorite/${i.typeId}/1`" :class="{active: type == i.typeId, 'tabs-item': true}" :key="i.typeId">

@@ -268,6 +268,7 @@ export default {
                 background: 'rgba(0, 0, 0, 0.7)'
               })
               this.$store.dispatch('getOrderDetail', {fileds: {no}, cb: () => { loading.close() }})
+              this.dialogFormVisible = false
             } else {
               this.$message.error(msg)
             }

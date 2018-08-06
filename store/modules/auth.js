@@ -27,8 +27,8 @@ const actions = {
     apiAuth.loginIndex(data => {
       successCb('登录成功')
       const {token} = data
-      Cookie.set('_token', token)
-      Cookie.set('_user', JSON.stringify(data))
+      Cookie.set('_token', token, {expires: 30})
+      Cookie.set('_user', JSON.stringify(data), {expires: 30})
       commit('SETTOKEN', token)
       commit('SETUSER', data)
       Cookie.set('_logout', false)
@@ -43,8 +43,8 @@ const actions = {
         successCb('登录成功', status)
       }
       const {token} = data
-      Cookie.set('_token', token)
-      Cookie.set('_user', JSON.stringify(data))
+      Cookie.set('_token', token, {expires: 30})
+      Cookie.set('_user', JSON.stringify(data), {expires: 30})
       commit('SETTOKEN', token)
       commit('SETUSER', data)
       Cookie.set('_logout', false)
@@ -55,8 +55,8 @@ const actions = {
       successCb('登录成功')
       const {token} = data
       // 存入cookie与 stroe state
-      Cookie.set('_token', token)
-      Cookie.set('_user', JSON.stringify(data))
+      Cookie.set('_token', token, {expires: 30})
+      Cookie.set('_user', JSON.stringify(data), {expires: 30})
       commit('SETTOKEN', token)
       commit('SETUSER', data)
       Cookie.set('_logout', false)
