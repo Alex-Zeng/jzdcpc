@@ -76,7 +76,7 @@
       <div v-for="(item, k) in goodsList" :id="item.id" :key="item.id" class="main-floor">
         <div class="floor-nav">
           <h3>{{item.name}}</h3>
-          <nuxt-link  class="el-button"  v-for="i in item.pushTypeList" :id="i.id" :key="i.id" :to='`/goods/search/%7B"type":0,"cateId":${i.id}%7D`'>{{i.name}}</nuxt-link>
+          <nuxt-link  class="el-button"  v-for="i in item.pushTypeList" :id="i.id" :key="i.id" :to='`/goods/search/%7B"type":0,"cateId":${i.id},"selectId":${item.id},"childId":${i.id}%7D`'>{{i.name}}</nuxt-link>
           <img :src="goodsListImg[k].img" alt="">
         </div>
         <div class="floor-content">
