@@ -60,11 +60,11 @@ export default {
 </script>
 <style lang="stylus">
   .setting-wrap
-    padding 40px
+    padding 0 40px 40px
     min-height 800px
     overflow hidden
     .setting-tabs
-      margin-top 28px
+      /*margin-top 28px*/
       overflow hidden
       padding 20px
       background-color #fff
