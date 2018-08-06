@@ -2,14 +2,14 @@
   <div>
     <indexHeader></indexHeader>
     <el-dialog title="新增收货地址" :visible.sync="dialogFormVisible" class="address-wrap">
-      <el-form :model="form" ref="addrForm">
-        <el-form-item label="收货人" label-width="80px">
+      <el-form :model="form" ref="addrForm" :rules="rules">
+        <el-form-item label="收货人" prop="name" label-width="80px">
           <el-input v-model="form.name" auto-complete="off" style="width: 366px;"></el-input>
         </el-form-item>
-        <el-form-item label="联系手机" label-width="80px">
+        <el-form-item label="联系手机" prop="phone" label-width="80px">
           <el-input v-model="form.phone" auto-complete="off" style="width: 366px;"></el-input>
         </el-form-item>
-        <el-form-item label="所在地区" label-width="80px">
+        <el-form-item label="所在地区" prop="areaId" label-width="80px">
           <el-select style="width: 120px;float: left;" value-key="name" v-model="pid" @change="getCity">
             <el-option
               v-for="item in province"
@@ -30,7 +30,7 @@
             </el-option>
           </el-select>
           <span style="float: left;margin: 0 8px;">-</span>
-          <el-select style="width: 120px;float: left;" value-key="name" v-model="countyid">
+          <el-select style="width: 120px;float: left;" value-key="name" v-model="countyid" @change="form.areaId = countyid.id">
             <el-option
               v-for="item in county"
               :key="item.id"
@@ -40,7 +40,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="详细地址" label-width="80px">
+        <el-form-item label="详细地址" prop="detail" label-width="80px">
           <el-input v-model="form.detail" auto-complete="off" style="width:86%;"></el-input>
           <el-checkbox style="margin-left: 8px;" v-model="form.is_default">设为默认</el-checkbox>
         </el-form-item>
@@ -56,6 +56,7 @@
           >
           </el-input>
           <el-button v-else class="button-new-tag" size="small" @click="showInput" style="margin-left:6px;"> + </el-button>
+          <span style="color: #999;margin-left: 6px;">(可添加地址标签，如“总公司”、“分公司”)</span>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -203,6 +204,7 @@ import indexHeader from '../../components/index/header'
 import indexFooter from '../../components/index/footer'
 import apiAddress from '../../api/apiAddress'
 import apiOrders from '../../api/apiOrders'
+import { phoneReg } from '../../helper/reg'
 export default {
   name: 'cart',
   components: {
@@ -235,6 +237,21 @@ export default {
         name: '',
         phone: '',
         tag: ''
+      },
+      rules: {
+        areaId: [
+          { required: true, message: '请选择地区', trigger: 'change' }
+        ],
+        detail: [
+          { required: true, message: '请输入详细收货地址', trigger: 'blur' }
+        ],
+        name: [
+          { required: true, message: '请输入收货人姓名', trigger: 'blur' }
+        ],
+        phone: [
+          { required: true, message: '请输入收货人手机', trigger: 'blur' },
+          { pattern: phoneReg, message: '手机号格式错误', trigger: 'blur' }
+        ]
       }
     }
   },
@@ -283,6 +300,16 @@ export default {
     },
     setTag (tag) {
       this.form.tag = tag
+    },
+    tagClose (id) {
+      apiAddress.removeAddressTag({id}, (data) => {
+        const {status, msg} = data
+        if (status !== 0) {
+          this.$message.error(msg)
+        } else {
+          this.getTags()
+        }
+      })
     },
     handleInputConfirm () {
       let inputValue = this.inputValue
