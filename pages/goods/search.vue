@@ -66,7 +66,7 @@
             background
             :total="total"
             :page-size="12"
-            :current-page="pageNumber"
+            :current-page.sync="pageNumber"
             @current-change="page"
           >
           </el-pagination>
@@ -99,7 +99,7 @@ export default {
       showMenu: false,
       list: [],
       total: 0,
-      pageNumber: 1,
+      pageNumber: 5,
       up: true,
       all: {},
       child: [],
@@ -265,6 +265,8 @@ export default {
     const {params: {all}} = this.$route
     let json = JSON.parse(all)
     this.all = json
+    const {pageNumber} = json
+    this.pageNumber = pageNumber || 1
     this.search()
   },
   name: 'search'

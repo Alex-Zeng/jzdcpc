@@ -1,6 +1,68 @@
 <template>
   <div>
     <indexHeader></indexHeader>
+    <el-dialog title="新增收货地址" :visible.sync="dialogFormVisible" class="address-wrap">
+      <el-form :model="form" ref="addrForm">
+        <el-form-item label="收货人" label-width="80px">
+          <el-input v-model="form.name" auto-complete="off" style="width: 366px;"></el-input>
+        </el-form-item>
+        <el-form-item label="联系手机" label-width="80px">
+          <el-input v-model="form.phone" auto-complete="off" style="width: 366px;"></el-input>
+        </el-form-item>
+        <el-form-item label="所在地区" label-width="80px">
+          <el-select style="width: 120px;float: left;" value-key="name" v-model="pid" @change="getCity">
+            <el-option
+              v-for="item in province"
+              :key="item.id"
+              :label="item.name"
+              :value="item"
+            >
+            </el-option>
+          </el-select>
+          <span style="float: left;margin: 0 8px;">-</span>
+          <el-select style="width: 120px;float: left;" value-key="name" v-model="cid" @change="getCounty">
+            <el-option
+              v-for="item in city"
+              :key="item.id"
+              :label="item.name"
+              :value="item"
+            >
+            </el-option>
+          </el-select>
+          <span style="float: left;margin: 0 8px;">-</span>
+          <el-select style="width: 120px;float: left;" value-key="name" v-model="countyid">
+            <el-option
+              v-for="item in county"
+              :key="item.id"
+              :label="item.name"
+              :value="item"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="详细地址" label-width="80px">
+          <el-input v-model="form.detail" auto-complete="off" style="width:86%;"></el-input>
+          <el-checkbox style="margin-left: 8px;" v-model="form.is_default">设为默认</el-checkbox>
+        </el-form-item>
+        <el-form-item label="设置标签" label-width="80px">
+          <el-tag v-for="i in tags" :key="i.id" :class="{select: form.tag==i.tag}" closable @click.native="setTag(i.tag)" @close="tagClose(i.id)">{{i.tag}}</el-tag>
+          <el-input
+            class="input-new-tag"
+            v-if="inputVisible"
+            v-model="inputValue"
+            ref="saveTagInput"
+            size="small"
+            @blur="handleInputConfirm"
+          >
+          </el-input>
+          <el-button v-else class="button-new-tag" size="small" @click="showInput" style="margin-left:6px;"> + </el-button>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitForm">确 定</el-button>
+      </div>
+    </el-dialog>
     <div class="order-wrap">
       <div class="title">确定订单</div>
       <div class="sub-title clearfix">
@@ -26,11 +88,11 @@
               </div>
             </div>
           </div>
-          <nuxt-link to="/user/setting/address" class="addr-item">
+          <div class="addr-item" @click="editOpen('', false)">
             <div class="addr-new">
               +
             </div>
-          </nuxt-link>
+          </div>
           <i class="drop" @click="addressAll = true" v-if="!addressAll">&#xe6d7;</i>
           <i class="close" @click="addressAll = false" v-if="addressAll">&#xe6d7;</i>
         </div>
@@ -155,12 +217,32 @@ export default {
       addressAll: false,
       defaultAddr: -1,
       editArr: [],
-      total: 0
+      total: 0,
+      dialogFormVisible: false,
+      inputVisible: false,
+      province: [],
+      city: [],
+      county: [],
+      tags: [],
+      inputValue: '',
+      pid: '',
+      cid: '',
+      countyid: '',
+      form: {
+        areaId: '',
+        detail: '',
+        postCode: '',
+        name: '',
+        phone: '',
+        tag: ''
+      }
     }
   },
   mounted () {
     this.getAddressList()
     this.getCartList()
+    this.getTags()
+    this.getProvince(0, 0)
   },
   methods: {
     makeOrder () {
@@ -189,6 +271,34 @@ export default {
         this.$message.error('网络有点问题，请刷新后重试')
       }
     },
+    showInput () {
+      this.inputVisible = true
+    },
+    async getTags () {
+      await apiAddress.getAddressTags(
+        ({data}) => {
+          this.tags = data
+        }
+      )
+    },
+    setTag (tag) {
+      this.form.tag = tag
+    },
+    handleInputConfirm () {
+      let inputValue = this.inputValue
+      if (inputValue) {
+        apiAddress.addAddressTag({tag: inputValue}, (data) => {
+          const {status, msg} = data
+          if (status !== 0) {
+            this.$message.error(msg)
+          } else {
+            this.getTags()
+          }
+        })
+      }
+      this.inputVisible = false
+      this.inputValue = ''
+    },
     toEdit (k, key, v) {
       let temp = this.editArr[k]
       temp[key] = v
@@ -206,6 +316,131 @@ export default {
           })
         }
       )
+    },
+    async getProvince (provinceId) {
+      await apiAddress.getLevelArea({provinceId, cityId: 0}, (data) => {
+        const {data: {list}} = data
+        this.province = list
+      })
+    },
+    async getCity ({id}) {
+      await apiAddress.getLevelArea({provinceId: id, cityId: 0}, (data) => {
+        const {data: {list}} = data
+        this.city = list
+      })
+    },
+    async getCounty ({id}) {
+      await apiAddress.getLevelArea({provinceId: 0, cityId: id}, (data) => {
+        const {data: {list}} = data
+        this.county = list
+      })
+    },
+    editOpen (obj, isEdit) {
+      this.pid = {}
+      this.cid = {}
+      this.countyid = {}
+      if (isEdit) {
+        this.form = {...obj}
+        const {areaIds, areaName} = obj
+        if (areaIds.length > 0) {
+          this.getCity({id: areaIds[0]})
+          this.getCounty({id: areaIds[1]})
+          setTimeout(() => {
+            const names = areaName.split('-')
+            this.pid = {id: areaIds[0], name: names[0]}
+            this.cid = {id: areaIds[1], name: names[1]}
+            this.countyid = {id: areaIds[2], name: names[2]}
+          })
+        }
+      } else {
+        this.form = {
+          areaId: '',
+          detail: '',
+          postCode: '',
+          name: '',
+          phone: '',
+          tag: ''
+        }
+      }
+      this.dialogFormVisible = true
+    },
+    async remove (id) {
+      this.$confirm('此操作将永久删除该收货地址, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const loading = this.$loading({
+          lock: true,
+          text: '删除中...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        await apiAddress.removeAddress(
+          {id},
+          (data) => {
+            const {status, msg} = data
+            if (status == 0) {
+              this.$message(
+                {
+                  type: 'success',
+                  message: msg
+                }
+              )
+              this.getAddressList()
+            } else {
+              this.$message.error(msg)
+            }
+          }
+        )
+        loading.close()
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+    submitForm () {
+      this.$refs['addrForm'].validate(async (valid) => {
+        if (valid) {
+          this.form.is_default = this.form.is_default ? 1 : 0
+          this.form.areaId = this.countyid.id ? this.countyid.id : 0
+          if (this.form.id) {
+            await apiAddress.editAddress(this.form, (data) => {
+              const {status, msg} = data
+              if (status !== 0) {
+                this.$message.error(msg)
+              } else {
+                this.$message(
+                  {
+                    type: 'success',
+                    message: msg
+                  }
+                )
+                this.dialogFormVisible = false
+                this.getAddressList()
+              }
+            })
+          } else {
+            await apiAddress.addAddress(this.form, (data) => {
+              const {status, msg} = data
+              if (status !== 0) {
+                this.$message.error(msg)
+              } else {
+                this.$message(
+                  {
+                    type: 'success',
+                    message: msg
+                  }
+                )
+                this.dialogFormVisible = false
+                this.getAddressList()
+              }
+            })
+          }
+        }
+      })
     },
     getCartList () {
       const loading = this.$loading({
@@ -456,34 +691,35 @@ export default {
 </style>
 
 <style lang="stylus">
-  .address-wrap
-    .el-radio.is-checked
-      .el-radio__inner
-        border-color #ff7900
-        background #ff7900
-      .el-radio__label
-        color #ff7900 !important
-    .addr-header
-      .el-tag
-        height 24px
-        line-height 22px
-    .el-tag
-      cursor pointer
+.address-wrap
+  .el-radio.is-checked
+    .el-radio__inner
       border-color #ff7900
-      color #ff7900
-      background-color #fff
-      &.select
-        background-color rgba(64, 158, 255, .5)
-    .el-tag+.el-tag
-      margin-left 6px
-    .button-new-tag
-      margin-left 10px
-      height 32px
-      line-height 30px
-      padding-top 0
-      padding-bottom 0
-    .input-new-tag
-      width 90px
-      margin-left 10px
-      vertical-align bottom
+      background #ff7900
+    .el-radio__label
+      color #ff7900 !important
+  .addr-header
+    .el-tag
+      height 24px
+      line-height 22px
+  .el-tag
+    cursor pointer
+    border-color #ff7900
+    color #ff7900
+    background-color #fff
+    &.select
+      background-color rgba(64, 158, 255, .5)
+  .el-tag+.el-tag
+    margin-left 6px
+  .button-new-tag
+    margin-left 10px
+    height 32px
+    line-height 30px
+    padding-top 0
+    padding-bottom 0
+    margin-left 6px !important
+  .input-new-tag
+    width 90px
+    margin-left 10px
+    vertical-align bottom
 </style>
