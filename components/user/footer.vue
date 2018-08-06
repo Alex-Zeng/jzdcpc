@@ -14,7 +14,7 @@
           法律条款
         </nuxt-link>
         ：:
-        <nuxt-link to="">
+        <nuxt-link to="/about">
           关于我们
         </nuxt-link>
       </div>
