@@ -35,6 +35,7 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge, chrome=1' },
       { hid: 'description', name: 'description', content: 'jzdc web project that base on Nuxt.js Framework' }
     ],
     link: [
