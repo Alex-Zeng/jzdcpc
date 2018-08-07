@@ -2,6 +2,7 @@ import axios from 'axios'
 // import { Message } from 'element-ui'
 import qs from 'qs'
 import config from './config'
+import Cookies from 'js-cookie'
 
 if (process.server) {
   config.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
@@ -25,12 +26,16 @@ service.interceptors.response.use(
   res => {
     const {status} = res.data
     if (parseInt(status) === -2) {
-      window.$nuxt.$message({
-        showClose: true,
-        message: '用户未登录或登录已失效，请登录后继续操作',
-        type: 'error'
-      })
-      window.$nuxt.$router.replace('/auth')
+      const token = Cookies.get('token')
+      // 存在token
+      if (token) {
+        window.$nuxt.$message({
+          showClose: true,
+          message: '用户未登录或登录已失效，请登录后继续操作',
+          type: 'error'
+        })
+        window.$nuxt.$router.replace('/auth')
+      }
     }
     return res.data
   },

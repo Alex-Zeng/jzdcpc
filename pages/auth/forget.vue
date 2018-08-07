@@ -132,7 +132,7 @@ export default {
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { pattern: passwordReg, message: '密码格式为长度6-20位的字母、数字、符号组成' }
+          { pattern: passwordReg, message: '密码格式为长度6-20位的字母、数字组成' }
         ]
       },
       imgSrcrand: '',
