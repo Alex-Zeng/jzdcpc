@@ -392,7 +392,7 @@ body{
 .sub-floor-nav{
   position fixed
   top 45%
-  right 200px
+  right 180px
 }
 .sub-floor-nav ul{
   padding-bottom 10px
