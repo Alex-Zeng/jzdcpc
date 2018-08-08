@@ -19,4 +19,5 @@ $ npm start
 $ npm run generate
 ```
 
+# server.js 为node服务器入口
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).

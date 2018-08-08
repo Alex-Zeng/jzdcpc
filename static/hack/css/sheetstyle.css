@@ -1,0 +1,81 @@
+* {
+  font-family: Microsoft YaHei, -apple-system, PingFang SC, Hiragino Sans GB, Helvetica Neue, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+  border: none;
+  list-style: none;
+  text-underline: none;
+  text-decoration: none;
+  outline: none;
+}
+html {
+  background-color: #f5f5f5;
+  font-family: MicrosoftYaHei;
+}
+.wrap {
+  width: 1300px;
+  margin: auto;
+}
+.wrap .logo {
+  padding: 50px 0;
+}
+.wrap .title {
+  height: 80px;
+  line-height: 80px;
+  font-size: 28px;
+  color: #fff;
+  text-align: center;
+  background: #2475e2;
+}
+.wrap .content {
+  overflow: hidden;
+  padding-top: 50px;
+}
+.wrap .content .left-box {
+  width: 300px;
+  height: 190px;
+  background: #2475e2;
+  float: left;
+  text-align: center;
+  font-size: 28px;
+  color: #fff;
+  padding-top: 60px;
+}
+.wrap .content .left-box img {
+  padding-top: 20px;
+}
+.wrap .content .right-box {
+  height: 250px;
+  width: 1000px;
+  background: #fff;
+  float: left;
+  font-size: 16px;
+  text-align: center;
+}
+.wrap .content .right-box a {
+  display: inline-block;
+  padding: 55px 120px;
+  text-align: center;
+  color: #333;
+}
+.wrap .content .right-box a p {
+  padding: 10px 0;
+}
+.wrap .content .right-box a .btn {
+  display: inline-block;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  background: #2475e2;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+}
+.wrap .content .right-box .code {
+  padding-top: 50px;
+  display: inline-block;
+  padding-right: 180px;
+}
+.wrap .content .right-box .code:last-child {
+  padding-right: 30px;
+}

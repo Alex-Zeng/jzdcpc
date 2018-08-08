@@ -1,9 +1,7 @@
 /**
  * 本文件为nuxt.js的配置文件，可覆盖webpack配置
  */
-
 module.exports = {
-  mode: 'spa',
   /*
   ** 配置鉴权中间件
   */
@@ -11,7 +9,8 @@ module.exports = {
     middleware: 'checkAuth'
     // mode: 'hash'
   },
-
+  // dev配置
+  dev: (process.env.NODE_ENV !== 'production'),
   /*
   ** 全局 CSS
   */
@@ -24,8 +23,7 @@ module.exports = {
   ** 增加element-ui，详见plugins/element-ui.js
   */
   plugins: [
-    '@/plugins/element-ui',
-    '@/plugins/ava'
+    '@/plugins/element-ui'
   ],
   /*
   ** Headers of the page
@@ -91,7 +89,7 @@ module.exports = {
   },
   proxy: {
     '/papi': {
-      target: 'http://192.168.3.135:8079/api',
+      target: 'http://dev.jizhongdiancai.com/api',
       pathRewrite: { '^/papi': '' }
     }
   }
