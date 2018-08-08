@@ -37,7 +37,7 @@
           登录后表示您已同意<nuxt-link to="/">《集众电采用户服务协议》</nuxt-link>
         </el-form-item>
         <el-form-item class="no-password">
-          <nuxt-link to="/auth" class="link">
+          <nuxt-link to="/auth" class="link" style="color:#ddd;">
             <i class="phone">&#xe640;</i><span>密码登录</span>
           </nuxt-link>
         </el-form-item>

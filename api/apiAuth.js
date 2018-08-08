@@ -53,5 +53,8 @@ export default {
       return
     }
     successCb(data)
+  },
+  async logout () {
+    await request.post('/napi/logout')
   }
 }

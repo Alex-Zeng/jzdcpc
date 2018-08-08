@@ -1,9 +1,7 @@
 /**
  * 本文件为nuxt.js的配置文件，可覆盖webpack配置
  */
-
 module.exports = {
-  mode: 'spa',
   /*
   ** 配置鉴权中间件
   */
@@ -11,7 +9,8 @@ module.exports = {
     middleware: 'checkAuth'
     // mode: 'hash'
   },
-
+  // dev配置
+  dev: (process.env.NODE_ENV !== 'production'),
   /*
   ** 全局 CSS
   */

@@ -73,10 +73,10 @@
             <span class="step-title">请设置您的登录密码</span>
           </el-form-item>
           <el-form-item prop="password" label="设置密码" label-width="86px">
-            <el-input style="width: 230px;" v-model="ipForm.password" placeholder="请输入密码"></el-input>
+            <el-input style="width: 230px;" v-model="ipForm.password" type="password" placeholder="请输入密码"></el-input>
           </el-form-item>
           <el-form-item prop="confirmPassword" label="再次确认" label-width="86px">
-            <el-input style="width: 230px;" v-model="ipForm.confirmPassword" placeholder="请确认密码"></el-input>
+            <el-input style="width: 230px;" v-model="ipForm.confirmPassword" type="password" placeholder="请确认密码"></el-input>
           </el-form-item>
           <el-form-item label="" label-width="86px">
             <el-button style="width: 200px;" type="primary" @click="initPassword('ipForm')"
@@ -92,13 +92,13 @@
             <span class="step-title">修改登录密码</span>
           </el-form-item>
           <el-form-item prop="password" label="旧密码" label-width="86px">
-            <el-input style="width: 230px;" v-model="password.oldPassword" placeholder="请输入旧密码"></el-input>
+            <el-input style="width: 230px;" v-model="password.oldPassword" type="password" placeholder="请输入旧密码"></el-input>
           </el-form-item>
           <el-form-item prop="newPassword" label="新密码" label-width="86px">
-            <el-input style="width: 230px;" v-model="password.newPassword" placeholder="请输入新密码"></el-input>
+            <el-input style="width: 230px;" v-model="password.newPassword" type="password" placeholder="请输入新密码"></el-input>
           </el-form-item>
           <el-form-item prop="confirmPassword" label="再次确认" label-width="86px">
-            <el-input style="width: 230px;" v-model="password.confirmPassword" placeholder="请确认新密码"></el-input>
+            <el-input style="width: 230px;" v-model="password.confirmPassword" type="password" placeholder="请确认新密码"></el-input>
           </el-form-item>
           <el-form-item label="" label-width="86px">
             <el-button style="width: 200px;" type="primary" @click="updatePassword('password')"
@@ -264,7 +264,7 @@ export default {
       ipRules: {
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { pattern: passwordReg, message: '密码格式为长度6-20位的字母、数字、符号组成' }
+          { pattern: passwordReg, message: '密码格式为长度6-20位的字母、数字组成' }
         ],
         confirmPassword: [
           { validator: confirmPassword, trigger: 'blur' }
@@ -278,7 +278,7 @@ export default {
       passwordRules: {
         newPassword: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { pattern: passwordReg, message: '密码格式为长度6-20位的字母、数字、符号组成' }
+          { pattern: passwordReg, message: '密码格式为长度6-20位的字母、数字组成' }
         ],
         confirmPassword: [
           { validator: confirmPassword, trigger: 'blur' }

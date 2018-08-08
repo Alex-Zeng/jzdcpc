@@ -38,7 +38,7 @@
           </el-button>
         </el-form-item>
         <el-form-item class="no-password">
-          <nuxt-link to="/auth/login" class="link">
+          <nuxt-link to="/auth/login" class="link" style="color:#ddd;">
             <i class="phone">&#xe636;</i><span>免密登录</span>
           </nuxt-link>
         </el-form-item>
