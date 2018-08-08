@@ -30,6 +30,7 @@ import userHeader from '../components/user/header'
 import authFooter from '../components/user/footer'
 
 export default {
+  middleware: 'checkToken',
   components: {
     userHeader,
     authFooter

@@ -91,7 +91,7 @@
           <el-form-item label="" label-width="86px" style="height: 20px;line-height: 20px;">
             <span class="step-title">修改登录密码</span>
           </el-form-item>
-          <el-form-item prop="password" label="旧密码" label-width="86px">
+          <el-form-item prop="oldPassword" label="旧密码" label-width="86px">
             <el-input style="width: 230px;" v-model="password.oldPassword" type="password" placeholder="请输入旧密码"></el-input>
           </el-form-item>
           <el-form-item prop="newPassword" label="新密码" label-width="86px">
@@ -264,7 +264,7 @@ export default {
       ipRules: {
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { pattern: passwordReg, message: '密码格式为长度6-20位的字母、数字组成' }
+          { pattern: passwordReg, message: '密码格式由长度6-20位的字母、数字、符号至少两种组成' }
         ],
         confirmPassword: [
           { validator: confirmPassword, trigger: 'blur' }
@@ -276,11 +276,15 @@ export default {
         confirmPassword: ''
       },
       passwordRules: {
+        oldPassword: [
+          { required: true, message: '请输入旧密码', trigger: 'blur' }
+        ],
         newPassword: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { pattern: passwordReg, message: '密码格式为长度6-20位的字母、数字组成' }
+          { pattern: passwordReg, message: '密码格式由长度6-20位的字母、数字、符号至少两种组成' }
         ],
         confirmPassword: [
+          { required: true, message: '请确定密码', trigger: 'blur' },
           { validator: confirmPassword, trigger: 'blur' }
         ]
       },
@@ -545,6 +549,7 @@ export default {
                 if (status == 0) {
                   this.$message.success(msg)
                   this.phoneStep = 1
+                  window.location.reload(true)
                 } else {
                   this.$message.error(msg)
                 }

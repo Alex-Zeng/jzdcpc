@@ -6,13 +6,13 @@
 		</div>
 
 		<div class="vicp-step1" v-show="step == 1">
-			<div class="vicp-drop-area" @dragleave="preventDefault" @dragover="preventDefault" @dragenter="preventDefault" @click="handleClick" @drop="handleChange">
+			<div class="vicp-drop-area" @click="handleClick">
 				<i class="vicp-icon1" v-show="loading != 1">
 				<i class="vicp-icon1-arrow"></i>
 				<i class="vicp-icon1-body"></i>
 				<i class="vicp-icon1-bottom"></i>
 				</i>
-				<span class="vicp-hint" v-show="loading !== 1">{{ lang.hint }}</span>
+				<span class="vicp-hint" v-show="loading !== 1">点击上传图片</span>
 				<span class="vicp-no-supported-hint" v-show="!isSupported">{{ lang.noSupported }}</span>
 				<input type="file" v-show="false" v-if="step == 1" @change="handleChange" ref="fileinput">
 			</div>

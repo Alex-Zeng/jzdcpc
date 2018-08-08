@@ -89,7 +89,7 @@ module.exports = {
   },
   proxy: {
     '/papi': {
-      target: 'http://dev.jizhongdiancai.com/api',
+      target: 'http://192.168.3.135/api',
       pathRewrite: { '^/papi': '' }
     }
   }
