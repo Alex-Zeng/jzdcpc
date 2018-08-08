@@ -107,7 +107,7 @@ export default {
     .back
       font-size 18px
       cursor pointer
-      color #2475E2
+      color #ff7900
       margin-bottom 16px
       .back_icon
         font-family 'jzdc'

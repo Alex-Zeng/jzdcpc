@@ -3,7 +3,7 @@
     <div class="main-row">
       <div class="main-row-left">
         <h3>累计交易额</h3>
-        <p>{{total.turnoverAll}}<span>元</span></p>
+        <p>{{total.money}}<span>元</span></p>
       </div>
       <div class="main-row-right">
         <div class="title">
@@ -300,14 +300,15 @@ export default {
       Buyer: true,
       noticeLists: {},
       total: {
-        turnoverAll: ''
+        money: 0
       },
       messageLists: {},
       buyerOrderInfo: {
         pay: 0,
         recieve: 0,
         deliver: 0,
-        service: 0
+        service: 0,
+        money: 0
       },
       supplierOrderInfo: {
         yesterday: 0,
@@ -330,11 +331,6 @@ export default {
         this.noticeLists = list
       })
     },
-    async getTotal () {
-      await apiWorkbench.getTotal((data) => {
-        this.total = data.data
-      })
-    },
     async messageList () {
       await apiWorkbench.messageList({pageSize: 3, pageNumber: 1}, (data) => {
         const {list} = data
@@ -344,11 +340,13 @@ export default {
     async getBuyerOrderInfo () {
       await apiWorkbench.getBuyerOrderInfo((data) => {
         this.buyerOrderInfo = data.data
+        this.total.money = data.data.money
       })
     },
     async getSupplierOrderInfo () {
       await apiWorkbench.getSupplierOrderInfo((data) => {
         this.supplierOrderInfo = data.data
+        this.total.money = data.data.money
       })
     },
     async getDeskList (index) {
@@ -375,7 +373,6 @@ export default {
   },
   created () {
     this.getNotice()
-    this.getTotal()
     this.messageList()
     if (parseInt(this.user.group) == 4) {
       this.getBuyerOrderInfo()
