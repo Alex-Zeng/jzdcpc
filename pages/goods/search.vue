@@ -40,7 +40,7 @@
           <div class="info">发现 {{all.keywords}} 共有 {{total}} 件商品</div>
         </div>
       </div>
-      <empty v-if="list.length <= 0"></empty>
+      <empty v-if="list.length <= 0" link="/" text="抱歉，找不到该商品/供应商" img="/empty/search_empty.png"></empty>
       <div v-else>
         <div class="result clearfix">
           <div class="item" v-for="i in list" :key="i.id" @click="$router.push('/goods/detail/'+i.id)">

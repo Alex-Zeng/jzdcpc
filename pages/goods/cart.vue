@@ -88,6 +88,7 @@ import empty from '../../components/empty'
 import apiMallCart from '../../api/apiMallCart'
 export default {
   name: 'cart',
+  middleware: 'lockGroup',
   components: {
     indexFooter,
     indexHeader,

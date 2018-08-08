@@ -52,6 +52,7 @@ import indexHeader from '../../components/index/header'
 import indexFooter from '../../components/index/footer'
 export default {
   name: 'result',
+  middleware: 'lockGroup',
   components: {
     indexFooter,
     indexHeader
