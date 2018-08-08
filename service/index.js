@@ -26,16 +26,18 @@ service.interceptors.response.use(
   res => {
     const {status} = res.data
     if (parseInt(status) === -2) {
-      const token = Cookies.get('token')
+      const token = Cookies.get('_token')
       // 存在token
       if (token) {
-        window.$nuxt.$message({
-          showClose: true,
-          message: '用户未登录或登录已失效，请登录后继续操作',
-          type: 'error'
-        })
-        window.$nuxt.$router.replace('/auth')
+        Cookies.set('_token', '')
+        Cookies.set('_user', '')
       }
+      window.$nuxt.$message({
+        showClose: true,
+        message: '用户未登录或登录已失效，请登录后继续操作',
+        type: 'error'
+      })
+      window.$nuxt.$router.replace('/auth')
     }
     return res.data
   },

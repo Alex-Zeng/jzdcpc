@@ -5,7 +5,9 @@
       <div class="jzdc">
         <nuxt-link to="/">
           <div class="logo"></div>
-          <div class="title">津晶科技信息服务（广州）有限责任公司</div>
+          <div class="title">
+            {{loggedUser.companyName || '未认证用户'}}
+          </div>
         </nuxt-link>
       </div>
       <div class="user">
@@ -64,6 +66,11 @@
       color #ffffff
       float left
       font-size 16px
+      display block
+      width 416px
+      overflow hidden
+      white-space nowrap
+      text-overflow ellipsis
 .user
   float right
   color #ffffff

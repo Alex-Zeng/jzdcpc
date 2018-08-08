@@ -8,9 +8,8 @@
         <div class="logo" v-else>
           <img src="~assets/img/common/default_avatar.png" alt="logo">
         </div>
-        <h3>
-          <!--{{user.username}}-->
-          进入工作台
+        <h3 class="cur-name">
+          {{user.username}}
         </h3>
       </nuxt-link>
     </div>
@@ -101,6 +100,13 @@ export default {
     text-align center
     background-color #ffffff
     border-bottom 10px solid #f4f5f5
+    .cur-name
+      width 150px
+      overflow hidden
+      white-space nowrap
+      text-overflow ellipsis
+      display block
+      margin-top 4px
     .logo
       width 92px
       height 92px

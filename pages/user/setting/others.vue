@@ -65,6 +65,9 @@ export default {
             })
             const all = JSON.parse(Cookies.get('_user'))
             Cookies.set('_user', JSON.stringify({...all, ...this.settingForm, path: this.preview}))
+            setTimeout(() => {
+              window.location.reload(true)
+            }, 1000)
           } else {
             this.$message.error(msg)
           }
