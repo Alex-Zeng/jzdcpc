@@ -164,6 +164,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('getMessageNumber')
+    this.$store.dispatch('getFavoriteNumber')
   }
 }
 </script>

@@ -7,7 +7,7 @@
         </nuxt-link>
     </div>
     <div class="content clearfix">
-      <div class="list">
+      <div class="list" v-if="favoriteList.length > 0">
         <div @click="$router.push('/goods/detail/'+i.id)" class="item" v-for="i in favoriteList" :key="i.id">
           <i class="delete" @click.stop="doDelete(i.id)">&#xe61d;</i>
           <div class="img">
@@ -23,6 +23,7 @@
           </div>
         </div>
       </div>
+      <empty img="/empty/f_empty.png" :styles="{width: '152px'}" text="您暂时还没有添加收藏的商品" link="" v-if="favoriteList.length <= 0"></empty>
       <div class="pager" style="margin-top: 20px;">
         <el-pagination
           background
@@ -140,6 +141,7 @@
 </style>
 
 <script>
+import empty from '../../../components/empty'
 const pageSize = 14
 export default {
   data () {
@@ -147,6 +149,9 @@ export default {
       type: -1,
       pageNumber: 1
     }
+  },
+  components: {
+    empty
   },
   computed: {
     favoriteType () {

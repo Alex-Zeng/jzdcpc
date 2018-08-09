@@ -2,7 +2,7 @@
   <div class="message-wrap">
     <div class="back" @click="back"><i class="back_icon">&#xe67a;</i>返回</div>
     <div class="title">消息中心</div>
-    <ul class="msg-list">
+    <ul class="msg-list" v-if="list.length > 0">
       <li class="msg-item" v-for="i in list" :key="i.id">
         <h4 class="time">{{i.release_time}}</h4>
         <div class="content clearfix">
@@ -13,7 +13,8 @@
         </div>
       </li>
     </ul>
-    <div class="pager" style="margin-top: 20px;">
+    <empty text="抱歉，暂无个人消息" link="" img="/empty/msg_empty.png" :styles="{width: '220px'}" v-if="list.length <= 0"></empty>
+    <div class="pager" style="margin-top: 20px;" v-if="list.length > 0">
       <el-pagination
         background
         :total="total"
@@ -27,9 +28,13 @@
 </template>
 
 <script>
+import empty from '../../components/empty'
 const pageSize = 10
 export default {
   name: 'message',
+  components: {
+    empty
+  },
   watch: {
     '$route': function () {
       const {params: {page}} = this.$route

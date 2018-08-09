@@ -55,7 +55,7 @@
             <span class="grey"><span>物料编号：{{spec.no}}</span><span style="text-indent: 40px;">物料规格：{{spec.name}}</span></span>
           </div>
 
-          <el-button type="primary" style="width: 240px;margin-left: 20px;" @click="addToCart"><i class="icon">&#xe617;</i>加入购物车</el-button>
+          <el-button type="primary" style="width: 240px;margin-left: 20px;" v-show="!(group == 5)" @click="addToCart"><i class="icon">&#xe617;</i>加入购物车</el-button>
         </div>
       </div>
       <div class="other-wrap clearfix">
@@ -92,6 +92,14 @@ export default {
   components: {
     indexHeader,
     indexFooter
+  },
+  computed: {
+    group () {
+      if (this.$store.getters.loggedUser) {
+        return this.$store.getters.loggedUser.group
+      }
+      return -1
+    }
   },
   data () {
     return {

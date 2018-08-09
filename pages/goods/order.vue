@@ -207,6 +207,7 @@ import apiOrders from '../../api/apiOrders'
 import { phoneReg } from '../../helper/reg'
 export default {
   name: 'cart',
+  middleware: 'lockGroup',
   components: {
     indexFooter,
     indexHeader

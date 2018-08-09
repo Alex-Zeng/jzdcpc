@@ -4,7 +4,7 @@
       <div class="content">
         <span class="welcome">集众电采欢迎您！！</span>
         <ul class="top-menu">
-          <nuxt-link to="/user/workbench/favorite" tag="li" class="item" v-show="token">
+          <nuxt-link to="/user/workbench/favorite"  class="item" v-show="token">
             <i class="icon">&#xe60f;</i>
             <span class="name">收藏(<span class="num">{{favoriteTotal}}</span>)</span>
           </nuxt-link>

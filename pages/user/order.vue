@@ -48,7 +48,7 @@
         <div class="item status">订单状态</div>
         <div class="item action">操作</div>
       </div>
-      <div class="table" v-for="order in orders" :key="order.id">
+      <div class="table" v-for="order in orders" :key="order.id" v-if="orders.length > 0">
         <p class="time">{{order.orderDate}}</p>
           <div class="title clearfix">
             <div class="item order-info"><span>订单号：{{order.out_id}}</span></div>
@@ -81,11 +81,12 @@
             <el-button class="order-button" type="primary" v-show="order.state == 3 && order.groupId == 5" style="width: 80px;padding-left: 0;padding-right: 0;" @click="$router.push('/user/order-detail/'+order.out_id)">确定发货</el-button>
             <el-button class="order-button" type="primary" v-show="order.state == 6 && order.groupId == 4 && (order.service_type ==0 || order.service_type ==2)" style="width: 80px;padding-left: 0;padding-right: 0;" @click="receipt(order.out_id)">确定收货</el-button>
             <el-button class="order-button text" type="text" v-show="order.state ==1 || order.state == 0" style="width: 80px;padding-left: 0;padding-right: 0;" @click="cancel(order.out_id)">取消交易</el-button>
-            <el-button class="order-button text" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;" v-show="type == 6" @click="$router.push('/user/service')">查看售后</el-button>
+            <el-button class="order-button text" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;" v-show="type == 6" @click="$router.push('/user/service/'+order.out_id)">查看售后</el-button>
           </div>
         </div>
       </div>
-      <div class="pager">
+      <empty text="您暂时还没有符合该条件的订单" link="" img="/empty/order_empty.png" v-if="orders.length <= 0"></empty>
+      <div class="pager" v-if="orders.length > 0">
         <el-pagination
           background
           :total="total"
@@ -101,6 +102,7 @@
 
 <script>
 import service from '@/service'
+import empty from '../../components/empty'
 const pageSize = 10
 export default {
   name: 'order',
@@ -120,6 +122,9 @@ export default {
       type: -1,
       url: ''
     }
+  },
+  components: {
+    empty
   },
   computed: {
     orders () {
@@ -142,6 +147,7 @@ export default {
       })
       const {params: {type, page, search}} = this.$route
       this.pageNumber = Number(page)
+      this.type = type
       let others = {}
       search && (others = JSON.parse(search))
       this.$store.dispatch('getOrderList', {
