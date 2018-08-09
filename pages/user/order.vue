@@ -148,6 +148,7 @@ export default {
       const {params: {type, page, search}} = this.$route
       this.pageNumber = Number(page)
       this.type = type
+      this.searchForm.status = type
       let others = {}
       search && (others = JSON.parse(search))
       this.$store.dispatch('getOrderList', {
@@ -172,6 +173,7 @@ export default {
     })
     const {params: {type, page, search}} = this.$route
     this.type = type
+    this.searchForm.status = type
     this.pageNumber = Number(page)
     let others = {}
     search && (others = JSON.parse(search))
@@ -192,6 +194,7 @@ export default {
     getList (page) {
       const {params: {type, search}} = this.$route
       this.type = type
+      this.searchForm.status = type
       let others = JSON.stringify({})
       search && (others = search)
       this.$router.push(`/user/order/${type}/${page}/${others}`)
