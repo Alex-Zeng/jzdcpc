@@ -94,6 +94,7 @@
 import apiAddress from '../../../api/apiAddress'
 import { phoneReg } from '../../../helper/reg'
 export default {
+  middleware: 'lockGroup',
   data () {
     return {
       list: [],

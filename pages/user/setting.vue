@@ -10,7 +10,7 @@
       <nuxt-link to="/user/setting/others" :class="{active: type == 3, 'tabs-item': true}">
         其他设置
       </nuxt-link>
-      <nuxt-link to="/user/setting/address" :class="{active: type == 4, 'tabs-item': true}">
+      <nuxt-link to="/user/setting/address" :class="{active: type == 4, 'tabs-item': true}" v-if="loggedUser.group != 5">
         收货地址管理
       </nuxt-link>
     </div>
@@ -34,6 +34,11 @@ export default {
       if (/user-setting-safe/.test(name)) {
         this.type = 2
       }
+    }
+  },
+  computed: {
+    loggedUser () {
+      return this.$store.getters.loggedUser
     }
   },
   data () {
