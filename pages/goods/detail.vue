@@ -10,7 +10,8 @@
       <div class="preview-wrap clearfix">
         <div class="look-at">
           <div class="big">
-            <img width="100%" height="100%" :src="detail.imgList && detail.imgList[select].img" alt="">
+            <PicZoom :url="detail.imgList && detail.imgList[select].img" :scale="2" :scroll="true" v-if="detail.imgList && detail.imgList[select].img"></PicZoom>
+            <img width="100%" height="100%" :src="detail.imgList && detail.imgList[select].img" alt="" v-else>
           </div>
           <div class="small-wrap">
             <i class="prev" @click="changeImg(false)">&#xe67d;</i>
@@ -86,12 +87,14 @@ import indexHeader from '../../components/index/header'
 import indexFooter from '../../components/index/footer'
 import apiGoods from '../../api/apiGoods'
 import apiMallCart from '../../api/apiMallCart'
+import PicZoom from '../../components/PicZoom'
 
 export default {
   name: 'detail',
   components: {
     indexHeader,
-    indexFooter
+    indexFooter,
+    PicZoom
   },
   computed: {
     group () {
@@ -114,7 +117,8 @@ export default {
       hot: [],
       hotCur: [],
       hotPage: 0,
-      stdPrice: null
+      stdPrice: null,
+      zoom: {x: 0, y: 0}
     }
   },
   methods: {
@@ -319,6 +323,8 @@ export default {
         width 100%
         height 380px
         border 1px solid #dedede
+        position relative
+        cursor move
         img
           background-color #dedede
       .small-wrap
