@@ -14,6 +14,9 @@
         <div class="avatar">
           <img src="" alt="">
         </div>
+        <div class="name" @click="$router.push('/goods/cart')" v-if="loggedUser.group != 5">
+          <span style="cursor: pointer;"><i class="icon">&#xe617;</i>购物车(<span class="num">{{num}}</span>)</span>
+        </div>
         <div class="name" @click="$router.push('/user/workbench/favorite')">
           <span style="cursor: pointer;"><i class="icon">&#xe60f;</i>收藏(<span class="num">{{favoriteTotal}}</span>)</span>
         </div>
@@ -135,10 +138,16 @@
 
 <script>
 import menunNav from './menuNav'
+import apiMallCart from '../../api/apiMallCart'
 export default {
   name: 'userHeader',
   components: {
     menunNav
+  },
+  data () {
+    return {
+      num: 0
+    }
   },
   computed: {
     msgs () {
@@ -160,11 +169,29 @@ export default {
     },
     message () {
       this.$router.push('/user/message')
+    },
+    async getNum () {
+      try {
+        await apiMallCart.getNum(
+          (result) => {
+            const {data: {total}} = result
+            this.num = total
+          }
+        )
+      } catch (e) {
+        this.$message(
+          {
+            type: 'error',
+            message: '网络有点小问题'
+          }
+        )
+      }
     }
   },
   mounted () {
     this.$store.dispatch('getMessageNumber')
     this.$store.dispatch('getFavoriteNumber')
+    this.getNum()
   }
 }
 </script>
