@@ -336,7 +336,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="stylus" scoped>
     .magnifier-box{
         width: 100%;
         height: 100%;
