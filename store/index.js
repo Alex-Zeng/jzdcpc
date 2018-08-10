@@ -6,6 +6,7 @@ import orders from './modules/orders'
 import favorite from './modules/favorite'
 import message from './modules/message'
 import notice from './modules/notice'
+import cart from './modules/cart'
 // import createLogger from '../helper/logger'
 import category from './modules/category'
 import {getUserFromReqCookie, getTokenFromReqCookie} from '../helper/auth'
@@ -39,7 +40,8 @@ const store = () =>
       favorite,
       message,
       notice,
-      category
+      category,
+      cart
     },
     strict: debug
     // plugins: debug ? [createLogger()] : []

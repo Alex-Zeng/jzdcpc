@@ -56,7 +56,6 @@
 
 <script>
 import top from './top'
-import apiMallCart from '../../api/apiMallCart'
 export default {
   name: 'indexHeader',
   components: {
@@ -74,6 +73,9 @@ export default {
   computed: {
     token () {
       return this.$store.getters.loggedToken
+    },
+    num () {
+      return this.$store.getters.cartNum
     },
     group () {
       if (this.$store.getters.loggedUser) {
@@ -94,7 +96,6 @@ export default {
       show: false,
       key: '',
       type: 0,
-      num: 0,
       selectId: -1,
       slogan: false
     }
@@ -140,12 +141,7 @@ export default {
     async getNum () {
       if (this.token) {
         try {
-          await apiMallCart.getNum(
-            (result) => {
-              const {data: {total}} = result
-              this.num = total
-            }
-          )
+          await this.$store.dispatch('getCartNum')
         } catch (e) {
           this.$message(
             {
