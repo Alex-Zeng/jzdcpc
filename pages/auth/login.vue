@@ -62,7 +62,7 @@
     <div
       class="login-form"
       v-show="step == 2"
-      style="padding-top: 100px; height: 450px;"
+      style="padding-top: 40px; height: 450px;"
       element-loading-text="提交中..."
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
