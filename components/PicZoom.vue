@@ -90,7 +90,7 @@
         methods: {
             initTime(){
                 this.init=false
-                let box=this.$refs[this.id]
+                let box= document.getElementById("lookZoomBox")
                 this.imgbox=box
                 this.cover=box.querySelector('.mouse-cover')
                 this.cover.style.width=(this.imgbox.offsetWidth/this.scale)+'px'
@@ -104,7 +104,6 @@
                 }else{
                     imgsrc=this.imgUrl
                 }
-                
                 this.img=new Image()
                 this.img.src=imgsrc
                 this.img.onload=()=>{
@@ -116,23 +115,23 @@
                     this.init=true
                 }
                 if(this.canvas){
-                    this.canvas.parentNode.removeChild(this.canvas);
-                    this.canvas=null
-                }
-                this.canvas=document.createElement('canvas')
-                this.canvas.className='mouse-cover-canvas'
-                this.canvas.style.position='absolute'
-                this.canvas.style.left=(this.imgbox.offsetLeft+this.imgbox.offsetWidth+1)+'px'
-                this.canvas.style.top=this.imgbox.offsetTop+'px'
-                this.canvas.style.border='1px solid #eee'
-                this.canvas.style.zIndex='99999'
-                this.canvas.height=this.imgbox.offsetHeight
-                this.canvas.width=this.imgbox.offsetWidth
-                this.canvas.style.display='none'
-                document.getElementById('lookZoomBox').append(this.canvas)
-                // document.body.append(this.canvas)
-                this.ctx=this.canvas.getContext("2d");
-                this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+                        this.canvas.parentNode.removeChild(this.canvas);
+                        this.canvas=null
+                    }
+                    this.canvas=document.createElement('canvas')
+                    this.canvas.className='mouse-cover-canvas'
+                    this.canvas.style.position='absolute'
+                    this.canvas.style.left=(this.imgbox.offsetLeft+this.imgbox.offsetWidth+1)+'px'
+                    this.canvas.style.top=this.imgbox.offsetTop+'px'
+                    this.canvas.style.border='1px solid #eee'
+                    this.canvas.style.zIndex='99999'
+                    this.canvas.height=this.imgbox.offsetHeight
+                    this.canvas.width=this.imgbox.offsetWidth
+                    this.canvas.style.display='none'
+                    document.getElementById("lookZoomBox").appendChild(this.canvas)
+                    // document.body.appendChild(this.canvas)
+                    this.ctx=this.canvas.getContext("2d");
+                    this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
             },
             initBox(){
                 this.showImg=false
@@ -356,6 +355,7 @@
         }
         img{
             width: 100%;
+            height: 100%;
         };
         .mouse-cover{
             position: fixed;

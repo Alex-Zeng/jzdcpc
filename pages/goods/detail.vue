@@ -10,7 +10,7 @@
       <div class="preview-wrap clearfix">
         <div class="look-at">
           <div class="big">
-            <PicZoom :url="detail.imgList && detail.imgList[select].img" :scale="3" :scroll="true" v-if="detail.imgList && detail.imgList[select].img"></PicZoom>
+            <PicZoom :url="detail.imgList && detail.imgList[select].img" :scale="2" :scroll="true" v-if="detail.imgList && detail.imgList[select].img"></PicZoom>
             <img width="100%" height="100%" :src="detail.imgList && detail.imgList[select].img" alt="" v-else>
           </div>
           <div class="small-wrap">
