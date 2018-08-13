@@ -2,7 +2,7 @@
   <div class="setting-wrap">
     <div class="setting-tabs clearfix">
       <nuxt-link to="/user/setting/cert" :class="{active: type == 1, 'tabs-item': true}">
-        企业信息变更
+        {{loggedUser.group == 6 ? '企业信息认证' : '企业信息变更'}}
       </nuxt-link>
       <nuxt-link to="/user/setting/safe" :class="{active: type == 2, 'tabs-item': true}">
         安全设置

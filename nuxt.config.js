@@ -34,7 +34,7 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge, chrome=1' },
-      { hid: 'description', name: 'description', content: 'jzdc web project that base on Nuxt.js Framework' }
+      { hid: 'description', name: 'description', content: '集众电采-打造家电产业链整合服务平台' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

@@ -8,7 +8,7 @@
           <el-breadcrumb-item to="/goods/cart">采购清单</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
-      <empty v-if="list.length <= 0"></empty>
+      <empty v-if="list.length <= 0" text="购物车中暂无商品" link="/" img="/empty/order_empty.png" :styles="{width: '230px'}"></empty>
       <div v-else>
         <div class="title-bar">
           <ul class="clearfix">
