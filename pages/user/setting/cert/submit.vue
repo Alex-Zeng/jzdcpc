@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <div class="label"><span>*</span>选填资料（未三证合一）：</div>
+    <div class="label">选填资料（未三证合一）：</div>
     <div class="imgBox clearfix">
       <div class="item">
         <uploadImg id="6" v-model="form.orgStructureCode" :defaultPath="form.orgStructureCodePath" title="组织机构代码证"></uploadImg>
