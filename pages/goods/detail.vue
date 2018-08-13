@@ -205,6 +205,7 @@ export default {
                 message: msg
               }
             )
+            this.$store.dispatch('getCartNum')
           } else {
             if (msg == '没有权限操作') {
               this.$message.error('请先进行企业认证')

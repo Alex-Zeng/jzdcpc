@@ -74,7 +74,7 @@
         </div>
       </div>
       <div v-for="(item, k) in goodsList" :id="item.id" :key="item.id" class="main-floor">
-        <div class="floor-nav">
+        <div class="floor-nav" :style="{background: goodsListImg[k].bg}">
           <h3>{{item.name}}</h3>
           <nuxt-link  class="el-button"  v-for="i in item.pushTypeList" :id="i.id" :key="i.id" :to='`/goods/search/%7B"type":0,"cateId":${i.id},"selectId":${item.id},"childId":${i.id}%7D`'>{{i.name}}</nuxt-link>
           <img :src="goodsListImg[k].img" alt="">
@@ -315,30 +315,6 @@ body{
   color #2475E2
   background #f7f7f7
 }
-.main-floor:nth-child(1) .floor-nav{
-  background linear-gradient(#9DB9FC, #7E9FF2)
-}
-.main-floor:nth-child(2) .floor-nav{
-  background linear-gradient(#9DC6FC, #7EB0F2)
-}
-.main-floor:nth-child(3) .floor-nav{
-  background linear-gradient(#6ABFD9, #46ACCB)
-}
-.main-floor:nth-child(4) .floor-nav{
-  background linear-gradient(#9D9DFC, #7E7EF2)
-}
-.main-floor:nth-child(5) .floor-nav{
-  background linear-gradient(#9DB5FC, #7E9BF2)
-}
-.main-floor:nth-child(6) .floor-nav{
-  background linear-gradient(#6DC9DA, #43B7CE)
-}
-.main-floor:nth-child(7) .floor-nav{
-  background linear-gradient(#52D9C2, #2ED4B8)
-}
-.main-floor:nth-child(8) .floor-nav{
-  background linear-gradient(#E3C471, #DDB447)
-}
 .floor-nav img{
   position absolute
   right 20px
@@ -436,14 +412,14 @@ export default {
       total: {},
       goodsList: [],
       goodsListImg: [
-        {img: require('@/assets/img/index/bingxiang.png')},
-        {img: require('@/assets/img/index/xiyiji.png')},
-        {img: require('@/assets/img/index/kongtiao.png')},
-        {img: require('@/assets/img/index/xiaodugui.png')},
-        {img: require('@/assets/img/index/quanzidong.png')},
-        {img: require('@/assets/img/index/fucai.png')},
-        {img: require('@/assets/img/index/baozhuangyinshua.png')},
-        {img: require('@/assets/img/index/yuancailiao.png')}
+        {img: require('@/assets/img/index/bingxiang.png'), bg: 'background linear-gradient(#9DB9FC, #7E9FF2)'},
+        {img: require('@/assets/img/index/xiyiji.png'), bg: 'background linear-gradient(#9DC6FC, #7EB0F2)'},
+        {img: require('@/assets/img/index/kongtiao.png'), bg: 'background linear-gradient(#6ABFD9, #46ACCB)'},
+        {img: require('@/assets/img/index/xiaodugui.png'), bg: 'background linear-gradient(#9D9DFC, #7E7EF2)'},
+        {img: require('@/assets/img/index/quanzidong.png'), bg: 'background linear-gradient(#9DB5FC, #7E9BF2)'},
+        {img: require('@/assets/img/index/fucai.png'), bg: 'background linear-gradient(#6DC9DA, #43B7CE)'},
+        {img: require('@/assets/img/index/baozhuangyinshua.png'), bg: 'background linear-gradient(#52D9C2, #2ED4B8)'},
+        {img: require('@/assets/img/index/yuancailiao.png'), bg: 'background linear-gradient(#E3C471, #DDB447)'}
       ],
       subFloorNav: []
     }

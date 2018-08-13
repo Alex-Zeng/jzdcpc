@@ -224,6 +224,7 @@ export default {
                 type: 'success',
                 message: msg
               })
+              this.$store.dispatch('getCartNum')
               this.getList()
             }
           }, {ids})
