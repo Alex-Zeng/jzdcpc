@@ -11,5 +11,6 @@
 
 <script>
 export default {
+  middleware: 'lockCert'
 }
 </script>

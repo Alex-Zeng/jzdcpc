@@ -207,6 +207,9 @@ export default {
             this.pid = {id: areaIds[0], name: names[0]}
             this.cid = {id: areaIds[1], name: names[1]}
             this.countyid = {id: areaIds[2], name: names[2]}
+            this.form.areaId = areaIds[2]
+            // 触发检验
+            this.$refs['addrForm'].validate()
           })
         }
       } else {
@@ -362,18 +365,24 @@ export default {
       })
     },
     async getProvince (provinceId) {
+      this.pid = ''
       await apiAddress.getLevelArea({provinceId, cityId: 0}, (data) => {
         const {data: {list}} = data
         this.province = list
       })
     },
     async getCity ({id}) {
+      this.cid = ''
+      this.countyid = ''
+      this.form.areaId = ''
       await apiAddress.getLevelArea({provinceId: id, cityId: 0}, (data) => {
         const {data: {list}} = data
         this.city = list
       })
     },
     async getCounty ({id}) {
+      this.countyid = ''
+      this.form.areaId = ''
       await apiAddress.getLevelArea({provinceId: 0, cityId: id}, (data) => {
         const {data: {list}} = data
         this.county = list

@@ -207,9 +207,11 @@ export default {
             )
             this.$store.dispatch('getCartNum')
           } else {
-            if (msg == '没有权限操作') {
-              this.$message.error('请先进行企业认证')
-              this.$router.push('/user/setting/cert')
+            if (status == 1) {
+              if (this.group != 4) {
+                this.$message.error('请先进行企业认证')
+                this.$router.push('/user/setting/cert')
+              }
             } else {
               this.$message.error(msg)
             }
@@ -221,6 +223,9 @@ export default {
     }
   },
   mounted () {
+    setTimeout(() => {
+      document.body.scrollTop = document.documentElement.scrollTop = 0
+    })
     const {params: {id}} = this.$route
     this.specLoading = true
     this.getHot()
