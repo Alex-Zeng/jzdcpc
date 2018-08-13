@@ -1,0 +1,301 @@
+<template>
+<div>
+    <indexHeader></indexHeader>
+    <div class="wrap">
+    <p>
+    <br/>
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-size: 19px"><strong>集众电采用户注册协议</strong></span>
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <br/> 
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        本协议由您与津晶科技信息服务（广州）有限责任公司（以下简称“津晶科技”）签订，本协议具有法律效力。 在申请注册时，您应当详细阅读了本协议所有内容，您充分理解并同意接受本协议的全部内容。集众电采互联网平台（以下简称“集众电采”）是津晶科技独立开发、运营的第三方电子商务平台。本协议适用于集众电采的用户（以下简称<span style="font-family:宋体, serif"><span>&quot;</span></span>用户<span style="font-family:宋体, serif"><span>&quot;</span></span>、<span style="font-family:宋体, serif"><span>&quot;</span></span>您<span style="font-family:宋体, serif"><span>&quot;</span></span>），若您使用集众电采（包括但不限于以任何形式接通、进入、浏览集众电采，或者使用集众电采的各项服务、功能等），您的使用行为将被视为以事实行为对本用户协议全部内容的知晓、认可并同意遵守。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        津晶科技有权根据业务需要酌情修订本协议，并以网站公告的形式进行更新，不再单独通知予您。经修订的协议一经在集众电采公布，即产生效力。如您不同意相关修订，请您立即停止注册。如您继续使用集众电采服务，则将视为您已接受经修订的协议，当您与津晶科技发生争议时，应以最新的协议为准。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <br/> 
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        第<span style="font-family:宋体, serif"><span>1</span></span>条 服务条款的确认和接受
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>1</span></span>）若您已经注册为集众电采用户，即表示您已充分阅读、理解并同意自己与津晶科技订立本用户服务协议，且您自愿受本用户服务协议的条款约束。如果您拒绝接受本用户服务协议，您必须立即放弃使用集众电采。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>2</span></span>）津晶科技有权就集众电采提供某一项功能或服务制订使用规则、服务规则、说明、使用协议或服务协议，该等规则内容一经正式在集众电采公布，即为本协议不可分割的组成部分，您同样应当遵守。如您继续使用该项功能或服务的，即视为您对前述规则、说明或协议的接受。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <br/> 
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        第<span style="font-family:宋体, serif"><span>2</span></span>条 用户资格
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>1)</span></span>需要做企业认证的用户，均须取得其所属企业、团体的合法授权，且提交的资料通过津晶科技核实，方可获取相应业务操作资格。申请认证的用户须向津晶科技提供包括但不限于法定代表人的身份证扫描件、企业证照（包括营业执照、组织机构代码证和税务登记证）、授权委托书照片、从业资质证书等资料。通过认证的用户执行年检制度，津晶科技有权要求用户每年提供相关材料或更新信息。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>2)</span></span>津晶科技有权禁止被取消用户资格的自然人、法人及其他组织再次使用集众电采。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <br/> 
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        第<span style="font-family:宋体, serif"><span>3</span></span>条 用户权利与义务
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>1</span></span>）用户有权根据本服务协议及集众电采发布的相关规则，利用本网站查找相关资源信息、在线发布产品或商业采购，参加本网站的有关活动及有权享受本网站提供的其他有关资讯及信息服务。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>2</span></span>）用户在使用集众电采时，须保证遵守国家的法律法规和规章制度，遵守集众电采的有关协议、规定、规则、程序和惯例，不得利用集众电采从事任何非法活动。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>3</span></span>）用户有权根据需要更改登录密码。用户自行负责对会员账号、密码和权限的管理，并对其账号发生的所有行为负责。如果因用户未妥善管理账号、密码或者管理不善造成的信息泄露、利益受损或其他不合规行为，均由用户自己承担，津晶科技不承担任何责任。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>4</span></span>）用户不得将账号、密码及相关服务销售、转让或赠与任何第三方，由此造成的一切后果和责任均由用户承担。如遇以上情形，津晶科技并有权单方面终止对用户提供的服务，直至取消您正在使用的账号。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>5</span></span>）用户确保通过集众电采发布的所有信息（内容包括但不限于个人信息、商业信息，形式包括但不限于文字、图片、视频）的真实性、准确性、即时性、完整性和合法性，并独立承担所有责任。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>6</span></span>）用户通过集众电采与其他的用户所发生的任何业务和法律纠纷，均由用户方自行解决，与津晶科技无关。倘若您与一名或一名以上用户发生争议，您同意免除津晶科技（包括津晶科技代理人和雇员）在因该等争议而引起的，或在任何方面与该等争议有关的不同种类和性质的任何<span style="font-family:宋体, serif"><span>(</span></span>实际和后果性的<span style="font-family:宋体, serif"><span>)</span></span>权利主张、要求和损害赔偿等方面的责任。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>7</span></span>）用户应遵守国家相关法律和规定，不得利用津晶科技及集众电采从事任何有违法律和社会公德的活动；不得传输任何非法的、骚扰性的、中伤他人的、辱骂性的、恐吓性的、伤害性的、庸俗的、淫秽的等信息；不得传输任何涉及国家安全的资料；不得侵犯任何第三方著作权、专利、商标、商业秘密、隐私权、名誉权或其它权利；不得干扰集众电采的正常服务秩序。否则，津晶科技有权取消其账号，有权单方面终止对用户提供的服务。相关系统记录有可能作为证据提交司法机关。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>8</span></span>）如因用户通过集众电采使用的服务或线下的商务行为，致使任何单位、个人对津晶及津晶关联企业提起的诉讼、仲裁或其他法律程序而产生的费用及遭受的损失，一切均由用户负责赔偿。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <br/> 
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        第<span style="font-family:宋体, serif"><span>4</span></span>条 信息收集和保护
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>1</span></span>）您提供发布的企业信息、产品服务信息、报价、需求信息、招投标信息将被显示在公共区域，对任何用户来说是公开的。请注意所有在这些场所公开的信息会成为公共信息，请您在决定公布前仔细考虑。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>2</span></span>）当您在集众电采注册成为会员时，集众电采需要收集您的企业信息、供应和需求信息、产品和服务信息、价格信息、联系人信息等信息。同时，集众电采会将相关信息汇聚到其数据库系统中，供其他用户授权访问。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>3</span></span>）集众电采有可能自动接收并记录您的浏览器和计算机上的信息，其中包括您的<span style="font-family:宋体, serif"><span>IP</span></span>地址，<span style="font-family:宋体, serif"><span>cookie</span></span>中的信息、软硬件特征信息、以及您需求的网页记录。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>4</span></span>）集众电采会对您及您的公司的身份和交易数据进行综合统计，并将相关数据进行分析和加工、再利用。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>5</span></span>）您同意津晶科技以及集众电采利用您的信息与您联络，并向您提供您感兴趣的信息，如：产品信息、采购信息。您接受本服务协议即为同意接收这些资料。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>6</span></span>）您授予津晶科技及集众电采无偿使用用户提交的“信息资料”的权利，即津晶科技及集众电采有权（全部或部分地）使用、复制、修订、改写、发布、翻译、分发、执行和展示<span style="font-family:宋体, serif"><span>&quot;</span></span>信息资料<span style="font-family:宋体, serif"><span>&quot;</span></span>或制作其派生作品，以任何形式、媒体或技术将<span style="font-family:宋体, serif"><span>&quot;</span></span>信息资料<span style="font-family:宋体, serif"><span>&quot;</span></span>纳入其他作品内。同时，您同意津晶科技在未改变您提供信息的实质内容的情况下免于承担因该信息引起的任何法律责任。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>7</span></span>）集众电采保证不对外公开或向任何第三方提供您的个人信息，但是存在下列情形之一的除外：
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        （<span style="font-family:宋体, serif"><span>1</span></span>）公开或提供相关信息之前获得您许可的；
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        （<span style="font-family:宋体, serif"><span>2</span></span>）根据法律或政策规定而公开或提供的；
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        （<span style="font-family:宋体, serif"><span>3</span></span>）只有公开或提供您的个人信息，才能提供您需要的服务的；
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        （<span style="font-family:宋体, serif"><span>4</span></span>）只有公开或提供您的个人信息，才能提供您需要的集众电采服务的；
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        （<span style="font-family:宋体, serif"><span>5</span></span>）根据国家权力机构要求公开或提供的；
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        （<span style="font-family:宋体, serif"><span>6</span></span>）根据本协议其他条款约定而公开或提供的。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        第<span style="font-family:宋体, serif"><span>5</span></span>条 责任声明
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>1</span></span>）在不影响用户发布信息的真实性的情况下，集众电采有权对于用户发布的信息进行策划宣传、向第三方网站推广、链接、编辑等处理。对于用户通过集众电采发布的任何虚假的、非法的、中伤他人的、欺骗性的或侵犯他人合法权益的信息资料，津晶科技将保留不通知用户即予以删除的权利，并可以单方面解除合同。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>2</span></span>）集众电采上的其数据信息均由用户方自主提供，集众电采仅作客观数据呈现，用户须自主判断其数据的真实性、有效性。津晶科技不对集众电采上任何一个用户提供信誉保障和责任担保。津晶科技不承诺商贸信息的真实性或准确性，不控制交易所涉及的产品或服务的质量、安全或合法性，不具备管理交易方履行其在贸易协议项下的各项义务的能力。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>3</span></span>）津晶科技将尽最大努力来减少错误，但网站上提供的服务和信息仍可能包含错误内容，津晶科技对用户因使用集众电采而造成的损失不负法律责任。津晶科技对其服务和信息不作保证，不论什么情况下对用户因使用集众电采而造成的直接、间接、偶尔的、特殊的、惩罚性的损害或其他一切损害不负法律责任。若您对集众电采提供的部分或所有服务不满，您唯一的补救措施是停止使用这些服务。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>4</span></span>）津晶科技不保证集众电采是不受干扰的、没有故障的。津晶科技不对因人为或非人为因素造成的用户与集众电采服务器之间的连接受阻而无法访问负责。您同意独立承担因操作者原因、第三方软件故障、硬件故障、网络故障、病毒、黑客、政策调整、集众电采更新、服务器配置等各种原因导致的服务中断、操作或传输的迟延、未经授权的进入等引起的损失。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>5</span></span>）由于地震、台风、水灾、火灾、战争、法律法规、意外事故以及其他不可抗力事件或非因津晶科技原因造成的停电、服务器不能使用等，致使集众电采相关服务履行迟延或不能履行的，津晶科技不承担任何责任。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>6</span></span>）集众电采含有与其他网站的链接。津晶科技并不能控制这些网站及其所提供的资源，所以对链接网站上的内容、广告、服务、产品信息的真实、准确、即时、完整性不做任何承诺，并且对链接网站不承担任何法律责任。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>7</span></span>）任何平台的通知都将以电子邮件或系统消息或手机短信的形式，向您的电子邮箱地址或平台消息中心或手机发送（您同意，如您修改原注册时提交的电子邮箱地址、并通过津晶科技审核的，以新电子邮箱地址为准）。该电子邮件进入前述电子邮箱接收系统时，视为送达。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>8</span></span>）津晶科技认为申请注册的用户与津晶科技形成竞争或对集众电采正常运营造成损害时，可拒绝其申请和注册。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>9</span></span>）任何因用户违反本协议而造成津晶科技的经济或名誉损失，津晶科技有权追究其经济责任与法律责任。即使津晶科技未就您的某项违约行为立刻采取行动，并不表明津晶科技放弃就任何继后或类似的违约事件采取行动的权利。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>10</span></span>）津晶科技转让本协议无需征得您的同意，津晶科技享有单方转让或转委托第三方履行的权利。在该等转让或委托中，您的用户信息也可能将被转让给该第三方，以使该第三方可以继续有效地为您提供服务。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <br/> 
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        第<span style="font-family:宋体, serif"><span>6</span></span>条 知识产权
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>1</span></span>）津晶科技对其开发集众电采享有的知识产权，受法律保护。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>2</span></span>）除非有合同书面约定，津晶科技未向用户授予与任何软件著作权、专利权、商标专用权、商业秘密及其他权利有关的任何权利。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>3</span></span>）集众电采上所有内容的选材、整理、编排、排版、汇编，以及由津晶科技创作的文字、图片等作品的著作权，无论是否明示，均属津晶科技所有。任何自然人、法人及其他组织未经津晶科技书面授权或许可，不得修改、出版、传播、参与传播、销售、制作衍生作品，或以其他任何方式使用整体或部分的集众电采上的内容， 包括但不限于公司信息、产品信息，津晶科技将保留追究其法律及经济责任的权利。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>4</span></span>）所有其它在集众电采上出现的商标为它们各自的权利人所有。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>5</span></span>）未经津晶科技书面授权，用户出现以下任何一种行为，均视为对于津晶科技的侵权：
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>将集众电采及其信息向任何第三方提供、销售、出租、出借、转让或披露、让其接触、修改或分许可、转许可、通过信息网络传播或以其他形式供他人利用。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>对集众电采及其信息进行全部或部分地翻译、分解、反向编译、反汇编、反向工程或其他试图从软件导出程序源代码的行为，或在软件的基础上书写或开发衍生软件、衍生产品或其他软件。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>限制、破坏或绕过集众电采的加密措施。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>去除、掩盖或更改集众电采上有关软件著作权或商标的标志。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>将集众电采及其信息用于除甲方内部使用以外的任何第三方，包括但不限于向第三方提供数据处理服务、应用服务、商业共享或其他软件共享安排。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <br/> 
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        第<span style="font-family:宋体, serif"><span>7</span></span>条 平台收费
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>1</span></span>）实名认证后成为普通会员及使用对应的普通会员服务是免费的；购买高级服务权限后，在有效期内享受相应的服务；选择其他收费服务，需要支付相应费用，具体费用标准请参看集众电采上公布的相应说明。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>2</span></span>）若您未及时支付相应费用，津晶科技有权在任何时刻对于您所享受的会员权益进行调整，而无需征得您的同意。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>3</span></span>）津晶科技保留调整价格以及修改费用条款的权利，一旦调整或修改，将立即在集众电采上公布。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>4</span></span>）津晶科技不承担您因使用集众电采的服务而需支付的软硬件、税收及其它费用。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>5</span></span>）津晶科技有权在未经通知的情况下随时改变或不继续提供某些或全部用户服务权益。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <br/> 
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="color:#ff0000">第<span style="font-family:宋体, serif"><span>8</span></span>条 业务共享</span>
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span style="undefinedcolor:#ff0000">1</span>）津晶科技承诺对您的信息进行保密。除法律法规及监管部门另有规定外，我们仅在以下情形中与第三方共享您的信息，第三方包括我们的关联公司、合作金融机构以及其他合作伙伴。在将信息提供给第三方前，我们将尽商业上合理的努力评估该第三方收集信息的合法性、正当性、必要性。我们会与第三方签订相关法律文件并要求第三方处理您的个人信息时遵守法律法规，尽力要求第三方对您的信息采取保护措施。<span style="font-family:宋体, serif"><span><br/> 2</span></span>）为了让您完成交易、实现交易目的，我们需要向您的交易相对方提供交易商品信息与相关支付信息。<span style="font-family:宋体, serif"><span><br/> 3</span></span>）某些产品或服务可能由第三方提供或由我们与第三方共同提供，因此，只有共享您的信息，才能提供您需要的产品或服务。例如：您通过集众电采需求金融产品时，我们需要向合作金融机构提供您的有效证件信息与联系方式，以保证您完成需求流程合规性要求以及保证您的资产准确无误的登记。<span style="font-family:宋体, serif"><span><br/> 4</span></span>）如您选择参与我们和第三方联合开展的抽奖、竞赛或类似推广活动，我们可能与其共享活动过程中产生的、为完成活动所必要的信息，以便第三方能及时向您发放奖品或为您提供服务，我们会依据法律法规或国家标准的要求，在活动规则页面或通过其他途径向您明确告知需要向第三方提供何种个人信息。<span style="font-family:宋体, serif"><span><br/> 5</span></span>）事先获得您明确同意的情况下，我们会在法律法规允许且不违背公序良俗的范围内，依据您的授权范围与第三方共享您的信息。</span>
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span style="undefinedcolor:#ff0000">6</span>）为了提升信息处理效率，降低信息处理成本，或提高信息处理准确性，我们可能会委托有能力的我们的关联公司或其他专业机构代表我们来处理用户信息，但我们会通过书面协议等方式要求受托公司遵守严格的保密义务及采取有效的保密措施，禁止其将这些信息用于未经您授权的用途。在委托关系解除时，受托公司不再保存个人信息。我们承诺对此负责。</span>
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <br/> 
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        第<span style="font-family:宋体, serif"><span>9</span></span>条 中止与终止
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>1</span></span>）对于用户的以下行为，津晶科技有权在未告知的情况下中止或终止其相关服务或者拒绝其以任何形式使用集众电采，且不对因此给您造成的服务减少等承担任何责任，并保留追究您法律责任的权利：
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>用户所提供的信息存在虚假信息，包括但不应限于营业执照、法定代表人信息、企业或产品信息、资质信息、个人信息等。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>用户所提供的营业执照系冒用，或证照信息与实际经营状况不一致时，或用户未取得其服务的企业、组织合法授权。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>利用集众电采滥发重复信息，发布国家法律法规等禁止或限制发布的信息，发布不属于会员经营范围的信息，或与集众电采服务无关的信息；
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>冒用其他企业的名义发布商业信息，进行商业活动；
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>计划破坏、攻击集众电采网站系统、网络的完整性，或者试图擅自进入集众电采网站电脑系统、网络；
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>使用或提供含有毁坏、干扰、截取或侵占任何系统、数据或个人资料的任何电脑病毒、伪装破坏程序、电脑蠕虫、定时程序炸弹或其他破坏性程序；
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>盗用他人在集众电采上的登录名和<span style="font-family:宋体, serif"><span>/</span></span>或密码；未经集众电采同意的账号出售或授权使用行为；通过或从事涉及津晶的欺诈活动；通过或从事涉及集众电采的知识产权侵权行为；
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>如发现用户利用津晶科技及集众电采所提供的服务和信息用于商业用途并与津晶科技形成竞争或损害津晶科技利益的，津晶科技有权单方终止其用户资格。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        •<span style="font-family:宋体, serif"> </span>违反国家法律法规、规章制度、津晶科技有关协议、规定、规则、程序和惯例的其他行为。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>2</span></span>）如您连续一年未使用您的账号登录过本网站，您的账号可能被注销，所有服务将同时终止。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>3</span></span>）您同意，在津晶科技未向您收费的情况下，津晶科技可自行全权决定以任何理由<span style="font-family:宋体, serif"><span>(</span></span>包括但不限于津晶科技认为您已违反本协议的字面意义和精神，或您以不符合本协议的字面意义和精神的方式行事<span style="font-family:宋体, serif"><span>)</span></span>终止您的账号、密码以及相关服务。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>4</span></span>）您同意，在津晶科技向您收费的情况下，津晶科技应基于合理的怀疑且经通知的情况下实施终止服务的行为。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>5</span></span>）您进一步承认和同意，津晶科技根据本协议规定终止您服务的情况下可立即使您的账号无效，或注销您的账号以及在您的账号内的所有相关资料和档案，和<span style="font-family:宋体, serif"><span>/</span></span>或禁止您进一步接入该等档案或使用相关服务。账号终止后，津晶科技没有义务为您保留原账号中或与之相关的任何信息，或转发任何未曾阅读或发送的信息给您或第三方。此外，您同意，津晶科技不会就终止向您提供服务而对您或任何第三者承担任何责任。
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        集众电采
+    </p>
+    <p style="margin-bottom: 0;line-height: 150%">
+        <span style="font-family:宋体, serif"><span>2018</span></span>年<span style="font-family:宋体, serif"><span>8</span></span>月
+    </p>
+    <p>
+        <br/>
+    </p>
+  </div>
+  <indexFooter></indexFooter>
+</div>
+</template>
+
+<script>
+import indexHeader from "@/components/index/header";
+import indexFooter from "@/components/index/footer";
+export default {
+  name: 'reg',
+  components: {
+    indexHeader,
+    indexFooter
+  }
+};
+</script>
+
+<style lang="stylus" scoped>
+.wrap
+    width 1300px
+    margin 0 auto
+    background #fff
+    padding 40px
+</style>
