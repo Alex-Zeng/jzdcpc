@@ -47,9 +47,6 @@
             下一步
           </el-button>
         </el-form-item>
-        <el-form-item class="protocol">
-          登录后表示您已同意<nuxt-link to="/">《集众电采用户服务协议》</nuxt-link>
-        </el-form-item>
         <el-form-item class="no-password" style="height: 30px;">
           <nuxt-link to="/auth" class="link" style="color:#ddd;">
             <i class="phone">&#xe640;</i><span>密码登录</span>
@@ -62,7 +59,7 @@
     <div
       class="login-form"
       v-show="step == 2"
-      style="padding-top: 100px; height: 450px;"
+      style="padding-top: 40px; height: 450px;"
       element-loading-text="提交中..."
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
@@ -89,9 +86,15 @@
           </el-input>
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary" class="login-button" style="margin-top: 10px" @click="register">
+          <el-button type="primary" class="login-button" style="margin-top: 10px" :disabled="!agree" @click="register">
             完成
           </el-button>
+        </el-form-item>
+
+        <el-form-item class="protocol">
+          <el-checkbox v-model="agree" style="margin-right: 5px;"/>我已同意
+          <a href="/protocol/reg" target="_blank">《集众电采用户服务协议》</a>
+          <a href="/protocol/secrecy" target="_blank">《保密协议》</a>
         </el-form-item>
 
         <el-form-item class="no-password">
@@ -117,6 +120,7 @@ export default {
     return {
       step: 1,
       loading: false,
+      agree: true,
       codeForm: {
         phone: '',
         code: '',
