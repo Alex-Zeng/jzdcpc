@@ -17,7 +17,7 @@ let serverConfig = {
   },
   proxy: {
     '/papi': {
-      target: 'http://jwapi-uat.jizhongdiancai.com/api',
+      target: 'http://scm.jizhongdiancai.com/api',
       pathRewrite: { '^/papi': '' }
     }
   }
