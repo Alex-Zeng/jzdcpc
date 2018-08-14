@@ -93,6 +93,7 @@
 <script>
 import apiAddress from '../../../api/apiAddress'
 import { phoneReg } from '../../../helper/reg'
+import areaJson from '../../../assets/json/area.json'
 export default {
   middleware: 'lockGroup',
   data () {
@@ -200,8 +201,18 @@ export default {
         this.form = {...obj}
         const {areaIds, areaName} = obj
         if (areaIds.length > 0) {
-          this.getCity({id: areaIds[0]})
-          this.getCounty({id: areaIds[1]})
+          const { area } = areaJson
+          area.forEach(i => {
+            if (i.id == areaIds[0]) {
+              this.getCity(i)
+              const { child } = i
+              child.forEach(j => {
+                if (j.id == areaIds[1]) {
+                  this.getCounty(j)
+                }
+              })
+            }
+          })
           setTimeout(() => {
             const names = areaName.split('-')
             this.pid = {id: areaIds[0], name: names[0]}
@@ -366,27 +377,18 @@ export default {
     },
     async getProvince (provinceId) {
       this.pid = ''
-      await apiAddress.getLevelArea({provinceId, cityId: 0}, (data) => {
-        const {data: {list}} = data
-        this.province = list
-      })
+      this.province = areaJson.area
     },
-    async getCity ({id}) {
+    async getCity (o) {
       this.cid = ''
       this.countyid = ''
       this.form.areaId = ''
-      await apiAddress.getLevelArea({provinceId: id, cityId: 0}, (data) => {
-        const {data: {list}} = data
-        this.city = list
-      })
+      this.city = o.child
     },
-    async getCounty ({id}) {
+    async getCounty (o) {
       this.countyid = ''
       this.form.areaId = ''
-      await apiAddress.getLevelArea({provinceId: 0, cityId: id}, (data) => {
-        const {data: {list}} = data
-        this.county = list
-      })
+      this.county = o.child
     }
   }
 }
