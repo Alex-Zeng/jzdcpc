@@ -75,22 +75,5 @@ module.exports = {
         })
       }
     }
-  },
-
-  /*
-  ** 配置axios
-  */
-  modules: [
-    '@nuxtjs/axios'
-  ],
-  axios: {
-    proxy: true
-    // See https://github.com/nuxt-community/axios-module#options
-  },
-  proxy: {
-    '/papi': {
-      target: 'http://192.168.3.135/api',
-      pathRewrite: { '^/papi': '' }
-    }
   }
 }
