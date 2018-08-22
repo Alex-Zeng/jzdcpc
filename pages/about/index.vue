@@ -3,7 +3,7 @@
     <div class="header">
       <div class="info">
         <p>
-          聚为财，众为本
+          集为财，众为本
         </p>
         <p>互利共赢</p>
       </div>
