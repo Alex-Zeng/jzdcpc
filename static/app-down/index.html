@@ -16,11 +16,15 @@
         <div>
             <a class="button" href="http://download.jizhongdiancai.com/index/androidNormal.html">
                 <img src="./img/guide/andrinod-icon.png" alt="">
-                Andrinod
+                Android
             </a>
-            <a class="button" href="http://download.jizhongdiancai.com/index/iphoneNormal.html">
+            <!--<a class="button" href="http://download.jizhongdiancai.com/index/iphoneNormal.html">
                 <img src="./img/guide/ios-icon.png" alt="">
                 iPhone
+            </a>-->
+            <a class="button" href="javascript:;" onclick="showCode()">
+              <img src="./img/guide/ios-icon.png" alt="">
+              iPhone
             </a>
             <a class="button" style="border: none" href="javascript:;">
                 <img src="./img/guide/sys.png" alt="">
@@ -43,7 +47,8 @@
             </h4>
             <div class="donw-btn">
                 <div class="donw-btn-">
-                  <a href="http://download.jizhongdiancai.com/index/iphoneNormal.html"><img src="./img/guide/ios-btn1.png" alt=""></a>
+                  <!--<a href="http://download.jizhongdiancai.com/index/iphoneNormal.html"><img src="./img/guide/ios-btn1.png" alt=""></a>-->
+                  <a href="javascript:;" onclick="showCode()"><img src="./img/guide/ios-btn1.png" alt=""></a>
                   <a href="http://download.jizhongdiancai.com/index/androidNormal.html"><img src="./img/guide/andrinod-btn.png" alt=""></a>
                 </div>
                 <img src="./img/guide/code.png" alt="">
@@ -73,7 +78,8 @@
             </ul>
             <div class="donw-btn">
                 <div class="donw-btn-">
-                  <a href="http://download.jizhongdiancai.com/index/iphoneNormal.html"><img src="./img/guide/ios-btn1.png" alt=""></a>
+                  <!--<a href="http://download.jizhongdiancai.com/index/iphoneNormal.html"><img src="./img/guide/ios-btn1.png" alt=""></a>-->
+                  <a href="javascript:;" onclick="showCode()"><img src="./img/guide/ios-btn1.png" alt=""></a>
                   <a href="http://download.jizhongdiancai.com/index/androidNormal.html"><img src="./img/guide/andrinod-btn.png" alt=""></a>
                 </div>
                 <img src="./img/guide/code.png" alt="">
@@ -91,7 +97,8 @@
             </h4>
             <div class="donw-btn">
                 <div class="donw-btn-">
-                  <a href="http://download.jizhongdiancai.com/index/iphoneNormal.html"><img src="./img/guide/ios-btn1.png" alt=""></a>
+                  <!--<a href="http://download.jizhongdiancai.com/index/iphoneNormal.html"><img src="./img/guide/ios-btn1.png" alt=""></a>-->
+                  <a href="javascript:;" onclick="showCode()"><img src="./img/guide/ios-btn1.png" alt=""></a>
                   <a href="http://download.jizhongdiancai.com/index/androidNormal.html"><img src="./img/guide/andrinod-btn.png" alt=""></a>
                 </div>
                 <img src="./img/guide/code.png" alt="">
@@ -99,6 +106,9 @@
         </div>
     </div>
     <div class="swiper-pagination"></div>
+</div>
+<div id="codeSahdow" onclick="hideCode()">
+  <img src="./img/guide/code.png" alt="">
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
 <script>
@@ -128,6 +138,12 @@
             },
         }
     });
+    function showCode () {
+      document.getElementById('codeSahdow').style.display = 'block'
+    }
+    function hideCode () {
+      document.getElementById('codeSahdow').style.display = 'none'
+    }
 </script>
 </body>
 </html>
