@@ -14,8 +14,7 @@
         <div class="avatar">
           <img src="" alt="">
         </div>
-        <div class="name" @click="$router.push('/goods/cartyy
-        ')" v-if="loggedUser.group != 5">
+        <div class="name" @click="$router.push('/goods/cartyy')" v-if="loggedUser.group != 5">
           <span style="cursor: pointer;"><i class="icon">&#xe617;</i>购物车(<span class="num">{{cartNum}}</span>)</span>
         </div>
         <div class="name" @click="$router.push('/user/workbench/favorite')">
