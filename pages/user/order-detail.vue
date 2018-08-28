@@ -517,6 +517,10 @@ export default {
           .spec
             font-size 12px
             color #999
+            width 120px
+            overflow hidden
+            white-space nowrap
+            text-overflow ellipsis
       .action
         color #2475e2
         cursor pointer

@@ -264,29 +264,40 @@ export default {
   },
   methods: {
     makeOrder () {
-      const receiverId = this.select
-      const channel = 0
-      const detail = JSON.stringify(this.cartList)
-      try {
-        apiOrders.make((result) => {
-          const {status, msg, data} = result
-          if (status !== 0) {
-            this.$message.error(msg)
-          } else {
-            this.$message({
-              type: 'success',
-              message: msg
-            })
-            sessionStorage.removeItem('carts')
-            sessionStorage.setItem('orderResult', JSON.stringify(data))
-            setTimeout(() => {
-              this.$router.replace('/goods/result')
-            })
-          }
-        }, {receiverId, channel, detail})
-      } catch (e) {
-        sessionStorage.setItem('carts', JSON.stringify(this.cartList))
-        this.$message.error('网络有点问题，请刷新后重试')
+      if (this.addressList.length > 0) {
+        const receiverId = this.select
+        const channel = 0
+        const detail = JSON.stringify(this.cartList)
+        try {
+          this.$confirm('确认相关信息是否填写正确?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            apiOrders.make((result) => {
+              const {status, msg, data} = result
+              if (status !== 0) {
+                this.$message.error(msg)
+              } else {
+                this.$message({
+                  type: 'success',
+                  message: msg
+                })
+                sessionStorage.removeItem('carts')
+                sessionStorage.setItem('orderResult', JSON.stringify(data))
+                setTimeout(() => {
+                  this.$router.replace('/goods/result')
+                })
+              }
+            }, {receiverId, channel, detail})
+          }).catch(() => {
+          })
+        } catch (e) {
+          sessionStorage.setItem('carts', JSON.stringify(this.cartList))
+          this.$message.error('网络有点问题，请刷新后重试')
+        }
+      } else {
+        this.$message.error('请添加收货地址')
       }
     },
     showInput () {
@@ -337,9 +348,12 @@ export default {
         ({list}) => {
           this.addressList = list
           list.forEach((i) => {
+            console.log(i.id)
             if (i.is_default) {
               this.select = i.id
               this.defaultAddr = i.id
+            } else {
+              this.select = list[0].id
             }
           })
         }
