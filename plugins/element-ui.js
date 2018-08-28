@@ -20,6 +20,7 @@ import {
   Pagination,
   Progress,
   Radio,
+  Row,
   Col,
   Select,
   Option,
@@ -35,7 +36,9 @@ import {
   Table,
   TableColumn,
   Tabs,
-  TabPane
+  TabPane,
+  Step,
+  Steps
 } from 'element-ui'
 import '../theme/button.css'
 import '../theme/radio-button.css'
@@ -52,6 +55,7 @@ import '../theme/pagination.css'
 import '../theme/progress.css'
 import '../theme/radio-group.css'
 import '../theme/radio.css'
+import '../theme/row.css'
 import '../theme/col.css'
 import '../theme/select.css'
 import '../theme/select-dropdown.css'
@@ -70,6 +74,8 @@ import '../theme/table.css'
 import '../theme/table-column.css'
 import '../theme/tabs.css'
 import '../theme/tab-pane.css'
+import '../theme/step.css'
+import '../theme/steps.css'
 
 export default () => {
   Vue.use(Button)
@@ -87,6 +93,7 @@ export default () => {
   Vue.use(Progress)
   Vue.use(Radio)
   Vue.use(Select)
+  Vue.use(Row)
   Vue.use(Col)
   Vue.use(Option)
   Vue.use(Tag)
@@ -102,6 +109,8 @@ export default () => {
   Vue.use(TableColumn)
   Vue.use(Tabs)
   Vue.use(TabPane)
+  Vue.use(Step)
+  Vue.use(Steps)
   Vue.prototype.$loading = Loading.service
   Vue.prototype.$message = Message
   Vue.prototype.$confirm = MessageBox.confirm
