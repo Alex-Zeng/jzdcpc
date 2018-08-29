@@ -244,6 +244,7 @@ export default {
           break
       }
       this.all.cateId = id
+      this.all.pageNumber = 1
       this.$router.push('/goods/search/' + JSON.stringify(this.all))
     },
     async search () {
