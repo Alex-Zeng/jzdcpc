@@ -17,6 +17,10 @@
         <nuxt-link to="/about" target="_blank">
           关于我们
         </nuxt-link>
+        ：:
+        <nuxt-link to="/suggest">
+          反馈建议
+        </nuxt-link>
       </div>
       <div class="add">
         <span>电话：(020)84125513</span>

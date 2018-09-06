@@ -36,5 +36,9 @@ export default {
   async service (cb, fileds) {
     const data = await request.post('/papi/order/service', fileds)
     cb(data)
+  },
+  async addSpecification (cb, fileds) {
+    const data = await request.post('/papi/goods/addSpecification', fileds)
+    cb(data)
   }
 }

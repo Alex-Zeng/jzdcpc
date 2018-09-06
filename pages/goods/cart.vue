@@ -41,9 +41,9 @@
               </li>
               <li class="item" style="width: 186px;">{{item.price}}</li>
               <li class="item" style="width: 138px;">
-                <el-input-number style="width: 138px;" v-model="item.quantity" :min="1" @change="updateNum(item.cartId, item.quantity)"></el-input-number>
+                <el-input-number style="width: 138px;" v-model="item.quantity" :min="item.moq?Number(item.moq):1" @change="updateNum(item,item.cartId, item.quantity)"></el-input-number>
               </li>
-              <li class="item" style="width: 280px; text-align: center;">{{(item.quantity*item.price).toFixed(2)}}</li>
+              <li class="item" style="width: 280px; text-align: center;">{{(item.quantity*item.price)}}</li>
               <li class="item action" style="width: 210px;text-align: center;">
                 <span class="op" @click="favorite(item.goodsId)">收藏商品</span>
                 <span class="op" @click="deleteIds(item.cartId)">删除</span>
@@ -57,7 +57,7 @@
           <span class="action" @click="$router.replace('/')">返回继续购物</span>
           <span class="action" @click="deleteAll">删除选中商品</span>
           <div class="right">
-            <span>已选择 {{count}} 件商品，总计<span style="color: #ff0000;">{{total.toFixed(2)}}</span>元</span>
+            <span>已选择 {{count}} 件商品，总计<span style="color: #ff0000;">{{total}}</span>元</span>
             <el-button
               class="order-btn"
               style="height: 80px;border:none;border-radius: 0;width: 150px;color: #ffffff;background-color: #ff0000;font-size: 18px;margin-left: 40px;"
@@ -163,12 +163,22 @@ export default {
         700
       )
     },
-    updateNum (id, number) {
+    changeNum (val, i) {
+      if (i.specPriceDetails) {
+        i.specPriceDetails.forEach((item) => {
+          if (item.minOrderQty <= val && item.maxOrderQty >= val) {
+            i.price = item.price
+          }
+        })
+      }
+    },
+    updateNum (item, id, number) {
       setTimeout(() => {
         apiMallCart.update((data) => {
         }, {id, number})
       })
       this.countAll()
+      this.changeNum(item.quantity, item)
     },
     countAll () {
       let count = 0
@@ -271,6 +281,10 @@ export default {
             const len = i.list.length
             group.push(false)
             check.push(new Array(len).fill(false))
+            i.list.forEach((item) => {
+              // 根据价格梯度显示价格
+              this.changeNum(item.quantity, item)
+            })
           })
           this.list = data
           this.groupAll = group

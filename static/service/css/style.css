@@ -263,6 +263,8 @@ html {
 }
 .footer-wrap .center-wrap .center-box p img {
   margin: 10px;
+  width: 108px;
+  height: 38px;
 }
 .footer-wrap .center-wrap .code {
   padding-left: 136px;
