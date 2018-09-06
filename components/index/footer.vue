@@ -19,8 +19,8 @@
         </p>
         <p>copyright © 2018 津晶科技 版权所有&emsp;&emsp;粤ICP备18037422号</p>
         <p>
-          <!--<a class="pn" href="http://webscan.360.cn/index/checkwebsite/url/www.jizhongdiancai.com"><img src="~assets/img/common/footer-360.png" alt=""></a>-->
-          <a class="pn" href='http://netadreg.gzaic.gov.cn/ntmm/WebSear/WebLogoPub.aspx?logo=440105105012017121300460'><img alt='' src='http://netadreg.gzaic.gov.cn/ntmm/default/images/logo_down.jpg' style='width:77px;height: 78px' /></a>
+          <a class="pn" href="http://webscan.360.cn/index/checkwebsite/url/www.jizhongdiancai.com"><img src="~assets/img/common/footer-360.png" alt=""></a>
+          <a class="pn" href='http://netadreg.gzaic.gov.cn/ntmm/WebSear/WebLogoPub.aspx?logo=440105105012017121300460'><img alt='' src='~assets/img/common/footer-hongdun.png'/></a>
           <a class="pn" href="http://www.miibeian.gov.cn"><img src="~assets/img/common/footer-icp.png" alt=""></a>
         </p>
       </div>
