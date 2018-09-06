@@ -26,34 +26,79 @@
           </div>
         </div>
         <div class="info-wrap">
-          <div class="title">{{detail.title}}</div>
+          <div class="title">
+            {{detail.title}}
+            <div class="collect">
+              <div style="color: #666666" v-if="!(detail.isFavorite)" @click.stop="favorite($route.params.id, detail.isFavorite)">
+                <i class="star">&#xe60f;</i>
+                <span>收藏</span>
+              </div>
+              <div v-else @click.stop="favoriteDelete($route.params.id, detail.isFavorite)">
+                <i style="color: #ff7900" class="star">&#xe60f;</i>
+                <span>已收藏</span>
+              </div>
+            </div>
+          </div>
           <div class="label">
             <span>单价</span>
-            <span class="money">¥{{stdPrice|| ((detail.min_price||0)+ '-' + (detail.max_price||0))}}</span>
-            <span class="uni">元/{{detail.unit}}</span>
+            <span class="money" v-if="detail.isDiscussPrice">议价</span>
+            <template v-else>
+              <span class="money" v-if="specificationsTarget.specPrice">
+                {{specificationsTarget.isDiscussPrice?'议价':specificationsTarget.specPrice}}
+              </span>
+              <span class="money" v-else>¥{{stdPrice|| ((detail.minPrice||0)+ '-' + (detail.maxPrice||0))}}</span>
+              <span class="uni">元<template v-if="specificationsTarget.specUnit">/{{specificationsTarget.specUnit}}</template></span>
+            </template>
+            <a href="tencent://message/?uin=964570305&Site=在线QQ&Menu=yes" style="display: inline-block;padding-top: 4px;padding-left: 10px;">
+              <img src="@/assets/img/goods/qq@2x.png" alt="">
+            </a>
           </div>
           <div class="info-item">
             <span class="name">供应商：</span>
-            <span>{{detail.supplier}}</span>
+            <span v-if="user">{{detail.companyName}}</span>
+            <span v-if="!user">供应商名称，
+              <span class="text-blue" @click="$router.push('/auth/login')">登录</span>
+              后可查看</span>
           </div>
           <div class="info-item">
-            <span class="name">采购数量：</span><el-input-number v-model="count" :min="1" label="描述文字"></el-input-number>
+            <span class="name">采购数量：</span><el-input-number v-model="count" :min="specificationsTarget.moq?Number(specificationsTarget.moq):1"></el-input-number>
           </div>
           <div class="info-item">
             <span class="name">计量单位：</span>
-            <span>{{detail.unit}}</span>
+            <span v-if="specificationsTarget.specUnit">{{specificationsTarget.specUnit}}</span>
           </div>
-          <div class="info-item type clearfix" v-for="(i, k) in detail.standard" :key="i.id">
-            <span class="name" style="float: left;">{{i.title}}：</span>
-            <div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;" v-if="k==0">
-              <el-button style="margin-top: 10px;" :type="choose[k] == item.color_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.color_id)">{{item.color_name}}</el-button>
+          <div class="info-item type clearfix" v-for="(i, k) in detail.specAttrs" :key="i.id">
+            <span class="name" style="float: left;">{{i.specAttrKey}}：</span>
+            <div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;">
+              <el-button style="margin-top: 10px;" :type="choose[k] == index? 'primary': ''" v-for="(item, index) in i.specAttrVals" :key="index" :class="{ disable: item.disable}" @click="chooseFunc(k, index, item.specAttrValId, item.disable, item.isCustom)">{{item.specAttrVal}}</el-button>
             </div>
-            <div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;" v-if="k==1">
+            <!--<div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;" v-if="k==1">
               <el-button style="margin-top: 10px;" :type="choose[k] == item.option_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.option_id)">{{item.option_name}}</el-button>
-            </div>
+            </div>-->
           </div>
-          <div class="label" style="margin-bottom: 20px;" v-if="spec.no && spec.name" v-loading="specLoading">
+          <!--<div class="label" style="margin-bottom: 20px;" v-if="spec.no && spec.name" v-loading="specLoading">
             <span class="grey"><span>物料编号：{{spec.no}}</span><span style="text-indent: 40px;">物料规格：{{spec.name}}</span></span>
+          </div>-->
+          <div class="info-item"  v-if="specificationsTarget.skuCode">
+            <span class="name" v-if="specificationsTarget.skuCode">SKU编码：</span>
+            <span style="min-width: 200px;display: inline-block;">{{specificationsTarget.skuCode}}</span>
+            <span class="text-blue" @click="editorMethods">{{editor?'保存': '编辑物料'}}</span>
+          </div>
+          <div class="label" style="margin-bottom: 20px;"  v-if="specificationsTarget.skuCode" v-loading="specLoading">
+            <span class="grey">
+              <span>
+                物料编号：<b v-show="!editor">{{specificationsTarget.materialCode}}</b>
+                <label v-show="editor">
+                  <el-input v-model="specificationsTarget.materialCode" size="small" placeholder="请输入内容"></el-input>
+                </label>
+              </span>
+              <span style="padding-left: 40px;">
+                物料规格：<b v-show="!editor">{{specificationsTarget.materialSpec}}</b>
+                <label v-show="editor">
+                  <el-input v-model="specificationsTarget.materialSpec" size="small" placeholder="请输入内容"></el-input>
+                </label>
+              </span>
+            </span>
           </div>
 
           <el-button type="primary" style="width: 240px;margin-left: 20px;" v-show="!(group == 5)" @click="addToCart"><i class="icon">&#xe617;</i>加入购物车</el-button>
@@ -102,6 +147,9 @@ export default {
         return this.$store.getters.loggedUser.group
       }
       return -1
+    },
+    user () {
+      return this.$store.getters.loggedUser
     }
   },
   data () {
@@ -113,12 +161,20 @@ export default {
       path: [],
       spec: {},
       specLoading: false,
-      choose: [0, 0],
+      choose: [null, null, null],
       hot: [],
       hotCur: [],
       hotPage: 0,
       stdPrice: null,
-      zoom: {x: 0, y: 0}
+      zoom: {x: 0, y: 0},
+      editor: false,
+      chooseEditor: false,
+      specificationsTarget: {},
+      newi: null,
+      newi1: null,
+      newi2: null,
+      arr: [null, null, null],
+      arr1: []
     }
   },
   methods: {
@@ -133,21 +189,127 @@ export default {
         return '"selectId":' + path[0].id + ',"childId":' + path[1].id + ',"scId":' + path[key].id
       }
     },
-    chooseFunc (k, index) {
-      const {params: {id}} = this.$route
+    chooseFunc (k, index, specAttrValId, disable, isCustom) {
+      // const {params: {id}} = this.$route
       this.$set(this.choose, k, index)
-      const colorId = this.choose[0]
-      const optionId = this.choose[1]
-      this.detail.standardPrice.forEach((i) => {
+      // const colorId = this.choose[0]
+      // const optionId = this.choose[1]
+      if (this.choose[k] === index) {
+        this.chooseEditor = true
+      } else {
+        this.chooseEditor = false
+      }
+      /* this.detail.standardPrice.forEach((i) => {
         if (colorId == i.color_id) {
           if (optionId == i.option_id) {
             this.stdPrice = i.price
           }
         }
-      })
-      apiGoods.getSpecification((data) => {
+      }) */
+      this.getSelectedItem(k, index, specAttrValId, disable, isCustom)
+      this.getPrice(k, specAttrValId, isCustom)
+      /* apiGoods.getSpecification((data) => {
         this.spec = data
-      }, {goodsId: id, colorId, optionId})
+      }, {goodsId: id, colorId, optionId}) */
+    },
+    /**
+     * 获取当前选中的属性
+     */
+    getSelectedItem (i, index, id, disable, isCustom) {
+      let that = disable
+      console.log(that)
+      this.detail.specAttrs.forEach((item3, index3) => {
+        item3.specAttrVals.forEach((item4, index4) => {
+          if (item4.specAttrValId === id) {
+            this.$set(item4, 'disable', false)
+            /// this.iscur[i].index = index
+          } else {
+            if (isCustom === 1) {
+              this.$set(item4, 'disable', true)
+            } else {
+              if (that === true) {
+                this.arr1 = []
+              }
+              if (this.arr1.length > 0) {
+                if (this.arr1.includes(item4.specAttrValId)) {
+                  this.$set(item4, 'disable', false)
+                } else {
+                  this.$set(item4, 'disable', true)
+                }
+              } else {
+                this.$set(item4, 'disable', true)
+              }
+            }
+          }
+        })
+      })
+      this.updateStatus(i, id)
+    },
+    /**
+     * 更新所有属性状态
+     */
+    updateStatus (i, id) {
+      this.detail.specifications.forEach((item) => {
+        if (item.specAttrs.indexOf(id) > -1) {
+          item.specAttrs.forEach((item2, index2) => {
+            if (item2 !== id) {
+              this.detail.specAttrs.forEach((item3, index3) => {
+                item3.specAttrVals.forEach((item4, index4) => {
+                  if (item4.specAttrValId === item2) {
+                    this.arr.fill(item2, i, i + 1)
+                    this.$set(item4, 'disable', false)
+                  }
+                })
+              })
+            }
+          })
+        }
+      })
+    },
+    getPrice (i, id, isCustom) {
+      if (isCustom === 1) {
+        this.detail.specifications.forEach((item) => {
+          if (item.specAttrs.indexOf(0) > -1) {
+            this.specificationsTarget = item
+          }
+        })
+      } else {
+        this.arr.fill(id, i, i + 1)
+        console.log(this.arr)
+        this.detail.specifications.forEach((item) => {
+          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.length === 1) {
+            this.specificationsTarget = item
+          }
+          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.length === 2) {
+            this.specificationsTarget = item
+          }
+          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[2]) > -1 && item.specAttrs.length === 3) {
+            this.specificationsTarget = item
+          }
+          this.changeNum(this.count)
+        })
+      }
+    },
+    changeNum (val) {
+      if (this.specificationsTarget.specPriceDetails) {
+        this.specificationsTarget.specPriceDetails.forEach((item) => {
+          if (item.minOrderQty <= val && item.maxOrderQty > val) {
+            this.specificationsTarget.specPrice = item.price
+          }
+        })
+      }
+    },
+    addSpecification () {
+      const {specId, materialCode, materialSpec} = this.specificationsTarget
+      apiGoods.addSpecification((data) => {
+        const {status, msg} = data
+        if (status === 0) {
+          this.$message({
+            type: 'success',
+            message: msg
+          })
+        }
+      }, {specId, materialCode, materialSpec})
     },
     getHot () {
       const {params: {id}} = this.$route
@@ -182,7 +344,6 @@ export default {
         if (this.offset * -1 < (this.detail.imgList.length - 4)) {
           this.offset -= 1
         }
-        console.log(this.offset)
       } else {
         if (this.offset >= 0) {
           return
@@ -192,8 +353,7 @@ export default {
     },
     addToCart () {
       const {params: {id}} = this.$route
-      const colorId = this.choose[0]
-      const optionId = this.choose[1]
+      const specId = this.specificationsTarget.specId
       const number = this.count
       try {
         apiMallCart.add((data) => {
@@ -216,9 +376,63 @@ export default {
               this.$message.error(msg)
             }
           }
-        }, {id, colorId, optionId, number})
+        }, {id, specId, number})
       } catch (e) {
         this.$message.error('网络开小差，请稍后重试')
+      }
+    },
+    favorite (goodsId) {
+      this.$store.dispatch('addFavorite', {fileds: {goodsId},
+        scb: (msg) => {
+          this.$message({
+            type: 'success',
+            message: msg
+          })
+          this.detail.isFavorite = 1
+        },
+        ecb: (msg) => {
+          this.$message.error(msg)
+        }
+      })
+    },
+    favoriteDelete (id) {
+      this.$confirm('此操作将永久删除该收藏记录, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: '删除中...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        this.$store.dispatch('deleteFavorite', {
+          fileds: {goodsId: id},
+          successCb: (msg) => {
+            this.$message({
+              type: 'success',
+              message: msg
+            })
+            loading.close()
+            this.detail.isFavorite = 0
+          },
+          errorCb: (msg) => {
+            this.$message.error(msg)
+            loading.close()
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+    editorMethods () {
+      this.editor = !this.editor
+      if (!this.editor) {
+        this.addSpecification()
       }
     }
   },
@@ -236,180 +450,204 @@ export default {
     apiGoods.getPath((data) => {
       this.path = data
     }, {id})
+  },
+  watch: {
+    count (val) {
+      this.changeNum(val)
+    }
   }
 }
 </script>
 
 <style lang="stylus">
-.detail-wrap
-  .el-breadcrumb__inner
-    a
-      color #2475e2
-  .info-wrap
-    .el-input-number__increase
-      background-color #2475e2
-      color #ffffff
-      border-radius 0 2px 2px 0
-      &:hover
-        background rgb(80, 145, 232)
-    .el-input__inner
-      border 1px solid #2475e2
-    .info-item.type
-      .el-button
-        padding 8px 20px
-        margin-left 10px
-  .other-wrap
-    .right
-      img
-        width 100%
+  .detail-wrap
+    .el-breadcrumb__inner
+      a
+        color #2475e2
+    .info-wrap
+      .el-input-number__increase
+        border-radius 0 2px 2px 0
+      .el-input__inner
+        border 1px solid #2475e2
+      .info-item.type
+        .el-button
+          padding 8px 20px
+          margin-left 10px
+        .disable
+          border-style dashed
+          color #dcdfe6
+    .other-wrap
+      .right
+        img
+          width 100%
 </style>
 
 <style lang="stylus" scoped>
-.detail-wrap
-  width 1300px
-  padding-bottom 40px
-  margin 0 auto
-  .breadcrumb
-    height 54px
-    box-sizing border-box
-    padding-top 20px
-  .other-wrap
-    padding-top 22px
-    .left
-      width 388px
-      float left
-      padding-left 48px
-      .hot-list
-        width 220px
-        margin 0 auto
-        .hot-item
+  .text-blue
+    cursor pointer
+    color #2475E2
+  .star
+    font-family 'jzdc'
+    cursor pointer
+    font-size 20px
+  .detail-wrap
+    width 1300px
+    padding-bottom 40px
+    margin 0 auto
+    .breadcrumb
+      height 54px
+      box-sizing border-box
+      padding-top 20px
+    .other-wrap
+      padding-top 22px
+      .left
+        width 388px
+        float left
+        padding-left 48px
+        .hot-list
           width 220px
-          height 220px
-          margin-top 20px
-          display block
-          img
+          margin 0 auto
+          .hot-item
             width 220px
             height 220px
-      .hot-pager
-        width 220px
-        margin 20px auto 0
-        .icon
-          font-size 20px
-          font-weight 600
-          color #2475e2
-          font-family 'jzdc'
-          cursor pointer
-        .icon-left
-          float left
-        .icon-right
-          float right
-    .right
-      float left
-      width 910px
-      border 1px solid #dedede
-      min-height 300px
-      .title
-        font-size 18px
-        color #2475e2
-        font-weight 600
-        margin 10px 0 20px 10px
-        padding-left 10px
-        border-left 4px solid #ff8b1f
-  .preview-wrap
-    padding 10px
-    border 1px solid #dedede
-    .icon
-      font-family 'jzdc'
-      margin-right 10px
-    .look-at
-      width 380px
-      margin-right 20px
-      float left
-      .big
-        width 100%
-        height 380px
-        border 1px solid #dedede
-        position relative
-        cursor move
-        img
-          background-color #dedede
-      .small-wrap
-        margin-top 20px
-        width 380px
-        height 70px
-        overflow hidden
-        position relative
-        .prev
-          font-family 'jzdc'
-          font-size 26px
-          left 0
-          top 50%
-          margin-top -14px
-          position absolute
-          color #2475e2
-          cursor pointer
-        .next
-          font-family 'jzdc'
-          font-size 26px
-          position absolute
-          color #2475e2
-          right 0
-          top 50%
-          margin-top -14px
-          cursor pointer
-        .super-wrap
-          width 5000px
-          overflow hidden
-        .small-list
-          width 310px
-          margin 0 auto
-          overflow hidden
-          .small-item
-            width 70px
-            height 70px
-            float left
-            margin-right 9px
-            &.active
-              border 1px solid #2475e2
+            margin-top 20px
+            display block
             img
-              width 100%
-              height 100%
-    .info-wrap
-      float left
-      color #666666
-      width 868px
-      .info-item
-        margin-bottom 30px
-        color #666666
-        font-size 16px
-        .name
-          width 100px
-          display inline-block
-      .title
-        color #333333
-        font-size 18px
-        font-weight 600
-        padding-left 20px
-        margin-bottom 18px
-      .label
-        background-color #ffe7d1
-        font-size 16px
-        padding 0 20px
-        height 40px
-        font-weight 500
-        margin-bottom 30px
-        width 100%
-        span
-          line-height 40px
-          display block
-          height 40px
-          float left
-        .money
-          color #ff0000
-          font-size 30px
+              width 220px
+              height 220px
+        .hot-pager
+          width 220px
+          margin 20px auto 0
+          .icon
+            font-size 20px
+            font-weight 600
+            color #2475e2
+            font-family 'jzdc'
+            cursor pointer
+          .icon-left
+            float left
+          .icon-right
+            float right
+      .right
+        float left
+        width 910px
+        border 1px solid #dedede
+        min-height 300px
+        .title
+          font-size 18px
+          color #2475e2
           font-weight 600
-          padding-left 60px
-          padding-right 10px
-        .uni
-          /*line-height 30px*/
+          margin 10px 0 20px 10px
+          padding-left 10px
+          border-left 4px solid #ff8b1f
+    .preview-wrap
+      padding 10px
+      border 1px solid #dedede
+      .icon
+        font-family 'jzdc'
+        margin-right 10px
+      .look-at
+        width 380px
+        margin-right 20px
+        float left
+        .big
+          width 100%
+          height 380px
+          border 1px solid #dedede
+          position relative
+          cursor move
+          img
+            background-color #dedede
+        .small-wrap
+          margin-top 20px
+          width 380px
+          height 70px
+          overflow hidden
+          position relative
+          .prev
+            font-family 'jzdc'
+            font-size 26px
+            left 0
+            top 50%
+            margin-top -14px
+            position absolute
+            color #2475e2
+            cursor pointer
+          .next
+            font-family 'jzdc'
+            font-size 26px
+            position absolute
+            color #2475e2
+            right 0
+            top 50%
+            margin-top -14px
+            cursor pointer
+          .super-wrap
+            width 5000px
+            overflow hidden
+          .small-list
+            width 310px
+            margin 0 auto
+            overflow hidden
+            .small-item
+              width 70px
+              height 70px
+              float left
+              margin-right 9px
+              &.active
+                border 1px solid #2475e2
+              img
+                width 100%
+                height 100%
+      .info-wrap
+        float left
+        color #666666
+        width 868px
+        .info-item
+          margin-bottom 30px
+          color #666666
+          font-size 16px
+          .name
+            width 100px
+            display inline-block
+        .title
+          height 22px
+          color #333333
+          font-size 18px
+          font-weight 600
+          padding-left 20px
+          margin-bottom 18px
+          .collect
+            float right
+            font-size 16px
+            width 150px
+            height 32px
+            line-height 32px
+            background rgba(245,245,245,1)
+            border-radius 5px
+            text-align center
+        .label
+          background-color #ffe7d1
+          font-size 16px
+          padding 0 20px
+          height 40px
+          font-weight 500
+          margin-bottom 30px
+          width 100%
+          label
+            width 180px
+            display inline-block
+            .el-input--small
+              font-size 16px
+          span
+            line-height 40px
+            display block
+            height 40px
+            float left
+          .money
+            color #ff0000
+            font-size 30px
+            font-weight 600
+            padding-left 60px
+            padding-right 10px
 </style>
