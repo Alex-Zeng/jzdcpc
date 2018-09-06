@@ -275,7 +275,6 @@ export default {
         })
       } else {
         this.arr.fill(id, i, i + 1)
-        console.log(this.arr)
         this.detail.specifications.forEach((item) => {
           if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.length === 1) {
             this.specificationsTarget = item
@@ -371,6 +370,8 @@ export default {
               if (this.group != 4) {
                 this.$message.error('请先进行企业认证')
                 this.$router.push('/user/setting/cert')
+              } else {
+                this.$message.error(msg)
               }
             } else {
               this.$message.error(msg)
