@@ -70,7 +70,7 @@
           <div class="info-item type clearfix" v-for="(i, k) in detail.specAttrs" :key="i.id">
             <span class="name" style="float: left;">{{i.specAttrKey}}：</span>
             <div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;">
-              <el-button style="margin-top: 10px;" :type="choose[k] == index? 'primary': ''" v-for="(item, index) in i.specAttrVals" :key="index" :class="{ disable: item.disable}" @click="chooseFunc(k, index, item.specAttrValId, item.disable, item.isCustom)">{{item.specAttrVal}}</el-button>
+              <el-button style="margin-top: 10px;" v-for="(item, index) in i.specAttrVals" :key="index" :class="{active: iscur[k].index == index,disable: item.disable}" @click="chooseFunc(k, index, item.specAttrValId, item.disable, item.isCustom)">{{item.specAttrVal}}</el-button>
             </div>
             <!--<div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;" v-if="k==1">
               <el-button style="margin-top: 10px;" :type="choose[k] == item.option_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.option_id)">{{item.option_name}}</el-button>
@@ -174,7 +174,36 @@ export default {
       newi1: null,
       newi2: null,
       arr: [null, null, null],
-      arr1: []
+      arr1: [],
+      iscur: [
+        {
+          index: null,
+          disable: [
+            {disable: true},
+            {disable: true},
+            {disable: false},
+            {disable: false}
+          ]
+        },
+        {
+          index: null,
+          disable: [
+            {disable: true},
+            {disable: true},
+            {disable: false},
+            {disable: false}
+          ]
+        },
+        {
+          index: null,
+          disable: [
+            {disable: true},
+            {disable: true},
+            {disable: false},
+            {disable: false}
+          ]
+        }
+      ]
     }
   },
   methods: {
@@ -191,14 +220,14 @@ export default {
     },
     chooseFunc (k, index, specAttrValId, disable, isCustom) {
       // const {params: {id}} = this.$route
-      this.$set(this.choose, k, index)
+      // this.$set(this.choose, k, index)
       // const colorId = this.choose[0]
       // const optionId = this.choose[1]
-      if (this.choose[k] === index) {
+      /* if (this.choose[k] === index) {
         this.chooseEditor = true
       } else {
         this.chooseEditor = false
-      }
+      } */
       /* this.detail.standardPrice.forEach((i) => {
         if (colorId == i.color_id) {
           if (optionId == i.option_id) {
@@ -222,7 +251,7 @@ export default {
         item3.specAttrVals.forEach((item4, index4) => {
           if (item4.specAttrValId === id) {
             this.$set(item4, 'disable', false)
-            /// this.iscur[i].index = index
+            this.iscur[i].index = index
           } else {
             if (isCustom === 1) {
               this.$set(item4, 'disable', true)
@@ -477,6 +506,15 @@ export default {
         .el-button
           padding 8px 20px
           margin-left 10px
+        .active
+          color #fff
+          background-color #2475E2
+          border-color #2475E2
+          &.disable
+            border-style dashed
+            color #dcdfe6
+            background-color #fff
+            border-color #dcdfe6
         .disable
           border-style dashed
           color #dcdfe6
