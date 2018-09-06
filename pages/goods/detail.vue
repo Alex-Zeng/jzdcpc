@@ -290,9 +290,12 @@ export default {
       }
     },
     changeNum (val) {
+      console.log(val)
+      console.log(this.specificationsTarget.specPriceDetails)
       if (this.specificationsTarget.specPriceDetails) {
         this.specificationsTarget.specPriceDetails.forEach((item) => {
-          if (item.minOrderQty <= val && item.maxOrderQty > val) {
+          if (item.minOrderQty <= val && item.maxOrderQty >= val) {
+            console.log('chang')
             this.specificationsTarget.specPrice = item.price
           }
         })

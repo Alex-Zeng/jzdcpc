@@ -166,7 +166,7 @@ export default {
     changeNum (val, i) {
       if (i.specPriceDetails) {
         i.specPriceDetails.forEach((item) => {
-          if (item.minOrderQty <= val && item.maxOrderQty > val) {
+          if (item.minOrderQty <= val && item.maxOrderQty >= val) {
             i.price = item.price
           }
         })
