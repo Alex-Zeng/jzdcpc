@@ -57,7 +57,7 @@
             </div>
             <div class="bottom">
               <span class="title">{{i.title}}</span>
-              <h4 class="money">¥<span class="num">{{i.min_price}}-{{i.max_price}}</span></h4>
+              <h4 class="money"><span class="num">{{i.showPrice}}</span></h4>
             </div>
           </div>
         </div>
