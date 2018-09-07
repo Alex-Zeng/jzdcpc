@@ -138,7 +138,7 @@
                   {{item.price}}
                 </li>
                 <li class="item info-item" style="width: 220px;">
-                  {{item.quantity * item.price}}
+                  {{parseInt(item.quantity*item.price) === (item.quantity*item.price)? (item.quantity*item.price).toFixed(2):(item.quantity*item.price).toFixed(4)}}
                 </li>
                 <li class="item info-item" style="width: 224px;">
                   &nbsp;
