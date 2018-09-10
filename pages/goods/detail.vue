@@ -177,31 +177,13 @@ export default {
       arr1: [],
       iscur: [
         {
-          index: null,
-          disable: [
-            {disable: true},
-            {disable: true},
-            {disable: false},
-            {disable: false}
-          ]
+          index: null
         },
         {
-          index: null,
-          disable: [
-            {disable: true},
-            {disable: true},
-            {disable: false},
-            {disable: false}
-          ]
+          index: null
         },
         {
-          index: null,
-          disable: [
-            {disable: true},
-            {disable: true},
-            {disable: false},
-            {disable: false}
-          ]
+          index: null
         }
       ]
     }
@@ -259,6 +241,8 @@ export default {
               if (that === true) {
                 this.arr1 = []
                 this.arr = [null, null, null]
+                this.iscur = [{index: null}, {index: null}, {index: null}]
+                this.iscur[i].index = index
               }
               if (this.arr1.length > 0) {
                 if (this.arr1.includes(item4.specAttrValId)) {
