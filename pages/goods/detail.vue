@@ -289,15 +289,14 @@ export default {
         })
       } else {
         this.arr.fill(id, i, i + 1)
-        console.log(this.arr)
-        let newArr = this.arr
-        for (var j = 0; j < newArr.length; j++) {
-          if (newArr[j] == null || newArr[j] == '' || typeof (newArr[j]) == 'undefined') {
-            newArr.splice(j, 1)
-            j = j - 1
+        this.arr.fill(id, i, i + 1)
+        let newArr = []
+        for (var j = 0; j < this.arr.length; j++) {
+          if (this.arr[j] == null || this.arr[j] == '' || typeof (this.arr[j]) == 'undefined') {
+          } else {
+            newArr.push(this.arr[j])
           }
         }
-        console.log(newArr)
         this.specificationsTarget = {}
         this.detail.specifications.forEach((item) => {
           if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.length === 1) {
