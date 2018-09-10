@@ -43,7 +43,7 @@
               <li class="item" style="width: 138px;">
                 <el-input-number style="width: 138px;" v-model="item.quantity" :min="item.moq?Number(item.moq):1" @change="updateNum(item,item.cartId, item.quantity)"></el-input-number>
               </li>
-              <li class="item" style="width: 280px; text-align: center;">{{(item.quantity*item.price)}}</li>
+              <li class="item" style="width: 280px; text-align: center;">{{parseInt(item.quantity*item.price) === (item.quantity*item.price)? (item.quantity*item.price).toFixed(2):(item.quantity*item.price).toFixed(4)}}</li>
               <li class="item action" style="width: 210px;text-align: center;">
                 <span class="op" @click="favorite(item.goodsId)">收藏商品</span>
                 <span class="op" @click="deleteIds(item.cartId)">删除</span>

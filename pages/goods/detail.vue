@@ -46,7 +46,7 @@
               <span class="money" v-if="specificationsTarget.specPrice">
                 {{specificationsTarget.isDiscussPrice?'议价':specificationsTarget.specPrice}}
               </span>
-              <span class="money" v-else>¥{{stdPrice|| ((detail.minPrice||0)+ '-' + (detail.maxPrice||0))}}</span>
+              <span class="money" v-else>{{detail.showPrice}}</span>
               <span class="uni">元<template v-if="specificationsTarget.specUnit">/{{specificationsTarget.specUnit}}</template></span>
             </template>
             <a href="tencent://message/?uin=3510294139&Site=在线QQ&Menu=yes" style="display: inline-block;padding-top: 4px;padding-left: 10px;">

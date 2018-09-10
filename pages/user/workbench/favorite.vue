@@ -18,7 +18,7 @@
           </div>
           <div class="bottom">
             <div class="left">
-              ￥<span>{{i.min_price}}~{{i.max_price}}</span>
+              <span>{{i.showPrice}}</span>
             </div>
           </div>
         </div>
