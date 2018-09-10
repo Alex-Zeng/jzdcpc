@@ -258,6 +258,7 @@ export default {
             } else {
               if (that === true) {
                 this.arr1 = []
+                this.arr = [null, null, null]
               }
               if (this.arr1.length > 0) {
                 if (this.arr1.includes(item4.specAttrValId)) {
@@ -304,6 +305,16 @@ export default {
         })
       } else {
         this.arr.fill(id, i, i + 1)
+        console.log(this.arr)
+        let newArr = this.arr
+        for (var j = 0; j < newArr.length; j++) {
+          if (newArr[j] == null || newArr[j] == '' || typeof (newArr[j]) == 'undefined') {
+            newArr.splice(j, 1)
+            j = j - 1
+          }
+        }
+        console.log(newArr)
+        this.specificationsTarget = {}
         this.detail.specifications.forEach((item) => {
           if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.length === 1) {
             this.specificationsTarget = item
