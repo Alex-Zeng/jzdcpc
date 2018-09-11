@@ -61,7 +61,7 @@
               后可查看</span>
           </div>
           <div class="info-item">
-            <span class="name">采购数量：</span><el-input-number v-model="count" :min="specificationsTarget.moq?Number(specificationsTarget.moq):1"></el-input-number>
+            <span class="name">采购数量：</span><el-input-number v-model="count" :min="number"></el-input-number>
           </div>
           <div class="info-item">
             <span class="name">计量单位：</span>
@@ -169,6 +169,7 @@ export default {
       zoom: {x: 0, y: 0},
       editor: false,
       chooseEditor: false,
+      number: 1,
       specificationsTarget: {},
       newi: null,
       newi1: null,
@@ -310,6 +311,13 @@ export default {
           }
           this.changeNum(this.count)
         })
+      }
+      if (this.specificationsTarget.moq) {
+        this.number = Number(this.specificationsTarget.moq)
+        this.count = Number(this.specificationsTarget.moq)
+      } else {
+        this.number = 1
+        this.count = 1
       }
     },
     changeNum (val) {
