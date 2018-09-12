@@ -174,9 +174,15 @@ export default {
       newi: null,
       newi1: null,
       newi2: null,
-      arr: [null, null, null],
+      arr: [null, null, null, null, null],
       arr1: [],
       iscur: [
+        {
+          index: null
+        },
+        {
+          index: null
+        },
         {
           index: null
         },
@@ -241,8 +247,8 @@ export default {
             } else {
               if (that === true) {
                 this.arr1 = []
-                this.arr = [null, null, null]
-                this.iscur = [{index: null}, {index: null}, {index: null}]
+                this.arr = [null, null, null, null, null]
+                this.iscur = [{index: null}, {index: null}, {index: null}, {index: null}, {index: null}]
                 this.iscur[i].index = index
               }
               if (this.arr1.length > 0) {
@@ -307,6 +313,12 @@ export default {
             this.specificationsTarget = item
           }
           if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[2]) > -1 && item.specAttrs.length === 3) {
+            this.specificationsTarget = item
+          }
+          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[3]) > -1 && item.specAttrs.length === 4) {
+            this.specificationsTarget = item
+          }
+          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[4]) > -1 && item.specAttrs.length === 5) {
             this.specificationsTarget = item
           }
           this.changeNum(this.count)
