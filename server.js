@@ -17,9 +17,7 @@ let serverConfig = {
   },
   proxy: {
     '/papi': {
-      // target: 'http://scm.jizhongdiancai.com/api',
-      // target: 'http://jwapi-uat.jizhongdiancai.com/api',
-      target: 'http://192.168.3.101/api',
+      target: 'http://192.168.3.135/api',
       pathRewrite: { '^/papi': '' }
     }
   }
@@ -32,4 +30,4 @@ if (!isProd) {
   builder.build()
 }
 app.use(nuxt.render)
-app.listen(3334)
+app.listen(3333)
