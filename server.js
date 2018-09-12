@@ -32,4 +32,4 @@ if (!isProd) {
   builder.build()
 }
 app.use(nuxt.render)
-app.listen(3333)
+app.listen(3334)
