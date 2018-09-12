@@ -263,12 +263,21 @@ html {
 }
 .footer-wrap .center-wrap .center-box p img {
   margin: 10px;
+  width: 108px;
+  height: 38px;
 }
-.footer-wrap .center-wrap .code {
+.footer-wrap .center-wrap .center-box p:last-child {
+  display: block;
+  text-align: center;
+}
+.footer-wrap .center-wrap .center-box p:last-child a {
+  padding: 0;
+}
+.footer-wrap .code {
   padding-left: 136px;
   text-align: center;
   padding-top: 10px;
 }
-.footer-wrap .center-wrap .code img {
+.footer-wrap .code img {
   padding-bottom: 10px;
 }

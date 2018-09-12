@@ -138,7 +138,7 @@
                   {{item.price}}
                 </li>
                 <li class="item info-item" style="width: 220px;">
-                  {{(item.quantity * item.price).toFixed(2)}}
+                  {{parseInt(item.quantity*item.price) === (item.quantity*item.price)? (item.quantity*item.price).toFixed(2):(item.quantity*item.price).toFixed(4)}}
                 </li>
                 <li class="item info-item" style="width: 224px;">
                   &nbsp;
@@ -147,11 +147,11 @@
               <div style="margin-left: -266px;" class="clearfix">
                 <div class="edit-item" style="width: 368px;">
                   <span class="label">物料编号：</span>
-                  <el-input style="width: 240px;display: inline-block;" v-model="item.no" :disabled="!editArr[k][key]"></el-input>
+                  <el-input style="width: 240px;display: inline-block;" v-model="item.materialCode" :disabled="!editArr[k][key]"></el-input>
                 </div>
                 <div class="edit-item" style="width: 568px;">
                   <span class="label">物料规格：</span>
-                  <el-input style="width: 440px;display: inline-block;" v-model="item.requirement" :disabled="!editArr[k][key]"></el-input>
+                  <el-input style="width: 440px;display: inline-block;" v-model="item.materialSpec" :disabled="!editArr[k][key]"></el-input>
                 </div>
                 <div class="edi-item" style="padding-top: 20px;">
                   <el-button v-if="!editArr[k][key]" @click="toEdit(k, key, true)">编辑物料</el-button>
@@ -172,7 +172,7 @@
       </div>
       <div class="submit-wrap clearfix">
         <span class="total" style="float: left;">
-          总额（元）: <b>{{total.toFixed(2)}}</b>
+          总额（元）: <b>{{total}}</b>
         </span>
         <el-button type="primary" style="float: right;width: 200px;" @click="makeOrder">提交订单</el-button>
       </div>
@@ -264,29 +264,40 @@ export default {
   },
   methods: {
     makeOrder () {
-      const receiverId = this.select
-      const channel = 0
-      const detail = JSON.stringify(this.cartList)
-      try {
-        apiOrders.make((result) => {
-          const {status, msg, data} = result
-          if (status !== 0) {
-            this.$message.error(msg)
-          } else {
-            this.$message({
-              type: 'success',
-              message: msg
-            })
-            sessionStorage.removeItem('carts')
-            sessionStorage.setItem('orderResult', JSON.stringify(data))
-            setTimeout(() => {
-              this.$router.replace('/goods/result')
-            })
-          }
-        }, {receiverId, channel, detail})
-      } catch (e) {
-        sessionStorage.setItem('carts', JSON.stringify(this.cartList))
-        this.$message.error('网络有点问题，请刷新后重试')
+      if (this.addressList.length > 0) {
+        const receiverId = this.select
+        const channel = 0
+        const detail = JSON.stringify(this.cartList)
+        try {
+          this.$confirm('确认相关信息是否填写正确?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            apiOrders.make((result) => {
+              const {status, msg, data} = result
+              if (status !== 0) {
+                this.$message.error(msg)
+              } else {
+                this.$message({
+                  type: 'success',
+                  message: msg
+                })
+                sessionStorage.removeItem('carts')
+                sessionStorage.setItem('orderResult', JSON.stringify(data))
+                setTimeout(() => {
+                  this.$router.replace('/goods/result')
+                })
+              }
+            }, {receiverId, channel, detail})
+          }).catch(() => {
+          })
+        } catch (e) {
+          sessionStorage.setItem('carts', JSON.stringify(this.cartList))
+          this.$message.error('网络有点问题，请刷新后重试')
+        }
+      } else {
+        this.$message.error('请添加收货地址')
       }
     },
     showInput () {
@@ -331,15 +342,36 @@ export default {
       let temp = this.editArr[k]
       temp[key] = v
       this.$set(this.editArr, k, temp)
+      if (!v) {
+        console.log('提交')
+        this.addSpecification(k, key)
+      }
+    },
+    addSpecification (k, key) {
+      console.log(this.cartList[k].list[key])
+      const {specId, materialCode, materialSpec} = this.cartList[k].list[key]
+      apiOrders.addSpecification((data) => {
+        const {status, msg} = data
+        if (status === 0) {
+          this.$message({
+            type: 'success',
+            message: msg
+          })
+          sessionStorage.setItem('carts', JSON.stringify(this.cartList))
+        }
+      }, {specId, materialCode, materialSpec})
     },
     async getAddressList () {
       await apiAddress.getAddressList(
         ({list}) => {
           this.addressList = list
           list.forEach((i) => {
+            console.log(i.id)
             if (i.is_default) {
               this.select = i.id
               this.defaultAddr = i.id
+            } else {
+              this.select = list[0].id
             }
           })
         }
@@ -495,6 +527,7 @@ export default {
           })
         })
         this.cartList = cart
+        console.log(this.cartList)
       }, 400)
     }
   }

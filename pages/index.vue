@@ -88,8 +88,7 @@
                   {{j.title}}
                 </p>
                 <div class="text-red">
-                  <span class="text-red">￥ {{j.min_price}}</span>
-                  <span class="text-red" v-if="j.min_price !== j.max_price">~ {{j.max_price}}</span>
+                  <span class="text-red">{{j.showPrice}}</span>
                 </div>
               </nuxt-link>
             </li>

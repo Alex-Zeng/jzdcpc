@@ -63,7 +63,7 @@
         </li>
         <li style="width: 126px;">{{i.price}}</li>
         <li style="width: 92px;">{{i.quantity}}</li>
-        <li style="width: 144px;">{{(i.price*i.quantity).toFixed(2)}}</li>
+        <li style="width: 144px;">{{i.price*i.quantity}}</li>
         <li style="width: 156px;">{{i.specifications_no}}</li>
         <li style="width: 254px;">{{i.specifications_name}}</li>
         <li style="width: 86px;" class="action" @click="dialogFormVisible = true, goodsId = i.id"
@@ -517,6 +517,10 @@ export default {
           .spec
             font-size 12px
             color #999
+            width 120px
+            overflow hidden
+            white-space nowrap
+            text-overflow ellipsis
       .action
         color #2475e2
         cursor pointer
