@@ -301,7 +301,7 @@ export default {
         for (var j = 0; j < this.arr.length; j++) {
           if (this.arr[j] == null || this.arr[j] == '' || typeof (this.arr[j]) == 'undefined') {
           } else {
-            newArr.push(this.arr[j])
+            newArr.push(parseInt(this.arr[j]))
           }
         }
         this.specificationsTarget = {}
