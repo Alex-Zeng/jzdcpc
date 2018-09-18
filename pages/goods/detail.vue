@@ -288,7 +288,7 @@ export default {
         }
         this.specificationsTarget = {}
         this.detail.specifications.forEach((item) => {
-          if (item.specAttrs === newArr) {
+          if (item.specAttrs.toString() === newArr.toString()) {
             this.specificationsTarget = item
           }
           /* if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.length === 1) {
