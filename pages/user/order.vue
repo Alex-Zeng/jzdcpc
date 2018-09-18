@@ -73,7 +73,7 @@
               </div>
               <div class="item source">数量：{{item.quantity}}</div>
               <div class="item addr">单价：{{item.price}}元</div>
-              <div class="item status">小计：{{(item.quantity * item.price).toFixed(2)}}元</div>
+              <div class="item status">小计：{{parseInt(item.quantity * item.price) === Number(item.quantity * item.price)? (item.quantity * item.price).toFixed(2) : (item.quantity * item.price).toFixed(4)}}元</div>
             </div>
           </div>
           <div class="info info-btn">

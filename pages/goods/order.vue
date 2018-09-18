@@ -172,7 +172,7 @@
       </div>
       <div class="submit-wrap clearfix">
         <span class="total" style="float: left;">
-          总额（元）: <b>{{total}}</b>
+          总额（元）: <b>{{parseInt(total) === Number(total) ? Number(total).toFixed(2): Number(total).toFixed(4)}}</b>
         </span>
         <el-button type="primary" style="float: right;width: 200px;" @click="makeOrder">提交订单</el-button>
       </div>
