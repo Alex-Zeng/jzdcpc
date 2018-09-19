@@ -477,6 +477,11 @@ export default {
     apiGoods.getGoodsDetail((data) => {
       this.specLoading = false
       this.detail = data
+      this.detail.detail = this.detail.detail.replace(/embed/, 'video')
+      setTimeout(function () {
+        console.log(document.getElementsByTagName('video')[0])
+        document.getElementsByTagName('video')[0].setAttribute('controls', true)
+      }, 2000)
       this.arr = new Array(data.specAttrs.length).fill(null)
     }, {id})
     apiGoods.getPath((data) => {
