@@ -238,11 +238,11 @@ export default {
       console.log(that)
       this.detail.specAttrs.forEach((item3, index3) => {
         item3.specAttrVals.forEach((item4, index4) => {
-          if (item4.specAttrValId === id) {
+          if (item4.specAttrValId == id) {
             this.$set(item4, 'disable', false)
             this.iscur[i].index = index
           } else {
-            if (isCustom === 1) {
+            if (isCustom == 1) {
               this.$set(item4, 'disable', true)
             } else {
               if (that === true) {
@@ -276,7 +276,7 @@ export default {
             if (item2 !== id) {
               this.detail.specAttrs.forEach((item3, index3) => {
                 item3.specAttrVals.forEach((item4, index4) => {
-                  if (item4.specAttrValId === item2) {
+                  if (item4.specAttrValId == item2) {
                     this.arr.fill(item2, i, i + 1)
                     this.$set(item4, 'disable', false)
                   }
@@ -288,7 +288,7 @@ export default {
       })
     },
     getPrice (i, id, isCustom) {
-      if (isCustom === 1) {
+      if (isCustom == 1) {
         this.detail.specifications.forEach((item) => {
           if (item.specAttrs.indexOf(0) > -1) {
             this.specificationsTarget = item
@@ -301,24 +301,24 @@ export default {
         for (var j = 0; j < this.arr.length; j++) {
           if (this.arr[j] == null || this.arr[j] == '' || typeof (this.arr[j]) == 'undefined') {
           } else {
-            newArr.push(this.arr[j])
+            newArr.push(parseInt(this.arr[j]))
           }
         }
         this.specificationsTarget = {}
         this.detail.specifications.forEach((item) => {
-          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.length === 1) {
+          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.length == 1) {
             this.specificationsTarget = item
           }
-          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.length === 2) {
+          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.length == 2) {
             this.specificationsTarget = item
           }
-          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[2]) > -1 && item.specAttrs.length === 3) {
+          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[2]) > -1 && item.specAttrs.length == 3) {
             this.specificationsTarget = item
           }
-          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[3]) > -1 && item.specAttrs.length === 4) {
+          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[3]) > -1 && item.specAttrs.length == 4) {
             this.specificationsTarget = item
           }
-          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[4]) > -1 && item.specAttrs.length === 5) {
+          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[4]) > -1 && item.specAttrs.length == 5) {
             this.specificationsTarget = item
           }
           this.changeNum(this.count)
