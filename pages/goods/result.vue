@@ -36,7 +36,7 @@
                 <li style="width: 110px;">X{{item.quantity}}</li>
                 <li style="width: 140px;">{{item.price}}</li>
                 <li style="width: 230px;">{{item.price * item.quantity}}</li>
-                <nuxt-link :to="'/goods/detail/'+item.goods_id" tag="li" style="width: 80px;cursor:pointer;color: #2475e2;">查看</nuxt-link>
+                <nuxt-link :to="'/goods/detail/'+item.goodsId" tag="li" style="width: 80px;cursor:pointer;color: #2475e2;">查看</nuxt-link>
               </ul>
             </div>
           </div>

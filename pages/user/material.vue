@@ -230,7 +230,7 @@ export default {
             message: msg
           })
           this.dialogShopcarEditorVisible = false
-          this.$router.push('/goods/cart')
+          // this.$router.push('/goods/cart')
         } else {
           this.$message.error(msg)
         }
