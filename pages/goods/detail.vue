@@ -300,7 +300,6 @@ export default {
           if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[2]) > -1 && item.specAttrs.length === 3) {
             this.specificationsTarget = item
           } */
-          this.changeNum(this.count)
         })
       }
       if (this.specificationsTarget.moq) {
@@ -310,6 +309,7 @@ export default {
         this.number = 1
         this.count = 1
       }
+      this.changeNum(this.count)
     },
     changeNum (val) {
       console.log(val)
