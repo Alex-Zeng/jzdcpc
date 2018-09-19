@@ -41,7 +41,7 @@
                 <td style="width: 127px;">{{i.title}}</td>
                 <td style="width: 127px;">{{i.specInfo}}</td>
                 <td style="width: 122px;">{{i.skuCode}}</td>
-                <td style="width: 140px;text-align: left;">
+                <td style="width: 150px;text-align: left;">
                   <el-button class="order-button text" size="small" type="primary" @click="shopCar(i.materialId, item.materialCode, item.materialSpec, i.specId, i)">购买</el-button>
                   <el-button class="order-button text" size="small" type="default" @click="editor(i.materialId, item.materialCode, item.materialSpec, i.specId, i)">编辑</el-button>
                   <el-button class="order-button text delete" size="small" type="danger" @click="cancel(i.materialId)">删除</el-button>
@@ -230,6 +230,7 @@ export default {
             message: msg
           })
           this.dialogShopcarEditorVisible = false
+          this.$store.dispatch('getCartNum')
           // this.$router.push('/goods/cart')
         } else {
           this.$message.error(msg)
@@ -310,6 +311,9 @@ export default {
     tr:hover
       .delete
         display inline-block
+    td
+      border none
+      padding 0
 .dialog-img
   display block
   width 60px

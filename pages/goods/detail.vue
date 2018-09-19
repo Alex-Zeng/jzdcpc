@@ -480,7 +480,9 @@ export default {
       this.detail.detail = this.detail.detail.replace(/embed/, 'video')
       setTimeout(function () {
         console.log(document.getElementsByTagName('video')[0])
-        document.getElementsByTagName('video')[0].setAttribute('controls', true)
+        document.getElementsByTagName('video')[0].setAttribute('muted', 'muted')
+        document.getElementsByTagName('video')[0].setAttribute('controls', 'controls')
+        document.getElementsByTagName('video')[0].setAttribute('autoplay', 'autoplay')
       }, 2000)
       this.arr = new Array(data.specAttrs.length).fill(null)
     }, {id})
