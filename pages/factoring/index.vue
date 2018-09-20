@@ -3,7 +3,7 @@
       <div class="content">
         <div class="header">
           <img src="@/assets/img/factoring/logo.png" @click="$router.push('/')" alt="">
-          <nuxt-link class="btn" to="/factoring/lists">服务记录</nuxt-link>
+          <nuxt-link class="btn" to="/factoring/lists/1">服务记录</nuxt-link>
         </div>
         <h3>
           <p>集众保理</p>
@@ -27,9 +27,7 @@ export default {
   }
 }
 </script>
-<style lang="stylus">
 
-</style>
 <style lang="stylus" scoped>
   .content-wrap
     background-image url("~/assets/img/factoring/bg.jpg")

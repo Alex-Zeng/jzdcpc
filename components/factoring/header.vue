@@ -3,7 +3,7 @@
       <div class="content">
         <i class="logo" @click="$router.replace('/')"></i>
         <nuxt-link class="btn" to="/factoring/form">融资申请</nuxt-link>&emsp;
-        <nuxt-link class="btn" to="/factoring/lists">服务记录</nuxt-link>
+        <nuxt-link class="btn" to="/factoring/lists/1">服务记录</nuxt-link>
       </div>
     </div>
 </template>

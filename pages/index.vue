@@ -50,9 +50,11 @@
           <h3>{{total.turnoverAll}}<span>元</span></h3>
         </div>
         <div class="jzAd">
-          <a href="/service/index.html" target="_blank">
+          <nuxt-link to="/factoring">
             <img src="~assets/img/index/fuwu.png" alt="">
-          </a>
+            <p>集众保理</p>
+            <span>前往集众保理>></span>
+          </nuxt-link>
         </div>
       </div>
       <div class="main-AD">
@@ -243,10 +245,35 @@ body{
 .main-count .jzAd{
   width 240px
   height 143px
-  line-height 143px
   text-align center
   color #ffffff
   background #5790DA
+}
+.main-count .jzAd a{
+  display block
+  position relative
+}
+.main-count .jzAd a p{
+  width:133px;
+  height:30px;
+  font-size:30px;
+  font-family:MicrosoftYaHei;
+  font-weight:bold;
+  color:rgba(255,255,255,1);
+  position absolute
+  top 58px
+  left 50px
+}
+.main-count .jzAd a span{
+  width:97px;
+  height:11px;
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  position absolute
+  top 112px
+  left 70px
 }
 .main-AD{
   height 120px
@@ -400,6 +427,9 @@ export default {
   components: {
     indexHeader,
     indexFooter
+  },
+  metaInfo: {
+    title: '商品详情'
   },
   data () {
     return {

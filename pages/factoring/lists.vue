@@ -5,30 +5,30 @@
       <span @click="$router.go(-1)" class="el-icon-back back">返回</span>
       <h3 class="title">服务记录</h3>
       <el-table
-        :data="tableData"
+        :data="factoringList"
         stripe
         style="width: 1200px;margin: auto;">
         <el-table-column
-          prop="date"
+          prop="dataTime"
           label="申请时间"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="orderSn"
           label="订单号"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="needAccount"
           label="申请金额"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="address"
+          prop="loanAccount"
           label="批复金额">
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="stateName"
           label="状态"
           width="180">
         </el-table-column>
@@ -40,13 +40,13 @@
           </template>
         </el-table-column>
       </el-table>
-      <div class="pagination">
+      <div class="pagination" v-if="false">
         <el-pagination
           @current-change="handleCurrentChange"
           :current-page.sync="currentPage"
-          :page-size="100"
+          :page-size="10"
           layout="prev, pager, next, jumper"
-          :total="1000">
+          :total="total">
         </el-pagination>
       </div>
     </div>
@@ -55,39 +55,34 @@
 
 <script>
 import factoringHeeader from '@/components/factoring/header'
+import apiFactoring from '@/api/apiFactoring'
 export default {
   name: 'factoring-lists',
   data () {
     return {
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }],
-      currentPage: 2
+      currentPage: 1,
+      total: 0,
+      factoringList: []
     }
   },
   methods: {
+    async getFactoringList () {
+      await apiFactoring.getFactoringList((data) => {
+        this.factoringList = data.data.factoringList
+      })
+    },
     handleClick (index, row) {
       console.log(index)
       console.log(row)
-      this.$router.push('/factoring/detail')
+      this.$router.push(`/factoring/detail/${row.factoringId}`)
     },
     handleCurrentChange (val) {
       console.log(`当前页: ${val}`)
+      this.$router.push(`/factoring/${val}`)
     }
+  },
+  created () {
+    this.getFactoringList()
   },
   components: {
     factoringHeeader

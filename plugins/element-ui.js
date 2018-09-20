@@ -38,7 +38,8 @@ import {
   Tabs,
   TabPane,
   Step,
-  Steps
+  Steps,
+  Autocomplete
 } from 'element-ui'
 import '../theme/button.css'
 import '../theme/radio-button.css'
@@ -76,6 +77,7 @@ import '../theme/tabs.css'
 import '../theme/tab-pane.css'
 import '../theme/step.css'
 import '../theme/steps.css'
+import '../theme/autocomplete.css'
 
 export default () => {
   Vue.use(Button)
@@ -111,6 +113,7 @@ export default () => {
   Vue.use(TabPane)
   Vue.use(Step)
   Vue.use(Steps)
+  Vue.use(Autocomplete)
   Vue.prototype.$loading = Loading.service
   Vue.prototype.$message = Message
   Vue.prototype.$confirm = MessageBox.confirm

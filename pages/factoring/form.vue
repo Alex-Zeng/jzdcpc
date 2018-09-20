@@ -11,36 +11,42 @@
         </el-steps>
       </div>
       <div class="form">
-        <el-form ref="form" :model="form" label-width="100px">
-          <el-form-item label="订单号：">
-            <el-input v-model="form.number"></el-input>
+        <el-form ref="form" :model="form" :rules="codeRules" label-width="100px">
+          <el-form-item label="订单号：" prop="number">
+            <el-autocomplete
+              v-model="form.number"
+              :fetch-suggestions="querySearch"
+              placeholder="请输入内容"
+              @select="handleSelect"
+              @blur="handleBlur(form.number)"
+            ></el-autocomplete>
           </el-form-item>
-          <el-form-item label="订单金额：">
-            <el-input v-model="form.goodsMoney"></el-input>
+          <el-form-item label="订单金额：" prop="account">
+            <el-input v-model="form.account" disabled></el-input>
           </el-form-item>
-          <el-form-item label="联系人：">
-            <el-input v-model="form.userName"></el-input>
+          <el-form-item label="联系人：" prop="contactUsername">
+            <el-input v-model="form.contactUsername"></el-input>
           </el-form-item>
-          <el-form-item label="联系电话：">
-            <el-input v-model="form.phone"></el-input>
+          <el-form-item label="联系电话：" prop="contactPhone">
+            <el-input v-model="form.contactPhone"></el-input>
           </el-form-item>
-          <el-form-item label="投资金额：">
-            <el-input v-model="form.money"></el-input>
+          <el-form-item label="投资金额：" prop="needAccount">
+            <el-input v-model="form.needAccount"></el-input>
           </el-form-item>
-          <el-form-item label="户名：">
+          <el-form-item label="户名：" prop="name">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="对公账号：">
-            <el-input v-model="form.name"></el-input>
+          <el-form-item label="对公账号：" prop="bankCorporate">
+            <el-input v-model="form.bankCorporate"></el-input>
           </el-form-item>
-          <el-form-item label="再次输入：">
-            <el-input v-model="form.name"></el-input>
+          <el-form-item label="再次输入：" prop="bankCorporateConfirm">
+            <el-input v-model="form.bankCorporateConfirm"></el-input>
           </el-form-item>
-          <el-form-item label="开户支行：">
-            <el-input v-model="form.name"></el-input>
+          <el-form-item label="开户支行：" prop="bankAddress">
+            <el-input v-model="form.bankAddress"></el-input>
           </el-form-item>
           <el-form-item label="">
-            <el-button style="padding-left: 100px;padding-right: 100px;" type="primary" @click="next">提交意见</el-button>
+            <el-button style="padding-left: 100px;padding-right: 100px;" type="primary" @click="onSubmit('form')">提交意向</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -60,21 +66,148 @@
 
 <script>
 import factoringHeeader from '@/components/factoring/header'
+import apiFactoring from '@/api/apiFactoring'
 export default {
   name: 'factoring-form',
   data () {
     return {
       active: 0,
+      orderList: [],
       form: {
-
+        account: '',
+        bankAddress: '',
+        bankCorporate: '',
+        bankCorporateConfirm: '',
+        contactPhone: '',
+        contactUsername: '',
+        name: '',
+        needAccount: '',
+        number: ''
+      },
+      codeRules: {
+        number: [
+          { required: true, message: '请选择订单号', trigger: 'blur' }
+        ],
+        account: [
+          { required: true, message: '请选择活动区域', trigger: 'blur' }
+        ],
+        contactUsername: [
+          { required: true, message: '请填写联系人', trigger: 'blur' }
+        ],
+        contactPhone: [
+          { required: true, message: '请填写联系电话', trigger: 'blur' }
+        ],
+        needAccount: [
+          { required: true, message: '请填写投资金额', trigger: 'blur' }
+        ],
+        name: [
+          { required: true, message: '请填写户名', trigger: 'blur' }
+        ],
+        bankCorporate: [
+          { required: true, message: '请填写对公账号', trigger: 'blur' }
+        ],
+        bankCorporateConfirm: [
+          { required: true, message: '请再次填写对公账号', trigger: 'blur' }
+        ],
+        bankAddress: [
+          { required: true, message: '请填写开户支行', trigger: 'blur' }
+        ]
       },
       centerDialogVisible: false
     }
   },
+  computed: {
+    token () {
+      return this.$store.getters.loggedToken
+    },
+    user () {
+      return this.$store.getters.loggedUser
+    }
+  },
   methods: {
-    next () {
-      this.active = 1
-      this.centerDialogVisible = true
+    querySearch (queryString, cb) {
+      var orderList = this.orderList
+      var results = queryString ? orderList.filter(this.createFilter(queryString)) : orderList
+      // 调用 callback 返回建议列表的数据
+      cb(results)
+    },
+    createFilter (queryString) {
+      return (orderList) => {
+        return (orderList.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+      }
+    },
+    handleSelect (item) {
+      console.log(item)
+      this.form.account = item.account
+      this.form.orderId = item.orderId
+    },
+    handleBlur (val) {
+      console.log(val)
+    },
+    async getOrderInfo () {
+      await apiFactoring.getOrderInfo({
+      }, (data) => {
+        const {status, msg, data: {orderList}} = data
+        if (status === 0) {
+          orderList.forEach((item) => {
+            item.value = item.orderSn
+          })
+          this.orderList = orderList
+        } else {
+          this.$message.error(msg)
+        }
+      })
+    },
+    async onSubmit (formName) {
+      console.log(formName)
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          apiFactoring.factoringAdd({
+            'orderId': this.form.orderId,
+            'contactUsername': this.form.contactUsername,
+            'contactPhone': this.form.contactPhone,
+            'needAccount': this.form.needAccount,
+            'bankCorporate': this.form.bankCorporate,
+            'bankCorporateConfirm': this.form.bankCorporateConfirm,
+            'bankAddress': this.form.bankAddress
+          }, (data) => {
+            this.active = 1
+            this.centerDialogVisible = true
+            this.$refs[formName].resetFields()
+            alert('submit!')
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    }
+  },
+  mounted () {
+    if (this.token) {
+      if (this.user.group === 6) {
+        this.$confirm('您尚未做企业认证，去认证?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$router.push('/user/setting/cert')
+        }).catch(() => {
+          this.$router.replace('/')
+        })
+      } else {
+        this.getOrderInfo()
+      }
+    } else {
+      this.$confirm('您尚未登录，去登录?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$router.push('/auth/login')
+      }).catch(() => {
+        this.$router.replace('/')
+      })
     }
   },
   components: {
