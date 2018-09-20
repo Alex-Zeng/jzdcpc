@@ -72,7 +72,7 @@ export default {
   name: 'factoring-form',
   data () {
     var validateneedAccount = (rule, value, callback) => {
-      if (value > this.form.account) {
+      if (value > Number(this.form.account)) {
         callback(new Error('融资金额不能大于订单金额!'))
       } else {
         callback()
