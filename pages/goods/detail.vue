@@ -119,7 +119,7 @@
         </div>
         <div class="right">
           <div class="title">商品详情</div>
-          <div v-html="detail.detail" style="padding: 0 28px 28px;"></div>
+          <div v-html="detail.webDetail" style="padding: 0 28px 28px;"></div>
         </div>
       </div>
     </div>

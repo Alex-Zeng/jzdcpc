@@ -17,7 +17,7 @@ let serverConfig = {
   },
   proxy: {
     '/papi': {
-      target: 'http://192.168.3.135/api',
+      target: 'http://scm.jizhongdiancai.com/api',
       pathRewrite: { '^/papi': '' }
     }
   }
