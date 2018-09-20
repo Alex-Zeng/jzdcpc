@@ -9,7 +9,7 @@
             <el-col :span="5"><div class="grid-content bg-purple">申请时间</div></el-col>
             <el-col :span="7"><div class="grid-content bg-purple-light">{{factoringDetail.dataTime? factoringDetail.dataTime: '&emsp;'}}</div></el-col>
             <el-col :span="5"><div class="grid-content bg-purple">申请订单号</div></el-col>
-            <el-col :span="7"><div class="grid-content bg-purple">{{factoringDetail.dataTime? factoringDetail.dataTime: '&emsp;'}}</div></el-col>
+            <el-col :span="7"><div class="grid-content bg-purple">{{factoringDetail.orderSn? factoringDetail.orderSn: '&emsp;'}}</div></el-col>
           </el-row>
         <el-row>
           <el-col :span="5"><div class="grid-content bg-purple">申请金额</div></el-col>
@@ -43,7 +43,7 @@
         </el-row>
         <div class="reason">
           <p>{{factoringDetail.stateName}}</p>
-          <p>{{factoringDetail.reasons}}</p>
+          <p v-show="factoringDetail.reasons">拒绝理由：{{factoringDetail.reasons}}</p>
         </div>
       </div>
     </div>

@@ -13,16 +13,17 @@
       <div class="form">
         <el-form ref="form" :model="form" :rules="codeRules" label-width="100px">
           <el-form-item label="订单号：" prop="number">
-            <el-autocomplete
-              v-model="form.number"
-              :fetch-suggestions="querySearch"
-              placeholder="请输入内容"
-              @select="handleSelect"
-              @blur="handleBlur(form.number)"
-            ></el-autocomplete>
+            <el-select v-model="form.number" placeholder="请选择" @change="onChange">
+              <el-option
+                v-for="item in orderList"
+                :key="item.value"
+                :label="item.value"
+                :value="item">
+              </el-option>
+            </el-select>
           </el-form-item>
           <el-form-item label="订单金额：" prop="account">
-            <el-input v-model="form.account" disabled></el-input>
+            <el-input :value="parseInt(form.account) === Number(form.account)? Number(form.account).toFixed(2):form.account" disabled></el-input>
           </el-form-item>
           <el-form-item label="联系人：" prop="contactUsername">
             <el-input v-model="form.contactUsername"></el-input>
@@ -70,6 +71,15 @@ import apiFactoring from '@/api/apiFactoring'
 export default {
   name: 'factoring-form',
   data () {
+    var validateneedAccount = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请填写投资金额'))
+      } else if (value > this.form.account) {
+        callback(new Error('投资金额不能大于订单金额!'))
+      } else {
+        callback()
+      }
+    }
     return {
       active: 0,
       orderList: [],
@@ -89,7 +99,7 @@ export default {
           { required: true, message: '请选择订单号', trigger: 'blur' }
         ],
         account: [
-          { required: true, message: '请选择活动区域', trigger: 'blur' }
+          { required: true, message: '请选择金额', trigger: 'blur' }
         ],
         contactUsername: [
           { required: true, message: '请填写联系人', trigger: 'blur' }
@@ -98,7 +108,7 @@ export default {
           { required: true, message: '请填写联系电话', trigger: 'blur' }
         ],
         needAccount: [
-          { required: true, message: '请填写投资金额', trigger: 'blur' }
+          { validator: validateneedAccount, trigger: 'blur' }
         ],
         name: [
           { required: true, message: '请填写户名', trigger: 'blur' }
@@ -136,13 +146,15 @@ export default {
         return (orderList.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
       }
     },
-    handleSelect (item) {
+    onChange (item) {
       console.log(item)
-      this.form.account = item.account
       this.form.orderId = item.orderId
+      this.form.account = item.account
     },
-    handleBlur (val) {
-      console.log(val)
+    async getName () {
+      await apiFactoring.getName((data) => {
+        this.form.name = data.data.name
+      })
     },
     async getOrderInfo () {
       await apiFactoring.getOrderInfo({
@@ -196,6 +208,7 @@ export default {
           this.$router.replace('/')
         })
       } else {
+        this.getName()
         this.getOrderInfo()
       }
     } else {
