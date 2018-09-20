@@ -31,7 +31,7 @@
           <el-form-item label="联系电话：" prop="contactPhone">
             <el-input v-model="form.contactPhone"></el-input>
           </el-form-item>
-          <el-form-item label="投资金额：" prop="needAccount">
+          <el-form-item label="融资金额：" prop="needAccount">
             <el-input v-model="form.needAccount"></el-input>
           </el-form-item>
           <el-form-item label="户名：" prop="name">
@@ -72,10 +72,8 @@ export default {
   name: 'factoring-form',
   data () {
     var validateneedAccount = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请填写投资金额'))
-      } else if (value > this.form.account) {
-        callback(new Error('投资金额不能大于订单金额!'))
+      if (value > this.form.account) {
+        callback(new Error('融资金额不能大于订单金额!'))
       } else {
         callback()
       }
@@ -108,6 +106,7 @@ export default {
           { required: true, message: '请填写联系电话', trigger: 'blur' }
         ],
         needAccount: [
+          { required: true, message: '请填融资金额', trigger: 'blur' },
           { validator: validateneedAccount, trigger: 'blur' }
         ],
         name: [
@@ -186,7 +185,11 @@ export default {
             this.active = 1
             this.centerDialogVisible = true
             this.$refs[formName].resetFields()
-            alert('submit!')
+            this.$message({
+              showClose: true,
+              message: '提交成功',
+              type: 'success'
+            })
           })
         } else {
           console.log('error submit!!')
