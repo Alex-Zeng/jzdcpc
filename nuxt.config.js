@@ -90,7 +90,8 @@ module.exports = {
   proxy: {
     '/papi': {
       // target: 'http://192.168.3.135:80/api',
-      target: 'http://jwapi-uat.jizhongdiancai.com/api',
+      // target: 'http://jwapi-uat.jizhongdiancai.com/api',
+      target: 'http://scm.jizhongdiancai.com/api',
       pathRewrite: { '^/papi': '' }
     }
   }
