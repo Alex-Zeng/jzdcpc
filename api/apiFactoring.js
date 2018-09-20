@@ -16,8 +16,8 @@ export default {
     const data = await request.post('/papi/Factoring/getFactoringDetail', fileds)
     cb(data)
   },
-  async getProfile (cb) {
-    const data = await request.get('/papi/user/getProfile')
+  async getName (cb) {
+    const data = await request.get('/papi/Factoring/getName')
     cb(data)
   }
 }
