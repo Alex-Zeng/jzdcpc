@@ -15,9 +15,5 @@ export default {
   async addMore (cb, fileds) {
     const data = await request.post('/papi/mall_cart/addMore', fileds)
     cb(data)
-  },
-  async getPath (cb, fileds) {
-    const { data } = await request.get('/papi/goods/getPath', fileds)
-    cb(data)
   }
 }

@@ -265,10 +265,28 @@ export default {
       })
     },
     async cancel (id) {
-      await apiMaterial.cancel((data) => {
-        this.getWebList()
-      }, {
-        materialId: id
+      this.$confirm('确定删除该条信息吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        apiMaterial.cancel((data) => {
+          const {status, msg} = data
+          if (status === 0) {
+            this.$message({
+              type: 'success',
+              message: msg
+            })
+            this.getWebList()
+          }
+        }, {
+          materialId: id
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
     }
   },
