@@ -222,10 +222,13 @@ export default {
       this.$router.push('/goods/search/' + JSON.stringify(this.all))
     },
     page (page) {
+      console.log(page)
       this.all = {...this.all, pageNumber: page}
       this.$router.push('/goods/search/' + JSON.stringify(this.all))
     },
     changeCate  (type, child, id) {
+      this.pageNumber = 1
+      this.page(1)
       switch (type) {
         case 1:
           this.child = child
@@ -244,7 +247,7 @@ export default {
           break
       }
       this.all.cateId = id
-      this.all.pageNumber = 1
+      // this.all.pageNumber = 1
       this.$router.push('/goods/search/' + JSON.stringify(this.all))
     },
     async search () {
