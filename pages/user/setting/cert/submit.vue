@@ -16,10 +16,10 @@
       <el-form ref="certform" :model="form" :rules="rules" label-width="80px" style="width: 1060px;">
         <div class="clearfix">
           <el-form-item prop="companyName" label="企业名称" style="width: 520px;float: left;">
-            <el-input v-model="form.companyName"></el-input>
+            <el-input v-model="form.companyName" :disabled="form.status == '1'?true:false"></el-input>
           </el-form-item>
           <el-form-item label="注册类型" prop="property" style="width: 520px;float: right;">
-            <el-select style="width: 100%;" v-model="form.property">
+            <el-select style="width: 100%;" v-model="form.property" :disabled="form.status == '1'?true:false">
               <el-option label="有限责任公司" value="0"></el-option>
               <el-option label="股份有限公司" value="1"></el-option>
               <el-option label="个体工商户" value="2"></el-option>
@@ -29,17 +29,17 @@
         </div>
         <div class="clearfix">
           <el-form-item label="法人代表" prop="representative" style="width: 520px;float: left;">
-            <el-input v-model="form.representative"></el-input>
+            <el-input v-model="form.representative" :disabled="form.status == '1'?true:false"></el-input>
           </el-form-item>
           <el-form-item label="注册资本" prop="capital" style="width: 520px;float: right;">
-            <el-input v-model="form.capital">
+            <el-input v-model="form.capital" :disabled="form.status == '1'?true:false">
               <template slot="append">万元</template>
             </el-input>
           </el-form-item>
         </div>
 
         <el-form-item label="住所" prop="address">
-          <el-input v-model="form.address"></el-input>
+          <el-input v-model="form.address" :disabled="form.status == '1'?true:false"></el-input>
         </el-form-item>
       </el-form>
     </div>

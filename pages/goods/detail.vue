@@ -291,15 +291,6 @@ export default {
           if (item.specAttrs.toString() === newArr.toString()) {
             this.specificationsTarget = item
           }
-          /* if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.length === 1) {
-            this.specificationsTarget = item
-          }
-          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.length === 2) {
-            this.specificationsTarget = item
-          }
-          if (item.specAttrs.indexOf(this.arr[0]) > -1 && item.specAttrs.indexOf(this.arr[1]) > -1 && item.specAttrs.indexOf(this.arr[2]) > -1 && item.specAttrs.length === 3) {
-            this.specificationsTarget = item
-          } */
         })
       }
       if (this.specificationsTarget.moq) {
