@@ -220,7 +220,8 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$router.push('/auth/login')
+        localStorage.setItem('oldUrl', this.$route.path)
+        this.$router.push('/auth')
       }).catch(() => {
         this.$router.replace('/')
       })

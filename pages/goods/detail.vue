@@ -72,13 +72,7 @@
             <div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;">
               <el-button style="margin-top: 10px;" v-for="(item, index) in i.specAttrVals" :key="index" :class="{active: iscur[k].index == index,disable: item.disable}" @click="chooseFunc(k, index, item.specAttrValId, item.disable, item.isCustom)">{{item.specAttrVal}}</el-button>
             </div>
-            <!--<div style="float: left; width: 768px;margin-left: -10px;margin-top: -10px;" v-if="k==1">
-              <el-button style="margin-top: 10px;" :type="choose[k] == item.option_id? 'primary': ''" v-for="(item, index) in i.list" :key="index" @click="chooseFunc(k, item.option_id)">{{item.option_name}}</el-button>
-            </div>-->
           </div>
-          <!--<div class="label" style="margin-bottom: 20px;" v-if="spec.no && spec.name" v-loading="specLoading">
-            <span class="grey"><span>物料编号：{{spec.no}}</span><span style="text-indent: 40px;">物料规格：{{spec.name}}</span></span>
-          </div>-->
           <div class="info-item"  v-if="specificationsTarget.skuCode">
             <span class="name" v-if="specificationsTarget.skuCode">SKU编码：</span>
             <span style="min-width: 200px;display: inline-block;">{{specificationsTarget.skuCode}}</span>
@@ -395,6 +389,7 @@ export default {
                 this.$message.error(msg)
               }
             } else {
+              localStorage.setItem('oldUrl', this.$route.path)
               this.$message.error(msg)
             }
           }

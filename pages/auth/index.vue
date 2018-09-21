@@ -88,7 +88,12 @@ export default {
                   message: msg,
                   type: 'success'
                 })
-                this.$router.replace('/')
+                let oldUrl = localStorage.getItem('oldUrl')
+                if (oldUrl) {
+                  this.$router.replace(oldUrl)
+                } else {
+                  this.$router.replace('/')
+                }
                 this.loading = false
               },
               fileds: this.form
