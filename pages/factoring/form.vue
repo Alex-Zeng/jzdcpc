@@ -13,7 +13,7 @@
       <div class="form">
         <el-form ref="form" :model="form" :rules="codeRules" label-width="100px">
           <el-form-item label="订单号：" prop="number">
-            <el-select v-model="form.number" placeholder="请选择" @change="onChange">
+            <el-select v-model="form.number" placeholder="请选择" @change="onChange" style="display: block;">
               <el-option
                 v-for="item in orderList"
                 :key="item.value"
@@ -220,7 +220,8 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$router.push('/auth/login')
+        localStorage.setItem('oldUrl', this.$route.path)
+        this.$router.push('/auth')
       }).catch(() => {
         this.$router.replace('/')
       })

@@ -72,12 +72,9 @@ export default {
       })
     },
     handleClick (index, row) {
-      console.log(index)
-      console.log(row)
       this.$router.push(`/factoring/detail/${row.factoringId}`)
     },
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
       this.$router.push(`/factoring/${val}`)
     }
   },

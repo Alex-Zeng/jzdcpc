@@ -12,7 +12,7 @@
       <span>点击上传</span>
     </div>
     <el-progress :text-inside="true" :stroke-width="18" :percentage="count" v-show="isProgress" style="margin-top: 100px;"></el-progress>
-    <input :id="'img'+id" style="visibility: hidden;height: 0; width: 1px;" type="file" @change="upload" accept="image/*"/>
+    <input :id="'img'+id" style="visibility: hidden;height: 0; width: 1px;" type="file" @change="upload" accept="image/gif, image/jpg, image/jpeg, image/bmp, image/png"/>
   </div>
 </template>
 
@@ -39,7 +39,12 @@ export default {
     async upload () {
       let fd = new FormData()
       let file = document.getElementById(`img${this.id}`).files[0]
+      let type = 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
       const {size} = file
+      if (type.indexOf(file.type) === -1) {
+        this.$message.error('上传文件格式不正确')
+        return ''
+      }
       const OUTSIZE = 8192000
       if (size && size > OUTSIZE) {
         this.$message.error('上传文件大小不可超过8M')

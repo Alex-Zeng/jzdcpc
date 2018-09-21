@@ -189,12 +189,22 @@ export default {
                   type: 'success'
                 })
                 if (this.step == 2) {
-                  this.$router.replace('/')
+                  let oldUrl = localStorage.getItem('oldUrl')
+                  if (oldUrl) {
+                    this.$router.replace(oldUrl)
+                  } else {
+                    this.$router.replace('/')
+                  }
                 } else if (this.step == 1) {
                   if (status == -3) {
                     this.step = this.step + 1
                   } else {
-                    this.$router.replace('/')
+                    let oldUrl = localStorage.getItem('oldUrl')
+                    if (oldUrl) {
+                      this.$router.replace(oldUrl)
+                    } else {
+                      this.$router.replace('/')
+                    }
                   }
                 } else {
                   this.step = this.step + 1
