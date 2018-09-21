@@ -13,7 +13,7 @@
       <div class="form">
         <el-form ref="form" :model="form" :rules="codeRules" label-width="100px">
           <el-form-item label="订单号：" prop="number">
-            <el-select v-model="form.number" placeholder="请选择" @change="onChange">
+            <el-select v-model="form.number" placeholder="请选择" @change="onChange" style="display: block;">
               <el-option
                 v-for="item in orderList"
                 :key="item.value"
