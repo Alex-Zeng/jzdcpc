@@ -39,10 +39,9 @@ export default {
     async upload () {
       let fd = new FormData()
       let file = document.getElementById(`img${this.id}`).files[0]
-      console.log(file)
-      let type = 'image/gif, image/jpg, image/jpeg, image/bmp, image/png'
+      let type = 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
       const {size} = file
-      if (type.indexOf(size.type) === -1) {
+      if (type.indexOf(file.type) === -1) {
         this.$message.error('上传文件格式不正确')
         return ''
       }
