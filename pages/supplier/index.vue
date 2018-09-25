@@ -82,7 +82,7 @@
        </div>
      </div>
      <div class="footer">
-       <p>copyright&nbsp;©&nbsp;2018&emsp;津晶科技&emsp;版权所有&emsp;&emsp;&emsp;&emsp;粤ICP背案号</p>
+       <p>copyright&nbsp;©&nbsp;2018&emsp;津晶科技&emsp;版权所有&emsp;&emsp;&emsp;&emsp;粤ICP备18037422号</p>
      </div>
    </div>
 </template>
