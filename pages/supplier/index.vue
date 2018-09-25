@@ -52,31 +52,31 @@
            </li>
            <li>
              <img src="~assets/img/supplier/product-03.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>除霜管</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-04.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>冰箱用镀锌冷凝管</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-05.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>工艺管</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-06.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>空调安装附板</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-07.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>蒸发管</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-08.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>连接管</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-09.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>内托衬板</p>
            </li>
          </ul>
        </div>
