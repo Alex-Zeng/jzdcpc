@@ -1,13 +1,13 @@
 <template>
    <div>
-     <div class="header">
+     <div class="header" :class="{scroll: isScroll}">
        <nuxt-link to="/" class="logo"></nuxt-link>
        <div class="header-nav">
-         <a href="" class="active">公司简介</a>
-         <a href="">产品展示</a>
+         <a href="#banner">公司简介</a>
+         <a href="#product">产品展示</a>
        </div>
      </div>
-     <div class="banner">
+     <div id="banner" class="banner">
        <h3>
          佛山市南海晶昊塑胶五金厂
        </h3>
@@ -89,14 +89,39 @@
 
 <script>
 export default {
-  name: 'supplier-index'
+  name: 'supplier-index',
+  data  () {
+    return {
+      isScroll: false
+    }
+  },
+  methods: {
+    scrollMethods () {
+      this.isScroll = true
+    }
+  },
+  mounted () {
+    let self = this
+    window.onscroll = function () {
+      var t = document.documentElement.scrollTop || document.body.scrollTop
+      if (t >= 200) {
+        self.isScroll = true
+      } else {
+        self.isScroll = false
+      }
+    }
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
   .header
+    padding-top 10px
     position fixed
     width 100%
+    z-index 2
+    &.scroll
+      background rgb(27, 127, 190)
     .logo
       display block
       width 84px
@@ -118,7 +143,7 @@ export default {
         padding 20px 0
         margin 0 2em
         color #ffffff
-        &.active:after
+        &:active:after
           text-align center
           display block
           margin auto
