@@ -180,6 +180,8 @@ export default {
     margin auto
     p
       text-indent 2em
+      padding-top 1em
+      line-height 1.8
   #intro
     background #ffffff
     padding-bottom 80px
