@@ -204,6 +204,11 @@ import apiSetting from '../../../api/apiSetting'
 import { phoneReg, passwordReg, emailReg } from '../../../helper/reg'
 export default {
   name: 'safe',
+  head () {
+    return {
+      title: '安全设置'
+    }
+  },
   components: {
     sms
   },

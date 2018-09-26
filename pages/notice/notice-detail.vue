@@ -29,6 +29,11 @@ import indexFooter from '@/components/index/footer'
 import apiNotice from '@/api/apiNotice'
 export default {
   name: 'notice-detail',
+  head () {
+    return {
+      title: '公告详情'
+    }
+  },
   data () {
     return {
       detail: {}

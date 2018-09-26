@@ -89,6 +89,11 @@ import apiMallCart from '../../api/apiMallCart'
 export default {
   name: 'cart',
   middleware: 'lockGroup',
+  head () {
+    return {
+      title: '购物清单'
+    }
+  },
   components: {
     indexFooter,
     indexHeader,

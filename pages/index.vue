@@ -428,9 +428,6 @@ export default {
     indexHeader,
     indexFooter
   },
-  metaInfo: {
-    title: '商品详情'
-  },
   data () {
     return {
       banner: [],
@@ -509,6 +506,11 @@ export default {
       if (anchorElement) {
         anchorElement.scrollIntoView()
       }
+    }
+  },
+  head () {
+    return {
+      title: '首页-集众电采'
     }
   }
 }

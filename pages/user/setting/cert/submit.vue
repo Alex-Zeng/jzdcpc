@@ -83,6 +83,11 @@
 <script>
 import uploadImg from '../../../../components/uploadImg'
 export default {
+  head () {
+    return {
+      title: '企业认证'
+    }
+  },
   components: {
     uploadImg
   },

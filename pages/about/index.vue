@@ -80,7 +80,10 @@
 <script>
 export default {
   name: 'index',
-  methods: {
+  head () {
+    return {
+      title: '关于我们'
+    }
   },
   created () {
   },

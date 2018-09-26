@@ -6,7 +6,7 @@
     <span style="font-family:黑体"><span style="font-size:24px"><strong>保密协议</strong></span></span>
 </p>
 <p style="margin-bottom: 0;line-height: 150%">
-    <br/> 
+    <br/>
 </p>
 <p style="margin-bottom: 0;line-height: 150%">
     <br/>
@@ -42,7 +42,7 @@
     <br/>
 </p>
 <p style="margin-bottom: 0;line-height: 150%">
-    <br/> 
+    <br/>
 </p>
 <p style="margin-bottom: 0;line-height: 150%">
     <span style="font-family:宋体">第</span><span style="font-family:Arial, serif">3</span><span style="font-family:宋体">条机密信息的确认</span>
@@ -123,6 +123,11 @@ import indexHeader from "@/components/index/header";
 import indexFooter from "@/components/index/footer";
 export default {
   name: 'se',
+  head () {
+    return {
+      title: '保密协议'
+    }
+  },
   components: {
     indexHeader,
     indexFooter

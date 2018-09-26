@@ -207,6 +207,11 @@
 <script>
 export default {
   name: 'orderDetail',
+  head () {
+    return {
+      title: '订单详情'
+    }
+  },
   computed: {
     detail () {
       return this.$store.getters.orderDetail

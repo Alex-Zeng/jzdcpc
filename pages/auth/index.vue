@@ -50,6 +50,11 @@
 <script>
 export default {
   name: 'login',
+  head () {
+    return {
+      title: '登录'
+    }
+  },
   data () {
     return {
       loading: false,

@@ -32,6 +32,11 @@ import api from '../../../api/apiSetting'
 import Cookies from 'js-cookie'
 export default {
   name: 'others',
+  head () {
+    return {
+      title: '其他设置'
+    }
+  },
   components: {Upload2},
   data () {
     return {

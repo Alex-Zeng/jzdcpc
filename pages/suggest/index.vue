@@ -46,6 +46,11 @@ import SuggestFooter from '@/components/user/footer'
 import { phoneReg } from '@/helper/reg'
 export default {
   name: 'suggest-index',
+  head () {
+    return {
+      title: '建议反馈'
+    }
+  },
   data () {
     var validatePhone = (rule, value, callback) => {
       const trimVal = value.trim()

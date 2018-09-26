@@ -106,6 +106,11 @@ import empty from '../../components/empty'
 const pageSize = 10
 export default {
   name: 'order',
+  head () {
+    return {
+      title: '订单信息'
+    }
+  },
   data () {
     return {
       pageNumber: 1,

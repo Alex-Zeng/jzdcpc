@@ -17,7 +17,7 @@
      <div id="intro">
        <h3 class="title">公司简介</h3>
        <div class="content">
-         <img src="~assets/img/supplier/intro-01.png" alt="">
+         <img src="~assets/img/supplier/intro-01.png" style="padding-bottom: 1em;" alt="">
          <p>
            佛山市南海晶昊塑胶五金厂办公室地址位于广东第三大城市，中国近代明清的天下四聚之一佛山，佛山 佛山市南海区里水镇新联工业区里广路175-2号1栋首层（邮编：528244），于2007-03-23 在佛山工商局注册成立，工厂已经工厂发展壮大的11年，愿与社会各界同仁携手合作，谋求共同发展，继续为新老客户提供最优秀的产品和服务。我工厂主要经营加工、产销：塑胶、五金、制冷配件。(依法须经批准的项目，经相关部门批准后方可开展经营活动)，我工厂与多家佛山冰箱、冷柜公司零售商和代理商建立了长期稳定的合作关系，品种齐全、价格合理，企业实力雄厚，重信用、守合同、保证产品质量，以多品种经营特色和薄利多销的原则，赢得了广大客户的信任，工厂始终奉行“诚信求实、致力服务、唯求满意”的企业宗旨，全力跟随客户需求，不断进行产品创新和服务改进。
          </p>
@@ -52,37 +52,37 @@
            </li>
            <li>
              <img src="~assets/img/supplier/product-03.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>除霜管</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-04.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>冰箱用镀锌冷凝管</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-05.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>工艺管</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-06.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>空调安装附板</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-07.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>蒸发管</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-08.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>连接管</p>
            </li>
            <li>
              <img src="~assets/img/supplier/product-09.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <p>内托衬板</p>
            </li>
          </ul>
        </div>
      </div>
      <div class="footer">
-       <p>copyright&nbsp;©&nbsp;2018&emsp;津晶科技&emsp;版权所有&emsp;&emsp;&emsp;&emsp;粤ICP背案号</p>
+       <p>copyright&nbsp;©&nbsp;2018&emsp;津晶科技&emsp;版权所有&emsp;&emsp;&emsp;&emsp;粤ICP备18037422号</p>
      </div>
    </div>
 </template>
@@ -90,6 +90,11 @@
 <script>
 export default {
   name: 'supplier-index',
+  head () {
+    return {
+      title: '佛山市南海晶昊塑胶五金厂'
+    }
+  },
   data  () {
     return {
       isScroll: false
@@ -175,6 +180,7 @@ export default {
     margin auto
     p
       text-indent 2em
+      line-height 1.8
   #intro
     background #ffffff
     padding-bottom 80px
@@ -206,6 +212,8 @@ export default {
             bottom 0
             left 0
             color #ffffff
+            text-indent 0
+            padding-top 0
   .footer
     border-top 100px solid #ffffff
     height 200px

@@ -18,6 +18,11 @@
 <script>
 export default {
   name: 'factoring',
+  head () {
+    return {
+      title: '集众保理'
+    }
+  },
   data () {
     return {}
   },

@@ -32,6 +32,11 @@
 
 <script>
 export default {
+  head () {
+    return {
+      title: '企业认证'
+    }
+  },
   data () {
     return {
       agent: '0',

@@ -116,6 +116,11 @@ export default {
   components: {
     smsButton
   },
+  head () {
+    return {
+      title: '登录'
+    }
+  },
   data () {
     return {
       step: 1,
