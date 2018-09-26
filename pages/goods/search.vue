@@ -84,6 +84,11 @@ import empty from '../../components/empty'
 import apiSearch from '../../api/apiSearch'
 const pageSize = 12
 export default {
+  head () {
+    return {
+      title: '搜索'
+    }
+  },
   components: {
     indexHeader,
     indexFooter,

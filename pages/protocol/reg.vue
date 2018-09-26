@@ -9,7 +9,7 @@
         <span style="font-size: 19px"><strong>集众电采用户注册协议</strong></span>
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
-        <br/> 
+        <br/>
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
         本协议由您与津晶科技信息服务（广州）有限责任公司（以下简称“津晶科技”）签订，本协议具有法律效力。 在申请注册时，您应当详细阅读了本协议所有内容，您充分理解并同意接受本协议的全部内容。集众电采互联网平台（以下简称“集众电采”）是津晶科技独立开发、运营的第三方电子商务平台。本协议适用于集众电采的用户（以下简称<span style="font-family:宋体, serif"><span>&quot;</span></span>用户<span style="font-family:宋体, serif"><span>&quot;</span></span>、<span style="font-family:宋体, serif"><span>&quot;</span></span>您<span style="font-family:宋体, serif"><span>&quot;</span></span>），若您使用集众电采（包括但不限于以任何形式接通、进入、浏览集众电采，或者使用集众电采的各项服务、功能等），您的使用行为将被视为以事实行为对本用户协议全部内容的知晓、认可并同意遵守。
@@ -18,7 +18,7 @@
         津晶科技有权根据业务需要酌情修订本协议，并以网站公告的形式进行更新，不再单独通知予您。经修订的协议一经在集众电采公布，即产生效力。如您不同意相关修订，请您立即停止注册。如您继续使用集众电采服务，则将视为您已接受经修订的协议，当您与津晶科技发生争议时，应以最新的协议为准。
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
-        <br/> 
+        <br/>
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
         第<span style="font-family:宋体, serif"><span>1</span></span>条 服务条款的确认和接受
@@ -30,7 +30,7 @@
         <span style="font-family:宋体, serif"><span>2</span></span>）津晶科技有权就集众电采提供某一项功能或服务制订使用规则、服务规则、说明、使用协议或服务协议，该等规则内容一经正式在集众电采公布，即为本协议不可分割的组成部分，您同样应当遵守。如您继续使用该项功能或服务的，即视为您对前述规则、说明或协议的接受。
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
-        <br/> 
+        <br/>
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
         第<span style="font-family:宋体, serif"><span>2</span></span>条 用户资格
@@ -42,7 +42,7 @@
         <span style="font-family:宋体, serif"><span>2)</span></span>津晶科技有权禁止被取消用户资格的自然人、法人及其他组织再次使用集众电采。
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
-        <br/> 
+        <br/>
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
         第<span style="font-family:宋体, serif"><span>3</span></span>条 用户权利与义务
@@ -72,7 +72,7 @@
         <span style="font-family:宋体, serif"><span>8</span></span>）如因用户通过集众电采使用的服务或线下的商务行为，致使任何单位、个人对津晶及津晶关联企业提起的诉讼、仲裁或其他法律程序而产生的费用及遭受的损失，一切均由用户负责赔偿。
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
-        <br/> 
+        <br/>
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
         第<span style="font-family:宋体, serif"><span>4</span></span>条 信息收集和保护
@@ -150,7 +150,7 @@
         <span style="font-family:宋体, serif"><span>10</span></span>）津晶科技转让本协议无需征得您的同意，津晶科技享有单方转让或转委托第三方履行的权利。在该等转让或委托中，您的用户信息也可能将被转让给该第三方，以使该第三方可以继续有效地为您提供服务。
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
-        <br/> 
+        <br/>
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
         第<span style="font-family:宋体, serif"><span>6</span></span>条 知识产权
@@ -186,7 +186,7 @@
         •<span style="font-family:宋体, serif"> </span>将集众电采及其信息用于除甲方内部使用以外的任何第三方，包括但不限于向第三方提供数据处理服务、应用服务、商业共享或其他软件共享安排。
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
-        <br/> 
+        <br/>
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
         第<span style="font-family:宋体, serif"><span>7</span></span>条 平台收费
@@ -207,7 +207,7 @@
         <span style="font-family:宋体, serif"><span>5</span></span>）津晶科技有权在未经通知的情况下随时改变或不继续提供某些或全部用户服务权益。
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
-        <br/> 
+        <br/>
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
         <span style="color:#ff0000">第<span style="font-family:宋体, serif"><span>8</span></span>条 业务共享</span>
@@ -219,7 +219,7 @@
         <span style="font-family:宋体, serif"><span style="undefinedcolor:#ff0000">6</span>）为了提升信息处理效率，降低信息处理成本，或提高信息处理准确性，我们可能会委托有能力的我们的关联公司或其他专业机构代表我们来处理用户信息，但我们会通过书面协议等方式要求受托公司遵守严格的保密义务及采取有效的保密措施，禁止其将这些信息用于未经您授权的用途。在委托关系解除时，受托公司不再保存个人信息。我们承诺对此负责。</span>
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
-        <br/> 
+        <br/>
     </p>
     <p style="margin-bottom: 0;line-height: 150%">
         第<span style="font-family:宋体, serif"><span>9</span></span>条 中止与终止
@@ -285,6 +285,11 @@ import indexHeader from "@/components/index/header";
 import indexFooter from "@/components/index/footer";
 export default {
   name: 'reg',
+  head () {
+    return {
+      title: '集众电采用户注册协议'
+    }
+  },
   components: {
     indexHeader,
     indexFooter

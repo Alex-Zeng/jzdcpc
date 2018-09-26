@@ -58,6 +58,11 @@ import factoringHeeader from '@/components/factoring/header'
 import apiFactoring from '@/api/apiFactoring'
 export default {
   name: 'factoring-lists',
+  head () {
+    return {
+      title: '申请记录'
+    }
+  },
   data () {
     return {
       currentPage: 1,

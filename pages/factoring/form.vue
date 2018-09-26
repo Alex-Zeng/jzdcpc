@@ -70,6 +70,11 @@ import factoringHeeader from '@/components/factoring/header'
 import apiFactoring from '@/api/apiFactoring'
 export default {
   name: 'factoring-form',
+  head () {
+    return {
+      title: '融资申请'
+    }
+  },
   data () {
     var validateneedAccount = (rule, value, callback) => {
       if (value > Number(this.form.account)) {

@@ -132,6 +132,11 @@ import service from '@/service'
 import apiMaterial from '@/api/apiMaterial'
 export default {
   name: 'material',
+  head () {
+    return {
+      title: '物料管理'
+    }
+  },
   data () {
     return {
       dialogFormVisible: false,

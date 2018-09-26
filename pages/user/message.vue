@@ -32,6 +32,11 @@ import empty from '../../components/empty'
 const pageSize = 10
 export default {
   name: 'message',
+  head () {
+    return {
+      title: '消息中心'
+    }
+  },
   components: {
     empty
   },

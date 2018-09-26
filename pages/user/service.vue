@@ -35,6 +35,11 @@
 <script>
 export default {
   name: 'service',
+  head () {
+    return {
+      title: '售后服务'
+    }
+  },
   computed: {
     detail () {
       return this.$store.getters.orderDetail

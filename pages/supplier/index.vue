@@ -90,6 +90,11 @@
 <script>
 export default {
   name: 'supplier-index',
+  head () {
+    return {
+      title: '佛山市南海晶昊塑胶五金厂'
+    }
+  },
   data  () {
     return {
       isScroll: false

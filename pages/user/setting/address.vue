@@ -96,6 +96,11 @@ import { phoneReg } from '../../../helper/reg'
 import areaJson from '../../../assets/json/area.json'
 export default {
   middleware: 'lockGroup',
+  head () {
+    return {
+      title: '收货地址'
+    }
+  },
   data () {
     return {
       list: [],

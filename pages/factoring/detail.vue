@@ -55,6 +55,11 @@ import factoringHeeader from '@/components/factoring/header'
 import apiFactoring from '@/api/apiFactoring'
 export default {
   name: 'factoring-detail',
+  head () {
+    return {
+      title: '保理详情'
+    }
+  },
   data () {
     return {
       UpperCase: '',

@@ -305,6 +305,11 @@ export default {
   components: {
     empty
   },
+  head () {
+    return {
+      title: '我的工作台'
+    }
+  },
   data  () {
     return {
       Buyer: true,

@@ -41,6 +41,11 @@ import indexFooter from '@/components/index/footer'
 const pageSize = 10
 export default {
   name: 'index',
+  head () {
+    return {
+      title: '平台公告'
+    }
+  },
   data () {
     return {
       pageNumber: 1

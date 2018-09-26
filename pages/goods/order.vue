@@ -208,6 +208,11 @@ import { phoneReg } from '../../helper/reg'
 export default {
   name: 'cart',
   middleware: 'lockGroup',
+  head () {
+    return {
+      title: '确认订单'
+    }
+  },
   components: {
     indexFooter,
     indexHeader

@@ -92,6 +92,11 @@ export default {
   components: {
     smsButton
   },
+  head () {
+    return {
+      title: '忘记密码'
+    }
+  },
   data () {
     var validatePhone = (rule, value, callback) => {
       const trimVal = value.trim()

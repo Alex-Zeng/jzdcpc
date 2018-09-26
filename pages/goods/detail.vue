@@ -480,6 +480,11 @@ export default {
     count (val) {
       this.changeNum(val)
     }
+  },
+  head () {
+    return {
+      title: '商品详情'
+    }
   }
 }
 </script>

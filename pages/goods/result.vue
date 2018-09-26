@@ -53,6 +53,11 @@ import indexFooter from '../../components/index/footer'
 export default {
   name: 'result',
   middleware: 'lockGroup',
+  head () {
+    return {
+      title: '订单详情'
+    }
+  },
   components: {
     indexFooter,
     indexHeader
