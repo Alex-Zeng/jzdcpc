@@ -504,7 +504,6 @@ export default {
       }, 60)
     },
     custormAnchor (anchorName) {
-      console.log(anchorName)
       // 找到锚点
       let anchorElement = document.getElementById(anchorName)
       if (anchorElement) {

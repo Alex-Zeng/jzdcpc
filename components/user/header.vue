@@ -159,6 +159,7 @@ export default {
   },
   methods: {
     logout () {
+      localStorage.clear()
       this.$store.dispatch('logout')
       setTimeout(() => {
         this.$router.replace('/auth')
