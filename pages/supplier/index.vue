@@ -17,7 +17,7 @@
      <div id="intro">
        <h3 class="title">公司简介</h3>
        <div class="content">
-         <img src="~assets/img/supplier/intro-01.png" alt="">
+         <img src="~assets/img/supplier/intro-01.png" style="padding-bottom: 1em;" alt="">
          <p>
            佛山市南海晶昊塑胶五金厂办公室地址位于广东第三大城市，中国近代明清的天下四聚之一佛山，佛山 佛山市南海区里水镇新联工业区里广路175-2号1栋首层（邮编：528244），于2007-03-23 在佛山工商局注册成立，工厂已经工厂发展壮大的11年，愿与社会各界同仁携手合作，谋求共同发展，继续为新老客户提供最优秀的产品和服务。我工厂主要经营加工、产销：塑胶、五金、制冷配件。(依法须经批准的项目，经相关部门批准后方可开展经营活动)，我工厂与多家佛山冰箱、冷柜公司零售商和代理商建立了长期稳定的合作关系，品种齐全、价格合理，企业实力雄厚，重信用、守合同、保证产品质量，以多品种经营特色和薄利多销的原则，赢得了广大客户的信任，工厂始终奉行“诚信求实、致力服务、唯求满意”的企业宗旨，全力跟随客户需求，不断进行产品创新和服务改进。
          </p>
@@ -180,7 +180,6 @@ export default {
     margin auto
     p
       text-indent 2em
-      padding-top 1em
       line-height 1.8
   #intro
     background #ffffff
@@ -213,6 +212,8 @@ export default {
             bottom 0
             left 0
             color #ffffff
+            text-indent 0
+            padding-top 0
   .footer
     border-top 100px solid #ffffff
     height 200px
