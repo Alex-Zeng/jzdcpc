@@ -113,7 +113,7 @@
         </div>
         <div class="right">
           <div class="title">商品详情</div>
-          <div v-html="detail.detail" style="padding: 0 28px 28px;"></div>
+          <div v-html="detail.webDetail" style="padding: 0 28px 28px;"></div>
         </div>
       </div>
     </div>
@@ -463,7 +463,7 @@ export default {
     apiGoods.getGoodsDetail((data) => {
       this.specLoading = false
       this.detail = data
-      this.detail.detail = this.detail.detail.replace(/embed/, 'video')
+      this.detail.webDetail = this.detail.webDetail.replace(/embed/, 'video')
       setTimeout(function () {
         if (document.getElementsByTagName('video').length > 0) {
           document.getElementsByTagName('video')[0].setAttribute('controls', 'controls')
