@@ -49,6 +49,11 @@
           <i class="title-icon">&#xe6bd;</i>订单管理
         </template>
         <div class="route-list">
+          <div :class="{item: true, 'active': /\/user\/goods/.test(path)}">
+            <nuxt-link to="/user/goods">我的商品</nuxt-link>
+          </div>
+        </div>
+        <div class="route-list">
           <div :class="{active: type ==i.key, item: true}" v-for="(i, k) in statusList" :key="'orders'+k">
             <nuxt-link :to="'/user/order/'+i.key+'/1'">{{i.value}}</nuxt-link>
           </div>
@@ -58,6 +63,21 @@
         <template slot="title">
           <a href="/service/index.html" style="display: block;"><i class="title-icon">&#xe67c;</i>集众服务</a>
         </template>
+      </el-collapse-item>
+      <el-collapse-item>
+        <template slot="title">
+          <i class="title-icon">&#xe639;</i>企业账号管理
+        </template>
+        <div class="route-list">
+          <div :class="{item: true, 'active': /\/user\/department/.test(path)}">
+            <nuxt-link to="/user/department">我的部门</nuxt-link>
+          </div>
+        </div>
+        <div class="route-list">
+          <div :class="{item: true, 'active': /\/user\/company/.test(path)}">
+            <nuxt-link to="/user/company">通讯录</nuxt-link>
+          </div>
+        </div>
       </el-collapse-item>
     </el-collapse>
   </div>

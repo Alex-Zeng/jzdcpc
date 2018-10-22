@@ -4,12 +4,13 @@
     <div class="radio-box">
       <el-radio label="0" v-model="agent">我是企业法人</el-radio>
       <el-radio label="1" v-model="agent">我是企业委托代理人</el-radio>
+      <el-radio label="2" v-model="agent">加入已经认证的企业</el-radio>
     </div>
-    <h4 class="title" style="margin-top: 30px;">请选择认证的企业类型</h4>
+    <!--<h4 class="title" style="margin-top: 30px;">请选择认证的企业类型</h4>
     <div class="radio-box">
       <el-radio label="1" v-model="type">我是采购商</el-radio>
       <el-radio label="2" v-model="type">我是供应商</el-radio>
-    </div>
+    </div>-->
     <el-button type="primary" class="next" @click="nextStep">下一步</el-button>
   </div>
 </template>

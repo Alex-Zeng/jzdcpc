@@ -11,9 +11,13 @@
         </nuxt-link>
       </div>
       <div class="user">
-        <div class="avatar">
-          <img src="" alt="">
+        <div class="name">
+          <span style="cursor: pointer;" v-if="changeRole" @click="changeRoleMethods"><i class="icon">&#xe609;</i>买家中心</span>
+          <span style="cursor: pointer;" v-if="!changeRole" @click="changeRoleMethods"><i class="icon">&#xe609;</i>卖家中心</span>
         </div>
+        <!--<div class="avatar">
+          <img src="" alt="">
+        </div>-->
         <div class="name" @click="$router.push('/goods/cart')" v-if="loggedUser.group != 5">
           <span style="cursor: pointer;"><i class="icon">&#xe617;</i>购物车(<span class="num">{{cartNum}}</span>)</span>
         </div>
@@ -140,6 +144,11 @@
 import menunNav from './menuNav'
 export default {
   name: 'userHeader',
+  data () {
+    return {
+      changeRole: false
+    }
+  },
   components: {
     menunNav
   },
@@ -150,6 +159,9 @@ export default {
     loggedUser () {
       return this.$store.getters.loggedUser
     },
+    userRole () {
+      return this.$store.getters.userRole
+    },
     favoriteTotal () {
       return this.$store.getters.favoriteTotal
     },
@@ -158,6 +170,9 @@ export default {
     }
   },
   methods: {
+    changeRoleMethods () {
+      this.changeRole = !this.changeRole
+    },
     logout () {
       localStorage.clear()
       this.$store.dispatch('logout')
@@ -182,6 +197,7 @@ export default {
     }
   },
   mounted () {
+    console.log(this.loggedUser)
     this.$store.dispatch('getMessageNumber')
     this.$store.dispatch('getFavoriteNumber')
     this.getNum()

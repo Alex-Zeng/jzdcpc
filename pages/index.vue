@@ -393,8 +393,11 @@ body{
 }
 .sub-floor-nav{
   position fixed
-  top 45%
-  right 180px
+  left: 54%;
+  bottom: 200px;
+  width 90px;
+  z-index: 9999;
+  margin-left: 610px;
 }
 .sub-floor-nav ul{
   padding-bottom 10px
