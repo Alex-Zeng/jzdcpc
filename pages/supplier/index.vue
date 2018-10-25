@@ -107,7 +107,7 @@
            <div>
              <img src="~assets/img/supplier2/product-0@2x.png" alt="">
            </div>
-           <div style="padding-left: 70px;padding-top: 30px; color: #737373 ;line-height: 37px">
+           <div style="padding-left: 70px;padding-top: 30px; color: #737373 ;line-height: 34px">
              <p>
                产品名称：R134a B 系列制冷压缩机
              </p>
@@ -292,7 +292,7 @@ export default {
             color #ffffff
             line-height 30px
             position absolute
-            top 180px
+            top 170px
   #zizhi
     .product-list
       li
@@ -314,7 +314,7 @@ export default {
           color #ffffff
           line-height 30px
           position absolute
-          top 165px
+          top 155px
   .footer
     border-top 100px solid #ffffff
     height 200px
