@@ -4,23 +4,100 @@
        <nuxt-link to="/" class="logo"></nuxt-link>
        <div class="header-nav">
          <a href="#banner">公司简介</a>
+         <a href="#zizhi">公司资质</a>
          <a href="#product">产品展示</a>
        </div>
      </div>
      <div id="banner" class="banner">
-       <h3>
-         佛山市南海晶昊塑胶五金厂
+       <h3 style="letter-spacing: 8px">
+         华意压缩机（荆州）有限公司
        </h3>
-       <h4>顾客至上 锐意进取</h4>
-       <p>加工：产销：塑胶：五金：制冷配件</p>
+       <p></p>
+       <p></p>
+       <h4 style="letter-spacing: 2px">以科技为动力 以质量求发展</h4>
      </div>
      <div id="intro">
        <h3 class="title">公司简介</h3>
        <div class="content">
-         <img src="~assets/img/supplier/intro-01.png" style="padding-bottom: 1em;" alt="">
-         <p>
-           佛山市南海晶昊塑胶五金厂办公室地址位于广东第三大城市，中国近代明清的天下四聚之一————佛山，佛山市南海区里水镇新联工业区里广路175-2号1栋首层（邮编：528244），于2007-03-23 在佛山工商局注册成立。我工厂已经走过了不断发展与壮大的11年，愿与社会各界同仁携手合作，谋求共同发展，继续为新老客户提供最优秀的产品和服务。我工厂主要经营加工、产销：塑胶、五金、制冷配件。(依法须经批准的项目，经相关部门批准后方可开展经营活动)，我工厂与多家佛山冰箱、冷柜公司零售商和代理商建立了长期稳定的合作关系，品种齐全、价格合理，企业实力雄厚，重信用、守合同、保证产品质量，以多品种经营特色和薄利多销的原则，赢得了广大客户的信任，工厂始终奉行“诚信求实、致力服务、唯求满意”的企业宗旨，全力跟随客户需求，不断进行产品创新和服务改进。
-         </p>
+         <div class="intro-img">
+           <div class="block" >
+             <el-carousel >
+               <el-carousel-item >
+                 <img src="~assets/img/supplier2/intro.png" style="padding-bottom: 1em;" alt="">
+               </el-carousel-item>
+               <el-carousel-item >
+                 <img src="~assets/img/supplier2/intro3.png" style="padding-bottom: 1em;" alt="">
+               </el-carousel-item>
+             </el-carousel>
+           </div>
+
+         </div>
+         <div class="intro-text" >
+           <p>
+           华意压缩机（荆州）有限公司位于湖北荆州。是由江西省华意压缩机股份有限公司控股的一家生产经营全封闭制冷压缩机的专业化子公司，
+             为省级高新技术企业，具有独立的法人资格及进出口经营权。年出口创汇位列市机电产品第一，率先完成市政府提出的家电行业三个100万台的目标。</p>
+           <p>公司拥有独立的产品开发研制能力，完善的研发与技术服务体系。生产和检测设备从美国引进，年生产能力达300万台，产品涵盖40多个品种的不同电压制冷压缩机，
+             获得国家CCC认证及ISO9001：2000质量体系认证。</p>
+             <p> 目前，公司已在荆州经济开发区投资1亿元兴建一个小型压缩机生产基地。项目达产后，预计年产压缩机500万台，工业总产值8亿元，出口创汇2亿元。
+           公司将抓住机遇，以科技为动力，以质量求发展，以良好的信誉及优异的业绩回报社会！
+          </p>
+         </div>
+       </div>
+     </div>
+     <div style="clear:both"></div>
+     <div id="zizhi">
+       <h3 class="title">公司资质</h3>
+       <div class="content">
+         <ul class="product-list">
+           <li>
+             <img src="~assets/img/supplier2/zizhi-01.png" style="padding-bottom: 1em;" alt="">
+             <div><p>ISO9001：2000认证</p></div>
+           </li>
+           <li>
+             <img src="~assets/img/supplier2/zizhi-02.png" style="padding-bottom: 1em;" alt="">
+             <div><p>UL认证</p></div>
+           </li>
+           <li>
+             <img src="~assets/img/supplier2/zizhi-03.png" style="padding-bottom: 1em;" alt="">
+             <div><p>VDE认证</p></div>
+           </li>
+           <li>
+             <img src="~assets/img/supplier2/zizhi-04.png" style="padding-bottom: 1em;" alt="">
+             <div><p>国家CCC认证</p></div>
+           </li>
+           <li>
+             <img src="~assets/img/supplier2/zizhi-05.png" style="padding-bottom: 1em;" alt="">
+             <div><p>湖北省高新技术企业</p></div>
+           </li>
+           <li>
+             <img src="~assets/img/supplier2/zizhi-06.png" style="padding-bottom: 1em;" alt="">
+             <div><p>湖北省重合同守信用企业</p></div>
+           </li>
+           <li>
+             <img src="~assets/img/supplier2/zizhi-07.png" style="padding-bottom: 1em;" alt="">
+             <div><p>荆州市先进企业</p></div>
+           </li>
+           <li>
+             <img src="~assets/img/supplier2/zizhi-08.png" style="padding-bottom: 1em;" alt="">
+             <div><p>荆州市重点企业</p></div>
+           </li>
+           <li>
+             <img src="~assets/img/supplier2/zizhi-09.png" style="padding-bottom: 1em;" alt="">
+             <div><p>荆州市重合同守信用企业</p></div>
+           </li>
+           <li>
+             <img src="~assets/img/supplier2/zizhi-10.png" style="padding-bottom: 1em;" alt="">
+             <div><p>荆州优化经济环境企业</p></div>
+           </li>
+           <li>
+             <img src="~assets/img/supplier2/zizhi-11.png" style="padding-bottom: 1em;" alt="">
+             <div><p>纳税光荣户</p></div>
+           </li>
+           <li>
+             <img src="~assets/img/supplier2/zizhi-12.png" style="padding-bottom: 1em;" alt="">
+             <div><p>优秀供应商</p></div>
+           </li>
+         </ul>
        </div>
      </div>
      <div id="product">
@@ -28,55 +105,47 @@
        <div class="content">
          <div class="product-info">
            <div>
-             <img src="~assets/img/supplier/product-01.png" alt="">
-             <div style="text-align: center">冰箱单管蒸发器</div>
+             <img src="~assets/img/supplier2/product-0@2x.png" alt="">
            </div>
-           <div style="padding-left: 70px;padding-top: 30px;">
+           <div style="padding-left: 70px;padding-top: 30px; color: #737373 ;line-height: 37px">
              <p>
-               1-蒸发器——是制冷系统中的主要换热装置，其作用是使低温低压的液态制冷剂在其内迅速
-               蒸发（沸腾）为蒸汽，吸收被冷却的物质的热量，使冷藏（冷冻）物质的温度下降从而达
-               到制冷的目的
+               产品名称：R134a B 系列制冷压缩机
              </p>
              <p>
-               2-产品特点：传热性能好、节能；产品加工定制服务
+               规    格：低背压
              </p>
              <p>
-               3-平台交易量：超过20万件
+               产品备注：小冰箱及饮水机用压缩机。具有体积小、重量轻、噪声低、高性的等特点
+             </p>
+             <p>
+               产品类别：R134a 低背压制冷压缩机
              </p>
            </div>
          </div>
          <ul class="product-list">
            <li>
-             <img src="~assets/img/supplier/product-02.png" alt="">
-             <p>冰箱单管蒸发器</p>
+             <nuxt-link to="/goods/detail/229" class="p-id">
+             <img src="~assets/img/supplier2/product-0@2x.png" alt="">
+             <div><p>R134a B 系列制冷压缩机</p></div>
+             </nuxt-link>
            </li>
            <li>
-             <img src="~assets/img/supplier/product-03.png" alt="">
-             <p>除霜管</p>
+             <nuxt-link to="/goods/detail/368" class="p-id">
+             <img src="~assets/img/supplier2/product-1@2x.png" alt="">
+             <div><p>R290 B 系列制冷压缩机</p></div>
+             </nuxt-link>
            </li>
            <li>
-             <img src="~assets/img/supplier/product-04.png" alt="">
-             <p>冰箱用镀锌冷凝管</p>
+             <nuxt-link to="/goods/detail/369" class="p-id">
+             <img src="~assets/img/supplier2/product-2@2x.png" alt="">
+             <div><p>R600a B 系列制冷压缩机</p></div>
+             </nuxt-link>
            </li>
            <li>
-             <img src="~assets/img/supplier/product-05.png" alt="">
-             <p>工艺管</p>
-           </li>
-           <li>
-             <img src="~assets/img/supplier/product-06.png" alt="">
-             <p>空调安装附板</p>
-           </li>
-           <li>
-             <img src="~assets/img/supplier/product-07.png" alt="">
-             <p>蒸发管</p>
-           </li>
-           <li>
-             <img src="~assets/img/supplier/product-08.png" alt="">
-             <p>连接管</p>
-           </li>
-           <li>
-             <img src="~assets/img/supplier/product-09.png" alt="">
-             <p>内托衬板</p>
+             <!--<nuxt-link to="/goods/detail/369" class="p-id">-->
+             <img src="~assets/img/supplier2/product-3@2x.png" alt="">
+             <div><p>R600a L 系列制冷压缩机</p></div>
+             <!--</nuxt-link>-->
            </li>
          </ul>
        </div>
@@ -124,7 +193,7 @@ export default {
     padding-top 10px
     position fixed
     width 100%
-    z-index 2
+    z-index 999
     &.scroll
       background rgb(27, 127, 190)
     .logo
@@ -178,12 +247,20 @@ export default {
   .content
     width 1300px
     margin auto
-    p
-      text-indent 2em
-      line-height 1.8
   #intro
     background #ffffff
     padding-bottom 80px
+    .intro-img
+      float left
+      width 500px
+      height 300px
+    .intro-text
+      float right
+      height 300px
+      width 750px
+      color #737373
+      letter-spacing 1px
+      line-height: 33px
   #product
     .product-info
       padding 40px 60px
@@ -200,20 +277,44 @@ export default {
           display inline-block
           margin 22px
           position relative
+          .p-id
+            cursor pointer
           img
             width 280px
             height 200px
-          p
-            width 100%
-            height 40px
-            line-height 40px
-            background rgba(0,0,0,0.5)
-            position absolute
-            bottom 0
-            left 0
+          div
+            width 280px
+            height 30px
+            background #000000
+            opacity 0.6
+            text-align center
+            p
             color #ffffff
-            text-indent 0
-            padding-top 0
+            line-height 30px
+            position absolute
+            top 180px
+  #zizhi
+    .product-list
+      li
+        text-align center
+        background #ffffff
+        display inline-block
+        margin 22px
+        position relative
+        img
+          width 280px
+          height 200px
+        div
+          width 280px
+          height 30px
+          background #000000
+          opacity 0.6
+          text-align center
+          p
+          color #ffffff
+          line-height 30px
+          position absolute
+          top 165px
   .footer
     border-top 100px solid #ffffff
     height 200px
