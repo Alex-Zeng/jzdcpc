@@ -142,12 +142,21 @@
              </nuxt-link>
            </li>
            <li>
-             <!--<nuxt-link to="/goods/detail/369" class="p-id">-->
+             <nuxt-link to="/goods/detail/367" class="p-id">
              <img src="~assets/img/supplier2/product-3@2x.png" alt="">
              <div><p>R600a L 系列制冷压缩机</p></div>
-             <!--</nuxt-link>-->
+             </nuxt-link>
            </li>
          </ul>
+       </div>
+     </div>
+     <div id="product_video">
+       <h3 class="title">集众电采诚邀优质供应商入驻</h3>
+       <div class="content" >
+         <video width="750" height="500" controls style="margin: 0 auto">
+           <source src="http://scm.jizhongdiancai.com/web/public/uploads/goods_thumb/zs.mp4" type="video/mp4">
+           您的浏览器不支持 video 标签。
+         </video>
        </div>
      </div>
      <div class="footer">
@@ -161,7 +170,7 @@ export default {
   name: 'supplier-index',
   head () {
     return {
-      title: '佛山市南海晶昊塑胶五金厂'
+      title: '华意压缩机（荆州）有限公司'
     }
   },
   data  () {
