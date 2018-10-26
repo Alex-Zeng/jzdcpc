@@ -185,7 +185,7 @@ export default {
     let self = this
     window.onscroll = function () {
       var t = document.documentElement.scrollTop || document.body.scrollTop
-      if (t >= 200) {
+      if (t >= 170) {
         self.isScroll = true
       } else {
         self.isScroll = false
