@@ -4,10 +4,10 @@
       <div v-show="form.status == '1'">
         工作人员努力审核中，请耐心等待
       </div>
-      <div v-show="form.status == '2'">
+      <div v-show="form.status == '3'">
         您的企业认证已经通过审核
       </div>
-      <div v-show="form.status == '3'">
+      <div v-show="form.status == '2'">
         您的企业认证已被拒绝，拒绝原因：{{this.form.refuseReason}}
       </div>
     </div>
@@ -49,12 +49,12 @@
       <div class="item">
         <uploadImg id="1" v-model="form.business" :defaultPath="form.businessPath" title="工商营业执照"></uploadImg>
       </div>
-      <div class="item">
+      <!--<div class="item">
         <uploadImg id="2" v-model="form.permitsAccount" :defaultPath="form.permitsAccountPath" title="开户许可证"></uploadImg>
-      </div>
-      <div class="item">
+      </div>-->
+      <!--<div class="item">
         <uploadImg id="3" v-model="form.legalIdentityCard" :defaultPath="form.legalIdentityCardPath" title="企业法人身份证"></uploadImg>
-      </div>
+      </div>-->
       <div class="item" v-show="form.agent == 1">
         <uploadImg id="4" v-model="form.attorney" :defaultPath="form.attorneyPath" title="授权委托书"></uploadImg>
       </div>
@@ -94,7 +94,7 @@ export default {
   data () {
     return {
       form: {
-        type: 1,
+        id: 0,
         agent: 1,
         companyName: '',
         representative: '',
@@ -102,14 +102,14 @@ export default {
         address: '',
         business: '',
         businessPath: '',
-        permitsAccount: '',
-        legalIdentityCard: '',
+        // permitsAccount: '',
+        // legalIdentityCard: '',
         agentIdentityCard: '',
         orgStructureCode: '',
         taxRegistrationCert: '',
         attorney: '',
-        permitsAccountPath: '',
-        legalIdentityCardPath: '',
+        // permitsAccountPath: '',
+        // legalIdentityCardPath: '',
         agentIdentityCardPath: '',
         orgStructureCodePath: '',
         taxRegistrationCertPath: '',
@@ -148,14 +148,14 @@ export default {
             this.$message.error('请上传营业执照!')
             return ''
           }
-          if (!(this.form.permitsAccount)) {
+          /* if (!(this.form.permitsAccount)) {
             this.$message.error('请上传开户许可证!')
             return ''
           }
           if (!(this.form.legalIdentityCard)) {
             this.$message.error('请上传法人身份证!')
             return ''
-          }
+          } */
           if (this.form.agent == 1 || this.form.agent == '1') {
             if (!(this.form.attorney)) {
               this.$message.error('请上传代办人委托书!')
