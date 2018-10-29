@@ -24,12 +24,12 @@
         </div>
         <div v-for="(i, k) in list" :key="'cart'+k">
           <div class="company-bar">
-            <el-checkbox v-model="groupAll[k]" :disabled="i.supplierName==='台山市飞华金属制品厂'">{{i.supplierName}}</el-checkbox>
+            <el-checkbox v-model="groupAll[k]" :disabled="i.buyAble==0">{{i.supplierName}}</el-checkbox>
           </div>
           <div class="goods-list" v-for="(item, key) in i.list" :key="'cart-item'+key">
             <ul class="clearfix">
               <li class="item" style="width: 155px;padding-left: 20px;">
-                <el-checkbox v-model="checkedList[k][key]" :disabled="i.supplierName==='台山市飞华金属制品厂'">
+                <el-checkbox v-model="checkedList[k][key]" :disabled="i.buyAble==0">
                 </el-checkbox>
                 <div class="img">
                   <img :src="item.icon" width="75px" height="75px" alt="">
@@ -109,7 +109,7 @@ export default {
         this.$set(this.checkedList, check)
         this.groupAll.fill(this.all)
         this.groupAll.forEach((item, index) => {
-          if (this.list[index].supplierName === '台山市飞华金属制品厂') {
+          if (this.list[index].buyAble == 0) {
             this.groupAll.fill(false, index, index + 1)
             this.checkedList[index].fill(false)
           }

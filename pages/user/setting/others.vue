@@ -5,7 +5,7 @@
        element-loading-lock="true"
        element-loading-text="设置中"
   >
-    <Upload2 v-model="show" field="image" :params="{type: 'user_icon'}" url="/papi/image_upload/index" @crop-upload-success="uploadSuccess"></Upload2>
+    <Upload2 v-model="show" field="image" :params="{type: 'company_logo'}" url="/papi/image_upload/index" @crop-upload-success="uploadSuccess"></Upload2>
     <el-form>
       <el-form-item label="联系人姓名：" label-width="104px">
         <el-input style="width: 340px;" v-model="settingForm.contact" @blur="set(settingForm.contact, 'contact')"></el-input>

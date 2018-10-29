@@ -12,6 +12,40 @@
       <el-radio label="2" v-model="type">我是供应商</el-radio>
     </div>-->
     <el-button type="primary" class="next" @click="nextStep">下一步</el-button>
+    <el-dialog
+      title="加入已认证的企业"
+      :visible.sync="addFirstDialogVisible"
+      width="500px"
+      center>
+      <el-form ref="form" :model="form" :rules="rules" style="margin-top: 20px;">
+        <el-form-item prop="code" label="1.请输入绑定验证码：">
+          <el-input
+            v-model="form.code"
+            type="text"
+          >
+          </el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="submitFirst('form')">下一步</el-button>
+        </span>
+    </el-dialog>
+    <el-dialog
+      title="加入已认证的企业"
+      :visible.sync="addSecondDialogVisible"
+      width="30%"
+      center>
+      <div class="el-dialog-content">
+        <h3>请确认信息是否正确，如有误请关闭后联系客服</h3>
+        <ul>
+          <li><label>公司名称</label><div>啛啛喳喳错扩扩绿扩</div></li>
+          <li><label>所属部门</label><div>啦啦啦啦啦啦啦</div></li>
+        </ul>
+      </div>
+      <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="handleSave()">确认加入</el-button>
+        </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -29,8 +63,36 @@
       margin-top 24px
       width 366px
       height 42px
+  .el-dialog__header
+    background: #F5F5F5;
+    text-align left
+  .el-dialog-content
+    font-size 18px
+    color #666666
+    h3
+      font-weight normal
+      padding-bottom 20px
+    ul
+      font-size 16px
+      border 1px solid #cccccc
+      border-bottom none
+      li
+        border-bottom 1px solid #cccccc
+        height 40px
+        line-height 40px
+        text-align center
+        display flex
+        align-items center
+        label
+          font-size 14px
+          display inline-block
+          width 120px
+          border-right 1px solid #cccccc
+        div
+          flex 1
 </style>
-
+<style lang="stylus" scoped>
+</style>
 <script>
 export default {
   head () {
@@ -41,12 +103,39 @@ export default {
   data () {
     return {
       agent: '0',
-      type: '1'
+      type: '1',
+      form: {
+        code: ''
+      },
+      addFirstDialogVisible: false,
+      addSecondDialogVisible: false,
+      rules: {
+        code: [
+          { required: true, message: '请输入验证码', trigger: 'blur' }
+        ]
+      }
     }
   },
   methods: {
     nextStep () {
-      this.$router.push('/user/setting/cert/submit/' + this.type + '/' + this.agent)
+      if (this.agent == 0 || this.agent == 1) {
+        this.$router.push('/user/setting/cert/submit/' + this.type + '/' + this.agent)
+      } else {
+        this.addFirstDialogVisible = true
+      }
+    },
+    submitFirst (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.addFirstDialogVisible = false
+          this.addSecondDialogVisible = true
+          this.$refs[formName].resetFields()
+        }
+      })
+    },
+    handleSave () {
+      this.addSecondDialogVisible = false
+      this.$router.push('/user/setting/cert/submit')
     }
   },
   mounted () {

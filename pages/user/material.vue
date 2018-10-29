@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="search-wrap">
-      <el-form ref="searchForm" :inline="true" :model="searchForm"  label-width="100px">
+      <el-form ref="searchForm" :inline="true" :model="searchForm"  label-width="100px" style="padding-top: 27px;">
         <el-form-item prop="materialCode" label="物料编号：">
           <el-input v-model="searchForm.materialCode" placeholder="请输入物料编号" style="width: 240px;"></el-input>
         </el-form-item>

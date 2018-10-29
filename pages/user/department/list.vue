@@ -1,34 +1,33 @@
 <template>
     <div class="container">
       <div class="header">
-        <span class="title">部门信息</span>
-        <div>
+        <span class="title">{{organizationName}}</span>
+        <div v-if="userRole==1">
           <span class="button" @click="editorDepartemnt">编辑</span>
           <span class="button" @click="addEmployee">添加成员</span>
         </div>
       </div>
-      <h3>部门负责人张三丰</h3>
       <el-table
         :data="tableData"
         @row-click="handleClick"
         style="width: 100%">
         <el-table-column
-          prop="date"
+          prop="staffName"
           label="姓名">
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="phone"
           label="电话">
         </el-table-column>
         <el-table-column
-          prop="address"
+          prop="remarks"
           label="备注">
         </el-table-column>
         <template slot="empty">
           <div class="empty-box">
             <img src="@/assets/img/common/department.png" alt="">
-            <p>还没有部门哦</p>
-            <el-button type="primary" @click="addEmployee">&emsp;添加成员&emsp;</el-button>
+            <p style="margin-right: 40px;">还没有成员哦</p>
+            <el-button type="primary" @click="addEmployee" v-if="userRole == 1" style="margin-right: 40px;">&emsp;添加成员&emsp;</el-button>
           </div>
         </template>
       </el-table>
@@ -52,36 +51,38 @@
           <el-button type="primary" @click="handleDepartemntSave('departmentForm')">完  成</el-button>
         </span>
       </el-dialog>
-      <el-dialog title="成员详情" width="800px" :visible.sync="dialogDetailVisible">
+      <el-dialog title="成员详情" width="800px" @close="editorMethods(true)" :visible.sync="dialogDetailVisible">
         <div class="dialog-header">
-          <div class="department">{{departemnt}}</div>
+          <div class="department">{{organizationName}}</div>
+          <template v-if="userRole == 1">
           <div v-if="editor">
-            <button @click="editorMethods">编辑</button>
+            <button @click="editorMethods(false)">编辑</button>
             <button @click="hanldeDel">移除</button>
           </div>
           <div v-if="!editor">
             <button @click="hanldeSave">保存</button>
           </div>
+          </template>
         </div>
         <div class="dialog-content">
-          <img src="" alt="头像">
+          <img src="~assets/img/common/default_avatar.png" alt="logo">
           <div class="info">
             <ul v-if="editor">
-              <li>大卫</li>
-              <li><i class="icon">&#xe636;</i>&nbsp;13202021212</li>
-              <li><i class="icon">&#xe601;</i>&nbsp;{{remak}}</li>
+              <li>{{staffName}}</li>
+              <li><i class="icon">&#xe636;</i>&nbsp;{{phone}}</li>
+              <li><i class="icon">&#xe601;</i>&nbsp;{{remarks}}</li>
             </ul>
             <ul v-if="!editor">
-              <li>大卫</li>
-              <li><i class="icon">&#xe636;</i>&nbsp;13202021212</li>
+              <li>{{staffName}}</li>
+              <li><i class="icon">&#xe636;</i>&nbsp;{{phone}}</li>
               <li>
                 <p>修改部门</p>
-                <el-select v-model="departemnt" filterable placeholder="请选择">
+                <el-select v-model="organizationNameDetail" filterable placeholder="请选择">
                   <el-option
                     v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.label">
+                    :key="item.organizationId"
+                    :label="item.organizationName"
+                    :value="item.organizationId">
                   </el-option>
                 </el-select>
               </li>
@@ -92,7 +93,7 @@
                   :autosize="{ minRows: 2, maxRows: 4}"
                   maxlength="100"
                   placeholder="请输入内容"
-                  v-model="remak">
+                  v-model="remarks">
                 </el-input>
               </li>
             </ul>
@@ -105,7 +106,7 @@
         width="500px"
         center>
         <el-form ref="phoneForm" :model="phoneForm" :rules="rules" style="margin-top: 20px;">
-          <el-form-item prop="phone" label="1.请填写新增成员的手机号码：">
+          <el-form-item prop="phone" label="请填写新增成员的手机号码：">
             <el-input
               v-model="phoneForm.phone"
               type="text"
@@ -118,58 +119,27 @@
         </span>
       </el-dialog>
       <el-dialog
-        title="添加成员"
-        :visible.sync="addFirstDepartemntDialogVisible"
-        width="500px"
-        center>
-        <el-form ref="phoneForm" :model="phoneForm" :rules="rules" style="margin-top: 50px;">
-          <el-form-item label="1请选择添加部门：" prop="departemnt">
-            <el-select v-model="employeeForm.departemnt" filterable placeholder="请选择部门">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.label">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </el-form>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="submitFirst('phoneForm')">下一步</el-button>
-        </span>
-      </el-dialog>
-      <el-dialog
         title="提示"
         :visible.sync="addSecondDialogVisible"
         width="800px"
         center>
         <el-form :model="employeeForm" :rules="rules" ref="employeeForm" label-width="100px">
-          <el-form-item label="用户名" prop="name">
-            <el-input v-model.number="employeeForm.name"></el-input>
+          <el-form-item label="用户名" prop="userName">
+            <el-input v-model.number="employeeForm.userName"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="pass">
-            <el-input type="password" v-model="employeeForm.pass" auto-complete="off"></el-input>
+          <el-form-item label="密码" prop="password">
+            <el-input type="password" v-model="employeeForm.password" auto-complete="off"></el-input>
           </el-form-item>
-          <el-form-item label="确认密码" prop="checkPass">
-            <el-input type="password" v-model="employeeForm.checkPass" auto-complete="off"></el-input>
+          <el-form-item label="确认密码" prop="passwordConfirm">
+            <el-input type="password" v-model="employeeForm.passwordConfirm" auto-complete="off"></el-input>
           </el-form-item>
-          <el-form-item label="选择部门" prop="departemnt">
-            <el-select v-model="employeeForm.departemnt" filterable placeholder="请选择部门">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.label">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="备注" prop="remak">
+          <el-form-item label="备注" prop="remarks">
             <el-input
               type="textarea"
               :autosize="{ minRows: 2, maxRows: 4}"
               maxlength="100"
               placeholder="请输入内容"
-              v-model="employeeForm.remak">
+              v-model="employeeForm.remarks">
             </el-input>
           </el-form-item>
         </el-form>
@@ -185,10 +155,8 @@
         center>
         <div class="success-content">
           <img src="@/assets/img/user/success.png" alt="1232">
-          <p>
-            已成功向尾号1234发送验证码
-            <br>
-            绑定完成后，您将会收到通知
+          <p style="padding-right: 100px;padding-left: 100px;">
+            {{successMsg}}
           </p>
         </div>
         <span slot="footer" class="dialog-footer">
@@ -199,20 +167,18 @@
 </template>
 <script>
 import { phoneReg, passwordReg } from '@/helper/reg'
+import apiDepartment from '@/api/apiDepartment'
 export default {
   name: 'department-list',
   data () {
     var checkDepartemnt = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('部门名称不能为空'))
+      } else if (this.departemntArr.includes(value)) {
+        callback(new Error('该部门已存在，请重新输入'))
+      } else {
+        callback()
       }
-      setTimeout(() => {
-        if (value === '部门') {
-          callback(new Error('该部门已存在，请重新输入'))
-        } else {
-          callback()
-        }
-      }, 1000)
     }
     var validatePhone = (rule, value, callback) => {
       const trimVal = value.trim()
@@ -225,7 +191,7 @@ export default {
       }
     }
     var checkPassword = (rule, value, callback) => {
-      if (value !== this.employeeForm.pass) {
+      if (value !== this.employeeForm.password) {
         callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
@@ -238,26 +204,18 @@ export default {
       addFirstDialogVisible: false,
       addSecondDialogVisible: false,
       addThreeDialogVisible: false,
+      successMsg: '',
       editor: true,
       tableData: [],
-      options: [{
-        value: '选项1',
-        label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
-      }],
-      departemnt: '研发部',
-      remak: '他就是我们的部门经理鸭',
+      options: [],
+      departemntArr: [],
+      organizationName: '',
+      organizationNameDetail: '',
+      staffName: '',
+      phone: '',
+      staffId: '',
+      remarks: '',
+      organizationId: '',
       departmentForm: {
         departmentName: ''
       },
@@ -265,27 +223,26 @@ export default {
         phone: ''
       },
       employeeForm: {
-        name: '',
-        pass: '',
-        checkPass: '',
-        departemnt: '',
-        remak: ''
+        userName: '',
+        password: '',
+        passwordConfirm: '',
+        remarks: ''
       },
       rules: {
         departmentName: [
-          { validator: checkDepartemnt, trigger: 'blur' }
+          { validator: checkDepartemnt, trigger: 'change' }
         ],
         phone: [
           { validator: validatePhone, trigger: 'blur' }
         ],
-        name: [
+        userName: [
           { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
-        pass: [
+        password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
           { pattern: passwordReg, message: '密码格式由长度6-20位的字母、数字、符号至少两种组成', trigger: 'blur' }
         ],
-        checkPass: [
+        passwordConfirm: [
           { required: true, message: '请再次输入密码', trigger: 'blur' },
           { pattern: passwordReg, message: '密码格式由长度6-20位的字母、数字、符号至少两种组成', trigger: 'blur' },
           { validator: checkPassword, trigger: 'blur' }
@@ -296,9 +253,48 @@ export default {
       }
     }
   },
+  created () {
+    this.organizationId = this.$route.params.page
+    this.getOrganizationStaff()
+    this.getOrganization()
+  },
   methods: {
+    async getOrganizationStaff () {
+      await apiDepartment.getOrganizationStaff({organizationId: this.organizationId}, (response) => {
+        const {data, msg, status} = response
+        if (status === 0) {
+          this.tableData = data.staffList
+          this.organizationName = data.organizationName
+          this.organizationNameDetail = data.organizationName
+        } else {
+          this.$message({
+            type: 'warning',
+            message: msg
+          })
+        }
+      })
+    },
+    async getOrganization () {
+      await apiDepartment.getOrganization({hasTotal: 0}, (response) => {
+        const {data, msg, status} = response
+        if (status == 0) {
+          this.options = data
+          data.forEach((item) => {
+            this.departemntArr.push(item.organizationName)
+          })
+        } else {
+          this.$message({
+            type: 'warning',
+            message: msg
+          })
+        }
+      })
+    },
     handleClick (row) {
-      console.log(row)
+      this.staffName = row.staffName
+      this.phone = row.phone
+      this.staffId = row.staffId
+      this.remarks = row.remarks
       this.dialogDetailVisible = true
     },
     addEmployee () {
@@ -307,24 +303,53 @@ export default {
     editorDepartemnt () {
       this.departemntEditorDialogVisible = true
     },
+    async organizationEdit () {
+      await apiDepartment.organizationEdit({
+        organizationId: this.organizationId,
+        organizationName: this.departmentForm.departmentName
+      }, (response) => {
+        const {msg, status} = response
+        if (status === 0) {
+          this.departemntEditorDialogVisible = false
+          this.loading = true
+          this.$message({
+            type: 'success',
+            message: '提交成功!'
+          })
+          this.organizationName = this.departmentForm.departmentName
+        } else {
+          this.$message({
+            type: 'warning',
+            message: msg
+          })
+        }
+      })
+    },
     handleDepartemntSave (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$confirm('请确定添加该部门, 是否继续?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
-            this.loading = true
-            this.$message({
-              type: 'success',
-              message: '提交成功!'
-            })
-          }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消修改'
-            })
+          this.organizationEdit()
+        }
+      })
+    },
+    async staffAdd () {
+      await apiDepartment.staffAdd({
+        organizationId: this.organizationId,
+        phone: this.phoneForm.phone
+      }, (response) => {
+        const {data, msg, status} = response
+        if (status == 0) {
+          this.addFirstDialogVisible = false
+          if (data.redirect === 'unregistered') {
+            this.addSecondDialogVisible = true
+          } else if (data.redirect === 'registered') {
+            this.addThreeDialogVisible = true
+            this.successMsg = data.redirectionInfo
+          }
+        } else {
+          this.$message({
+            type: 'warning',
+            message: msg
           })
         }
       })
@@ -332,9 +357,25 @@ export default {
     submitFirst (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.addFirstDialogVisible = false
-          this.addSecondDialogVisible = true
-          this.$refs[formName].resetFields()
+          this.staffAdd()
+        }
+      })
+    },
+    async userAdd () {
+      await apiDepartment.userAdd(this.employeeForm, (response) => {
+        const {msg, status} = response
+        if (status == 0) {
+          this.addThreeDialogVisible = false
+          this.getOrganizationStaff()
+          this.$message({
+            type: 'success',
+            message: msg
+          })
+        } else {
+          this.$message({
+            type: 'warning',
+            message: msg
+          })
         }
       })
     },
@@ -342,8 +383,9 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.addSecondDialogVisible = false
-          this.addThreeDialogVisible = true
-          this.$refs[formName].resetFields()
+          this.employeeForm.phone = this.phoneForm.phone
+          this.employeeForm.organizationId = this.organizationId
+          this.userAdd()
         }
       })
     },
@@ -354,11 +396,51 @@ export default {
     submitThree () {
       this.addThreeDialogVisible = false
     },
-    editorMethods () {
-      this.editor = false
+    editorMethods (e) {
+      this.editor = e
     },
-    hanldeSave () {
-      this.editor = true
+    async hanldeSave () {
+      let organizationId = Number(this.organizationNameDetail) ? this.organizationNameDetail : this.organizationId
+      await apiDepartment.staffEdit({
+        staffId: this.staffId,
+        organizationId: organizationId,
+        remarks: this.remarks
+      }, (response) => {
+        const {msg, status} = response
+        if (status == 0) {
+          this.dialogDetailVisible = false
+          this.getOrganizationStaff()
+          this.$message({
+            type: 'success',
+            message: msg
+          })
+        } else {
+          this.$message({
+            type: 'warning',
+            message: msg
+          })
+        }
+      })
+    },
+    async staffDelete () {
+      await apiDepartment.staffDelete({
+        staffId: this.staffId
+      }, (response) => {
+        const {msg, status} = response
+        if (status == 0) {
+          this.dialogDetailVisible = false
+          this.getOrganizationStaff()
+          this.$message({
+            type: 'success',
+            message: msg
+          })
+        } else {
+          this.$message({
+            type: 'warning',
+            message: msg
+          })
+        }
+      })
     },
     hanldeDel () {
       this.$confirm('是否确认该操作？', '确认信息', {
@@ -367,10 +449,7 @@ export default {
         cancelButtonText: '否'
       })
         .then(() => {
-          this.$message({
-            type: 'info',
-            message: '移除成功'
-          })
+          this.staffDelete()
         })
         .catch(action => {
           /* this.$message({
@@ -380,6 +459,11 @@ export default {
               : '停留在当前页面'
           }) */
         })
+    }
+  },
+  computed: {
+    userRole () {
+      return this.$store.getters.userRole
     }
   }
 }
@@ -422,6 +506,7 @@ export default {
   .header
     display flex
     justify-content space-between
+    padding-bottom 20px
     .title
       border-left 4px solid #FF7900
       color #333333

@@ -2,18 +2,18 @@
     <div class="container">
       <div class="header">
         <span class="title">部门信息</span>
-        <span class="button" @click="addDepartment">新增部门</span>
+        <span class="button" @click="addDepartment" v-if="userRole == 1">新增部门</span>
       </div>
       <el-table
         :data="tableData"
         @row-click="handleClick"
         style="width: 100%">
         <el-table-column
-          prop="date"
+          prop="organizationName"
           label="部门名称">
         </el-table-column>
         <el-table-column
-          prop="address"
+          prop="total"
           label="成员">
         </el-table-column>
         <template slot="empty">
@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import apiDepartment from '@/api/apiDepartment'
 export default {
   name: 'department-list',
   data () {
@@ -96,10 +97,44 @@ export default {
       }
     }
   },
+  created () {
+    this.getOrganization()
+  },
   methods: {
+    async getOrganization () {
+      await apiDepartment.getOrganization({hasTotal: 0}, (response) => {
+        const {data, msg, status} = response
+        if (status == 0) {
+          this.tableData = data
+        } else {
+          this.$message({
+            type: 'warning',
+            message: msg
+          })
+        }
+      })
+    },
+    async organizationAdd () {
+      await apiDepartment.organizationAdd({organizationName: this.departmentForm.name}, (response) => {
+        const {msg, status} = response
+        if (status == 0) {
+          this.loading = true
+          this.$message({
+            type: 'success',
+            message: '提交成功!'
+          })
+          this.getOrganization()
+        } else {
+          this.$message({
+            type: 'warning',
+            message: msg
+          })
+        }
+        this.centerDialogVisible = false
+      })
+    },
     handleClick (row) {
-      console.log(row.id)
-      this.$router.push('/user/department/list/' + row.id)
+      this.$router.push('/user/department/list/' + row.organizationId)
     },
     addDepartment () {
       this.centerDialogVisible = true
@@ -112,11 +147,7 @@ export default {
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            this.loading = true
-            this.$message({
-              type: 'success',
-              message: '提交成功!'
-            })
+            this.organizationAdd()
           }).catch(() => {
             this.$message({
               type: 'info',
@@ -125,6 +156,11 @@ export default {
           })
         }
       })
+    }
+  },
+  computed: {
+    userRole () {
+      return this.$store.getters.userRole
     }
   }
 }

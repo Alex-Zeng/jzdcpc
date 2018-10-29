@@ -6,9 +6,12 @@
         <div class="banner">
           <el-carousel height="360px" indicator-position="none">
             <el-carousel-item v-for="item in banner" :key="item.id">
-              <a :href="item.url" :target="item.target">
+              <a :href="item.url" :target="item.target" v-if="item.url">
                 <img :src="item.img" alt="banner">
               </a>
+              <div v-else>
+                <img :src="item.img" alt="banner">
+              </div>
             </el-carousel-item>
           </el-carousel>
         </div>
