@@ -58,6 +58,7 @@ export default {
   data () {
     return {
       loading: false,
+      role: null,
       form: {
         userName: '',
         password: ''
@@ -93,6 +94,7 @@ export default {
                   message: msg,
                   type: 'success'
                 })
+                this.$store.dispatch('getPermission', {fileds: this.role})
                 let oldUrl = localStorage.getItem('oldUrl')
                 if (oldUrl) {
                   this.$router.replace(oldUrl)

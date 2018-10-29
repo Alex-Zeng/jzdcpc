@@ -125,6 +125,7 @@ export default {
     return {
       step: 1,
       loading: false,
+      role: null,
       agree: true,
       codeForm: {
         phone: '',
@@ -188,6 +189,7 @@ export default {
                 this.loading = false
               },
               successCb: (msg, status) => {
+                this.$store.dispatch('getPermission', {fileds: this.role})
                 this.$message({
                   showClose: true,
                   message: msg,

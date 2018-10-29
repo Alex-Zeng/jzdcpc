@@ -22,6 +22,7 @@ const getters = {
 const actions = {
   logout ({ commit }) {
     // apiAuth.logout()
+    commit('ROLE', null)
     commit('SETTOKEN', null)
     commit('SETUSER', null)
     Cookie.set('_token', '')
@@ -37,11 +38,11 @@ const actions = {
       commit('SETUSER', data)
     }, errorCb, fileds)
   },
-  getPermission ({ commit }) {
+  getPermission ({ commit }, {fileds}) {
     apiAuth.getPermission(data => {
       const { role } = data
       commit('ROLE', role)
-    })
+    }, fileds)
   },
   doLoginPhone ({ commit }, {successCb, errorCb, fileds}) {
     apiAuth.loginPhone(({data, status}) => {

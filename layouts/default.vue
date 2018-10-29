@@ -5,10 +5,14 @@
 </template>
 <script>
 export default {
+  data () {
+    return {
+      role: null
+    }
+  },
   watch: {
     $route: {
       handler: function () {
-        this.$store.dispatch('getPermission')
         if (window._czc) {
           let location = window.location
           let contentUrl = location.pathname + location.hash
