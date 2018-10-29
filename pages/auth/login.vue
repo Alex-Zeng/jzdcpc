@@ -189,7 +189,7 @@ export default {
                 this.loading = false
               },
               successCb: (msg, status) => {
-                this.$store.dispatch('getPermission', {fileds: this.role})
+                this.$store.dispatch('getPermission', {fileds: 99})
                 this.$message({
                   showClose: true,
                   message: msg,

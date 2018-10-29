@@ -5,11 +5,6 @@
 </template>
 <script>
 export default {
-  data () {
-    return {
-      role: null
-    }
-  },
   watch: {
     $route: {
       handler: function () {

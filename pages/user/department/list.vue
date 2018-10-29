@@ -198,6 +198,7 @@ export default {
       }
     }
     return {
+      userRole: null,
       departemntEditorDialogVisible: false,
       dialogDetailVisible: false,
       addFirstDepartemntDialogVisible: false,
@@ -257,6 +258,9 @@ export default {
     this.organizationId = this.$route.params.page
     this.getOrganizationStaff()
     this.getOrganization()
+  },
+  mounted () {
+    this.userRole = localStorage.getItem('userRole')
   },
   methods: {
     async getOrganizationStaff () {
@@ -459,11 +463,6 @@ export default {
               : '停留在当前页面'
           }) */
         })
-    }
-  },
-  computed: {
-    userRole () {
-      return this.$store.getters.userRole
     }
   }
 }

@@ -3,16 +3,12 @@ import Cookie from 'js-cookie'
 
 const state = {
   user: {},
-  role: null,
   token: Cookie.get('_token') || null
 }
 
 const getters = {
   loggedUser: (state) => {
     return state.user
-  },
-  userRole: (state) => {
-    return state.role
   },
   loggedToken: (state) => {
     return state.token
@@ -22,7 +18,6 @@ const getters = {
 const actions = {
   logout ({ commit }) {
     // apiAuth.logout()
-    commit('ROLE', null)
     commit('SETTOKEN', null)
     commit('SETUSER', null)
     Cookie.set('_token', '')
@@ -37,12 +32,6 @@ const actions = {
       commit('SETTOKEN', token)
       commit('SETUSER', data)
     }, errorCb, fileds)
-  },
-  getPermission ({ commit }, {fileds}) {
-    apiAuth.getPermission(data => {
-      const { role } = data
-      commit('ROLE', role)
-    }, fileds)
   },
   doLoginPhone ({ commit }, {successCb, errorCb, fileds}) {
     apiAuth.loginPhone(({data, status}) => {
@@ -97,7 +86,7 @@ const mutations = {
   SETUSER (state, user) {
     state.user = user
   },
-  ROLE (state, role) {
+  SETROLE (state, role) {
     state.role = role
   },
   SETTOKEN (state, token) {

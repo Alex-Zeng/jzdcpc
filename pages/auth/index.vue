@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import apiAuth from '../../api/apiAuth'
+
 export default {
   name: 'login',
   head () {
@@ -58,7 +60,6 @@ export default {
   data () {
     return {
       loading: false,
-      role: null,
       form: {
         userName: '',
         password: ''
@@ -94,7 +95,7 @@ export default {
                   message: msg,
                   type: 'success'
                 })
-                this.$store.dispatch('getPermission', {fileds: this.role})
+                this.getRole()
                 let oldUrl = localStorage.getItem('oldUrl')
                 if (oldUrl) {
                   this.$router.replace(oldUrl)
@@ -115,57 +116,62 @@ export default {
           return false
         }
       })
+    },
+    async getRole () {
+      await apiAuth.getRole((data) => {
+        localStorage.setItem('userRole', data.roleId)
+      })
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
-  //eslint-disable
-  .login-box
-    background-repeat no-repeat
-    background-image url("~assets/img/auth/login_bg.png")
-    background-position top center
-    height 699px
-    padding-top 100px
-    .login-index-form
-      height 500px
-      width 600px
-      background url("~assets/img/auth/login_form_bg.png") no-repeat
-      background rgba(0, 0, 0, 0.6)
-      border-radius 8px
-      margin 0 auto
-      padding 94px 80px
-      .jzdc-icon
-        font-family 'jzdc'!important
-        font-size 25px
-        padding-right 12px
-      .jzdc-icon-user
-        &::before
-          content '\E600'
-        &::after
-          content " "
-          height 100%
-          width 0
-          display inline-block
-          vertical-align middle
-      .jzdc-icon-lock
-        &::before
-          content '\E640'
-        &::after
-          content " "
-          height 100%
-          width 0
-          display inline-block
-          vertical-align middle
-      .login-button
-        line-height 1.8
-        width 100%
-        font-size 20px
-      .no-password
-        text-align center
-        color #ffffff
-        font-size 16px
-        .link
+//eslint-disable
+.login-box
+  background-repeat no-repeat
+  background-image url("~assets/img/auth/login_bg.png")
+  background-position top center
+  height 699px
+  padding-top 100px
+  .login-index-form
+    height 500px
+    width 600px
+    background url("~assets/img/auth/login_form_bg.png") no-repeat
+    background rgba(0, 0, 0, 0.6)
+    border-radius 8px
+    margin 0 auto
+    padding 94px 80px
+    .jzdc-icon
+      font-family 'jzdc'!important
+      font-size 25px
+      padding-right 12px
+    .jzdc-icon-user
+      &::before
+        content '\E600'
+      &::after
+        content " "
+        height 100%
+        width 0
+        display inline-block
+        vertical-align middle
+    .jzdc-icon-lock
+      &::before
+        content '\E640'
+      &::after
+        content " "
+        height 100%
+        width 0
+        display inline-block
+        vertical-align middle
+    .login-button
+      line-height 1.8
+      width 100%
+      font-size 20px
+    .no-password
+      text-align center
+      color #ffffff
+      font-size 16px
+      .link
           display inline-block
           .phone
             font-family 'jzdc'!important
@@ -179,19 +185,19 @@ export default {
 </style>
 
 <style lang="stylus">
-  //样式覆盖
-  .login-index-form
-    .el-form-item__label
-      color #ffffff
-      color rgba(255, 255, 255, .8)
-      font-size 16px
-      &::before
-        content: '' !important
+//样式覆盖
+.login-index-form
+  .el-form-item__label
+    color #ffffff
+    color rgba(255, 255, 255, .8)
+    font-size 16px
+    &::before
+      content: '' !important
 
-    .el-input__inner
-      font-size 18px
-      height 52px
-    .forget
+  .el-input__inner
+    font-size 18px
+    height 52px
+  .forget
       margin-top 0
       text-align right
       .el-form-item__content

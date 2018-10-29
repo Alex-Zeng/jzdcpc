@@ -159,9 +159,6 @@ export default {
     loggedUser () {
       return this.$store.getters.loggedUser
     },
-    userRole () {
-      return this.$store.getters.userRole
-    },
     favoriteTotal () {
       return this.$store.getters.favoriteTotal
     },
