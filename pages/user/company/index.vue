@@ -500,6 +500,11 @@ export default {
           }) */
         })
     }
+  },
+  computed: {
+    userRole () {
+      return this.$store.getters.userRole
+    }
   }
 }
 </script>

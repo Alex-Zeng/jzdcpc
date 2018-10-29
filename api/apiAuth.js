@@ -9,6 +9,14 @@ export default {
     }
     successCb(data)
   },
+  async getPermission (successCb, errorCb, fileds) {
+    const { data, status, msg } = await request.post('/papi/company_audit/getPermission', fileds)
+    if (status !== 0) {
+      errorCb(msg)
+      return
+    }
+    successCb(data)
+  },
   async loginPhone (successCb, errorCb, fileds) {
     const { data, status, msg } = await request.post('/papi/login/phone', fileds)
     if (status === -3) {

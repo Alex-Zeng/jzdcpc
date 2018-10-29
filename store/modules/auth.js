@@ -37,11 +37,11 @@ const actions = {
       commit('SETUSER', data)
     }, errorCb, fileds)
   },
-  getPermission ({ commit }, {fileds}) {
+  getPermission ({ commit }) {
     apiAuth.getPermission(data => {
       const { role } = data
       commit('ROLE', role)
-    }, fileds)
+    })
   },
   doLoginPhone ({ commit }, {successCb, errorCb, fileds}) {
     apiAuth.loginPhone(({data, status}) => {
