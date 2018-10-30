@@ -57,6 +57,17 @@ export const getTokenFromReqCookie = (req) => {
   return jwt
 }
 
+export const getRoleFromReqCookie = (req) => {
+  if (!req) {
+    return null
+  }
+  if (!req.headers.cookie) return
+  const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('_role='))
+  if (!jwtCookie) return null
+  const jwt = jwtCookie.split('=')[1]
+  return jwt
+}
+
 export const getUserFromReqCookie = (req) => {
   if (!req) {
     return null

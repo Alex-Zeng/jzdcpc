@@ -48,8 +48,6 @@
 </template>
 
 <script>
-import apiAuth from '../../api/apiAuth'
-
 export default {
   name: 'login',
   head () {
@@ -95,7 +93,7 @@ export default {
                   message: msg,
                   type: 'success'
                 })
-                this.getRole()
+                this.$store.dispatch('getRole')
                 let oldUrl = localStorage.getItem('oldUrl')
                 if (oldUrl) {
                   this.$router.replace(oldUrl)
@@ -115,11 +113,6 @@ export default {
           })
           return false
         }
-      })
-    },
-    async getRole () {
-      await apiAuth.getRole((data) => {
-        localStorage.setItem('userRole', data.roleId)
       })
     }
   }

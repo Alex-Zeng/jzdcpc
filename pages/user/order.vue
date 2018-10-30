@@ -140,6 +140,9 @@ export default {
     },
     statusList () {
       return this.$store.getters.statusList
+    },
+    groupId () {
+      return this.$store.getters.groupId
     }
   },
   watch: {
@@ -155,8 +158,15 @@ export default {
       this.type = type
       this.searchForm.status = type
       let others = {}
+      let url = null
+      if (this.groupId === 5) {
+        url = '/papi/buyer/getList'
+      } else if (this.groupId === 4) {
+        url = '/papi/seller/getList'
+      }
       search && (others = JSON.parse(search))
       this.$store.dispatch('getOrderList', {
+        url,
         data: {
           status: type,
           pageNumber: this.pageNumber,
@@ -183,7 +193,14 @@ export default {
     let others = {}
     search && (others = JSON.parse(search))
     others && (this.searchForm = others)
+    let url = null
+    if (this.groupId === 5) {
+      url = '/papi/buyer/getList'
+    } else if (this.groupId === 4) {
+      url = '/papi/seller/getList'
+    }
     this.$store.dispatch('getOrderList', {
+      url,
       data: {
         status: type,
         pageNumber: this.pageNumber,
@@ -216,7 +233,15 @@ export default {
           spinner: 'el-icon-loading',
           background: 'rgba(0, 0, 0, 0.7)'
         })
-        this.$store.dispatch('orderCancel', {fileds: {no},
+        let url = null
+        if (this.groupId === 5) {
+          url = '/papi/buyer/cancel'
+        } else if (this.groupId === 4) {
+          url = '/papi/seller/cancel'
+        }
+        this.$store.dispatch('orderCancel', {
+          url,
+          fileds: {no},
           cb: (data) => {
             loading.close()
             const {status, msg} = data
@@ -227,7 +252,14 @@ export default {
               })
               const {params: {type, page}} = this.$route
               this.pageNumber = Number(page)
+              let url = null
+              if (this.groupId === 5) {
+                url = '/papi/buyer/getList'
+              } else if (this.groupId === 4) {
+                url = '/papi/seller/getList'
+              }
               this.$store.dispatch('getOrderList', {
+                url,
                 data: {
                   status: type,
                   pageNumber: this.pageNumber,
@@ -261,7 +293,15 @@ export default {
           spinner: 'el-icon-loading',
           background: 'rgba(0, 0, 0, 0.7)'
         })
-        this.$store.dispatch('orderReceipt', {fileds: {no},
+        let url = null
+        if (this.groupId === 5) {
+          url = '/papi/buyer/receipt'
+        } else if (this.groupId === 4) {
+          url = '/papi/seller/receipt'
+        }
+        this.$store.dispatch('orderReceipt', {
+          url,
+          fileds: {no},
           cb: (data) => {
             loading.close()
             const {status, msg} = data
@@ -272,7 +312,14 @@ export default {
               })
               const {params: {type, page}} = this.$route
               this.pageNumber = Number(page)
+              let url = null
+              if (this.groupId === 5) {
+                url = '/papi/buyer/getList'
+              } else if (this.groupId === 4) {
+                url = '/papi/seller/getList'
+              }
               this.$store.dispatch('getOrderList', {
+                url,
                 data: {
                   status: type,
                   pageNumber: this.pageNumber,
@@ -355,8 +402,14 @@ export default {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
+      let exportUrl = null
+      if (this.groupId === 5) {
+        exportUrl = '/papi/buyer/export'
+      } else if (this.groupId === 4) {
+        exportUrl = '/papi/seller/export'
+      }
       try {
-        const {status, data: { url }} = await service.post('/papi/order/export', this.searchForm)
+        const {status, data: { url }} = await service.post(exportUrl, this.searchForm)
         if (status == 0) {
           this.$message(
             {

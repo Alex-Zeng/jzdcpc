@@ -23,16 +23,16 @@ const getters = {
 }
 
 const actions = {
-  getOrderList ({ commit }, {data, cb}) {
-    apiOrders.orderList(data => {
+  getOrderList ({ commit }, {url, data, cb}) {
+    apiOrders.orderList(url, data => {
       const {list, total} = data
       commit('updateList', list)
       commit('updateTotal', total)
       cb()
     }, data)
   },
-  getOrderDetail ({ commit }, {fileds, cb}) {
-    apiOrders.detail((result) => {
+  getOrderDetail ({ commit }, {url, fileds, cb}) {
+    apiOrders.detail(url, (result) => {
       const {data} = result
       commit('updateDetail', data)
       cb()
@@ -54,18 +54,18 @@ const actions = {
       commit('updateStatusList', arr)
     })
   },
-  orderReceipt ({ commit }, {cb, fileds}) {
-    apiOrders.receipt((data) => {
+  orderReceipt ({ commit }, {url, cb, fileds}) {
+    apiOrders.receipt(url, (data) => {
       cb(data)
     }, fileds)
   },
-  orderCancel ({ commit }, {cb, fileds}) {
-    apiOrders.cancel((data) => {
+  orderCancel ({ commit }, {url, cb, fileds}) {
+    apiOrders.cancel(url, (data) => {
       cb(data)
     }, fileds)
   },
-  orderService ({ commit }, {cb, fileds}) {
-    apiOrders.service((data) => {
+  orderService ({ commit }, {url, cb, fileds}) {
+    apiOrders.service(url, (data) => {
       cb(data)
     }, fileds)
   }

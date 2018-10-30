@@ -229,7 +229,6 @@ export default {
       }
     }
     return {
-      userRole: null,
       searchForm: {},
       departemntEditorDialogVisible: false,
       dialogDetailVisible: false,
@@ -290,9 +289,6 @@ export default {
   created () {
     this.getContactList()
     this.getOrganization()
-  },
-  mounted () {
-    this.userRole = localStorage.getItem('userRole')
   },
   methods: {
     async getContactList () {
@@ -503,6 +499,11 @@ export default {
               : '停留在当前页面'
           }) */
         })
+    }
+  },
+  computed: {
+    userRole () {
+      return this.$store.getters.loggedRole
     }
   }
 }

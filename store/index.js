@@ -9,7 +9,7 @@ import notice from './modules/notice'
 import cart from './modules/cart'
 // import createLogger from '../helper/logger'
 import category from './modules/category'
-import {getUserFromReqCookie, getTokenFromReqCookie} from '../helper/auth'
+import {getUserFromReqCookie, getTokenFromReqCookie, getRoleFromReqCookie} from '../helper/auth'
 
 Vue.use(Vuex)
 
@@ -19,8 +19,11 @@ const store = () =>
   new Vuex.Store({
     actions: {
       nuxtServerInit ({ commit }, { req }) {
+        console.log(req)
         const user = getUserFromReqCookie(req)
         const token = getTokenFromReqCookie(req)
+        const role = getRoleFromReqCookie(req)
+        // const groupId = getRoleFromReqCookie(req)
         if (user) {
           commit('SETUSER', JSON.parse(decodeURIComponent(user)))
         } else {
@@ -31,6 +34,16 @@ const store = () =>
         } else {
           commit('SETTOKEN', '')
         }
+        if (role) {
+          commit('SETROLE', role)
+        } else {
+          commit('SETROLE', '')
+        }
+        /* if (groupId) {
+          commit('SETGROUPID', groupId)
+        } else {
+          commit('SETGROUPID', '')
+        } */
       }
     },
     modules: {

@@ -70,7 +70,13 @@ export default {
       spinner: 'el-icon-loading',
       background: 'rgba(0, 0, 0, 0.7)'
     })
-    this.$store.dispatch('getOrderDetail', {fileds: {no}, cb: () => { loading.close() }})
+    let url = null
+    if (this.groupId === 5) {
+      url = '/papi/buyer/detail'
+    } else if (this.groupId === 4) {
+      url = '/papi/seller/detail'
+    }
+    this.$store.dispatch('getOrderDetail', {url, fileds: {no}, cb: () => { loading.close() }})
   }
 }
 </script>

@@ -1,8 +1,8 @@
 import request from '../service'
 
 export default {
-  async orderList (successCb, fileds) {
-    const { data, status } = await request.post('/papi/order/getList', fileds)
+  async orderList (url, successCb, fileds) {
+    const { data, status } = await request.post(url, fileds)
     if (status !== 0) {
       // errorCb(msg)
       return
@@ -13,28 +13,28 @@ export default {
     const data = await request.post('/papi/order/make', fileds)
     cb(data)
   },
-  async detail (cb, fileds) {
-    const data = await request.post('/papi/order/detail', fileds)
+  async detail (url, cb, fileds) {
+    const data = await request.post(url, fileds)
     cb(data)
   },
   async delivery (cb, fileds) {
-    const data = await request.post('/papi/order/delivery', fileds)
+    const data = await request.post('/papi/seller/delivery', fileds)
     cb(data)
   },
   async statusList (cb) {
     const {data} = await request.get('/papi/order/showStatusList')
     cb(data)
   },
-  async receipt (cb, fileds) {
-    const data = await request.post('/papi/order/receipt', fileds)
+  async receipt (url, cb, fileds) {
+    const data = await request.post(url, fileds)
     cb(data)
   },
-  async cancel (cb, fileds) {
-    const data = await request.post('/papi/order/cancel', fileds)
+  async cancel (url, cb, fileds) {
+    const data = await request.post(url, fileds)
     cb(data)
   },
-  async service (cb, fileds) {
-    const data = await request.post('/papi/order/service', fileds)
+  async service (url, cb, fileds) {
+    const data = await request.post(url, fileds)
     cb(data)
   },
   async addSpecification (cb, fileds) {

@@ -66,7 +66,6 @@ export default {
     }
     return {
       tableData: [],
-      userRole: null,
       centerDialogVisible: false,
       rules: {
         name: [
@@ -82,7 +81,6 @@ export default {
     this.getOrganization()
   },
   mounted () {
-    this.userRole = localStorage.getItem('userRole')
   },
   methods: {
     async getOrganization () {
@@ -140,6 +138,11 @@ export default {
           })
         }
       })
+    }
+  },
+  computed: {
+    userRole () {
+      return this.$store.getters.loggedRole
     }
   }
 }

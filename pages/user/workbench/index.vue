@@ -20,7 +20,7 @@
     </div>
     <div class="main-row">
       <div class="main-row-left">
-        <ul v-if="user.group == 4">
+        <ul v-if="groupId == 4">
           <li>
             <h4>待发货（单）</h4>
             <p>{{buyerOrderInfo.deliver}}</p>
@@ -38,7 +38,7 @@
             <p>{{buyerOrderInfo.service}}</p>
           </li>
         </ul>
-        <ul v-if="user.group == 5">
+        <ul v-if="groupId == 5">
           <li>
             <h4>昨日成交（笔）</h4>
             <p>{{supplierOrderInfo.yesterday}}</p>
@@ -364,8 +364,8 @@ export default {
         this.total.money = data.data.money
       })
     },
-    async getDeskList (index) {
-      await apiWorkbench.getDeskList({type: index}, (data) => {
+    async getDeskList (url, index) {
+      await apiWorkbench.getDeskList(url, {type: index}, (data) => {
         const {data: {list}} = data
         if (index == 1) {
           this.tableData1 = list
@@ -384,24 +384,39 @@ export default {
       this.$router.push('/user/order-detail/' + index.orderNo)
       // @click="$router.push('/user/order-detail/'+order.out_id+'/'+type)"
       // this.$router.push('/user/order-detail/'+order.out_id+'/'+type)
+    },
+    changeRole (val) {
+      if (val == 5) {
+        this.getBuyerOrderInfo()
+        this.getDeskList('/papi/buyer/getDeskList', 1)
+      }
+      if (val == 4) {
+        this.getSupplierOrderInfo()
+        this.getDeskList('/papi/seller/getDeskList', 1)
+      }
     }
   },
   created () {
     this.getNotice()
     this.messageList()
-    if (parseInt(this.user.group) == 4) {
-      this.getBuyerOrderInfo()
-    }
-    if (parseInt(this.user.group) == 5) {
-      this.getSupplierOrderInfo()
-    }
-    this.getDeskList(1)
+    this.changeRole(this.groupId)
   },
   mounted () {
+  },
+  watch: {
+    groupId (val) {
+      this.changeRole(val)
+    }
   },
   computed: {
     user () {
       return this.$store.getters.loggedUser
+    },
+    userRole () {
+      return this.$store.getters.loggedRole
+    },
+    groupId () {
+      return this.$store.getters.groupId
     }
   }
 }

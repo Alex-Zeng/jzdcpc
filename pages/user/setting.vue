@@ -2,7 +2,7 @@
   <div class="setting-wrap">
     <div class="setting-tabs clearfix">
       <nuxt-link to="/user/setting/cert" :class="{active: type == 1, 'tabs-item': true}">
-        {{loggedUser.group == 6 ? '企业信息认证' : '企业信息变更'}}
+        {{userRole == 0 ? '企业信息认证' : '企业信息变更'}}
       </nuxt-link>
       <nuxt-link to="/user/setting/safe" :class="{active: type == 2, 'tabs-item': true}">
         安全设置
@@ -10,7 +10,7 @@
       <nuxt-link to="/user/setting/others" :class="{active: type == 3, 'tabs-item': true}">
         其他设置
       </nuxt-link>
-      <nuxt-link to="/user/setting/address" :class="{active: type == 4, 'tabs-item': true}" v-if="loggedUser.group != 5">
+      <nuxt-link to="/user/setting/address" :class="{active: type == 4, 'tabs-item': true}" v-if="userRole != 0">
         收货地址管理
       </nuxt-link>
     </div>
@@ -37,8 +37,8 @@ export default {
     }
   },
   computed: {
-    loggedUser () {
-      return this.$store.getters.loggedUser
+    userRole () {
+      return this.$store.getters.loggedRole
     }
   },
   data () {

@@ -38,7 +38,7 @@
             <nuxt-link to="/user/material">物料管理</nuxt-link>
           </div>
         </div>
-        <div class="route-list" v-if="user.group != 5">
+        <div class="route-list" v-if="loggedRole != 0">
           <div :class="{item: true, 'active': /\/user\/setting\/address/.test(path)}">
             <nuxt-link to="/user/setting/address">收货地址管理</nuxt-link>
           </div>
@@ -48,7 +48,7 @@
         <template slot="title">
           <i class="title-icon">&#xe6bd;</i>订单管理
         </template>
-        <div class="route-list">
+        <div class="route-list" v-if="groupId == 4">
           <div :class="{item: true, 'active': /\/user\/goods/.test(path)}">
             <nuxt-link to="/user/goods">我的商品</nuxt-link>
           </div>
@@ -66,7 +66,7 @@
       </el-collapse-item>
       <el-collapse-item>
         <template slot="title">
-          <i class="title-icon">&#xe639;</i>企业账号管理
+          <i class="title-icon">&#xe639;</i>企业成员
         </template>
         <div class="route-list">
           <div :class="{item: true, 'active': /\/user\/department/.test(path)}">
@@ -98,6 +98,12 @@ export default {
     },
     statusList: function () {
       return this.$store.getters.statusList
+    },
+    loggedRole () {
+      return this.$store.getters.loggedRole
+    },
+    groupId () {
+      return this.$store.getters.groupId
     }
   },
   watch: {

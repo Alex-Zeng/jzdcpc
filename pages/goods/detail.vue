@@ -95,7 +95,7 @@
             </span>
           </div>
 
-          <el-button type="primary" style="width: 240px;margin-left: 20px;" v-show="!(group == 5)" @click="addToCart"><i class="icon">&#xe617;</i>加入购物车</el-button>
+          <el-button type="primary" style="width: 240px;margin-left: 20px;" v-show="!(group == 0)" @click="addToCart"><i class="icon">&#xe617;</i>加入购物车</el-button>
         </div>
       </div>
       <div class="other-wrap clearfix">
@@ -137,8 +137,8 @@ export default {
   },
   computed: {
     group () {
-      if (this.$store.getters.loggedUser) {
-        return this.$store.getters.loggedUser.group
+      if (this.$store.getters.loggedRole) {
+        return this.$store.getters.loggedRole
       }
       return -1
     },
