@@ -1,7 +1,7 @@
 import request from '../service'
 export default {
   async getCertification (cb) {
-    const { data } = await request.post('/papi/user/getCertification')
+    const { data } = await request.post('/papi/company_audit/get')
     cb(data)
   },
   async certification (fileds, successCb, errorCb) {
