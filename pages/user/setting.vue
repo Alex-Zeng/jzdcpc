@@ -10,7 +10,7 @@
       <nuxt-link to="/user/setting/others" :class="{active: type == 3, 'tabs-item': true}">
         其他设置
       </nuxt-link>
-      <nuxt-link to="/user/setting/address" :class="{active: type == 4, 'tabs-item': true}" v-if="userRole != 0">
+      <nuxt-link to="/user/setting/address" :class="{active: type == 4, 'tabs-item': true}">
         收货地址管理
       </nuxt-link>
     </div>

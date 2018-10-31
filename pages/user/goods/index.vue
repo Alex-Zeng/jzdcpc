@@ -5,10 +5,10 @@
     </div>
     <el-form :inline="true" :model="searchForm" style="padding-top: 20px;">
       <el-form-item label="产品名称">
-        <el-input v-model="searchForm.name"></el-input>
+        <el-input v-model="searchForm.keyword"></el-input>
       </el-form-item>
       <el-form-item style="float: right;">
-        <el-button type="primary" @click="onSearch">搜索</el-button>
+        <el-button type="primary" @click="getList">搜索</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -16,26 +16,26 @@
       @row-click="handleClick"
       style="width: 100%">
       <el-table-column
-        prop="address"
+        prop="imgUrl"
         label="图片">
         <template slot-scope="scope">
-          <img :src="scope.row.name" class="goods-img" alt="">
+          <img :src="scope.row.imgUrl" class="goods-img" alt="">
         </template>
       </el-table-column>
       <el-table-column
-        prop="date"
+        prop="title"
         label="产品名称">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="spuCode"
         label="SPU码">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="releaseTime"
         label="上架时间">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="salesNumber"
         label="累积销量">
       </el-table-column>
       <template slot="empty">
@@ -45,133 +45,44 @@
         </div>
       </template>
     </el-table>
+    <div class="pager" v-if="tableData.length > 0">
+      <el-pagination
+        background
+        :total="total"
+        :page-size="10"
+        :current-page="pageNumber"
+        @current-change="getList"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 <script>
+import apiMyGoods from '@/api/apiMyGoods'
 export default {
   name: 'commodity-management',
   data () {
     return {
-      searchForm: {},
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }],
-      departemnt: '研发部',
-      remak: '他就是我们的部门经理鸭',
-      departmentForm: {
-        departmentName: ''
+      total: 0,
+      pageNumber: 1,
+      searchForm: {
+        keyword: ''
       },
-      phoneForm: {
-        phone: ''
-      },
-      employeeForm: {
-        name: '',
-        pass: '',
-        checkPass: '',
-        departemnt: '',
-        remak: ''
-      }
+      tableData: []
     }
   },
+  created () {
+    this.getList()
+  },
   methods: {
-    onSearch () {},
+    async getList () {
+      await apiMyGoods.getProductList((data) => {
+        this.tableData = data.list
+        this.total = data.total
+      }, {pageSize: 10, pageNumber: this.pageNumber, keyword: this.searchForm.keyword})
+    },
     handleClick (row) {
       console.log(row)
-      this.dialogDetailVisible = true
-    },
-    addEmployee () {
-      this.addFirstDialogVisible = true
-    },
-    /* editorDepartemnt () {
-      this.departemntEditorDialogVisible = true
-    }, */
-    handleDepartemntSave (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.$confirm('请确定添加该部门, 是否继续?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
-            this.loading = true
-            this.$message({
-              type: 'success',
-              message: '提交成功!'
-            })
-          }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消修改'
-            })
-          })
-        }
-      })
-    },
-    submitFirst (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.addFirstDialogVisible = false
-          this.addSecondDialogVisible = true
-          this.$refs[formName].resetFields()
-        }
-      })
-    },
-    submitSecond (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.addSecondDialogVisible = false
-          this.addThreeDialogVisible = true
-          this.$refs[formName].resetFields()
-        }
-      })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
-      this.addSecondDialogVisible = false
-    },
-    submitThree () {
-      this.addThreeDialogVisible = false
-    },
-    editorMethods () {
-      this.editor = false
-    },
-    hanldeSave () {
-      this.editor = true
-    },
-    hanldeDel () {
-      this.$confirm('是否确认该操作？', '确认信息', {
-        distinguishCancelAndClose: true,
-        confirmButtonText: '是',
-        cancelButtonText: '否'
-      })
-        .then(() => {
-          this.$message({
-            type: 'info',
-            message: '移除成功'
-          })
-        })
-        .catch(action => {
-          /* this.$message({
-            type: 'info',
-            message: action === 'cancel'
-              ? '放弃保存并离开页面'
-              : '停留在当前页面'
-          }) */
-        })
     }
   }
 }

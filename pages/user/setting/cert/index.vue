@@ -130,7 +130,7 @@ export default {
       }
     },
     async getPushTypeAndGoods (formName) {
-      await apiCert.invitationVerify((response) => {
+      await apiCert.invitationVerify({code: this.form.code}, (response) => {
         const {data, msg, status} = response
         if (status === 0) {
           this.depatmentData = data
@@ -149,7 +149,7 @@ export default {
             type: 'error'
           })
         }
-      }, {code: this.form.code})
+      })
     },
     submitFirst (formName) {
       this.$refs[formName].validate((valid) => {

@@ -1,7 +1,7 @@
 export default function ({ store, redirect }) {
-  if (store.getters.groupId) {
-    const groupId = store.getters.groupId
-    if (groupId == 5) {
+  if (store.getters.loggedUser) {
+    const userRole = store.getters.loggedUser
+    if (userRole == -1) {
       redirect('/')
     }
   }
