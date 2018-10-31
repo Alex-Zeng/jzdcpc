@@ -24,12 +24,12 @@
         </div>
         <div v-for="(i, k) in list" :key="'cart'+k">
           <div class="company-bar">
-            <el-checkbox v-model="groupAll[k]" :disabled="i.buyAble==0">{{i.supplierName}}</el-checkbox>
+            <el-checkbox v-model="groupAll[k]" :disabled="i.buyAble == 0">{{i.supplierName}}</el-checkbox>
           </div>
           <div class="goods-list" v-for="(item, key) in i.list" :key="'cart-item'+key">
             <ul class="clearfix">
               <li class="item" style="width: 155px;padding-left: 20px;">
-                <el-checkbox v-model="checkedList[k][key]" :disabled="i.buyAble==0">
+                <el-checkbox v-model="checkedList[k][key]" :disabled="i.buyAble == 0">
                 </el-checkbox>
                 <div class="img">
                   <img :src="item.icon" width="75px" height="75px" alt="">

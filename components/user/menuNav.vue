@@ -33,7 +33,7 @@
             <nuxt-link to="/user/setting/safe">安全设置</nuxt-link>
           </div>
         </div>
-        <div class="route-list">
+        <div class="route-list" v-if="loggedRole != 0">
           <div :class="{item: true, 'active': /\/user\/material/.test(path)}">
             <nuxt-link to="/user/material">物料管理</nuxt-link>
           </div>
@@ -44,7 +44,7 @@
           </div>
         </div>
       </el-collapse-item>
-      <el-collapse-item title="订单管理" name="2">
+      <el-collapse-item title="订单管理" name="2"  v-if="loggedRole != 0">
         <template slot="title">
           <i class="title-icon">&#xe6bd;</i>订单管理
         </template>
@@ -64,7 +64,7 @@
           <a href="/service/index.html" style="display: block;"><i class="title-icon">&#xe67c;</i>集众服务</a>
         </template>
       </el-collapse-item>
-      <el-collapse-item>
+      <el-collapse-item v-if="loggedRole != 0">
         <template slot="title">
           <i class="title-icon">&#xe639;</i>企业成员
         </template>
