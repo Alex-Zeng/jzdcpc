@@ -20,7 +20,7 @@
           <div class="empty-box">
             <img src="@/assets/img/common/department.png" alt="">
             <p>还没有部门哦</p>
-            <el-button type="primary" @click="addDepartment">&emsp;新增部门&emsp;</el-button>
+            <el-button type="primary" @click="addDepartment" v-if="userRole==1">&emsp;新增部门&emsp;</el-button>
           </div>
         </template>
       </el-table>

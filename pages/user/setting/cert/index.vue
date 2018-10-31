@@ -38,8 +38,8 @@
       <div class="el-dialog-content">
         <h3>请确认信息是否正确，如有误请关闭后联系客服</h3>
         <ul>
-          <li><label>公司名称</label><div>啛啛喳喳错扩扩绿扩</div></li>
-          <li><label>所属部门</label><div>啦啦啦啦啦啦啦</div></li>
+          <li><label>公司名称</label><div>{{depatmentData.companyName}}</div></li>
+          <li><label>所属部门</label><div>{{depatmentData.organizationName}}</div></li>
         </ul>
       </div>
       <span slot="footer" class="dialog-footer">
@@ -94,6 +94,7 @@
 <style lang="stylus" scoped>
 </style>
 <script>
+import apiCert from '@/api/apiCert'
 export default {
   head () {
     return {
@@ -106,6 +107,10 @@ export default {
       type: '1',
       form: {
         code: ''
+      },
+      depatmentData: {
+        companyName: '',
+        organizationName: ''
       },
       addFirstDialogVisible: false,
       addSecondDialogVisible: false,
@@ -124,12 +129,32 @@ export default {
         this.addFirstDialogVisible = true
       }
     },
-    submitFirst (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
+    async getPushTypeAndGoods (formName) {
+      await apiCert.invitationVerify((response) => {
+        const {data, msg, status} = response
+        if (status === 0) {
+          this.depatmentData = data
+          this.$message({
+            showClose: true,
+            message: msg,
+            type: 'success'
+          })
           this.addFirstDialogVisible = false
           this.addSecondDialogVisible = true
           this.$refs[formName].resetFields()
+        } else {
+          this.$message({
+            showClose: true,
+            message: msg,
+            type: 'error'
+          })
+        }
+      }, {code: this.form.code})
+    },
+    submitFirst (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.getPushTypeAndGoods(formName)
         }
       })
     },
