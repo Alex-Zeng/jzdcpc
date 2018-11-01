@@ -189,13 +189,13 @@ export default {
                 this.loading = false
               },
               successCb: (msg, status) => {
-                this.$store.dispatch('getPermission', {fileds: 99})
                 this.$message({
                   showClose: true,
                   message: msg,
                   type: 'success'
                 })
                 if (this.step == 2) {
+                  this.$store.dispatch('getRole')
                   let oldUrl = localStorage.getItem('oldUrl')
                   if (oldUrl) {
                     this.$router.replace(oldUrl)
@@ -206,6 +206,7 @@ export default {
                   if (status == -3) {
                     this.step = this.step + 1
                   } else {
+                    this.$store.dispatch('getRole')
                     let oldUrl = localStorage.getItem('oldUrl')
                     if (oldUrl) {
                       this.$router.replace(oldUrl)

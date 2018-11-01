@@ -79,7 +79,6 @@
         <el-tab-pane label="近期成交" name="1">
           <el-table
             :data="tableData1"
-            v-if="tableData1.length > 0"
             height="500"
             border
             stripe
@@ -121,12 +120,11 @@
               </template>
             </el-table-column>
           </el-table>
-          <empty v-if="tableData1.length <= 0" img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
+          <empty img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
         </el-tab-pane>
         <el-tab-pane label="待发货" name="2">
           <el-table
             :data="tableData2"
-            v-if="tableData2.length > 0"
             height="500"
             border
             stripe
@@ -168,12 +166,11 @@
               </template>
             </el-table-column>
           </el-table>
-          <empty v-if="tableData2.length <= 0" img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
+          <empty img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
         </el-tab-pane>
         <el-tab-pane label="售后处理中" name="3">
           <el-table
             :data="tableData3"
-            v-if="tableData3.length > 0"
             height="500"
             border
             stripe
@@ -215,7 +212,7 @@
               </template>
             </el-table-column>
           </el-table>
-          <empty v-if="tableData3.length <= 0" img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
+          <empty img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
         </el-tab-pane>
       </el-tabs>
     </div>
