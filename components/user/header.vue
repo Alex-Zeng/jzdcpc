@@ -174,7 +174,7 @@ export default {
   },
   methods: {
     changeRoleMethods (val) {
-      // this.$router.replace('/user/workbench')
+      this.$router.replace('/user/workbench')
       if (val == 4) {
         this.$store.commit('supplier')
       } else if (val == 5) {

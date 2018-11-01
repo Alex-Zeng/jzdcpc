@@ -15,5 +15,9 @@ export default {
   async invitationVerify (fileds, cb) {
     const data = await request.post('/papi/company_audit/invitationVerify', fileds)
     cb(data)
+  },
+  async invitationConfirm (fileds, cb) {
+    const data = await request.post('/papi/company_audit/invitationConfirm', fileds)
+    cb(data)
   }
 }

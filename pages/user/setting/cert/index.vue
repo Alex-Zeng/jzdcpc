@@ -134,11 +134,6 @@ export default {
         const {data, msg, status} = response
         if (status === 0) {
           this.depatmentData = data
-          this.$message({
-            showClose: true,
-            message: msg,
-            type: 'success'
-          })
           this.addFirstDialogVisible = false
           this.addSecondDialogVisible = true
           this.$refs[formName].resetFields()
@@ -159,8 +154,24 @@ export default {
       })
     },
     handleSave () {
-      this.addSecondDialogVisible = false
-      this.$router.push('/user/setting/cert/submit')
+      apiCert.invitationVerify({code: this.form.code}, (response) => {
+        const {msg, status} = response
+        if (status === 0) {
+          this.$message({
+            showClose: true,
+            message: msg,
+            type: 'success'
+          })
+          this.addSecondDialogVisible = false
+          this.$router.push('/user/setting/cert/submit')
+        } else {
+          this.$message({
+            showClose: true,
+            message: msg,
+            type: 'error'
+          })
+        }
+      })
     }
   },
   mounted () {

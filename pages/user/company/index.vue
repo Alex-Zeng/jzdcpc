@@ -48,7 +48,7 @@
           <div class="empty-box">
             <img src="@/assets/img/common/department.png" alt="">
             <p style="margin-right: 40px;">还没有成员哦</p>
-            <el-button type="primary" @click="addEmployee"  v-if="userRole == 1" style="margin-right: 40px;">&emsp;添加成员&emsp;</el-button>
+            <el-button type="primary" @click="addEmployee" v-if="userRole == 1" style="margin-right: 40px;">&emsp;添加成员&emsp;</el-button>
           </div>
         </template>
       </el-table>
