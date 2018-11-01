@@ -48,7 +48,7 @@
         <template slot="title">
           <i class="title-icon">&#xe6bd;</i>订单管理
         </template>
-        <div class="route-list" v-if="groupId == 4">
+        <div class="route-list" v-if="groupId == 5">
           <div :class="{item: true, 'active': /\/user\/goods/.test(path)}">
             <nuxt-link to="/user/goods">我的商品</nuxt-link>
           </div>
