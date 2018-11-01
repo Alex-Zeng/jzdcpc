@@ -68,6 +68,17 @@ export const getRoleFromReqCookie = (req) => {
   return jwt
 }
 
+export const groupIdFromReqCookie = (req) => {
+  if (!req) {
+    return null
+  }
+  if (!req.headers.cookie) return
+  const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('_groupId='))
+  if (!jwtCookie) return null
+  const jwt = jwtCookie.split('=')[1]
+  return jwt
+}
+
 export const getUserFromReqCookie = (req) => {
   if (!req) {
     return null

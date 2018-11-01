@@ -5,7 +5,7 @@ const state = {
   user: {},
   token: Cookie.get('_token') || null,
   role: Cookie.get('_role') || null,
-  groupId: 4
+  groupId: Cookie.get('_groupId') || 4
 }
 
 const getters = {
@@ -29,9 +29,11 @@ const actions = {
     commit('SETTOKEN', null)
     commit('SETUSER', null)
     commit('SETROLE', null)
+    commit('SETGROUPID', null)
     Cookie.set('_token', '')
     Cookie.set('_user', '')
     Cookie.set('_role', '')
+    Cookie.set('_groupId', '')
   },
   doLoginIndex ({ commit }, {successCb, errorCb, fileds}) {
     apiAuth.loginIndex(data => {
@@ -48,6 +50,8 @@ const actions = {
       let role = data.roleId
       Cookie.set('_role', role, {expires: 30})
       commit('SETROLE', role)
+      Cookie.set('_groupId', 4, {expires: 30})
+      commit('SETGROUPID', 4)
     })
   },
   doLoginPhone ({ commit }, {successCb, errorCb, fileds}) {
@@ -113,9 +117,11 @@ const mutations = {
     state.groupId = groupId
   },
   buyer (state) {
+    Cookie.set('_groupId', 4, {expires: 30})
     state.groupId = 4
   },
   supplier (state) {
+    Cookie.set('_groupId', 5, {expires: 30})
     state.groupId = 5
   }
 }

@@ -9,7 +9,7 @@ import notice from './modules/notice'
 import cart from './modules/cart'
 // import createLogger from '../helper/logger'
 import category from './modules/category'
-import {getUserFromReqCookie, getTokenFromReqCookie, getRoleFromReqCookie} from '../helper/auth'
+import {getUserFromReqCookie, getTokenFromReqCookie, getRoleFromReqCookie, groupIdFromReqCookie} from '../helper/auth'
 
 Vue.use(Vuex)
 
@@ -23,7 +23,7 @@ const store = () =>
         const user = getUserFromReqCookie(req)
         const token = getTokenFromReqCookie(req)
         const role = getRoleFromReqCookie(req)
-        // const groupId = getRoleFromReqCookie(req)
+        const groupId = groupIdFromReqCookie(req)
         if (user) {
           commit('SETUSER', JSON.parse(decodeURIComponent(user)))
         } else {
@@ -39,11 +39,11 @@ const store = () =>
         } else {
           commit('SETROLE', '')
         }
-        /* if (groupId) {
+        if (groupId) {
           commit('SETGROUPID', groupId)
         } else {
           commit('SETGROUPID', '')
-        } */
+        }
       }
     },
     modules: {

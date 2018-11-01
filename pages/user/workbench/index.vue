@@ -353,13 +353,13 @@ export default {
     async getBuyerOrderInfo () {
       await apiWorkbench.getBuyerOrderInfo((data) => {
         this.buyerOrderInfo = data.data
-        this.total.money = data.data.money
+        this.total.money = data.data.money || 0
       })
     },
     async getSupplierOrderInfo () {
       await apiWorkbench.getSupplierOrderInfo((data) => {
         this.supplierOrderInfo = data.data
-        this.total.money = data.data.money
+        this.total.money = data.data.money || 0
       })
     },
     async getDeskList (url, index) {
