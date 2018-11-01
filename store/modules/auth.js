@@ -5,7 +5,7 @@ const state = {
   user: {},
   token: Cookie.get('_token') || null,
   role: Cookie.get('_role') || null,
-  groupId: 5
+  groupId: 4
 }
 
 const getters = {

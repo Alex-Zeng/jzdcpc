@@ -159,9 +159,9 @@ export default {
       this.searchForm.status = type
       let others = {}
       let url = null
-      if (this.groupId === 5) {
+      if (this.groupId === 4) {
         url = '/papi/buyer/getList'
-      } else if (this.groupId === 4) {
+      } else if (this.groupId === 5) {
         url = '/papi/seller/getList'
       }
       search && (others = JSON.parse(search))
@@ -194,9 +194,9 @@ export default {
     search && (others = JSON.parse(search))
     others && (this.searchForm = others)
     let url = null
-    if (this.groupId === 5) {
+    if (this.groupId === 4) {
       url = '/papi/buyer/getList'
-    } else if (this.groupId === 4) {
+    } else if (this.groupId === 5) {
       url = '/papi/seller/getList'
     }
     this.$store.dispatch('getOrderList', {
@@ -234,9 +234,9 @@ export default {
           background: 'rgba(0, 0, 0, 0.7)'
         })
         let url = null
-        if (this.groupId === 5) {
+        if (this.groupId === 4) {
           url = '/papi/buyer/cancel'
-        } else if (this.groupId === 4) {
+        } else if (this.groupId === 5) {
           url = '/papi/seller/cancel'
         }
         this.$store.dispatch('orderCancel', {
@@ -253,9 +253,9 @@ export default {
               const {params: {type, page}} = this.$route
               this.pageNumber = Number(page)
               let url = null
-              if (this.groupId === 5) {
+              if (this.groupId === 4) {
                 url = '/papi/buyer/getList'
-              } else if (this.groupId === 4) {
+              } else if (this.groupId === 5) {
                 url = '/papi/seller/getList'
               }
               this.$store.dispatch('getOrderList', {
@@ -294,9 +294,9 @@ export default {
           background: 'rgba(0, 0, 0, 0.7)'
         })
         let url = null
-        if (this.groupId === 5) {
+        if (this.groupId === 4) {
           url = '/papi/buyer/receipt'
-        } else if (this.groupId === 4) {
+        } else if (this.groupId === 5) {
           url = '/papi/seller/receipt'
         }
         this.$store.dispatch('orderReceipt', {
@@ -313,9 +313,9 @@ export default {
               const {params: {type, page}} = this.$route
               this.pageNumber = Number(page)
               let url = null
-              if (this.groupId === 5) {
+              if (this.groupId === 4) {
                 url = '/papi/buyer/getList'
-              } else if (this.groupId === 4) {
+              } else if (this.groupId === 5) {
                 url = '/papi/seller/getList'
               }
               this.$store.dispatch('getOrderList', {
@@ -403,9 +403,9 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       })
       let exportUrl = null
-      if (this.groupId === 5) {
+      if (this.groupId === 4) {
         exportUrl = '/papi/buyer/export'
-      } else if (this.groupId === 4) {
+      } else if (this.groupId === 5) {
         exportUrl = '/papi/seller/export'
       }
       try {

@@ -20,7 +20,7 @@
     </div>
     <div class="main-row">
       <div class="main-row-left">
-        <ul v-if="groupId == 4">
+        <ul v-if="groupId == 5">
           <li>
             <h4>待发货（单）</h4>
             <p>{{buyerOrderInfo.deliver}}</p>
@@ -38,7 +38,7 @@
             <p>{{buyerOrderInfo.service}}</p>
           </li>
         </ul>
-        <ul v-if="groupId == 5">
+        <ul v-if="groupId == 4">
           <li>
             <h4>昨日成交（笔）</h4>
             <p>{{supplierOrderInfo.yesterday}}</p>
@@ -312,6 +312,7 @@ export default {
   },
   data  () {
     return {
+      tabIndex: 1,
       Buyer: true,
       noticeLists: {},
       total: {
@@ -377,7 +378,14 @@ export default {
       })
     },
     handleClick (tab, event) {
-      this.getDeskList(parseInt(tab.index) + 1)
+      let url = null
+      if (this.groupId == 4) {
+        url = '/papi/buyer/getDeskList'
+      } else if (this.groupId == 5) {
+        url = '/papi/seller/getDeskList'
+      }
+      this.tabIndex = parseInt(tab.index) + 1
+      this.getDeskList(url, parseInt(tab.index) + 1)
     },
     handleClickRow (index) {
       console.log(index)
@@ -386,13 +394,14 @@ export default {
       // this.$router.push('/user/order-detail/'+order.out_id+'/'+type)
     },
     changeRole (val) {
-      if (val == 5) {
-        this.getBuyerOrderInfo()
-        this.getDeskList('/papi/buyer/getDeskList', 1)
-      }
+      console.log('val' + val)
       if (val == 4) {
+        this.getBuyerOrderInfo()
+        this.getDeskList('/papi/buyer/getDeskList', this.tabIndex)
+      }
+      if (val == 5) {
         this.getSupplierOrderInfo()
-        this.getDeskList('/papi/seller/getDeskList', 1)
+        this.getDeskList('/papi/seller/getDeskList', this.tabIndex)
       }
     }
   },
@@ -405,6 +414,7 @@ export default {
   },
   watch: {
     groupId (val) {
+      console.log(val)
       this.changeRole(val)
     }
   },
