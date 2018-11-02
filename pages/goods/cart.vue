@@ -38,6 +38,7 @@
               <li class="item info" style="width:325px;">
                 <span class="title">{{item.title}}</span>
                 <span>{{item.specificationsInfo}}</span>
+                <span v-if="i.buyAble == 0" class="text-red">您不能购买自己出售的商品</span>
               </li>
               <li class="item" style="width: 186px;">{{item.price}}</li>
               <li class="item" style="width: 138px;">

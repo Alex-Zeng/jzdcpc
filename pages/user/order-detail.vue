@@ -168,7 +168,7 @@
         </div>
         <div class="left" style="width:220px;">
           <div class="item" style="height: 56px;"></div>
-          <div class="item">
+          <div class="item" v-if="detail.state == 3">
             <span class="value">
               <el-button type="primary" @click="delivery">确定发货</el-button>
             </span>

@@ -95,7 +95,7 @@
             </span>
           </div>
 
-          <el-button type="primary" style="width: 240px;margin-left: 20px;" v-show="!(group == 0)" @click="addToCart"><i class="icon">&#xe617;</i>加入购物车</el-button>
+          <el-button type="primary" style="width: 240px;margin-left: 20px;" v-show="!(userRole == 0)" @click="addToCart"><i class="icon">&#xe617;</i>加入购物车</el-button>
         </div>
       </div>
       <div class="other-wrap clearfix">
@@ -136,11 +136,14 @@ export default {
     PicZoom
   },
   computed: {
-    group () {
+    userRole () {
       if (this.$store.getters.loggedRole) {
         return this.$store.getters.loggedRole
       }
       return -1
+    },
+    groupId () {
+      return this.$store.getters.groupId
     },
     user () {
       return this.$store.getters.loggedUser
@@ -370,30 +373,34 @@ export default {
       const specId = this.specificationsTarget.specId
       const number = this.count
       try {
-        apiMallCart.add((data) => {
-          const {msg, status} = data
-          if (status == 0) {
-            this.$message(
-              {
-                type: 'success',
-                message: msg
-              }
-            )
-            this.$store.dispatch('getCartNum')
-          } else {
-            if (status == 1) {
-              if (this.group != 4) {
-                this.$message.error('请先进行企业认证')
-                this.$router.push('/user/setting/cert')
+        if (specId) {
+          apiMallCart.add((data) => {
+            const {msg, status} = data
+            if (status == 0) {
+              this.$message(
+                {
+                  type: 'success',
+                  message: msg
+                }
+              )
+              this.$store.dispatch('getCartNum')
+            } else {
+              if (status == 1) {
+                if (this.groupId != 4) {
+                  this.$message.error('请先进行企业认证')
+                  // this.$router.push('/user/setting/cert')
+                } else {
+                  this.$message.error(msg)
+                }
               } else {
+                localStorage.setItem('oldUrl', this.$route.path)
                 this.$message.error(msg)
               }
-            } else {
-              localStorage.setItem('oldUrl', this.$route.path)
-              this.$message.error(msg)
             }
-          }
-        }, {id, specId, number})
+          }, {id, specId, number})
+        } else {
+          this.$message.error('请选择商品规格')
+        }
       } catch (e) {
         this.$message.error('网络开小差，请稍后重试')
       }
