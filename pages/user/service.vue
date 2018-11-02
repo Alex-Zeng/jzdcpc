@@ -71,10 +71,8 @@ export default {
       background: 'rgba(0, 0, 0, 0.7)'
     })
     let url = null
-    if (this.groupId == 5) {
-      url = '/papi/buyer/detail'
-    } else if (this.groupId == 4) {
-      url = '/papi/seller/detail'
+    if (this.groupId == 4) {
+      url = '/papi/buyer/service'
     }
     this.$store.dispatch('getOrderDetail', {url, fileds: {no}, cb: () => { loading.close() }})
   }

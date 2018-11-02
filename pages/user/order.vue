@@ -78,10 +78,10 @@
           </div>
           <div class="info info-btn">
             <el-button class="order-button" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;margin-right: 8px;" @click="$router.push('/user/order-detail/'+order.out_id+'/'+type)">查看详情</el-button>
-            <el-button class="order-button" type="primary" v-show="order.state == 3 && order.groupId == 5" style="width: 80px;padding-left: 0;padding-right: 0;" @click="$router.push('/user/order-detail/'+order.out_id)">确定发货</el-button>
+            <el-button class="order-button" type="primary" v-show="order.state == 3 && groupId == 5" style="width: 80px;padding-left: 0;padding-right: 0;" @click="$router.push('/user/order-detail/'+order.out_id)">确定发货</el-button>
             <el-button class="order-button" type="primary" v-show="parseInt(order.confirmType) ==1" style="width: 80px;padding-left: 0;padding-right: 0;" @click="receipt(order.out_id)">确定收货</el-button>
             <el-button class="order-button text" type="text" v-show="parseInt(order.cancelType) ==1" style="width: 80px;padding-left: 0;padding-right: 0;" @click="cancel(order.out_id)">取消交易</el-button>
-            <el-button class="order-button text" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;" v-show="type == 6" @click="$router.push('/user/service/'+order.out_id)">查看售后</el-button>
+            <el-button class="order-button text" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;" v-show="type == 6 && groupId == 4" @click="$router.push('/user/service/'+order.out_id)">查看售后</el-button>
           </div>
         </div>
       </div>
