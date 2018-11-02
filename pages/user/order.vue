@@ -54,7 +54,7 @@
             <div class="item order-info"><span>订单号：{{order.out_id}}</span></div>
             <div class="item source">{{order.companyName || '无'}}</div>
             <div class="item addr">{{order.receiver_name}}</div>
-            <div class="item status">{{order.service_type == 1? '售后处理中': order.service_type == 2 && type == 6? '售后完成': getStateTitle(parseInt(order.state), parseInt(order.groupId))}}</div>
+            <div class="item status">{{order.service_type == 1? '售后处理中': order.service_type == 2 && type == 6? '售后完成': i.statusMsg}}</div>
             <div class="item action"><span>总额：</span>¥{{order.money}}</div>
           </div>
         <div class="lists">
@@ -79,8 +79,8 @@
           <div class="info info-btn">
             <el-button class="order-button" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;margin-right: 8px;" @click="$router.push('/user/order-detail/'+order.out_id+'/'+type)">查看详情</el-button>
             <el-button class="order-button" type="primary" v-show="order.state == 3 && order.groupId == 5" style="width: 80px;padding-left: 0;padding-right: 0;" @click="$router.push('/user/order-detail/'+order.out_id)">确定发货</el-button>
-            <el-button class="order-button" type="primary" v-show="order.state == 6 && order.groupId == 4 && (order.service_type ==0 || order.service_type ==2)" style="width: 80px;padding-left: 0;padding-right: 0;" @click="receipt(order.out_id)">确定收货</el-button>
-            <el-button class="order-button text" type="text" v-show="order.state ==1 || order.state == 0" style="width: 80px;padding-left: 0;padding-right: 0;" @click="cancel(order.out_id)">取消交易</el-button>
+            <el-button class="order-button" type="primary" v-show="parseInt(i.confirmType) ==1" style="width: 80px;padding-left: 0;padding-right: 0;" @click="receipt(order.out_id)">确定收货</el-button>
+            <el-button class="order-button text" type="text" v-show="parseInt(i.cancelType) ==1" style="width: 80px;padding-left: 0;padding-right: 0;" @click="cancel(order.out_id)">取消交易</el-button>
             <el-button class="order-button text" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;" v-show="type == 6" @click="$router.push('/user/service/'+order.out_id)">查看售后</el-button>
           </div>
         </div>
