@@ -130,14 +130,7 @@
           </div>
         </div>
       </div>
-      <div v-else>
-        <div class="empty" v-if="detail.groupId == 4">暂无物流信息</div>
-      </div>
-    </div>
-
-    <div class="common card clearfix" v-if="(detail.groupId == 5) && (!detail.expressCode)">
-      <div class="title">物流信息</div>
-      <div>
+      <div  v-else-if="(groupId == 5) && (!detail.expressCode)">
         <div class="left" style="width:420px;">
           <div class="item">
             <span class="label">运单号：</span>
@@ -175,9 +168,11 @@
           </div>
         </div>
       </div>
+      <div v-else>
+        <div class="empty" v-if="groupId == 4">暂无物流信息</div>
+      </div>
     </div>
-
-    <div class="common card clearfix" v-if="detail.groupId != 4">
+    <div class="common card clearfix" v-if="groupId != 4">
       <div class="title">付款信息</div>
       <div v-if="detail.payNumber || detail.payDate || detail.payImg">
         <div class="left" style="width: 370px;">
