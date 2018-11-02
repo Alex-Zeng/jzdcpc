@@ -35,7 +35,7 @@ const actions = {
     apiOrders.detail(url, (result) => {
       const {data} = result
       commit('updateDetail', data)
-      cb()
+      cb(result)
     }, fileds)
   },
   doDelivery ({ commit }, {fileds, cb}) {

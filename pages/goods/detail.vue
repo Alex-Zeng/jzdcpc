@@ -473,7 +473,12 @@ export default {
       this.arr = new Array(data.specAttrs.length).fill(null)
     }, {id})
     apiGoods.getPath((data) => {
-      this.path = data
+      const {dataPath, msg, status} = data
+      if (status == 0) {
+        this.path = dataPath
+      } else {
+        this.$message.error(msg)
+      }
     }, {id})
   },
   watch: {
