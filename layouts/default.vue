@@ -14,6 +14,7 @@ export default {
           let refererUrl = '/'
           window._czc.push(['_trackPageview', contentUrl, refererUrl])
         }
+        this.$store.dispatch('getRole')
       },
       // 深度观察监听
       deep: true

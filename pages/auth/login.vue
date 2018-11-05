@@ -195,7 +195,6 @@ export default {
                   type: 'success'
                 })
                 if (this.step == 2) {
-                  this.$store.dispatch('getRole')
                   let oldUrl = localStorage.getItem('oldUrl')
                   if (oldUrl) {
                     this.$router.replace(oldUrl)
@@ -206,7 +205,6 @@ export default {
                   if (status == -3) {
                     this.step = this.step + 1
                   } else {
-                    this.$store.dispatch('getRole')
                     let oldUrl = localStorage.getItem('oldUrl')
                     if (oldUrl) {
                       this.$router.replace(oldUrl)

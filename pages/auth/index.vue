@@ -93,7 +93,6 @@ export default {
                   message: msg,
                   type: 'success'
                 })
-                this.$store.dispatch('getRole')
                 let oldUrl = localStorage.getItem('oldUrl')
                 if (oldUrl) {
                   this.$router.replace(oldUrl)

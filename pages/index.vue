@@ -9,9 +9,7 @@
               <a :href="item.url" :target="item.target" v-if="item.url">
                 <img :src="item.img" alt="banner">
               </a>
-              <div v-else>
-                <img :src="item.img" alt="banner">
-              </div>
+              <div v-else><img :src="item.img" alt="banner"></div>
             </el-carousel-item>
           </el-carousel>
         </div>
