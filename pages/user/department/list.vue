@@ -119,7 +119,7 @@
         </span>
       </el-dialog>
       <el-dialog
-        title="提示"
+        title="输入用户信息"
         :visible.sync="addSecondDialogVisible"
         width="800px"
         center>

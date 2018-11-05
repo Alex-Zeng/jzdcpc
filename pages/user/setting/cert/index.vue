@@ -163,6 +163,7 @@ export default {
             type: 'success'
           })
           this.addSecondDialogVisible = false
+          this.$store.dispatch('getRole')
           this.$router.push('/user/setting/cert/submit')
         } else {
           this.$message({

@@ -180,7 +180,7 @@ export default {
       } else if (val == 5) {
         this.$store.commit('buyer')
       }
-      // this.changeRole = !this.changeRole
+      this.changeRole = !this.changeRole
     },
     logout () {
       localStorage.clear()

@@ -18,7 +18,7 @@
         <template slot="title">
           <i class="title-icon">&#xe639;</i>企业账号管理
         </template>
-        <div class="route-list">
+        <div class="route-list" v-if="loggedRole != 1">
           <div :class="{item: true, 'active': /\/user\/setting\/cert/.test(path)}">
             <nuxt-link to="/user/setting/cert">企业认证</nuxt-link>
           </div>

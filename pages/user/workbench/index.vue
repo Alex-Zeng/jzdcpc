@@ -391,7 +391,6 @@ export default {
       // this.$router.push('/user/order-detail/'+order.out_id+'/'+type)
     },
     changeRole (val) {
-      console.log('val' + val)
       if (val == 4) {
         this.getBuyerOrderInfo()
         this.getDeskList('/papi/buyer/getDeskList', this.tabIndex)

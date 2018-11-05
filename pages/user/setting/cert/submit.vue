@@ -182,7 +182,8 @@ export default {
                 }
               )
               loading.close()
-              this.$router.replace('/user/setting/cert')
+              this.$store.dispatch('getRole')
+              this.$router.replace('/user/workbench')
             },
             errorCb: (msg) => {
               loading.close()
