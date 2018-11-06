@@ -39,7 +39,11 @@
             </div>
             <span style="float: left;">{{i.name}}</span>
           </li>
-          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true"><i class="menu-icon" style="margin-right: 15px;">&#xe67e;</i>
+          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true">
+            <!--<i class="menu-icon" style="margin-right: 15px;">&#xe67e;</i>-->
+            <div class="img">
+              <img src="@/assets/img/index/service-icon.png" alt="">
+            </div>
             <a href="/service/index.html" style="color: #ffffff" target="_blank">集众服务</a>
           </li>
         </ul>
