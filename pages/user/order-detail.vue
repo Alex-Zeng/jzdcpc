@@ -232,23 +232,27 @@ export default {
     }
   },
   mounted () {
-    const {params: {no, type}} = this.$route
-    this.type = type * 1
-    const loading = this.$loading({
-      lock: true,
-      text: '加载中...',
-      spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0.7)'
-    })
-    let url = null
-    if (this.groupId == 4) {
-      url = '/papi/buyer/detail'
-    } else if (this.groupId == 5) {
-      url = '/papi/seller/detail'
-    }
-    this.$store.dispatch('getOrderDetail', {url, fileds: {no}, cb: () => { loading.close() }})
+    this.getDetail()
   },
   methods: {
+    getDetail () {
+      const {params: {no, type}} = this.$route
+      this.type = type * 1
+      const loading = this.$loading({
+        lock: true,
+        text: '加载中...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      console.log(type)
+      let url = null
+      if (this.groupId == 4) {
+        url = '/papi/buyer/detail'
+      } else if (this.groupId == 5) {
+        url = '/papi/seller/detail'
+      }
+      this.$store.dispatch('getOrderDetail', {url, fileds: {no, type}, cb: () => { loading.close() }})
+    },
     doService () {
       const {params: {no}} = this.$route
       const goodsId = this.goodsId
@@ -276,15 +280,7 @@ export default {
                 type: 'success',
                 message: msg
               })
-              const {params: {no, type}} = this.$route
-              this.type = type * 1
-              const loading = this.$loading({
-                lock: true,
-                text: '加载中...',
-                spinner: 'el-icon-loading',
-                background: 'rgba(0, 0, 0, 0.7)'
-              })
-              this.$store.dispatch('getOrderDetail', {fileds: {no}, cb: () => { loading.close() }})
+              this.getDetail()
               this.dialogFormVisible = false
             } else {
               this.$message.error(msg)
