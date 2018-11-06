@@ -35,7 +35,7 @@
           <li class="itemAll"><i class="menu-icon">&#xe605;</i>全部商品分类</li>
           <li :class="{item:true, isOpen: isOpen || show, active: (child===i.child) && showWrap}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="selectId = i.id, child = i.child, showWrap=true, slogan=false">
             <div class="img">
-              <img :src="i.iconWeb" width="20" height="20" alt="">
+              <img :src="i.iconWeb" alt="">
             </div>
             <span style="float: left;">{{i.name}}</span>
           </li>
@@ -241,7 +241,7 @@ export default {
           img
             vertical-align:middle
             display inline-block
-            width 16px
+            width 14px
         &.isOpen
           display block
         &:after
