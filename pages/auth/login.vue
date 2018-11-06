@@ -125,6 +125,7 @@ export default {
     return {
       step: 1,
       loading: false,
+      role: null,
       agree: true,
       codeForm: {
         phone: '',
@@ -204,6 +205,7 @@ export default {
                   if (status == -3) {
                     this.step = this.step + 1
                   } else {
+                    this.$store.dispatch('getRole')
                     let oldUrl = localStorage.getItem('oldUrl')
                     if (oldUrl) {
                       this.$router.replace(oldUrl)

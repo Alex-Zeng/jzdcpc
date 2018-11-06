@@ -24,12 +24,12 @@
         </div>
         <div v-for="(i, k) in list" :key="'cart'+k">
           <div class="company-bar">
-            <el-checkbox v-model="groupAll[k]">{{i.supplierName}}</el-checkbox>
+            <el-checkbox v-model="groupAll[k]" :disabled="i.buyAble == 0">{{i.supplierName}}</el-checkbox>
           </div>
           <div class="goods-list" v-for="(item, key) in i.list" :key="'cart-item'+key">
             <ul class="clearfix">
               <li class="item" style="width: 155px;padding-left: 20px;">
-                <el-checkbox v-model="checkedList[k][key]">
+                <el-checkbox v-model="checkedList[k][key]" :disabled="i.buyAble == 0">
                 </el-checkbox>
                 <div class="img">
                   <img :src="item.icon" width="75px" height="75px" alt="">
@@ -38,6 +38,7 @@
               <li class="item info" style="width:325px;">
                 <span class="title">{{item.title}}</span>
                 <span>{{item.specificationsInfo}}</span>
+                <span v-if="i.buyAble == 0" class="text-red">您不能购买自己出售的商品</span>
               </li>
               <li class="item" style="width: 186px;">{{item.price}}</li>
               <li class="item" style="width: 138px;">
@@ -100,7 +101,7 @@ export default {
     empty
   },
   watch: {
-    all: function () {
+    all: function (val, oldVal) {
       if (this.checkedList.length > 0) {
         let check = []
         this.checkedList.forEach((i) => {
@@ -108,6 +109,12 @@ export default {
         })
         this.$set(this.checkedList, check)
         this.groupAll.fill(this.all)
+        this.groupAll.forEach((item, index) => {
+          if (this.list[index].buyAble == 0) {
+            this.groupAll.fill(false, index, index + 1)
+            this.checkedList[index].fill(false)
+          }
+        })
         this.countAll()
       }
     },

@@ -9,6 +9,10 @@ export default {
     }
     successCb(data)
   },
+  async getRole (cb) {
+    const { data } = await request.post('/papi/user/getRole')
+    cb(data)
+  },
   async loginPhone (successCb, errorCb, fileds) {
     const { data, status, msg } = await request.post('/papi/login/phone', fileds)
     if (status === -3) {

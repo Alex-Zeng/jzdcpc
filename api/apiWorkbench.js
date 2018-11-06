@@ -13,11 +13,11 @@ export default {
     cb(data)
   },
   async getSupplierOrderInfo (cb) {
-    const data = await request.get('/papi/user/getSupplierOrderInfo')
+    const data = await request.get('/papi/seller/getOrderInfo')
     cb(data)
   },
-  async getDeskList (fileds, cb) {
-    const data = await request.get('/papi/order/getDeskList', fileds)
+  async getDeskList (url, fileds, cb) {
+    const data = await request.get(url, fileds)
     cb(data)
   }
 }

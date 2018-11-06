@@ -18,7 +18,7 @@
         <template slot="title">
           <i class="title-icon">&#xe639;</i>企业账号管理
         </template>
-        <div class="route-list">
+        <div class="route-list" v-if="loggedRole != 1">
           <div :class="{item: true, 'active': /\/user\/setting\/cert/.test(path)}">
             <nuxt-link to="/user/setting/cert">企业认证</nuxt-link>
           </div>
@@ -33,21 +33,26 @@
             <nuxt-link to="/user/setting/safe">安全设置</nuxt-link>
           </div>
         </div>
-        <div class="route-list">
+        <div class="route-list" v-if="loggedRole != 0">
           <div :class="{item: true, 'active': /\/user\/material/.test(path)}">
             <nuxt-link to="/user/material">物料管理</nuxt-link>
           </div>
         </div>
-        <div class="route-list" v-if="user.group != 5">
+        <div class="route-list" v-if="loggedRole != 0">
           <div :class="{item: true, 'active': /\/user\/setting\/address/.test(path)}">
             <nuxt-link to="/user/setting/address">收货地址管理</nuxt-link>
           </div>
         </div>
       </el-collapse-item>
-      <el-collapse-item title="订单管理" name="2">
+      <el-collapse-item title="订单管理" name="2"  v-if="loggedRole != 0">
         <template slot="title">
           <i class="title-icon">&#xe6bd;</i>订单管理
         </template>
+        <div class="route-list" v-if="groupId == 5">
+          <div :class="{item: true, 'active': /\/user\/goods/.test(path)}">
+            <nuxt-link to="/user/goods">我的商品</nuxt-link>
+          </div>
+        </div>
         <div class="route-list">
           <div :class="{active: type ==i.key, item: true}" v-for="(i, k) in statusList" :key="'orders'+k">
             <nuxt-link :to="'/user/order/'+i.key+'/1'">{{i.value}}</nuxt-link>
@@ -58,6 +63,21 @@
         <template slot="title">
           <a href="/service/index.html" style="display: block;"><i class="title-icon">&#xe67c;</i>集众服务</a>
         </template>
+      </el-collapse-item>
+      <el-collapse-item v-if="loggedRole != 0">
+        <template slot="title">
+          <i class="title-icon">&#xe639;</i>企业成员
+        </template>
+        <div class="route-list">
+          <div :class="{item: true, 'active': /\/user\/department/.test(path)}">
+            <nuxt-link to="/user/department">我的部门</nuxt-link>
+          </div>
+        </div>
+        <div class="route-list">
+          <div :class="{item: true, 'active': /\/user\/company/.test(path)}">
+            <nuxt-link to="/user/company">通讯录</nuxt-link>
+          </div>
+        </div>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -78,6 +98,12 @@ export default {
     },
     statusList: function () {
       return this.$store.getters.statusList
+    },
+    loggedRole () {
+      return this.$store.getters.loggedRole
+    },
+    groupId () {
+      return this.$store.getters.groupId
     }
   },
   watch: {

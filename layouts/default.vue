@@ -3,7 +3,24 @@
     <nuxt/>
   </div>
 </template>
-
+<script>
+export default {
+  watch: {
+    $route: {
+      handler: function () {
+        if (window._czc) {
+          let location = window.location
+          let contentUrl = location.pathname + location.hash
+          let refererUrl = '/'
+          window._czc.push(['_trackPageview', contentUrl, refererUrl])
+        }
+      },
+      // 深度观察监听
+      deep: true
+    }
+  }
+}
+</script>
 <style>
 html {
   font-family: "MicrosoftYaHei","Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

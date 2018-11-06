@@ -136,6 +136,9 @@ export default {
     },
     user () {
       return this.$store.getters.loggedUser
+    },
+    loggedRole () {
+      return this.$store.getters.loggedRole
     }
   },
   methods: {
@@ -205,7 +208,7 @@ export default {
   },
   mounted () {
     if (this.token) {
-      if (this.user.group === 6) {
+      if (this.loggedRole == 0) {
         this.$confirm('您尚未做企业认证，去认证?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',

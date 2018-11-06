@@ -20,7 +20,7 @@
     </div>
     <div class="main-row">
       <div class="main-row-left">
-        <ul v-if="user.group == 4">
+        <ul v-if="groupId == 5">
           <li>
             <h4>待发货（单）</h4>
             <p>{{buyerOrderInfo.deliver}}</p>
@@ -38,7 +38,7 @@
             <p>{{buyerOrderInfo.service}}</p>
           </li>
         </ul>
-        <ul v-if="user.group == 5">
+        <ul v-if="groupId == 4">
           <li>
             <h4>昨日成交（笔）</h4>
             <p>{{supplierOrderInfo.yesterday}}</p>
@@ -79,7 +79,6 @@
         <el-tab-pane label="近期成交" name="1">
           <el-table
             :data="tableData1"
-            v-if="tableData1.length > 0"
             height="500"
             border
             stripe
@@ -121,12 +120,11 @@
               </template>
             </el-table-column>
           </el-table>
-          <empty v-if="tableData1.length <= 0" img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
+          <empty img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
         </el-tab-pane>
         <el-tab-pane label="待发货" name="2">
           <el-table
             :data="tableData2"
-            v-if="tableData2.length > 0"
             height="500"
             border
             stripe
@@ -168,12 +166,11 @@
               </template>
             </el-table-column>
           </el-table>
-          <empty v-if="tableData2.length <= 0" img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
+          <empty img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
         </el-tab-pane>
         <el-tab-pane label="售后处理中" name="3">
           <el-table
             :data="tableData3"
-            v-if="tableData3.length > 0"
             height="500"
             border
             stripe
@@ -215,7 +212,7 @@
               </template>
             </el-table-column>
           </el-table>
-          <empty v-if="tableData3.length <= 0" img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
+          <empty img="/empty/search_empty.png" text="暂无相关订单信息" link=""></empty>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -312,6 +309,7 @@ export default {
   },
   data  () {
     return {
+      tabIndex: 1,
       Buyer: true,
       noticeLists: {},
       total: {
@@ -355,17 +353,17 @@ export default {
     async getBuyerOrderInfo () {
       await apiWorkbench.getBuyerOrderInfo((data) => {
         this.buyerOrderInfo = data.data
-        this.total.money = data.data.money
+        this.total.money = data.data.money || 0
       })
     },
     async getSupplierOrderInfo () {
       await apiWorkbench.getSupplierOrderInfo((data) => {
         this.supplierOrderInfo = data.data
-        this.total.money = data.data.money
+        this.total.money = data.data.money || 0
       })
     },
-    async getDeskList (index) {
-      await apiWorkbench.getDeskList({type: index}, (data) => {
+    async getDeskList (url, index) {
+      await apiWorkbench.getDeskList(url, {type: index}, (data) => {
         const {data: {list}} = data
         if (index == 1) {
           this.tableData1 = list
@@ -377,31 +375,54 @@ export default {
       })
     },
     handleClick (tab, event) {
-      this.getDeskList(parseInt(tab.index) + 1)
+      let url = null
+      if (this.groupId == 4) {
+        url = '/papi/buyer/getDeskList'
+      } else if (this.groupId == 5) {
+        url = '/papi/seller/getDeskList'
+      }
+      this.tabIndex = parseInt(tab.index) + 1
+      this.getDeskList(url, parseInt(tab.index) + 1)
     },
     handleClickRow (index) {
       console.log(index)
       this.$router.push('/user/order-detail/' + index.orderNo)
       // @click="$router.push('/user/order-detail/'+order.out_id+'/'+type)"
       // this.$router.push('/user/order-detail/'+order.out_id+'/'+type)
+    },
+    changeRole (val) {
+      if (val == 4) {
+        this.getBuyerOrderInfo()
+        this.getDeskList('/papi/buyer/getDeskList', this.tabIndex)
+      }
+      if (val == 5) {
+        this.getSupplierOrderInfo()
+        this.getDeskList('/papi/seller/getDeskList', this.tabIndex)
+      }
     }
   },
   created () {
     this.getNotice()
     this.messageList()
-    if (parseInt(this.user.group) == 4) {
-      this.getBuyerOrderInfo()
-    }
-    if (parseInt(this.user.group) == 5) {
-      this.getSupplierOrderInfo()
-    }
-    this.getDeskList(1)
+    this.changeRole(this.groupId)
   },
   mounted () {
+  },
+  watch: {
+    groupId (val) {
+      console.log(val)
+      this.changeRole(val)
+    }
   },
   computed: {
     user () {
       return this.$store.getters.loggedUser
+    },
+    userRole () {
+      return this.$store.getters.loggedRole
+    },
+    groupId () {
+      return this.$store.getters.groupId
     }
   }
 }

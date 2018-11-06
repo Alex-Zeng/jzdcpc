@@ -12,7 +12,6 @@ const getters = {
 
 const actions = {
   getFavoriteList ({ commit }, fileds) {
-    console.log('test')
     apiTest.getFavoriteList(data => {
       commit('updateList', data)
     }, fileds)

@@ -11,10 +11,14 @@
         </nuxt-link>
       </div>
       <div class="user">
-        <div class="avatar">
-          <img src="" alt="">
+        <div class="name" v-if="loggedRole == 1">
+          <span style="cursor: pointer;" v-show="groupId == 5" @click="changeRoleMethods(groupId)"><i class="icon">&#xe609;</i>买家中心</span>
+          <span style="cursor: pointer;" v-show="groupId == 4" @click="changeRoleMethods(groupId)"><i class="icon">&#xe609;</i>卖家中心</span>
         </div>
-        <div class="name" @click="$router.push('/goods/cart')" v-if="loggedUser.group != 5">
+        <!--<div class="avatar">
+          <img src="" alt="">
+        </div>-->
+        <div class="name" @click="$router.push('/goods/cart')" v-if="loggedRole != 0">
           <span style="cursor: pointer;"><i class="icon">&#xe617;</i>购物车(<span class="num">{{cartNum}}</span>)</span>
         </div>
         <div class="name" @click="$router.push('/user/workbench/favorite')">
@@ -140,6 +144,11 @@
 import menunNav from './menuNav'
 export default {
   name: 'userHeader',
+  data () {
+    return {
+      changeRole: false
+    }
+  },
   components: {
     menunNav
   },
@@ -150,14 +159,29 @@ export default {
     loggedUser () {
       return this.$store.getters.loggedUser
     },
+    loggedRole () {
+      return this.$store.getters.loggedRole
+    },
     favoriteTotal () {
       return this.$store.getters.favoriteTotal
     },
     cartNum () {
       return this.$store.getters.cartNum
+    },
+    groupId () {
+      return this.$store.getters.groupId
     }
   },
   methods: {
+    changeRoleMethods (val) {
+      this.$router.replace('/user/workbench')
+      if (val == 4) {
+        this.$store.commit('supplier')
+      } else if (val == 5) {
+        this.$store.commit('buyer')
+      }
+      this.changeRole = !this.changeRole
+    },
     logout () {
       localStorage.clear()
       this.$store.dispatch('logout')

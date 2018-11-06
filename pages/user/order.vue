@@ -54,7 +54,7 @@
             <div class="item order-info"><span>订单号：{{order.out_id}}</span></div>
             <div class="item source">{{order.companyName || '无'}}</div>
             <div class="item addr">{{order.receiver_name}}</div>
-            <div class="item status">{{order.service_type == 1? '售后处理中': order.service_type == 2 && type == 6? '售后完成': getStateTitle(parseInt(order.state), parseInt(order.groupId))}}</div>
+            <div class="item status">{{order.service_type == 1? '售后处理中': order.service_type == 2 && type == 6? '售后完成': order.statusMsg}}</div>
             <div class="item action"><span>总额：</span>¥{{order.money}}</div>
           </div>
         <div class="lists">
@@ -78,10 +78,10 @@
           </div>
           <div class="info info-btn">
             <el-button class="order-button" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;margin-right: 8px;" @click="$router.push('/user/order-detail/'+order.out_id+'/'+type)">查看详情</el-button>
-            <el-button class="order-button" type="primary" v-show="order.state == 3 && order.groupId == 5" style="width: 80px;padding-left: 0;padding-right: 0;" @click="$router.push('/user/order-detail/'+order.out_id)">确定发货</el-button>
-            <el-button class="order-button" type="primary" v-show="order.state == 6 && order.groupId == 4 && (order.service_type ==0 || order.service_type ==2)" style="width: 80px;padding-left: 0;padding-right: 0;" @click="receipt(order.out_id)">确定收货</el-button>
-            <el-button class="order-button text" type="text" v-show="order.state ==1 || order.state == 0" style="width: 80px;padding-left: 0;padding-right: 0;" @click="cancel(order.out_id)">取消交易</el-button>
-            <el-button class="order-button text" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;" v-show="type == 6" @click="$router.push('/user/service/'+order.out_id)">查看售后</el-button>
+            <el-button class="order-button" type="primary" v-show="order.state == 3 && groupId == 5" style="width: 80px;padding-left: 0;padding-right: 0;" @click="$router.push('/user/order-detail/'+order.out_id)">确定发货</el-button>
+            <el-button class="order-button" type="primary" v-show="parseInt(order.confirmType) ==1" style="width: 80px;padding-left: 0;padding-right: 0;" @click="receipt(order.out_id)">确定收货</el-button>
+            <el-button class="order-button text" type="text" v-show="parseInt(order.cancelType) ==1" style="width: 80px;padding-left: 0;padding-right: 0;" @click="cancel(order.out_id)">取消交易</el-button>
+            <el-button class="order-button text" type="primary" style="width: 80px;padding-left: 0;padding-right: 0;" v-show="type == 6 && groupId == 4" @click="$router.push('/user/service/'+order.out_id)">查看售后</el-button>
           </div>
         </div>
       </div>
@@ -140,13 +140,16 @@ export default {
     },
     statusList () {
       return this.$store.getters.statusList
+    },
+    groupId () {
+      return this.$store.getters.groupId
     }
   },
   watch: {
     '$route': function () {
       const loading = this.$loading({
         lock: true,
-        text: 'Loading',
+        text: 'Loading2',
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
@@ -155,8 +158,15 @@ export default {
       this.type = type
       this.searchForm.status = type
       let others = {}
+      let url = null
+      if (this.groupId == 4) {
+        url = '/papi/buyer/getList'
+      } else if (this.groupId == 5) {
+        url = '/papi/seller/getList'
+      }
       search && (others = JSON.parse(search))
       this.$store.dispatch('getOrderList', {
+        url,
         data: {
           status: type,
           pageNumber: this.pageNumber,
@@ -183,7 +193,14 @@ export default {
     let others = {}
     search && (others = JSON.parse(search))
     others && (this.searchForm = others)
+    let url = null
+    if (this.groupId == 4) {
+      url = '/papi/buyer/getList'
+    } else if (this.groupId == 5) {
+      url = '/papi/seller/getList'
+    }
     this.$store.dispatch('getOrderList', {
+      url,
       data: {
         status: type,
         pageNumber: this.pageNumber,
@@ -216,7 +233,15 @@ export default {
           spinner: 'el-icon-loading',
           background: 'rgba(0, 0, 0, 0.7)'
         })
-        this.$store.dispatch('orderCancel', {fileds: {no},
+        let url = null
+        if (this.groupId == 4) {
+          url = '/papi/buyer/cancel'
+        } else if (this.groupId == 5) {
+          url = '/papi/seller/cancel'
+        }
+        this.$store.dispatch('orderCancel', {
+          url,
+          fileds: {no},
           cb: (data) => {
             loading.close()
             const {status, msg} = data
@@ -227,7 +252,14 @@ export default {
               })
               const {params: {type, page}} = this.$route
               this.pageNumber = Number(page)
+              let url = null
+              if (this.groupId == 4) {
+                url = '/papi/buyer/getList'
+              } else if (this.groupId == 5) {
+                url = '/papi/seller/getList'
+              }
               this.$store.dispatch('getOrderList', {
+                url,
                 data: {
                   status: type,
                   pageNumber: this.pageNumber,
@@ -261,7 +293,15 @@ export default {
           spinner: 'el-icon-loading',
           background: 'rgba(0, 0, 0, 0.7)'
         })
-        this.$store.dispatch('orderReceipt', {fileds: {no},
+        let url = null
+        if (this.groupId == 4) {
+          url = '/papi/buyer/receipt'
+        } else if (this.groupId == 5) {
+          url = '/papi/seller/receipt'
+        }
+        this.$store.dispatch('orderReceipt', {
+          url,
+          fileds: {no},
           cb: (data) => {
             loading.close()
             const {status, msg} = data
@@ -272,7 +312,14 @@ export default {
               })
               const {params: {type, page}} = this.$route
               this.pageNumber = Number(page)
+              let url = null
+              if (this.groupId == 4) {
+                url = '/papi/buyer/getList'
+              } else if (this.groupId == 5) {
+                url = '/papi/seller/getList'
+              }
               this.$store.dispatch('getOrderList', {
+                url,
                 data: {
                   status: type,
                   pageNumber: this.pageNumber,
@@ -355,8 +402,14 @@ export default {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
+      let exportUrl = null
+      if (this.groupId == 4) {
+        exportUrl = '/papi/buyer/export'
+      } else if (this.groupId == 5) {
+        exportUrl = '/papi/seller/export'
+      }
       try {
-        const {status, data: { url }} = await service.post('/papi/order/export', this.searchForm)
+        const {status, data: { url }} = await service.post(exportUrl, this.searchForm)
         if (status == 0) {
           this.$message(
             {

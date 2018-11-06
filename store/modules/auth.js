@@ -3,7 +3,9 @@ import Cookie from 'js-cookie'
 
 const state = {
   user: {},
-  token: Cookie.get('_token') || null
+  token: Cookie.get('_token') || null,
+  role: Cookie.get('_role') || null,
+  groupId: Cookie.get('_groupId') || 4
 }
 
 const getters = {
@@ -12,6 +14,12 @@ const getters = {
   },
   loggedToken: (state) => {
     return state.token
+  },
+  loggedRole: (state) => {
+    return state.role
+  },
+  groupId: (state) => {
+    return state.groupId
   }
 }
 
@@ -20,8 +28,12 @@ const actions = {
     // apiAuth.logout()
     commit('SETTOKEN', null)
     commit('SETUSER', null)
+    commit('SETROLE', null)
+    commit('SETGROUPID', null)
     Cookie.set('_token', '')
     Cookie.set('_user', '')
+    Cookie.set('_role', '')
+    Cookie.set('_groupId', '')
   },
   doLoginIndex ({ commit }, {successCb, errorCb, fileds}) {
     apiAuth.loginIndex(data => {
@@ -32,6 +44,15 @@ const actions = {
       commit('SETTOKEN', token)
       commit('SETUSER', data)
     }, errorCb, fileds)
+  },
+  getRole ({commit}) {
+    apiAuth.getRole(data => {
+      let role = data.roleId
+      Cookie.set('_role', role, {expires: 30})
+      commit('SETROLE', role)
+      Cookie.set('_groupId', 4, {expires: 30})
+      commit('SETGROUPID', 4)
+    })
   },
   doLoginPhone ({ commit }, {successCb, errorCb, fileds}) {
     apiAuth.loginPhone(({data, status}) => {
@@ -88,6 +109,20 @@ const mutations = {
   },
   SETTOKEN (state, token) {
     state.token = token
+  },
+  SETROLE (state, role) {
+    state.role = role
+  },
+  SETGROUPID (state, groupId) {
+    state.groupId = groupId
+  },
+  buyer (state) {
+    Cookie.set('_groupId', 4, {expires: 30})
+    state.groupId = 4
+  },
+  supplier (state) {
+    Cookie.set('_groupId', 5, {expires: 30})
+    state.groupId = 5
   }
 }
 

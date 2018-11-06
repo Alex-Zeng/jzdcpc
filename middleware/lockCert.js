@@ -1,7 +1,7 @@
 export default function ({ store, redirect }) {
-  if (store.getters.loggedUser) {
-    const user = store.getters.loggedUser
-    if (user.group == 6) {
+  if (store.getters.loggedRole != null) {
+    const userRole = store.getters.loggedRole
+    if (userRole == 0) {
       redirect('/user/setting/cert')
     }
   }

@@ -43,6 +43,9 @@ export default {
   computed: {
     detail () {
       return this.$store.getters.orderDetail
+    },
+    groupId () {
+      return this.$store.getters.groupId
     }
   },
   methods: {
@@ -70,7 +73,11 @@ export default {
       spinner: 'el-icon-loading',
       background: 'rgba(0, 0, 0, 0.7)'
     })
-    this.$store.dispatch('getOrderDetail', {fileds: {no}, cb: () => { loading.close() }})
+    let url = null
+    if (this.groupId == 4) {
+      url = '/papi/buyer/detail'
+    }
+    this.$store.dispatch('getOrderDetail', {url, fileds: {no}, cb: () => { loading.close() }})
   }
 }
 </script>

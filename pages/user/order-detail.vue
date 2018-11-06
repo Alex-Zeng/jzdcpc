@@ -130,14 +130,7 @@
           </div>
         </div>
       </div>
-      <div v-else>
-        <div class="empty" v-if="detail.groupId == 4">暂无物流信息</div>
-      </div>
-    </div>
-
-    <div class="common card clearfix" v-if="(detail.groupId == 5) && (!detail.expressCode)">
-      <div class="title">物流信息</div>
-      <div>
+      <div  v-else-if="(groupId == 5) && (!detail.expressCode)">
         <div class="left" style="width:420px;">
           <div class="item">
             <span class="label">运单号：</span>
@@ -168,16 +161,18 @@
         </div>
         <div class="left" style="width:220px;">
           <div class="item" style="height: 56px;"></div>
-          <div class="item">
+          <div class="item" v-if="detail.state == 3">
             <span class="value">
               <el-button type="primary" @click="delivery">确定发货</el-button>
             </span>
           </div>
         </div>
       </div>
+      <div v-else>
+        <div class="empty" v-if="groupId == 4">暂无物流信息</div>
+      </div>
     </div>
-
-    <div class="common card clearfix" v-if="detail.groupId != 4">
+    <div class="common card clearfix" v-if="groupId != 4">
       <div class="title">付款信息</div>
       <div v-if="detail.payNumber || detail.payDate || detail.payImg">
         <div class="left" style="width: 370px;">
@@ -215,6 +210,9 @@ export default {
   computed: {
     detail () {
       return this.$store.getters.orderDetail
+    },
+    groupId () {
+      return this.$store.getters.groupId
     }
   },
   data () {
@@ -234,17 +232,27 @@ export default {
     }
   },
   mounted () {
-    const {params: {no, type}} = this.$route
-    this.type = type * 1
-    const loading = this.$loading({
-      lock: true,
-      text: '加载中...',
-      spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0.7)'
-    })
-    this.$store.dispatch('getOrderDetail', {fileds: {no}, cb: () => { loading.close() }})
+    this.getDetail()
   },
   methods: {
+    getDetail () {
+      const {params: {no, type}} = this.$route
+      this.type = type * 1
+      const loading = this.$loading({
+        lock: true,
+        text: '加载中...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      console.log(type)
+      let url = null
+      if (this.groupId == 4) {
+        url = '/papi/buyer/detail'
+      } else if (this.groupId == 5) {
+        url = '/papi/seller/detail'
+      }
+      this.$store.dispatch('getOrderDetail', {url, fileds: {no, type}, cb: () => { loading.close() }})
+    },
     doService () {
       const {params: {no}} = this.$route
       const goodsId = this.goodsId
@@ -255,8 +263,16 @@ export default {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
+      let url = null
+      if (this.groupId == 4) {
+        url = '/papi/buyer/service'
+      } else if (this.groupId == 5) {
+        url = '/papi/seller/service'
+      }
       try {
-        this.$store.dispatch('orderService', {fileds: {no, goodsId, type},
+        this.$store.dispatch('orderService', {
+          url,
+          fileds: {no, goodsId, type},
           cb: (data) => {
             const {status, msg} = data
             if (status == 0) {
@@ -264,15 +280,7 @@ export default {
                 type: 'success',
                 message: msg
               })
-              const {params: {no, type}} = this.$route
-              this.type = type * 1
-              const loading = this.$loading({
-                lock: true,
-                text: '加载中...',
-                spinner: 'el-icon-loading',
-                background: 'rgba(0, 0, 0, 0.7)'
-              })
-              this.$store.dispatch('getOrderDetail', {fileds: {no}, cb: () => { loading.close() }})
+              this.getDetail()
               this.dialogFormVisible = false
             } else {
               this.$message.error(msg)
@@ -333,6 +341,7 @@ export default {
     },
     delivery () {
       const {params: {no}} = this.$route
+      console.log(no)
       if (!this.expressForm.express) {
         this.$message.error('物流公司必须填写')
         return
@@ -366,7 +375,13 @@ export default {
                 spinner: 'el-icon-loading',
                 background: 'rgba(0, 0, 0, 0.7)'
               })
-              this.$store.dispatch('getOrderDetail', {fileds: {no}, cb: () => { loading.close() }})
+              let url = null
+              if (this.groupId == 4) {
+                url = '/papi/buyer/detail'
+              } else if (this.groupId == 5) {
+                url = '/papi/seller/detail'
+              }
+              this.$store.dispatch('getOrderDetail', {url, fileds: {no}, cb: () => { loading.close() }})
               this.$message(
                 {
                   type: 'success',

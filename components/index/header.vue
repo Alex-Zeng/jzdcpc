@@ -14,7 +14,7 @@
             <el-button type="primary" @click="search">搜一搜</el-button>
           </div>
         </div>
-        <nuxt-link to="/goods/cart" tag="div" class="btn"><el-button style="padding: 8px 14px;"  v-show="group == 4"><div class="car"><i class="icon">&#xe617;</i><span class="car-text">购物清单</span><el-badge :value="num"></el-badge></div></el-button></nuxt-link>
+        <nuxt-link to="/goods/cart" tag="div" class="btn"><el-button style="padding: 8px 14px;"  v-show="group !== 0"><div class="car"><i class="icon">&#xe617;</i><span class="car-text">购物清单</span><el-badge :value="num"></el-badge></div></el-button></nuxt-link>
         <ul class="header-menu" @mouseleave="showWrap=false, show=isOpen, slogan=false" @mouseover="show=true">
           <div class="child-wrap" v-show="slogan" @mouseleave="slogan=false">
             <a href="/service/index.html" target="_blank"><img src="~/assets/img/common/slogan.jpg" alt=""></a>
@@ -35,11 +35,11 @@
           <li class="itemAll"><i class="menu-icon">&#xe605;</i>全部商品分类</li>
           <li :class="{item:true, isOpen: isOpen || show, active: (child===i.child) && showWrap}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="selectId = i.id, child = i.child, showWrap=true, slogan=false">
             <div class="img">
-              <img :src="i.web_path" width="16px" alt="">
+              <img :src="i.iconWeb" width="20" height="20" alt="">
             </div>
             <span style="float: left;">{{i.name}}</span>
           </li>
-          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true"><i class="menu-icon" style="margin-right: 16px;">&#xe67e;</i>
+          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true"><i class="menu-icon" style="margin-right: 15px;">&#xe67e;</i>
             <a href="/service/index.html" style="color: #ffffff" target="_blank">集众服务</a>
           </li>
         </ul>
@@ -78,8 +78,8 @@ export default {
       return this.$store.getters.cartNum
     },
     group () {
-      if (this.$store.getters.loggedUser) {
-        return this.$store.getters.loggedUser.group
+      if (this.$store.getters.loggedRole) {
+        return this.$store.getters.loggedRole
       }
       return -1
     }
@@ -240,6 +240,8 @@ export default {
           margin-right 20px
           img
             vertical-align:middle
+            display inline-block
+            width 16px
         &.isOpen
           display block
         &:after

@@ -5,7 +5,7 @@ export default {
     cb(data)
   },
   async getPath (cb, fileds) {
-    const { data } = await request.get('/papi/goods/getPath', fileds)
+    const data = await request.get('/papi/goods/getPath', fileds)
     cb(data)
   },
   async getSpecification (cb, fileds) {
