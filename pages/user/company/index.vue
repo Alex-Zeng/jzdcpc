@@ -265,6 +265,9 @@ export default {
         departmentName: [
           { validator: checkDepartemnt, trigger: 'change' }
         ],
+        department: [
+          { required: true, message: '请选择部门', trigger: 'blur' }
+        ],
         phone: [
           { validator: validatePhone, trigger: 'blur' }
         ],
@@ -371,7 +374,7 @@ export default {
     },
     async staffAdd () {
       await apiDepartment.staffAdd({
-        organizationId: this.organizationId,
+        organizationId: this.phoneForm.department,
         phone: this.phoneForm.phone
       }, (response) => {
         const {data, msg, status} = response
