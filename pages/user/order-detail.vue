@@ -177,17 +177,17 @@
       <div v-if="detail.payNumber || detail.payDate || detail.payImg">
         <div class="left" style="width: 370px;">
           <div class="item">
-            <span class="label">{{detail.payMethod == '转账' ? '票号' : '流水号'}}：</span>
+            <span class="label">{{detail.payMethod == '转账' ? '流水号' : '票号'}}：</span>
             <span class="value">{{detail.payNumber}}</span>
           </div>
           <div class="item">
-            <span class="label">{{detail.payMethod == '转账' ? '承兑日期' : '汇款日期'}}：</span>
+            <span class="label">{{detail.payMethod == '转账' ? '汇款日期' : '承兑日期'}}：</span>
             <span class="value">{{detail.payDate}}</span>
           </div>
         </div>
         <div class="left">
           <div class="item">
-            <span class="label">{{detail.payMethod == '转账' ? '票据影像' : '汇款凭证'}}：</span>
+            <span class="label">{{detail.payMethod == '转账' ? '汇款凭证' : '票据影像'}}：</span>
             <span class="value" style="color:#2475e2;cursor:pointer;" @click="img = detail.payImg, show=true">查看</span>
           </div>
         </div>
