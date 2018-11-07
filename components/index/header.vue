@@ -35,11 +35,15 @@
           <li class="itemAll"><i class="menu-icon">&#xe605;</i>全部商品分类</li>
           <li :class="{item:true, isOpen: isOpen || show, active: (child===i.child) && showWrap}" v-for="(i ,k) in menu" :key="'child'+k + i.id" @mouseover="selectId = i.id, child = i.child, showWrap=true, slogan=false">
             <div class="img">
-              <img :src="i.iconWeb" width="20" height="20" alt="">
+              <img :src="i.iconWeb" alt="">
             </div>
             <span style="float: left;">{{i.name}}</span>
           </li>
-          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true"><i class="menu-icon" style="margin-right: 15px;">&#xe67e;</i>
+          <li :class="{item:true, isOpen: isOpen || show, active: slogan}" @mouseover="showWrap=false, slogan=true">
+            <!--<i class="menu-icon" style="margin-right: 15px;">&#xe67e;</i>-->
+            <div class="img">
+              <img src="@/assets/img/index/service-icon.png" alt="">
+            </div>
             <a href="/service/index.html" style="color: #ffffff" target="_blank">集众服务</a>
           </li>
         </ul>
@@ -241,7 +245,7 @@ export default {
           img
             vertical-align:middle
             display inline-block
-            width 16px
+            width 14px
         &.isOpen
           display block
         &:after
