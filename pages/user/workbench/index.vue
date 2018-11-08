@@ -20,7 +20,7 @@
     </div>
     <div class="main-row">
       <div class="main-row-left">
-        <ul v-if="groupId == 5">
+        <ul v-if="groupId == 4">
           <li>
             <h4>待发货（单）</h4>
             <p>{{buyerOrderInfo.deliver}}</p>
@@ -38,7 +38,7 @@
             <p>{{buyerOrderInfo.service}}</p>
           </li>
         </ul>
-        <ul v-if="groupId == 4">
+        <ul v-if="groupId == 5">
           <li>
             <h4>昨日成交（笔）</h4>
             <p>{{supplierOrderInfo.yesterday}}</p>
@@ -316,21 +316,8 @@ export default {
         money: 0
       },
       messageLists: {},
-      buyerOrderInfo: {
-        pay: 0,
-        recieve: 0,
-        deliver: 0,
-        service: 0,
-        money: 0
-      },
-      supplierOrderInfo: {
-        yesterday: 0,
-        total: 0,
-        pending: 0,
-        service: 0,
-        goodsNumber: 0,
-        visit: 0
-      },
+      buyerOrderInfo: {},
+      supplierOrderInfo: {},
       tableData1: [],
       tableData2: [],
       tableData3: [],
@@ -353,13 +340,16 @@ export default {
     async getBuyerOrderInfo () {
       await apiWorkbench.getBuyerOrderInfo((data) => {
         this.buyerOrderInfo = data.data
+        console.log(data.data)
         this.total.money = data.data.money || 0
       })
     },
     async getSupplierOrderInfo () {
       await apiWorkbench.getSupplierOrderInfo((data) => {
-        this.supplierOrderInfo = data.data
-        this.total.money = data.data.money || 0
+        if (data.status == 0) {
+          this.supplierOrderInfo = data.data
+          this.total.money = data.data.money || 0
+        }
       })
     },
     async getDeskList (url, index) {
@@ -391,6 +381,7 @@ export default {
       // this.$router.push('/user/order-detail/'+order.out_id+'/'+type)
     },
     changeRole (val) {
+      console.log(val)
       if (val == 4) {
         this.getBuyerOrderInfo()
         this.getDeskList('/papi/buyer/getDeskList', this.tabIndex)

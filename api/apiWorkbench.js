@@ -9,7 +9,7 @@ export default {
     cb(data)
   },
   async getBuyerOrderInfo (cb) {
-    const data = await request.get('/papi/user/getBuyerOrderInfo')
+    const data = await request.get('/papi/buyer/getOrderInfo')
     cb(data)
   },
   async getSupplierOrderInfo (cb) {
