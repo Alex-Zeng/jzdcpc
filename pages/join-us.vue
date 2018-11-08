@@ -123,6 +123,11 @@ import {phoneReg} from '@/helper/reg'
 import apiCaptcha from '@/api/apiJoinUs'
 export default {
   name: 'join-us',
+  head () {
+    return {
+      title: '招募'
+    }
+  },
   data () {
     var validatePhone = (rule, value, callback) => {
       const trimVal = value.trim()
@@ -165,6 +170,7 @@ export default {
               })
               this.$refs[formName].resetFields()
               this.loading = false
+              this.$router.go(-1)
             },
             (msg) => {
               this.$message({
