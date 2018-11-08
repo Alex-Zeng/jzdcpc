@@ -82,6 +82,7 @@
             v-model="nameForm.password"
             placeholder="请输入密码"
             type="password"
+            autoComplete="new-password"
           >
           </el-input>
         </el-form-item>
