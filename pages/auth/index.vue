@@ -157,7 +157,7 @@ export default {
         display inline-block
         vertical-align middle
     .login-button
-      line-height 1.8
+      line-height 1.3
       width 100%
       font-size 20px
     .no-password
@@ -189,7 +189,7 @@ export default {
 
   .el-input__inner
     font-size 18px
-    height 52px
+    height 42px
   .forget
       margin-top 0
       text-align right
