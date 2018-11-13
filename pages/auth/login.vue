@@ -298,7 +298,7 @@ export default {
         display inline-block
         vertical-align middle
     .login-button
-      line-height 1.8
+      line-height 1.3
       width 100%
       font-size 20px
       margin-top 20px
@@ -339,7 +339,7 @@ export default {
   .el-form-item__content
     position relative
     .captcha
-      height 50px
+      height 40px
       border-left 1px solid #dfdfdf
       position absolute
       right 1px
@@ -349,7 +349,7 @@ export default {
     .sms-button
       position absolute
       right 1px
-      height 50px
+      height 42px
       bottom 1px
       border-top-left-radius 0
       border-bottom-left-radius 0
