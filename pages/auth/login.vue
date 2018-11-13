@@ -171,7 +171,6 @@ export default {
       this.imgSrc = src
       this.imgSrcrand = src
     }, (msg) => {
-      console.log(msg)
     })
   },
   methods: {
@@ -196,6 +195,7 @@ export default {
                   type: 'success'
                 })
                 if (this.step == 2) {
+                  this.$store.dispatch('getRole')
                   let oldUrl = localStorage.getItem('oldUrl')
                   if (oldUrl) {
                     this.$router.replace(oldUrl)
@@ -335,7 +335,7 @@ export default {
 
   .el-input__inner
     font-size 18px
-    height 52px
+    height 42px
   .el-form-item__content
     position relative
     .captcha

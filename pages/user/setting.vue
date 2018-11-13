@@ -1,7 +1,7 @@
 <template>
   <div class="setting-wrap">
     <div class="setting-tabs clearfix">
-      <nuxt-link  v-if="loggedRole != 1" to="/user/setting/cert" :class="{active: type == 1, 'tabs-item': true}">
+      <nuxt-link  v-if="loggedRole == 1" to="/user/setting/cert" :class="{active: type == 1, 'tabs-item': true}">
         {{userRole == 0 ? '企业信息认证' : '企业信息变更'}}
       </nuxt-link>
       <nuxt-link to="/user/setting/safe" :class="{active: type == 2, 'tabs-item': true}">
